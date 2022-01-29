@@ -17,6 +17,9 @@ import {
 import {
     Floor
 } from './level_design/Floor.js';
+import {
+    Opening
+} from './level_design/Opening.js';
 
 let scene, renderer, camera, controls;
 
@@ -100,7 +103,7 @@ function init() {
     scene.add(axesHelper);
 
     /* ---------------------------------- TEST ---------------------------------- */
-    
+
     let wall1 = new Wall(0, 25, 0, 100, 50, "red");
     wall1 = wall1.create();
     console.log(wall1.position);
@@ -122,6 +125,16 @@ function init() {
     floor = floor.create();
     console.log(floor.position);
     scene.add(floor);
+
+    let win = new Opening(0, 0, 0, 20, 10, "window", wall1);
+    win = win.create();
+    console.log(win.position);
+    scene.add(win);
+
+    let door = new Opening(0, -50/2+10, 0, 10, 20, "door", wall2);
+    door = door.create();
+    console.log(door.position);
+    scene.add(door);
 
     render();
 }
@@ -154,6 +167,6 @@ window.onkeyup = (e) => {
         console.log(camera.position);
 }
 
-function toRad(val){
-    return val*Math.PI/180;
+function toRad(val) {
+    return val * Math.PI / 180;
 }

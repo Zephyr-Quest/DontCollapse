@@ -17,19 +17,19 @@ export class Floor extends Locatable {
     create() {
         const loader = new THREE.TextureLoader();
 
-        const wallGeometry = new THREE.PlaneGeometry(this.length, this.width);
-        const wallMaterial = new THREE.MeshBasicMaterial({
+        const floorGeometry = new THREE.PlaneGeometry(this.length, this.width);
+        const floorMaterial = new THREE.MeshBasicMaterial({
             color: this.color,
             //TODO ERROR HERE FOR TEXTURE
             // map: loader.load(this.texture),
         });
-        const wall = new THREE.Mesh(wallGeometry, wallMaterial);
+        const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 
         // Set the rotation
-        wall.rotation.x=-90*Math.PI/180;
-        wall.position.set(this.getPositionArray()[0], this.getPositionArray()[1], this.getPositionArray()[2])
+        floor.rotation.x=-90*Math.PI/180;
+        floor.position.set(this.getPositionArray()[0], this.getPositionArray()[1], this.getPositionArray()[2])
 
-        return wall;
+        return floor;
     }
 
 };
