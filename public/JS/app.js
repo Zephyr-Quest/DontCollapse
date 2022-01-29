@@ -1,13 +1,24 @@
 // import * as THREE from 'https://unpkg.com/three@0.137.0'; 
 // import * as THREE from 'https://cdn.skypack.dev/three';
 import * as THREE from 'three';
-import { OrbitControls } from 'https://unpkg.com/three@0.137.0/examples/jsm/controls/OrbitControls.js';
+import {
+    OrbitControls
+} from 'https://unpkg.com/three@0.137.0/examples/jsm/controls/OrbitControls.js';
 
-import { Config } from './config.js';
-import { Textures } from './assets/textures.js';
+import {
+    Config
+} from './config.js';
+import {
+    Textures
+} from './assets/textures.js';
+import {
+    Wall
+} from './level_design/Wall.js';
+import {
+    Floor
+} from './level_design/Floor.js';
 
 let scene, renderer, camera, controls;
-const loader = new THREE.TextureLoader();
 
 /* ---------------------------------- Debug --------------------------------- */
 
@@ -26,14 +37,14 @@ const textureLoader = new THREE.TextureLoader(loadManager);
 for (let textureName in Textures) {
     if (!Textures.hasOwnProperty(textureName)) continue;
     const currentTexture = Textures[textureName];
-    
+
     // Add the texture to the loader
     currentTexture.texture = textureLoader.load(Config.texturesPath + currentTexture.filename);
     currentTexture.texture.magFilter = THREE.NearestFilter;
 }
 
 // Start ThreeJS after loading textures
-loadManager.onLoad = init;
+loadManager.onLoad = init();
 
 /* -------------------------------------------------------------------------- */
 /*                           ThreeJS main functions                           */
@@ -85,6 +96,33 @@ function init() {
     // console.log(plane);
     // scene.add(plane);
 
+    var axesHelper = new THREE.AxesHelper(1000);
+    scene.add(axesHelper);
+
+    /* ---------------------------------- TEST ---------------------------------- */
+    
+    let wall1 = new Wall(0, 25, 0, 100, 50, "red");
+    wall1 = wall1.create();
+    console.log(wall1.position);
+    scene.add(wall1);
+
+    let wall2 = new Wall(50, 25, 50, 100, 50, "green");
+    wall2 = wall2.create();
+    wall2.rotation.y = toRad(-90);
+    console.log(wall2.position);
+    scene.add(wall2);
+
+    let wall3 = new Wall(-50, 25, 50, 100, 50, "violet");
+    wall3 = wall3.create();
+    wall3.rotation.y = toRad(90);
+    console.log(wall3.position);
+    scene.add(wall3);
+
+    let floor = new Floor(0, 0, 50, 100, 100, "blue");
+    floor = floor.create();
+    console.log(floor.position);
+    scene.add(floor);
+
     render();
 }
 
@@ -108,7 +146,14 @@ function render() {
     requestAnimationFrame(render);
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                HELP FUNCTION                               */
+/* -------------------------------------------------------------------------- */
 window.onkeyup = (e) => {
     if (e.code === 'Space')
         console.log(camera.position);
+}
+
+function toRad(val){
+    return val*Math.PI/180;
 }

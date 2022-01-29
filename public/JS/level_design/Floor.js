@@ -4,20 +4,20 @@ import {
 import * as THREE from 'three';
 
 
-export class Wall extends Locatable {
-    constructor(x, y, z, length, height, color) {
+export class Floor extends Locatable {
+    constructor(x, y, z, length, width, color) {
         super(x, y, z);
         //TODO ERROR HERE FOR TEXTURE
         this.texture = "./text/wall.jpg";
         this.length = length;
-        this.height = height;
+        this.width = width;
         this.color=color;
     }
 
     create() {
         const loader = new THREE.TextureLoader();
 
-        const wallGeometry = new THREE.PlaneGeometry(this.length, this.height);
+        const wallGeometry = new THREE.PlaneGeometry(this.length, this.width);
         const wallMaterial = new THREE.MeshBasicMaterial({
             color: this.color,
             //TODO ERROR HERE FOR TEXTURE
@@ -26,7 +26,7 @@ export class Wall extends Locatable {
         const wall = new THREE.Mesh(wallGeometry, wallMaterial);
 
         // Set the rotation
-        wall.rotation.setFromVector3(this.getRotationVector());
+        wall.rotation.x=-90*Math.PI/180;
         wall.position.set(this.getPositionArray()[0], this.getPositionArray()[1], this.getPositionArray()[2])
 
         return wall;
