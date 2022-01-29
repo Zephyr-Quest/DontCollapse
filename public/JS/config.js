@@ -1,6 +1,6 @@
 export const Config = {
-    camX: 0,
-    camY: 0,
+    camX: 50,
+    camY: 50,
     camZ: 120,
     floorSize: 100
 };

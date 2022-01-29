@@ -6,6 +6,10 @@ import {
 } from 'https://unpkg.com/three@0.137.0/examples/jsm/controls/OrbitControls.js';
 
 import {
+    FBXLoader
+} from 'https://unpkg.com/three@0.137.0/examples/jsm/loaders/FBXLoader.js'
+
+import {
     Config
 } from './config.js';
 import {
@@ -20,6 +24,9 @@ import {
 import {
     Opening
 } from './level_design/Opening.js';
+import {
+    MinEquation
+} from 'three';
 
 let scene, renderer, camera, controls;
 
@@ -72,68 +79,193 @@ function init() {
     // Setting up the camera
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.set(Config.camX, Config.camY, Config.camZ);
-    camera.lookAt(new THREE.Vector3(0, 0, 0));
     scene.add(camera);
 
     // Setting up the camera controls
     controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 0, 50)
     controls.update();
 
     // Setting up lights
-    const ambientLight = new THREE.AmbientLight(0xcccccc, 0.6);
-    scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    // directionalLight.position.set(10, 20, 10);
-    // directionalLight.target.position.set(0, 0, 0);
+    // const ambientLight = new THREE.AmbientLight(0xcccccc, 0.6);
+    // scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    directionalLight.position.set(50, 50 ,100);
+    directionalLight.target.position.set(-50, -50, 0);
     scene.add(directionalLight);
     // const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1);
     // directionalLight2.position.set(0, -10, 0);
     // directionalLight2.target.position.set(0, 0, 0);
     // scene.add(directionalLight2);
 
-    // Add a floor
-    // const planeGeometry = new THREE.PlaneGeometry(Config.floorSize, Config.floorSize);
-    // const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xeeeee, side: THREE.DoubleSide });
-    // const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    // plane.rotation.x = 90;
-    // console.log(plane);
-    // scene.add(plane);
-
     var axesHelper = new THREE.AxesHelper(1000);
     scene.add(axesHelper);
 
     /* ---------------------------------- TEST ---------------------------------- */
 
+    /* --------------------------------- MACHINE -------------------------------- */
+    const fbxLoader = new FBXLoader()
+    fbxLoader.load(
+        '/JS/assets/3D_models/cheminey.fbx',
+        (object) => {
+            object.scale.set(.1, .1, .1)
+            object.rotation.y = toRad(-90);
+            object.position.x = -50;
+            let bbox = new THREE.Box3().setFromObject(object);
+            object.position.x = -50 - (bbox.min.x - bbox.max.x) / 2;
+            object.position.y = -(bbox.min.y);
+            object.position.z = -(bbox.min.z);
+            scene.add(object)
+        }
+    )
+
+    /* ----------------------------------- ARM ---------------------------------- */
+    fbxLoader.load(
+        '/JS/assets/3D_models/arm.fbx',
+        (object) => {
+            object.scale.set(.02, .02, .02)
+            object.rotation.y = toRad(-180);
+            object.position.x = -13.5;
+            let bbox = new THREE.Box3().setFromObject(object);
+            object.position.y = -(bbox.min.y);
+            object.position.z = -(bbox.min.z);
+            scene.add(object)
+        }
+    )
+
+    fbxLoader.load(
+        '/JS/assets/3D_models/arm.fbx',
+        (object) => {
+            object.scale.set(.02, .02, .02)
+            object.rotation.y = toRad(-180);
+            object.position.x = -13.5;
+            let bbox = new THREE.Box3().setFromObject(object);
+            object.position.y = -(bbox.min.y);
+            object.position.z = (bbox.max.z - bbox.min.z) * 2;
+            scene.add(object)
+        }
+    )
+
+    /* --------------------------------- PALETTE -------------------------------- */
+    fbxLoader.load(
+        '/JS/assets/3D_models/palette.fbx',
+        (object) => {
+            const loader = new THREE.TextureLoader()
+            const material = new THREE.MeshBasicMaterial({
+                color: 0xFF8844,
+                map: loader.load('/JS/assets/3D_models/textures/palette.png'),
+            });
+            object.traverse(function (child) {
+                if (child.isMesh) {
+                    child.material.map = material.map; // assign your diffuse texture here
+                }
+            });
+            object.scale.set(.1, .1, .1)
+            object.rotation.y = toRad(-170);
+            object.position.x = -50;
+            let bbox = new THREE.Box3().setFromObject(object);
+            object.position.x = -47 - (bbox.min.x - bbox.max.x) / 2;
+            object.position.y = -(bbox.min.y);
+            object.position.z = 100 - bbox.max.z;
+            scene.add(object)
+        }
+    )
+
+    fbxLoader.load(
+        '/JS/assets/3D_models/palette.fbx',
+        (object) => {
+            const loader = new THREE.TextureLoader()
+            const material = new THREE.MeshBasicMaterial({
+                color: 0xFF8844,
+                map: loader.load('/JS/assets/3D_models/textures/palette.png'),
+            });
+            object.traverse(function (child) {
+                if (child.isMesh) {
+                    child.material.map = material.map; // assign your diffuse texture here
+                }
+            });
+            object.scale.set(.1, .1, .1)
+            object.rotation.y = toRad(-180);
+            object.position.x = -50;
+            let bbox = new THREE.Box3().setFromObject(object);
+            object.position.x = -50 - (bbox.min.x - bbox.max.x) / 2;
+            object.position.y = -(bbox.min.y) * 2;
+            object.position.z = 100 - bbox.max.z;
+            scene.add(object)
+        }
+    )
+    fbxLoader.load(
+        '/JS/assets/3D_models/palette.fbx',
+        (object) => {
+            const loader = new THREE.TextureLoader()
+            const material = new THREE.MeshBasicMaterial({
+                color: 0xFF8844,
+                map: loader.load('/JS/assets/3D_models/textures/palette.png'),
+            });
+            object.traverse(function (child) {
+                if (child.isMesh) {
+                    child.material.map = material.map; // assign your diffuse texture here
+                }
+            });
+            object.scale.set(.1, .1, .1)
+            object.rotation.y = toRad(-170);
+            object.position.x = -50;
+            let bbox = new THREE.Box3().setFromObject(object);
+            object.position.x = -47 - (bbox.min.x - bbox.max.x) / 2;
+            object.position.y = -(bbox.min.y) * 3;
+            object.position.z = 100 - bbox.max.z;
+            scene.add(object)
+        }
+    )
+
+    fbxLoader.load(
+        '/JS/assets/3D_models/scifi_gen.fbx',
+        (object) => {
+            const loader = new THREE.TextureLoader()
+            const material = new THREE.MeshBasicMaterial({
+                color: 0xFF8844,
+                map: loader.load('/JS/assets/3D_models/SciFi Generator AO.png'),
+            });
+            object.traverse(function (child) {
+                if (child.isMesh) {
+                    child.material.map = material.map; // assign your diffuse texture here
+                }
+            });
+            object.scale.set(.02, .02, .02)
+            object.rotation.y = toRad(-90);
+            object.position.x = 50;
+            let bbox = new THREE.Box3().setFromObject(object);
+            object.position.x = 50 + (bbox.min.x - bbox.max.x) / 2;
+            // object.position.y = -(bbox.min.y) * 3;
+            object.position.z = bbox.max.z;
+            scene.add(object)
+        }
+    )
+
     let wall1 = new Wall(0, 25, 0, 100, 50, "red");
     wall1 = wall1.create();
-    console.log(wall1.position);
     scene.add(wall1);
 
     let wall2 = new Wall(50, 25, 50, 100, 50, "green");
     wall2 = wall2.create();
     wall2.rotation.y = toRad(-90);
-    console.log(wall2.position);
     scene.add(wall2);
 
     let wall3 = new Wall(-50, 25, 50, 100, 50, "violet");
     wall3 = wall3.create();
     wall3.rotation.y = toRad(90);
-    console.log(wall3.position);
     scene.add(wall3);
 
     let floor = new Floor(0, 0, 50, 100, 100, "blue");
     floor = floor.create();
-    console.log(floor.position);
     scene.add(floor);
 
     let win = new Opening(0, 0, 0, 20, 10, "window", wall1);
     win = win.create();
-    console.log(win.position);
     scene.add(win);
 
-    let door = new Opening(0, -50/2+10, 0, 10, 20, "door", wall2);
+    let door = new Opening(0, -50 / 2 + 10, 0, 10, 20, "door", wall2);
     door = door.create();
-    console.log(door.position);
     scene.add(door);
 
     render();
