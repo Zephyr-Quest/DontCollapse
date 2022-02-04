@@ -8,16 +8,58 @@
     <title>HUD</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
 </head>
 
 <body>
-    <div class="progress-container">
-        <div class="progress"></div>
+    <!-- Progress Bar -->
+    <div id="top">
+        <div class="progress-container">
+            <div class="progress"></div>
+        </div>
+
+
+        <!-- Modal Shop -->
+        <button id="shop">Shop</button>
     </div>
 
-    <button></button>
+
+    <aside id="modal1" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="title-modal">Bienvenue dans le shop !</h2>
+
+
+
+            <span class="switch-shop" id="switch_shop" title="Click to toggle the shop">
+                <span id="machine_link" class="selected">Machines</span> | <span id="ressource_link">Ressources</span> | <span id="personnel_link">Personnel</span>
+            </span>
+
+            <div class="machine_shop" id="machine_shop">
+                <h1>Machines</h1>
+            </div>
+
+            <div class="ressources_shop" id="resources_shop" style="display: none;">
+                <h1>Ressources</h1>
+            </div>
+
+            <div class="personnel_shop" id="personnel_shop" style="display: none;">
+                <h1>Personnel</h1>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
 
     <script src="../js/main.js"></script>
+    <script src="../js/shop.js"></script>
 </body>
 
 </html>

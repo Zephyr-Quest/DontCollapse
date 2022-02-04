@@ -3,7 +3,6 @@
     padding: 0;
     border: none;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -12,33 +11,93 @@ body {
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: #726868;
 
-    background: #121212;
+}
+
+#top {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
 }
 
 .progress-container {
-    height: 0.8rem;
+    display: flex;
+    justify-content: flex-end;
+
+    height: 50px;
     width: 400px;
-    border-radius: 0.4rem;
-    
-    background: #000;
+    border-radius: 50px;
+
+    background: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 166, 0), rgb(0, 255, 0));
 }
 
 .progress-container .progress {
+    background-color: black;
     height: 100%;
     width: 0;
-    border-radius: 0.4rem;
+    border-radius: 0px 50px 50px 0px;
+    min-width: 0px;
     max-width: 400px;
 
-    background: #ff4754;
 
-    transition: width 0.4s ease;
+    /* transition: width 0.2 ease; */
 }
 
-button{
+#shop {
     height: 50px;
-    width: 100px;
+    width: 50px;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+
+
+
+
+/* The Modal (background) */
+.modal {
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Modal Content/Box */
+.modal-content {
+    overflow: auto;
+    width: 600px;
+    max-width: calc(100vh -20px);
+    max-height: calc(100vh -20px);
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Séparation avec style du contenu */
+.modal table {
+    margin: 0 auto;
+}
+
+.modal table,
+.modal td{
+    border: solid black 1px;
 }
