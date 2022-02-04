@@ -44,7 +44,7 @@ body {
     /* transition: width 0.2 ease; */
 }
 
-#shop {
+#shop-button {
     height: 50px;
     width: 50px;
     border-radius: 10%;
@@ -72,8 +72,9 @@ body {
 .modal-content {
     overflow: auto;
     width: 600px;
-    max-width: calc(100vh -20px);
-    max-height: calc(100vh -20px);
+    /* max-width: calc(100vh -20px);
+    max-height: calc(100vh -20px); */
+    max-height: 600px;
     padding: 20px;
     background-color: #fff;
 }
@@ -92,12 +93,38 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
 /* Séparation avec style du contenu */
+.modal-content {
+    text-align: center;
+    margin: auto;
+}
+
+#switch_shop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#switch_shop span{
+    cursor: pointer;
+    display: flex;
+}
+
+#switch_shop .selected {
+    color: #faa200;
+    font-weight: bold;
+}
+
 .modal table {
     margin: 0 auto;
 }
 
 .modal table,
-.modal td{
+.modal td {
     border: solid black 1px;
+}
+
+.shop_elem{
+    overflow: scroll;
 }

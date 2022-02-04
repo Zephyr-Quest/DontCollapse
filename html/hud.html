@@ -22,7 +22,7 @@
 
 
         <!-- Modal Shop -->
-        <button id="shop">Shop</button>
+        <button id="shop-button">Shop</button>
     </div>
 
 
@@ -35,20 +35,43 @@
 
 
 
-            <span class="switch-shop" id="switch_shop" title="Click to toggle the shop">
-                <span id="machine_link" class="selected">Machines</span> | <span id="ressource_link">Ressources</span> | <span id="personnel_link">Personnel</span>
-            </span>
+            <!-- <span class="switch_shop" id="switch_shop" title="Click to toggle the shop">
+            </span> -->
+            <div id="switch_shop">
+                <span id="machine_link" class="selected">Machines</span>
+                <span id="ressource_link">Ressources</span>
+                <span id="personnel_link">Personnel</span>
+            </div>
 
-            <div class="machine_shop" id="machine_shop">
+            <div class="shop_elem" id="machine_shop">
                 <h1>Machines</h1>
+                <table>
+
+                </table>
             </div>
 
-            <div class="ressources_shop" id="resources_shop" style="display: none;">
+            <div class="shop_elem" id="resources_shop" style="display: none;">
                 <h1>Ressources</h1>
+                <table>
+
+                </table>
             </div>
 
-            <div class="personnel_shop" id="personnel_shop" style="display: none;">
+            <div class="shop_elem" id="personnel_shop" style="display: none;">
                 <h1>Personnel</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Personne</td>
+                            <td>Age</td>
+                            <td>rendement</td>
+                        </tr>
+                    </thead>
+                    <tbody id="pers-tab">
+
+                    </tbody>
+
+                </table>
             </div>
 
         </div>
@@ -57,9 +80,9 @@
 
 
 
-
+    <!-- <script src="../js/data/personnel.json"></script> -->
     <script src="../js/main.js"></script>
-    <script src="../js/shop.js"></script>
+    <script src="../js/show.js"></script>
 </body>
 
 </html>

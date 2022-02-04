@@ -1,0 +1,19 @@
+let personnel = ['Mikael Morelle', 'Elise Butler', 'Hannah Reid', 'Eddie Lee', 'Lillie Jackson', 'Ibrahim Diaz', 'George Cox', 'Darcy Romero', 'Daisy King', 'Caitlin Snyder', 'Jenna Turner', 'Mollie Cruz', 'Paige Hernandez', 'Sara Bradley', 'Tommy Miller', 'Jackson Tucker', 'Grover Palmer', 'Gabrielle Thomas', 'Skye Roberts', 'Adam Blaese', 'Samantha Black', 'Nicholas Scott', 'Eden Sanders', 'Jade Brown', 'Nannie O\'Moore', 'Madison Lynch', 'Annabelle Cunningham', 'Georgina Chavez', 'Theodore Bailey', 'Rose Fisher', 'William Hall', 'Vincent Smith', 'April Murray', 'Madison Hunter', 'Imogen O\'Sullivan', 'Frank Elliott', 'Sean Jones', 'Omar Murphy', 'Lillie Howard', 'Eleanor Ross', 'Niamh Jenkins', 'Warren Anderson', 'Reuben Price', 'Gabriella Ryan', 'Julia Harrison', 'Matthew Bennett', 'Hugo Gray', 'Chloe Holmes', 'Hassan Hart', 'Michelle Morrison', 'Mohammad Morris', 'Kevin Lawrence', 'Alexander Gibson', 'Dennis Webb', 'Anna Willis', 'Ella Patterson', 'Erin Grant', 'Lydia Graham', 'Poppy Patel', 'Isabella Gonzalez', 'Maxwell Nelson', 'Fraser Dunn', 'Alexandra Ramos', 'Annabel Riley', 'Samantha Gutierrez', 'Holly Brooks', 'Skye Wilson', 'Jamie Mason', 'Hugh Hunt', 'Taylor Stewart', 'Tobias Nguyen', 'Gabriella Kelly', 'Muhammed Sullivan', 'Tilly Hill', 'Marie Freeman', 'Christopher Washington', 'Darcy Richards', 'Jackson Garcia', 'Sadie Allen', 'Mia Warren', 'Harrison Chapman', 'Jade Armstrong', 'Joshua Harris', 'Frank Mitchell', 'Freya White', 'Craig Wells', 'Edward Rogers', 'Lloyd Stevens', 'Matilda O\'Ryan', 'Traci Johnston', 'Tia Reed', 'James Long', 'Sara Mills', 'Rosa Woods', 'Olivia Edwards', 'Charles Green', 'Amy Johnson', 'Morgan James', 'Tegan Perry', 'Maya O\'Gallagher', 'Isobel O\'Quinn', 'Imogen Adams', 'Skye Jordan', 'Declan Kim', 'Leonard Wright', 'Nancy Wagner', 'Margie O\'Brien', 'Alyssa O\'Doherty', 'Christian Duncan', 'Joshua Robertson', 'Tara Bell', 'Casey Alvarez', 'Kayla Reyes', 'Traci Harper', 'Joe Russell', 'Mohammed Davis', 'Kiera Shaw', 'Grover Robinson', 'Katherine Evans', 'Maddison Arnold', 'Tommy Rivera', 'Alexandra Griffin', 'Tommy Kelley', 'Marie Ramirez', 'Ben Hayes', 'Hollie Barnes', 'Tara Carter', 'Fred Ford', 'Roosevelt O\'Neill', 'Kathleen Mcdonald', 'Charley Henderson', 'Christopher Owens', 'Theo Morales', 'Aaliyah Mendoza', 'Joshua Castillo', 'Tommy Jimenez', 'Joel Powell', 'Joel Flores', 'Ibrahim Ferguson', 'Angela Wood', 'Faye Walsh', 'Brooke Cole', 'Jessie Kennedy', 'Leo Gonzales', 'Tommy Medina', 'Michael Rose', 'Lillie Burns', 'Katherine Berry', 'Tara Foster', 'Heather Hughes', 'Charlie Spencer', 'Nathaniel Knight', 'Aisha Phillips', 'Alexander Lopez', 'Gary Watson', 'Joe Taylor', 'Vincent Hudson', 'Layla Gardner', 'Robert O\'Reilly', 'Lois Cooper', 'Adam Reynolds', 'Lloyd Simpson', 'Charley Cook', 'Nicole Dixon', 'Nathaniel Meyer', 'Tristan Walker', 'Joel Sanchez', 'Matilda Payne', 'Liam Campbell', 'Angela Fox', 'Frances Vasquez', 'Daisy Ward', 'Annie Stephens', 'Dewey Ellis', 'Caleb Morgan', 'Zara Marshall', 'Joel Martin', 'Sophia Rice', 'Keira O\'Connor', 'Sadie Matthews', 'Rebecca Lewis', 'Amanda Herrera', 'Sara West', 'Esme Coleman', 'Alfred Rodriguez', 'Maddison Hamilton', 'Marie Gordon', 'Frank Henry', 'Hassan Bryant', 'Lisa Alexander', 'Nannie Ortiz', 'Cerys Baker', 'Zac Hawkins', 'Tegan Stone', 'Casey Lane', 'Luke Wallace', 'Nicole Crawford', 'Esme Williams', 'Evie Porter', 'Abbie Parker', 'April Moore', 'Ellie Simmons', 'Archie Richardson', 'Kevin Clark', 'Eva Olson', 'Sara Ruiz', 'Freya Thompson', 'Olivia Young', 'Fred Bloggs']
+values = []
+
+let size = personnel.length;
+for (let i = 0; i < size; i++) {
+
+    let pers = new Object();
+    pers.id = i;
+    pers.name = personnel[i];
+    pers.age = Math.floor(Math.random() * (60 - 18) + 18);
+    pers.rendement = Math.floor(Math.random() * 10 + 1);
+    pers.hired = 0;
+
+    values.push(pers)
+}
+
+
+values = JSON.stringify(values)
+console.log(values)
