@@ -7,10 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HUD</title>
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    
+    <script src="../js/data/machine.json"></script>
+    <script src="../js/data/ressources.json"></script>
+    <script src="../js/data/staff.json"></script>
+    
+    
 </head>
 
 <body>
@@ -46,14 +49,30 @@
             <div class="shop_elem" id="machine_shop">
                 <h1>Machines</h1>
                 <table>
+                    <thead>
+                        <tr>
+                            <td>Machine</td>
+                            <td>Price</td>
+                        </tr>
+                    </thead>
+                    <tbody id="mach_tab">
 
+                    </tbody>
                 </table>
             </div>
 
             <div class="shop_elem" id="resources_shop" style="display: none;">
                 <h1>Ressources</h1>
                 <table>
+                    <thead>
+                        <tr>
+                            <td>Type</td>
+                            <td>Price</td>
+                        </tr>
+                    </thead>
+                    <tbody id="ress_tab">
 
+                    </tbody>
                 </table>
             </div>
 
@@ -67,19 +86,16 @@
                             <td>rendement</td>
                         </tr>
                     </thead>
-                    <tbody id="pers-tab">
+                    <tbody id="pers_tab">
 
                     </tbody>
-
                 </table>
             </div>
-
         </div>
-
     </aside>
 
 
-
+<script src="../index.js"></script>
     <!-- <script src="../js/data/personnel.json"></script> -->
     <script src="../js/main.js"></script>
     <script src="../js/show.js"></script>

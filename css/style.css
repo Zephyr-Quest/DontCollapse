@@ -41,7 +41,6 @@ body {
     max-width: 400px;
 
 
-    /* transition: width 0.2 ease; */
 }
 
 #shop-button {
@@ -52,12 +51,9 @@ body {
 }
 
 
-
-
-
 /* The Modal (background) */
 .modal {
-    position: fixed;
+    position: absolute;
     display: none;
     justify-content: center;
     align-items: center;
@@ -72,9 +68,11 @@ body {
 .modal-content {
     overflow: auto;
     width: 600px;
-    /* max-width: calc(100vh -20px);
-    max-height: calc(100vh -20px); */
-    max-height: 600px;
+    height: 600px;
+
+    /* max-height: 600px;
+    max-width: 600px; */
+
     padding: 20px;
     background-color: #fff;
 }
@@ -84,12 +82,12 @@ body {
     color: #aaa;
     float: right;
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 1000;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: #faa200;
     text-decoration: none;
     cursor: pointer;
 }
@@ -106,7 +104,7 @@ body {
     justify-content: space-evenly;
 }
 
-#switch_shop span{
+#switch_shop span {
     cursor: pointer;
     display: flex;
 }
@@ -123,8 +121,4 @@ body {
 .modal table,
 .modal td {
     border: solid black 1px;
-}
-
-.shop_elem{
-    overflow: scroll;
 }

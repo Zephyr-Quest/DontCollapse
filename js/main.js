@@ -5,8 +5,9 @@ const update = () => {
     else id -= 1;
 
     if (id > 370 || id < 10) stat = !stat;
-    $('.progress').width(id);
-
+    let bar = document.getElementsByClassName("progress")[0];
+    bar.style.width = id+"px";
+    
     setTimeout(update, 15);
 }
 update();
