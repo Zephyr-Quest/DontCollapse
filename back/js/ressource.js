@@ -1,8 +1,9 @@
-class Ressources {
+class Ressource {
     constructor(){
         this.name;
         this.price;
+        this.quality;
     }
 }
 
-module.exports = Ressources;
+module.exports = Ressource;
