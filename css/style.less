@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: #726868;
+}
+
+#top {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.progress-container {
+    display: flex;
+    justify-content: flex-end;
+
+    height: 50px;
+    width: 400px;
+    border-radius: 50px;
+
+    background: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 166, 0), rgb(0, 255, 0));
+}
+
+.progress-container .progress {
+    background-color: black;
+    height: 100%;
+    width: 0;
+    border-radius: 0px 50px 50px 0px;
+    min-width: 0px;
+    max-width: 400px;
+
+
+}
+
+#shop-button {
+    height: 50px;
+    width: 50px;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+
+/* The Modal (background) */
+.modal {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Modal Content/Box */
+.modal-content {
+    overflow: auto;
+    width: 600px;
+    height: 600px;
+
+    /* max-height: 600px;
+    max-width: 600px; */
+
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: 1000;
+}
+
+.close:hover,
+.close:focus {
+    color: #faa200;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Séparation avec style du contenu */
+.modal-content {
+    text-align: center;
+    margin: auto;
+}
+
+#switch_shop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#switch_shop span {
+    cursor: pointer;
+    display: flex;
+}
+
+#switch_shop .selected {
+    color: #faa200;
+    font-weight: bold;
+}
+
+.modal table {
+    margin: 0 auto;
+}
+
+.modal table,
+.modal td {
+    border: solid black 1px;
+}

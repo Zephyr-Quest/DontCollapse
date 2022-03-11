@@ -1,5 +1,8 @@
 let id = 200;
 let stat = true;
+
+/* ------------------------------ progress bar ------------------------------ */
+
 const update = () => {
     if (stat) id += 1;
     else id -= 1;
@@ -13,7 +16,7 @@ const update = () => {
 update();
 
 
-//!----------------------------------
+/* ---------------------------------- modal --------------------------------- */
 
 const modal = document.getElementById('modal1');
 
