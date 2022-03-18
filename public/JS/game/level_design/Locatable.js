@@ -27,8 +27,7 @@ export class Locatable {
      * @returns The position vector
      */
     getPositionVector() {
-        let vec=new Vector3(this.x, this.y, this.z)
-        return vec;
+        return new Vector3(this.x, this.y, this.z)
     }
 
     /**
@@ -44,7 +43,6 @@ export class Locatable {
      * @returns The rotation vector
      */
     getRotationVector() {
-        let vec=new Vector3(this.rotX, this.rotY, this.rotZ);
-        return vec;;
+        return new Vector3(this.rotX, this.rotY, this.rotZ);
     }
 }
