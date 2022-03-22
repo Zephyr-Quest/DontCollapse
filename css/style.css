@@ -10,27 +10,41 @@ body {
 }
 body {
   background: #726868;
+  font-family: 'Raleway', sans-serif;
 }
 #top {
   display: flex;
-  justify-content: space-around;
   align-items: flex-start;
 }
-.progress-container {
+#top .containers {
   display: flex;
-  justify-content: flex-end;
-  height: 50px;
-  width: 400px;
-  border-radius: 50px;
-  background: linear-gradient(to right, #ff0000, #ffa600, #00ff00);
+  flex-direction: column;
 }
-.progress-container .progress {
+#top .containers .progress-container {
+  margin-left: 100px;
+  display: flex;
+  border: solid #35354d;
   background-color: black;
+  height: 30px;
+  width: 400px;
+}
+#top .containers .progress-container .progress {
   height: 100%;
-  width: 0;
-  border-radius: 0px 50px 50px 0px;
+  width: 200;
   min-width: 0px;
   max-width: 400px;
+  z-index: 1;
+}
+#top .containers .progress-container .text {
+  text-align: center;
+  z-index: 2;
+  position: fixed;
+  width: 400px;
+  margin-left: 100px;
+  left: 0;
+  font-size: x-large;
+  font-style: italic;
+  color: white;
 }
 #shop-button {
   height: 50px;

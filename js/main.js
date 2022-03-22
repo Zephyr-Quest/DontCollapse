@@ -1,3 +1,5 @@
+import progressBar from './progressBar.js';
+
 let id = 200;
 let stat = true;
 
@@ -7,10 +9,10 @@ const update = () => {
     if (stat) id += 1;
     else id -= 1;
 
-    if (id > 370 || id < 10) stat = !stat;
-    let bar = document.getElementsByClassName("progress")[0];
-    bar.style.width = id+"px";
-    
+    if (id > 400 || id < 0) stat = !stat;
+    progressBar.updateSocial(stat)
+    progressBar.updateEconomic(!stat)
+    progressBar.updateEcologic(stat)
     setTimeout(update, 15);
 }
 update();

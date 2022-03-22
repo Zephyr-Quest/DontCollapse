@@ -8,15 +8,31 @@
     <title>HUD</title>
     <link rel="stylesheet" href="./css/style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
     <!-- Progress Bar -->
     <div id="top">
-        <div class="progress-container">
-            <div class="progress"></div>
-        </div>
+        <div class="containers">
+            <div class="progress-container">
+                <div class="progress"></div>
+                <div class="text">Social</div>
+            </div>
 
+            <div class="progress-container">
+                <div class="progress"></div>
+                <div class="text">Economic</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress"></div>
+                <div class="text">Ecologic</div>
+            </div>
+        </div>
 
         <!-- Modal Shop -->
         <button id="shop-button">Shop</button>
@@ -30,10 +46,6 @@
             <span class="close">&times;</span>
             <h2 id="title-modal">Bienvenue dans le shop !</h2>
 
-            <!-- TODO mettre modal sous forme de catalogue -->
-            <!-- TODO modal chat / shop / joueurs  -->
-            <!-- TODO modal shop avec selection du neuf ou du petit coin -->
-            <!-- TODO argent en chiffre  -->
 
             <div id="switch_shop">
                 <span id="machine_link" class="selected">Machines</span>
@@ -89,8 +101,7 @@
         </div>
     </aside>
 
-
-    <script src="./js/main.js"></script>
+    <script src="./js/main.js" type="module"></script>
 </body>
 
 </html>

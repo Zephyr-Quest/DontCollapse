@@ -12,34 +12,54 @@ body {
 
 body {
     background: #726868;
+    font-family: 'Raleway', sans-serif;
+
 }
 
 #top {
     display: flex;
-    justify-content: space-around;
     align-items: flex-start;
-}
 
-.progress-container {
-    display: flex;
-    justify-content: flex-end;
+    .containers {
+        display: flex;
+        flex-direction: column;
 
-    height: 50px;
-    width: 400px;
-    border-radius: 50px;
+        .progress-container {
+            @margin:100px;
+            margin-left: @margin;
+            display: flex;
+            border: solid rgb(53, 53, 77);
+            background-color: black;
+            height: 30px;
+            width: 400px;
 
-    background: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 166, 0), rgb(0, 255, 0));
-}
+            .progress {
+                height: 100%;
+                width: 200;
+                min-width: 0px;
+                max-width: 400px;
+                z-index: 1;
+            }
 
-.progress-container .progress {
-    background-color: black;
-    height: 100%;
-    width: 0;
-    border-radius: 0px 50px 50px 0px;
-    min-width: 0px;
-    max-width: 400px;
+            .text { 
+                text-align: center;
+                z-index: 2;
+                position: fixed;
+                width:400px;
+                // position: fixed;
+                margin-left: @margin;
+                left: 0;
+                // margin-left: 50%;
+                // transform: translateX(-50%);
 
+                font-size: x-large;
+                font-style: italic;
+                color: white;
 
+            }
+        }
+
+    }
 }
 
 #shop-button {
