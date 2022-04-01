@@ -1,0 +1,177 @@
+@charset "UTF-8";
+
+/* -------------------------------------------------------------------------- */
+/*                               Some variables                               */
+/* -------------------------------------------------------------------------- */
+
+// Colors
+@text-color: #000;
+@bg-color: #eee;
+@primary-color: #3ca50c;
+@grey: #e4e4e4;
+@header-bg-color: #eee;
+
+// Fonts
+@text-font: 'Aclonica';
+@primary-font: 'KoHo';
+@secondary-font: sans-serif;
+
+/* -------------------------------------------------------------------------- */
+/*                                   General                                  */
+/* -------------------------------------------------------------------------- */
+
+body {
+    // User can't select text anymore
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+
+    background-color: @bg-color;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    color: @text-color;
+
+    padding: 0;
+    margin: 0;
+}
+
+.log-out {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    font-size: 2.5rem;
+    color: @text-color;
+    cursor: pointer;
+
+    &:hover {
+        color: @primary-color;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                Main content                                */
+/* -------------------------------------------------------------------------- */
+
+main {
+    width: 50%;
+    margin: auto;
+
+    h1, h2, h3 {
+        font-family: @primary-font, @secondary-font;
+        letter-spacing: 0.15rem;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        text-shadow: 1px 2px 3px black;
+    }
+
+    h2 {
+        display: flex;
+        align-items: center;
+    }
+    
+    ion-icon {
+        color: @primary-color;
+        margin-right: 10px;
+    }
+
+    .card {
+        box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        padding-left: 30px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        font-family: @primary-font, @secondary-font;
+        margin-bottom: 25px;
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .green {
+            color: @primary-color;
+        }
+
+        &:hover {
+            background-color: @grey;
+            transition: background-color 0.3s;
+        }
+    }
+
+    .scoreboard {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        
+        .card {
+            h3 {
+                font-size: 2rem;
+                margin: 0;
+                margin-left: 10px;
+            }
+
+            ul {
+                margin-left: 50px;
+            }
+        }
+    }
+
+    .games {
+        margin-top: 50px;
+
+        .card {
+            cursor: pointer;
+            padding-left: 40px;
+
+            ion-icon {
+                font-size: 2.5rem;
+            }
+
+            ul {
+                margin-left: 50px;
+            }
+        }
+
+        #new_game {
+            background-color: @primary-color;
+            color: @bg-color;
+            border: 3px solid @primary-color;
+            justify-content: center;
+            padding: 0;
+
+            &:hover {
+                background-color: transparent;
+                color: @primary-color;
+
+                ion-icon {
+                    color: @primary-color;
+                }
+            }
+
+            ion-icon {
+                color: @bg-color;
+                margin-right: 5px;
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              Responsive Design                             */
+/* -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 800px) {
+    main {
+        width: 90%;
+
+        h1 {
+            margin-top: 70px;
+        }
+    }
+}
