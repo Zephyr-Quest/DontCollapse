@@ -58,33 +58,24 @@ let allRooms = [];
 /* ----------------------------------- APP ---------------------------------- */
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/front/html/index.html');
+    res.sendFile(__dirname + '/front/html/lobby.html');
 });
-
-app.get("/host", (req, res) => {
-    if (!req.session.username) {
-        console.log("Username undefined");
-    }
-})
-
-app.get("/join", (req, res) => {
-    if (!req.session.username) {
-        console.log("Username undefined");
-    }
-})
 
 app.post("/host",
     body("pseudo").isLength({ min: 3 }).trim().escape(),
     (req, res) => {
         const userName = req.body.pseudo;
 
-        // Check if userName already exists
-        if (allPlayers.includes(userName)) {
-            console.log("Pseudo already exists");
-            res.redirect("/lobby");
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            console.error(errors);
+            res.status(400).json({
+                errors: errors.array(),
+            });
+            return;
         }
 
-        console.log("--- LOG IN ---");
+        console.log("--- HOST ---");
         // Add userName to users connected
         req.session.username = userName;
         allPlayers.push(userName);
@@ -95,7 +86,7 @@ app.post("/host",
         allRooms.push({ idRoom: size(allRooms), players: roomPlayers });
 
         console.log(req.session.username, " connected in room ", allRooms.size() - 1);
-        res.redirect('/room');
+        res.send('host');
     })
 
 app.post("/join",
@@ -104,13 +95,16 @@ app.post("/join",
 
         const userName = req.body.pseudo;
 
-        // Check if userName already exists
-        if (allPlayers.includes(userName)) {
-            console.log("Pseudo already exists");
-            res.redirect("/lobby");
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            console.error(errors);
+            res.status(400).json({
+                errors: errors.array(),
+            });
+            return;
         }
 
-        console.log("--- LOG IN ---");
+        console.log("--- JOIN ---");
         // Add userName to users connected
         req.session.username = userName;
         allPlayers.push(userName);
@@ -121,10 +115,10 @@ app.post("/join",
         allRooms[idRoom].players.push(userName);
         console.log(req.session.username, " connected in room ", idRoom);
 
-        res.redirect('/room');
+        res.send("joined")
     })
 
-app.post("/room", (req, res) => {
+app.get("/game", (req, res) => {
 
 })
 
@@ -139,6 +133,23 @@ http.listen(4200, () => {
 io.on('connection', (socket) => {
     console.log('a user connected');
 
+    /* ------------------------- Display room on /lobby ------------------------- */
+    socket.on("host-room", (idRoom) => {
+        // Display new room
+    })
+
+    socket.on("join-room", (idRoom) => {
+        // Check if room full
+        if (allRooms[idRoom].size() === 4) {
+            // Enlever room
+        }
+        io.emit("hide-card", idRoom);
+    })
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                                Disconnection                               */
+    /* -------------------------------------------------------------------------- */
     socket.on('disconnect', () => {
         console.log('a user disconnected');
     });
