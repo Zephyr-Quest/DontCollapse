@@ -1,73 +1,89 @@
-let maxSize = 400;
-let sizeSocial = 200;
+let maxSize = 100;
+let sizeSocial = 100;
 let sizeEcono = 200;
 let sizeEcolo = 200;
 
+let gradSocials = 1
+let gradEcono = 99
+let gradEcolo = 1
 //import config from "./config.js";
 
 function updateSocial(add) {
-    let bar = document.getElementsByClassName("progress")[0];
+    let bar = document.getElementsByClassName("progress-container")[0];
+    let color;
+    if (gradSocials >= 66) {
+        color = "rgba(0,255,0,1)"
+    } else if (gradSocials >= 33) {
+        color = 'rgba(255,165,0,1)';
+    } else {
+        color = 'rgba(255,0,0,1)'
+    }
 
     if (add == true) {
-        if (maxSize >= sizeSocial) {
-            bar.style.width = (sizeSocial++) + "px"
-        }
+        gradSocials += 1
+        let gradFondu = gradSocials + 6
+        bar.style.background = "linear-gradient(90deg," + color + " " + gradSocials + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
     } else {
-        if (sizeSocial >= 0) {
-            bar.style.width = (sizeSocial--) + "px"
-        }
+        gradSocials -= 1
+        let gradFondu = gradSocials + 6
+        bar.style.background = "linear-gradient(90deg," + color + " " + gradSocials + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
     }
-
-    if (sizeSocial >= 2 * (maxSize / 3)) {
-        bar.style.backgroundColor = "green"
-    } else if (sizeSocial >= maxSize / 3) {
-        bar.style.backgroundColor = 'orange';
-    } else {
-        bar.style.backgroundColor = 'red'
-    }
+    let text = bar.innerText;
+    bar.innerText= "Socials     " + gradSocials + "%";
 }
 
+
+
 function updateEconomic(add) {
-    let bar = document.getElementsByClassName("progress")[1];
+    let bar = document.getElementsByClassName("progress-container")[1];
+
+    let color;
+    if (gradEcono >= 66) {
+        color = "rgba(0,255,0,1)"
+    } else if (gradEcono >= 33) {
+        color = 'rgba(255,165,0,1)';
+    } else {
+        color = 'rgba(255,0,0,1)'
+    }
 
     if (add == true) {
-        if (maxSize >= sizeEcono) {
-            bar.style.width = (sizeEcono++) + "px"
-        }
+        gradEcono += 1
+        let gradFondu = gradEcono + 6
+        bar.style.background = "linear-gradient(90deg," + color + " " + gradEcono + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
     } else {
-        if (sizeEcono >= 0) {
-            bar.style.width = (sizeEcono--) + "px"
-        }
+        gradEcono -= 1
+        let gradFondu = gradEcono + 6
+        bar.style.background = "linear-gradient(90deg," + color + " " + gradEcono + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
     }
+    let text = bar.innerText;
+    bar.innerText= "Economic     " + gradEcono + "%";
 
-    if (sizeEcono >= 2 * (maxSize / 3)) {
-        bar.style.backgroundColor = "green"
-    } else if (sizeEcono >= maxSize / 3) {
-        bar.style.backgroundColor = 'orange';
-    } else {
-        bar.style.backgroundColor = 'red'
-    }
 }
 
 function updateEcologic(add) {
-    let bar = document.getElementsByClassName("progress")[2];
+    let bar = document.getElementsByClassName("progress-container")[2];
+
+    let color;
+    if (gradEcolo >= 66) {
+        color = "rgba(0,255,0,1)"
+    } else if (gradEcolo >= 33) {
+        color = 'rgba(255,165,0,1)';
+    } else {
+        color = 'rgba(255,0,0,1)'
+    }
 
     if (add == true) {
-        if (maxSize >= sizeEcolo) {
-            bar.style.width = (sizeEcolo++) + "px"
-        }
+        gradEcolo += 1
+        let gradFondu = gradEcolo + 6
+        bar.style.background = "linear-gradient(90deg," + color + " " + gradEcolo + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
     } else {
-        if (sizeEcolo >= 0) {
-            bar.style.width = (sizeEcolo--) + "px"
-        }
+        gradEcolo -= 1
+        let gradFondu = gradEcolo + 6
+        bar.style.background = "linear-gradient(90deg," + color + " " + gradEcolo + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
     }
-    if (sizeEcolo >= 2 * (maxSize / 3)) {
-        bar.style.backgroundColor = "green"
-    } else if (sizeEcolo >= maxSize / 3) {
-        bar.style.backgroundColor = 'orange';
-    } else {
-        bar.style.backgroundColor = 'red'
-    }
+    let text = bar.innerText;
+    bar.innerText= "Ecologic     " + gradEcolo + "%";
+
 }
 
 export default {

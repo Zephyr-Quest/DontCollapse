@@ -1,10 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    border: none;
-    box-sizing: border-box;
-}
-
 html,
 body {
     height: 100%;
@@ -14,24 +7,35 @@ body {
     background: #726868;
     font-family: 'Raleway', sans-serif;
 
+    margin: 0;
+    padding: 0;
+
 }
+
+
 
 #top {
     display: flex;
     align-items: flex-start;
+    justify-content: space-around;
 
     .containers {
         display: flex;
         flex-direction: column;
 
         .progress-container {
-            @margin:100px;
-            margin-left: @margin;
-            display: flex;
+            //@margin:100px;
+            //margin-left: @margin;
             border: solid rgb(53, 53, 77);
-            background-color: black;
+            // background-color: black;
             height: 30px;
             width: 400px;
+            background: rgb(255, 0, 0);
+            background: linear-gradient(90deg, rgba(255, 0, 0, 1) 54%, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 1) 100%);
+            text-align: center;
+            font-size: x-large;
+            font-style: italic;
+            color: white;
 
             .progress {
                 height: 100%;
@@ -41,20 +45,8 @@ body {
                 z-index: 1;
             }
 
-            .text { 
+            .text {
                 text-align: center;
-                z-index: 2;
-                position: fixed;
-                width:400px;
-                // position: fixed;
-                margin-left: @margin;
-                left: 0;
-                // margin-left: 50%;
-                // transform: translateX(-50%);
-
-                font-size: x-large;
-                font-style: italic;
-                color: white;
 
             }
         }
@@ -70,31 +62,99 @@ body {
 }
 
 
-/* The Modal (background) */
+/* -------------------------------------------------------------------------- */
+/*                                    Modal                                   */
+/* -------------------------------------------------------------------------- */
+
 .modal {
-    position: absolute;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-}
+    padding: 0;
 
-/* Modal Content/Box */
-.modal-content {
-    overflow: auto;
-    width: 600px;
+    // justify-content: center;
+    // align-items: center;
     height: 600px;
-
-    /* max-height: 600px;
-    max-width: 600px; */
-
-    padding: 20px;
-    background-color: #fff;
+    width: 600px;
+    max-height: 600px;
+    max-width: 600px;
 }
+
+.modal::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    padding: 1rem;
+    display: block;
+
+    margin: auto;
+    text-align: center;
+}
+
+.modal[open] {
+    animation: slide-up 100ms forwards, fade-in 250ms forwards;
+
+}
+
+.modal[open]::backdrop {
+    animation: fade-in 250ms forwards;
+}
+
+.modal[closing] {
+    display: block;
+    pointer-events: none;
+    inset: 0;
+    animation: fade-out 250ms forwards;
+}
+
+.modal[closing]::backdrop {
+    animation: fade-out 250ms forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    100% {
+        opacity: 0;
+    }
+
+    0% {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+// .modal {
+//     background: rgba(0, 0, 0, 0.8);
+// }
+
+// /* Modal Content/Box */
+// .modal-content {
+//     overflow: auto;
+//     width: 600px;
+//     height: 600px;
+
+//     /* max-height: 600px;
+//     max-width: 600px; */
+
+//     padding: 20px;
+//     background-color: #fff;
+// }
 
 /* The Close Button */
 .close {
@@ -109,12 +169,6 @@ body {
     color: #faa200;
     text-decoration: none;
     cursor: pointer;
-}
-
-/* Séparation avec style du contenu */
-.modal-content {
-    text-align: center;
-    margin: auto;
 }
 
 #switch_shop {
@@ -133,11 +187,11 @@ body {
     font-weight: bold;
 }
 
-.modal table {
-    margin: 0 auto;
-}
+// .modal table {
+//     margin: 0 auto;
+// }
 
-.modal table,
-.modal td {
-    border: solid black 1px;
-}
+// .modal table,
+// .modal td {
+//     border: solid black 1px;
+// }
