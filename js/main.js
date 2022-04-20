@@ -1,10 +1,16 @@
 import ProgressBar from './progressBar.js';
-import Modal from './modal.js'
+import Modal from './modal.js';
+import Shop from './shop.js';
 
-let id = 1;
-let stat = true;
+
+
+
+
+
 
 /* ------------------------------ progress bar ------------------------------ */
+let id = 1;
+let stat = true;
 
 const update = () => {
     if (stat) id += 1;

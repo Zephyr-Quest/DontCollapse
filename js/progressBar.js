@@ -29,7 +29,7 @@ function updateSocial(add) {
         bar.style.background = "linear-gradient(90deg," + color + " " + gradSocials + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
     }
     let text = bar.innerText;
-    bar.innerText= "Socials     " + gradSocials + "%";
+    bar.innerText= "Social     " + gradSocials + "%";
 }
 
 
