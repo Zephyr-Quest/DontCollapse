@@ -4,9 +4,12 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const bodyParser = require("body-parser");
 const sharedsession = require('express-socket.io-session');
+const ejs = require('ejs');
+const path = require('path');
 
 const {
     body,
+    validationResult
 } = require("express-validator");
 
 if (process.env.NODE_ENV !== "production") {
@@ -29,6 +32,8 @@ app.use(jsonParse);
 app.use(session);
 // app.use("/static", express.static('./static/'));
 app.use(express.static(__dirname + '/public'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 
 if (app.get("env") === "production") {
@@ -58,7 +63,7 @@ let allRooms = [];
 /* ----------------------------------- APP ---------------------------------- */
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/front/html/lobby.html');
+    res.render('lobby');
 });
 
 app.post("/host",
@@ -72,6 +77,7 @@ app.post("/host",
             res.status(400).json({
                 errors: errors.array(),
             });
+            console.log(errors);
             return;
         }
 
@@ -83,9 +89,9 @@ app.post("/host",
         // Create new room
         let roomPlayers = [];
         roomPlayers.push(userName)
-        allRooms.push({ idRoom: size(allRooms), players: roomPlayers });
+        allRooms.push({ idRoom: allRooms.length, players: roomPlayers });
 
-        console.log(req.session.username, " connected in room ", allRooms.size() - 1);
+        console.log(req.session.username, " connected in room ", allRooms.length - 1);
         res.send('host');
     })
 
