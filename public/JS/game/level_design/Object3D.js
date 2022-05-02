@@ -10,6 +10,11 @@ import {
         Models
 } from "../config/models.js";
 
+import {
+        GLTFLoader
+} from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js";
+
+
 import * as THREE from 'three';
 
 
@@ -19,27 +24,33 @@ export class Object3D extends Locatable {
                 this.length = length;
                 this.width = width;
                 this.type = type;
+                this.loader = new GLTFLoader();
         }
 
-        addToScene(scene) {
-                if (this.type == "wall") {
-                        this.geometry = new THREE.PlaneGeometry(1, 1);
+        getMesh() {
+                if (Models[this.type].model != null) {
+                        loader.load('path/to/model.glb', function (gltf) {
+                                return gltf
+                        }, undefined, function (error) {
+                                console.error(error);
+                        });
+                } else {
+                        this.geometry = new THREE.PlaneGeometry(10, 10);
                         this.material = new THREE.MeshBasicMaterial({
                                 color: 0xffff00,
                                 side: THREE.DoubleSide
                         });
                         this.mesh = new THREE.Mesh(this.geometry, this.material);
-                } else {
-                        this.mesh = Models[this.type].model.scene.clone();
+                        return this.mesh;
                 }
-                scene.add(this.mesh);
         }
+
         log() {
                 console.log(this)
         }
 
-        removeFromScene(scene) {
-                scene.remove(this.mesh);
+        removeFromScene(sc) {
+                sc.remove(this.mesh);
         }
 
         updateMesh() {
