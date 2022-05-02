@@ -2,7 +2,10 @@ const http = (function () {
     const HOST = 'http://localhost:4200';
 
     function customFecth(url, config, resolve, reject) {
-        fetch(url, config).then(resolve).catch(reject);
+        fetch(url, config).then(data => {
+            if (data.ok) resolve(data.json());
+            else reject(data);
+        }).catch(reject);
     }
 
     return {

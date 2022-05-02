@@ -49,7 +49,6 @@ io.use(sharedsession(session, {
 
 /* -------------------------------- Variables ------------------------------- */
 
-let allPlayers = [];
 let allRooms = [];
 
 // const Employee = require("./back/js/employee");
@@ -86,24 +85,30 @@ app.post("/host",
         }
 
         console.log("--- HOST ---");
-        // Add userName to users connected
         req.session.username = userName;
-        allPlayers.push(userName);
+        req.session.idRoom = allRooms.length;
 
         // Create new room
         let roomPlayers = [];
         roomPlayers.push(userName)
         allRooms.push({ idRoom: allRooms.length, players: roomPlayers });
 
-        console.log(req.session.username, " connected in room ", allRooms.length - 1);
-        res.send('host');
+        console.log(req.session.username, " connected in room ", req.session.idRoom);
+        res.send({
+            state: 'host'
+        });
+
+        io.emit("host-room", allRooms.length - 1);
     })
 
 app.post("/join",
     body("pseudo").isLength({ min: 3 }).trim().escape(),
+    body("idRoom"),
     (req, res) => {
 
         const userName = req.body.pseudo;
+        const idRoom = req.body.idRoom;
+        console.log(idRoom);
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -114,23 +119,27 @@ app.post("/join",
             return;
         }
 
+        if (allRooms.includes(userName)) {
+            res.status(400).json({
+                errors: "Pseudo already exists in this room",
+            });
+            return;
+        }
+
         console.log("--- JOIN ---");
-        // Add userName to users connected
         req.session.username = userName;
-        allPlayers.push(userName);
+        req.session.idRoom = idRoom;
 
         // Add player in room
-        const idRoom = req.body.idRoom;
-        req.session.idRoom = idRoom;
         allRooms[idRoom].players.push(userName);
         console.log(req.session.username, " connected in room ", idRoom);
 
-        res.send("joined")
+        res.send({
+            state: 'joined'
+        });
+
+        io.to(idRoom).emit("join-room", idRoom);
     })
-
-app.get("/game", (req, res) => {
-
-})
 
 
 http.listen(4200, () => {
@@ -143,19 +152,39 @@ http.listen(4200, () => {
 io.on('connection', (socket) => {
     console.log('a user connected');
 
-    /* ------------------------- Display room on /lobby ------------------------- */
+    io.emit("display-rooms", allRooms);
+
+    const username = socket.handshake.session.username;
+    const idRoom = socket.handshake.session.idRoom;
+
+    if (username) {
+        console.log(username, idRoom);
+        console.log(typeof idRoom)
+        console.log(allRooms[idRoom]);
+        socket.join(idRoom);
+        io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
+    }
+
     socket.on("host-room", (idRoom) => {
-        // Display new room
+        // Display rooms
+        io.emit("display-rooms", allRooms);
+        // Display players in room
+        // io.to(idRoom).emit("updatePlayerList");
     })
 
     socket.on("join-room", (idRoom) => {
+        // Display rooms
+        io.emit("display-rooms", allRooms);
+        // Display players in room
+        console.log("ici ", idRoom);
+        // io.to(idRoom).emit("updatePlayerList");
+
         // Check if room full
         if (allRooms[idRoom].size() === 4) {
             // Enlever room
+            io.emit("hide-card", idRoom);
         }
-        io.emit("hide-card", idRoom);
     })
-
 
     /* -------------------------------------------------------------------------- */
     /*                                Disconnection                               */
