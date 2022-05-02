@@ -48,22 +48,22 @@ function printEtQuinc() {
 }
 
 function printSelector(event) {
-    switch (event.target.textContent) {
-        case "Électricité":
+    switch (event.target.classList[0]) {
+        case "elem1":
             printElec();
             changeRubric(0)
             break;
-        case "Eau":
+        case "elem2":
             printEau();
             changeRubric(1)
 
             break;
-        case "Cartons":
+        case "elem3":
             printCart();
             changeRubric(2)
 
             break;
-        case "Étain - Quincaillerie":
+        case "elem4":
             printEtQuinc();
             changeRubric(3)
 

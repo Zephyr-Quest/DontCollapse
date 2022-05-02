@@ -48,22 +48,22 @@ function printMena() {
 }
 
 function printSelector(event) {
-    switch (event.target.textContent) {
-        case "Ingénieur":
+    switch (event.target.classList[0]) {
+        case "elem1":
             printInge();
             changeRubric(0)
             break;
-        case "Superviseur":
+        case "elem2":
             printSuper();
             changeRubric(1)
 
             break;
-        case "Maintenance":
+        case "elem3":
             printMaint();
             changeRubric(2)
 
             break;
-        case "Ménage":
+        case "elem4":
             printMena();
             changeRubric(3)
             break;

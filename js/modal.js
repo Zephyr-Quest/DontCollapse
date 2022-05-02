@@ -12,39 +12,45 @@ function closeFunction() {
     }, {
         once: true
     });
+    Shop.closeShop();
 
+    closeModal.removeEventListener('click', closeFunction); // cross
+    modal.removeEventListener('click', outsideClose);       // outside
+    window.removeEventListener('keydown', escapeClose);     // Escape
+}
 
-    //Shop.closeShop();
+function outsideClose(e){
+    if (e.target.nodeName === "DIALOG") {
+        closeFunction();
+    }
+}
+
+function escapeClose(e){
+    if ((e.key === "Escape" || e.key === "Esc") && modal.hasAttribute('open')) {
+        closeFunction();
+    }
+}
+
+function initModalListeners(){
+    // When the user click on the cross, close the modal
+    closeModal.addEventListener('click', closeFunction);
+    
+    // When the user clicks anywhere outside of the modal, close it
+    modal.addEventListener('click', outsideClose);
+    
+    // When the user clicks on Escape, close the modal
+    window.addEventListener('keydown', escapeClose);
 }
 
 
 
-function initModals() {
+function openShop() {
     openModal.addEventListener('click', () => {
-        modal.showModal();
+        initModalListeners();
         Shop.initShop();
-
+        modal.showModal();
     });
-
-    closeModal.addEventListener('click', () => {
-        closeFunction();
-    });
-
-    // When the user clicks anywhere outside of the modal, close it
-    modal.addEventListener('click', e => {
-        if (e.target.nodeName === "DIALOG") {
-            closeFunction();
-        }
-    });
-
-    // When the user clicks on escape, close the modal
-    window.addEventListener('keydown', e => {
-        if ((e.key === "Escape" || e.key === "Esc") && modal.hasAttribute('open')) {
-            closeFunction();
-        }
-    });
-
 }
 export default {
-    initModals
+    openShop
 }

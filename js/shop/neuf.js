@@ -5,7 +5,7 @@ const rightPage = document.querySelectorAll('#right-page div');
 
 
 function openRubric() {
-    printManix()
+    printLevel(1)
     changeRubric(0)
 }
 
@@ -14,57 +14,36 @@ function changeRubric(id) {
         rightRubric.forEach(e => {
             e.classList.remove('selected');
         });
-        rightRubric[id].classList.add('selected')
-
+        rightRubric[id].classList.add('selected');
     }
-};
-
-function printManix() {
-    leftPage[0].innerHTML = "Poste à souder <br> Niveau 1";
-    leftPage[1].innerHTML = "Assembleur de précision <br> Niveau 1";
-    rightPage[0].innerHTML = "Assembleur mécanique <br> Niveau 1";
-    rightPage[1].innerHTML = "Assembleur général <br> Niveau 1";
 }
 
-function printDroit() {
-    leftPage[0].innerHTML = "Poste à souder <br> Niveau 2";
-    leftPage[1].innerHTML = "Assembleur de précision <br> Niveau 2";
-    rightPage[0].innerHTML = "Assembleur mécanique <br> Niveau 2";
-    rightPage[1].innerHTML = "Assembleur général <br> Niveau 2";
+function printLevel(id) {
+    leftPage[0].innerHTML = `Poste à souder <br> Niveau ${id}`;
+    leftPage[1].innerHTML = `Assembleur de précision <br> Niveau ${id}`;
+    rightPage[0].innerHTML = `Assembleur mécanique <br> Niveau ${id}`;
+    rightPage[1].innerHTML = `Assembleur général <br> Niveau ${id}`;
 }
 
-function printBraz() {
-    leftPage[0].innerHTML = "Poste à souder <br> Niveau 3";
-    leftPage[1].innerHTML = "Assembleur de précision <br> Niveau 3";
-    rightPage[0].innerHTML = "Assembleur mécanique <br> Niveau 3";
-    rightPage[1].innerHTML = "Assembleur général <br> Niveau 3";
-}
-
-function printTesla() {
-    leftPage[0].innerHTML = "Poste à souder <br> Niveau 4";
-    leftPage[1].innerHTML = "Assembleur de précision <br> Niveau 4";
-    rightPage[0].innerHTML = "Assembleur mécanique <br> Niveau 4";
-    rightPage[1].innerHTML = "Assembleur général <br> Niveau 4";
-}
 
 function printSelector(event) {
-    switch (event.target.textContent) {
-        case "Manix 2":
-            printManix();
+    switch (event.target.classList[0]) {
+        case "elem1":
+            printLevel(1);
             changeRubric(0)
             break;
-        case "Droit Ô But":
-            printDroit();
+        case "elem2":
+            printLevel(2);
             changeRubric(1)
 
             break;
-        case "Braz'Air'Eau":
-            printBraz();
+        case "elem3":
+            printLevel(3);
             changeRubric(2)
 
             break;
-        case "Teslassemblage":
-            printTesla();
+        case "elem4":
+            printLevel(4);
             changeRubric(3)
             break;
 

@@ -1,42 +1,31 @@
-let maxSize = 100;
-let sizeSocial = 100;
-let sizeEcono = 200;
-let sizeEcolo = 200;
+/* const sizeSocial = 100;
+const sizeEcono = 200;
+const sizeEcolo = 200; */
 
-let gradSocials = 1
-let gradEcono = 99
-let gradEcolo = 1
 //import config from "./config.js";
 
-function updateSocial(add) {
+function updateSocial(amount) {
     let bar = document.getElementsByClassName("progress-container")[0];
+    let gradSocial = amount;
     let color;
-    if (gradSocials >= 66) {
+    if (gradSocial >= 66) {
         color = "rgba(0,255,0,1)"
-    } else if (gradSocials >= 33) {
+    } else if (gradSocial >= 33) {
         color = 'rgba(255,165,0,1)';
     } else {
         color = 'rgba(255,0,0,1)'
     }
 
-    if (add == true) {
-        gradSocials += 1
-        let gradFondu = gradSocials + 6
-        bar.style.background = "linear-gradient(90deg," + color + " " + gradSocials + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
-    } else {
-        gradSocials -= 1
-        let gradFondu = gradSocials + 6
-        bar.style.background = "linear-gradient(90deg," + color + " " + gradSocials + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
-    }
-    let text = bar.innerText;
-    bar.innerText= "Social     " + gradSocials + "%";
+    let gradFondu = gradSocial + 6
+    bar.style.background = "linear-gradient(90deg," + color + " " + gradSocial + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
+    bar.innerText = "Social " + gradSocial + "%";
 }
 
 
 
-function updateEconomic(add) {
+function updateEconomic(amount) {
     let bar = document.getElementsByClassName("progress-container")[1];
-
+    let gradEcono = amount;
     let color;
     if (gradEcono >= 66) {
         color = "rgba(0,255,0,1)"
@@ -46,23 +35,14 @@ function updateEconomic(add) {
         color = 'rgba(255,0,0,1)'
     }
 
-    if (add == true) {
-        gradEcono += 1
-        let gradFondu = gradEcono + 6
-        bar.style.background = "linear-gradient(90deg," + color + " " + gradEcono + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
-    } else {
-        gradEcono -= 1
-        let gradFondu = gradEcono + 6
-        bar.style.background = "linear-gradient(90deg," + color + " " + gradEcono + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
-    }
-    let text = bar.innerText;
-    bar.innerText= "Economic     " + gradEcono + "%";
-
+    let gradFondu = gradEcono + 6
+    bar.style.background = "linear-gradient(90deg," + color + " " + gradEcono + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
+    bar.innerText = "Economic     " + gradEcono + "%";
 }
 
-function updateEcologic(add) {
+function updateEcologic(amount) {
     let bar = document.getElementsByClassName("progress-container")[2];
-
+    let gradEcolo = amount;
     let color;
     if (gradEcolo >= 66) {
         color = "rgba(0,255,0,1)"
@@ -72,18 +52,9 @@ function updateEcologic(add) {
         color = 'rgba(255,0,0,1)'
     }
 
-    if (add == true) {
-        gradEcolo += 1
-        let gradFondu = gradEcolo + 6
-        bar.style.background = "linear-gradient(90deg," + color + " " + gradEcolo + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
-    } else {
-        gradEcolo -= 1
-        let gradFondu = gradEcolo + 6
-        bar.style.background = "linear-gradient(90deg," + color + " " + gradEcolo + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
-    }
-    let text = bar.innerText;
-    bar.innerText= "Ecologic     " + gradEcolo + "%";
-
+    let gradFondu = gradEcolo + 6
+    bar.style.background = "linear-gradient(90deg," + color + " " + gradEcolo + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
+    bar.innerText = "Ecologic     " + gradEcolo + "%";
 }
 
 export default {
