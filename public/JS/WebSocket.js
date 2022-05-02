@@ -10,20 +10,17 @@ const WebSocket = (function () {
     };
 
     // HTML elements
-    const playerListUl = document.getElementById("player_list")
+    const playerListUl = document.getElementById("player_list");
     
     // Data stored
     let connectedPlayers = [];
 
     function updatePlayersOnScreen() {
-        console.log("iciiii");
         // Remove previous players
-        if (playerListUl.children) {
-            for (const child of playerListUl.children) {
-                child.remove();
-            }
+        while (playerListUl.children && playerListUl.children.length > 0) {
+            console.log(playerListUl.children);
+            playerListUl.children[0].remove();
         }
-
 
         // Print new players
         connectedPlayers.forEach(player => {

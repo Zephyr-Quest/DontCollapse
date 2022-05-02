@@ -30,15 +30,14 @@ socket.on("display-rooms", (allRooms) => {
 
     for (const card of document.querySelectorAll("#games-display .card"))
         card.addEventListener("click", () => connect('/join', card.getAttribute('name')));
+})
 
-    // for (const card of document.querySelectorAll("#games-display .card")) {
-    //     card.addEventListener("click", () => {
-    //         let host = card.getElementsByClassName("green")[0].innerText;
-    //         let res = Object.keys(allRooms).findIndex(key => allRooms[key][0].name == host)
-    //         if (allRooms[res] && allRooms[res].players.length < 4) {
-    //             socket.emit("join-room", host);
-    //             window.location.href = "/game";
-    //         }
-    //     })
-    // }
+/* ------------------------------- Hide a room ------------------------------ */
+socket.on("hide-card", host => {
+    for (const card of document.querySelectorAll("#games-display .card")) {
+        let usr = card.getElementsByClassName("green")[0].innerText;
+        if (usr == host) {
+            card.style.display = "none"
+        }
+    }
 })

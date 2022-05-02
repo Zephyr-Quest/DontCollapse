@@ -58,6 +58,21 @@ let allRooms = [];
 // const Ressources = require("./back/js/ressources");
 // const Company = require("./back/js/company");
 
+/* -------------------------------- Functions ------------------------------- */
+
+/**
+ * Obtain the higher id of an object
+ * @param {Object} obj 
+ * @return {String} max id
+ */
+ function getMaxKey(obj) {
+    let result = -1;
+
+    Object.keys(obj).forEach(key => {
+        if (key > result) result = key;
+    });
+    return result;
+}
 
 /* ----------------------------------- APP ---------------------------------- */
 
@@ -86,7 +101,11 @@ app.post("/host",
 
         console.log("--- HOST ---");
         req.session.username = userName;
-        req.session.idRoom = allRooms.length;
+
+        let idRoom = Number(getMaxKey(allRooms)) + 1;
+
+        req.session.idRoom = idRoom;
+        // req.session.idRoom = allRooms.length;
 
         // Create new room
         let roomPlayers = [];
@@ -168,16 +187,11 @@ io.on('connection', (socket) => {
     socket.on("host-room", (idRoom) => {
         // Display rooms
         io.emit("display-rooms", allRooms);
-        // Display players in room
-        // io.to(idRoom).emit("updatePlayerList");
     })
 
     socket.on("join-room", (idRoom) => {
         // Display rooms
         io.emit("display-rooms", allRooms);
-        // Display players in room
-        console.log("ici ", idRoom);
-        // io.to(idRoom).emit("updatePlayerList");
 
         // Check if room full
         if (allRooms[idRoom].size() === 4) {
