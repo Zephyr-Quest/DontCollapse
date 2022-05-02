@@ -66,6 +66,10 @@ app.get('/', (req, res) => {
     res.render('lobby');
 });
 
+app.get('/game', (req, res) => {
+    res.render('game');
+});
+
 app.post("/host",
     body("pseudo").isLength({ min: 3 }).trim().escape(),
     (req, res) => {
