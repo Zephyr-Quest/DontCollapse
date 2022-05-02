@@ -15,6 +15,7 @@ import {
 } from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js";
 
 
+
 import * as THREE from 'three';
 
 
@@ -56,7 +57,7 @@ export class Object3D extends Locatable {
                         if (this.type == "cube") {
                                 this.geometry = new THREE.BoxGeometry(this.length, this.length, this.length)
                                 this.material = new THREE.MeshBasicMaterial({
-                                        side: THREE.FrontSide,
+                                        side: THREE.fro,
                                         color: this.color,
                                 })
                         }

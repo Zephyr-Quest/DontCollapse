@@ -14,6 +14,14 @@ import {
         Vector3
 } from 'three';
 
+import {
+        ObjectArray
+} from "./level_design/scene.js"
+
+import {
+        Object3D
+} from "./level_design/Object3D.js"
+
 const stats = new Stats();
 stats.showPanel(0);
 
@@ -28,8 +36,9 @@ export class Scene {
                 this.textureLoader = new THREE.TextureLoader(this.loadManager);
 
                 this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-                this.camera.position.set(1000,-1000,500);
-                this.camera.lookAt(new THREE.Vector3(0,0,0));
+                this.camera.position.set(1000, -1000, 500);
+                // this.camera.position.set(0, 0, 0);
+                this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
                 this.scene = new THREE.Scene();
 
@@ -76,6 +85,11 @@ export class Scene {
                 this.axesHelper = new THREE.AxesHelper(1000);
                 this.scene.add(this.axesHelper);
 
+                this.raycaster = new THREE.Raycaster();
+                this.renderer.domElement.addEventListener('click', event => {
+                        this.onMouseClick(event, this);
+                });
+
                 this.animate()
         }
 
@@ -96,4 +110,51 @@ export class Scene {
                 this.camera.updateProjectionMatrix();
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
         }
+
+        createScene() {
+                let obj, mesh
+                this.selectionables = new THREE.Group();
+                ObjectArray.forEach(el => {
+                        if (el.color != "red") {
+                                obj = new Object3D(el)
+                                mesh = obj.getMesh()
+                                this.scene.add(mesh)
+                        } else {
+                                obj = new Object3D(el)
+                                let cube = obj.getMesh()
+                                this.selectionables.add(cube);
+                        }
+                });
+                this.scene.add(this.selectionables);
+        }
+
+        onMouseClick(event, ctx) {
+                let double
+                var position = new THREE.Vector2();
+                // On conserve la position de la souris dans l'espace de coordonnées
+                // NDC (Normalized device coordinates).
+                var domRect = document.getElementById("myThreeJsCanvas").getBoundingClientRect();
+                position.x = ((event.clientX - domRect.left) / domRect.width) * 2 - 1;
+                position.y = -((event.clientY - domRect.top) / domRect.height) * 2 + 1;
+
+                var s = ctx.getSelectionneLePlusProche(position, ctx);
+                if (s) {
+                                s.material.color.setHex("0xe06666");
+                                setTimeout(()=>{
+                                        s.material.color.set("red");
+                                },200)
+                }
+        }
+
+
+        getSelectionneLePlusProche(position, ctx) {
+                // Mise à jour de la position du rayon à lancer.
+                ctx.raycaster.setFromCamera(position, ctx.camera);
+                // Obtenir la liste des intersections
+                var selectionnes = ctx.raycaster.intersectObjects(ctx.selectionables.children);
+                if (selectionnes.length) {
+                        return selectionnes[0].object;
+                }
+        }
+
 }
