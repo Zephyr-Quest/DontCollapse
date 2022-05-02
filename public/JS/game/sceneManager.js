@@ -19,6 +19,7 @@ stats.showPanel(0);
 
 document.body.appendChild(stats.dom);
 
+THREE.Object3D.DefaultUp.set(0, 0, 1);
 
 export class Scene {
 
@@ -27,9 +28,8 @@ export class Scene {
                 this.textureLoader = new THREE.TextureLoader(this.loadManager);
 
                 this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-                this.camera.position.x =Config.camX;
-                this.camera.position.y =Config.camY;
-                this.camera.position.z =Config.camZ;
+                this.camera.position.set(1000,-1000,500);
+                this.camera.lookAt(new THREE.Vector3(0,0,0));
 
                 this.scene = new THREE.Scene();
 

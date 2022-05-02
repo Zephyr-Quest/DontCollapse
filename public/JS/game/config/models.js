@@ -6,5 +6,15 @@ export const Models = {
                 name: "",
                 model: null,
                 scale: 1
+        },
+        floor: {
+                name: "",
+                model: null,
+                scale: 1
+        },
+        cube: {
+                name: "",
+                model: null,
+                scale: 1
         }
 }

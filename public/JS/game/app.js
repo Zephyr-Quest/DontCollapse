@@ -10,7 +10,27 @@ import {
         Object3D
 } from "./level_design/Object3D.js"
 
-// let sc = new Scene()
-// let wall = new Object3D(0,0,0,20,10,"wall")
-// let w1=wall.getMesh()
-// sc.scene.add(w1)
+import {
+        ObjectArray
+} from "./level_design/scene.js"
+
+
+
+
+let sc = new Scene()
+let obj, mesh
+ObjectArray.forEach(el => {
+        if (el.color != "red") {
+                obj = new Object3D(el)
+                mesh = obj.getMesh()
+                sc.scene.add(mesh)
+        } else {
+                obj = new Object3D(el)
+                let cube = obj.getMesh()
+                sc.scene.add(cube)
+                cube.cursor = 'pointer';
+                cube.on('click', function (ev) {
+                        console.log(ev)
+                });
+        }
+});
