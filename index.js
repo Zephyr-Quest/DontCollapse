@@ -112,12 +112,12 @@ app.post("/host",
         roomPlayers.push(userName)
         allRooms.push({ idRoom: allRooms.length, players: roomPlayers });
 
-        console.log(req.session.username, " connected in room ", req.session.idRoom);
+        // console.log(req.session.username, " connected in room ", req.session.idRoom);
         res.send({
             state: 'host'
         });
 
-        io.emit("host-room", allRooms.length - 1);
+        io.emit("host-room", "");
     })
 
 app.post("/join",
@@ -127,7 +127,6 @@ app.post("/join",
 
         const userName = req.body.pseudo;
         const idRoom = req.body.idRoom;
-        console.log(idRoom);
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -151,7 +150,7 @@ app.post("/join",
 
         // Add player in room
         allRooms[idRoom].players.push(userName);
-        console.log(req.session.username, " connected in room ", idRoom);
+        // console.log(req.session.username, " connected in room ", idRoom);
 
         res.send({
             state: 'joined'
@@ -169,22 +168,20 @@ http.listen(4200, () => {
 /* ----------------------------------- IO ----------------------------------- */
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
-
-    io.emit("display-rooms", allRooms);
-
     const username = socket.handshake.session.username;
     const idRoom = socket.handshake.session.idRoom;
-
+    
     if (username) {
-        console.log(username, idRoom);
-        console.log(typeof idRoom)
-        console.log(allRooms[idRoom]);
+        console.log(username, " connected in room ", idRoom);
+        console.log(allRooms[idRoom], "\n");
         socket.join(idRoom);
         io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
     }
+    else console.log('a user connected');
 
-    socket.on("host-room", (idRoom) => {
+    io.emit("display-rooms", allRooms);
+
+    socket.on("host-room", () => {
         // Display rooms
         io.emit("display-rooms", allRooms);
     })
@@ -204,6 +201,8 @@ io.on('connection', (socket) => {
     /*                                Disconnection                               */
     /* -------------------------------------------------------------------------- */
     socket.on('disconnect', () => {
-        console.log('a user disconnected');
+        const username = socket.handshake.session.username;
+        if (username) console.log(username, " disconnected");
+        else console.log('a user disconnected');
     });
 });

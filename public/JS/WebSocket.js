@@ -18,7 +18,6 @@ const WebSocket = (function () {
     function updatePlayersOnScreen() {
         // Remove previous players
         while (playerListUl.children && playerListUl.children.length > 0) {
-            console.log(playerListUl.children);
             playerListUl.children[0].remove();
         }
 
