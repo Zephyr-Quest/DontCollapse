@@ -10,10 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/Zephyr-Quest/DontCollapse.git"
   },
-  "keywords": [
-    "server"
-  ],
-  "author": "moi",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Zephyr-Quest/DontCollapse/issues"
