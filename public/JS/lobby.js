@@ -21,6 +21,8 @@ hostCard.addEventListener("click", () => connect('/host'));
 
 /* ---------------------- Display the differents rooms ---------------------- */
 socket.on("display-rooms", (allRooms) => {
+    console.log(allRooms);
+
     let htmlScore = "";
     Object.keys(allRooms).forEach(key => {
         if (allRooms[key].players.length < 4)
@@ -34,8 +36,9 @@ socket.on("display-rooms", (allRooms) => {
 
 /* ------------------------------- Hide a room ------------------------------ */
 socket.on("hide-card", host => {
+    console.log("hide", host);
     for (const card of document.querySelectorAll("#games-display .card")) {
-        let usr = card.getElementsByClassName("green")[0].innerText;
+        let usr = card.getElementsByClassName("green")[0].getAttribute("name");
         if (usr == host) {
             card.style.display = "none"
         }

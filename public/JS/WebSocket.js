@@ -6,6 +6,9 @@ const WebSocket = (function () {
             console.log(players)
             connectedPlayers = players;
             updatePlayersOnScreen();
+        },
+        "disconnection": () => {
+            window.location.href = "/";
         }
     };
 

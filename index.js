@@ -11,6 +11,7 @@ const {
     body,
     validationResult
 } = require("express-validator");
+const { all } = require('express/lib/application');
 
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
@@ -50,6 +51,7 @@ io.use(sharedsession(session, {
 /* -------------------------------- Variables ------------------------------- */
 
 let allRooms = [];
+let disconnectingUsers = [];
 
 // const Employee = require("./back/js/employee");
 // const Factory = require("./back/js/factory");
@@ -65,7 +67,7 @@ let allRooms = [];
  * @param {Object} obj 
  * @return {String} max id
  */
- function getMaxKey(obj) {
+function getMaxKey(obj) {
     let result = -1;
 
     Object.keys(obj).forEach(key => {
@@ -81,7 +83,48 @@ app.get('/', (req, res) => {
 });
 
 app.get('/game', (req, res) => {
-    res.render('game');
+    res.render('game', {
+        username: req.session.username
+    });
+});
+
+app.get("/roomdata", (req, res) => {
+    const idRoom = req.session.idRoom;
+    const data = {
+        room: allRooms[idRoom],
+        username: req.session.username
+    }
+    res.json(data);
+});
+
+app.delete("/removeuser/:player", (req, res) => {
+    const idRoom = req.session.idRoom;
+    const username = req.session.username;
+    const player = req.params.player;
+
+    if (allRooms[idRoom].players.indexOf(username) !== 0) {
+        res.status(401).json({
+            message: "You don't have permission."
+        });
+        return;
+    }
+
+    if (!allRooms[idRoom].players.includes(player)) {
+        res.status(400).json({
+            message: "The player doesn't exist."
+        });
+        return;
+    }
+
+    // Disconnect the player
+    const players = io.sockets.adapter.rooms.get(idRoom);
+    for (const p of players) {
+        const pSocket = io.sockets.sockets.get(p);
+        const pUsername = pSocket.handshake.session.username;
+
+        if (pUsername === player)
+            pSocket.emit("disconnection");
+    }
 });
 
 app.post("/host",
@@ -117,7 +160,7 @@ app.post("/host",
             state: 'host'
         });
 
-        io.emit("host-room", "");
+        // io.emit("host-room", "");
     })
 
 app.post("/join",
@@ -167,29 +210,48 @@ http.listen(4200, () => {
 
 /* ----------------------------------- IO ----------------------------------- */
 
-io.on('connection', (socket) => {
-    const username = socket.handshake.session.username;
-    const idRoom = socket.handshake.session.idRoom;
+io.on('connection', socket => {
+    let username = socket.handshake.session.username;
+    let idRoom = socket.handshake.session.idRoom;
     
-    if (username) {
+    if (username !== undefined && allRooms[idRoom]) {
         console.log(username, " connected in room ", idRoom);
         console.log(allRooms[idRoom], "\n");
-        socket.join(idRoom);
-        io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
+        if (idRoom !== undefined) {
+            socket.join(idRoom);
+            io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
+        }
     }
     else console.log('a user connected');
 
+    if (username !== undefined && idRoom !== undefined && disconnectingUsers.includes(username)) {
+        if (allRooms[idRoom]) {
+            // Check the exiting room
+            if (allRooms[idRoom].players.indexOf(username) === 0) {
+                // Delete the room
+                console.log("delete", idRoom);
+                allRooms.splice(idRoom, 1);
+                io.to(idRoom).emit("disconnection");
+            } else {
+                // Remove the user from the room
+                console.log("splice", idRoom);
+                allRooms[idRoom].players.splice(allRooms[idRoom].players.indexOf(username), 1);
+                io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
+            }
+        }
+        
+        // Disconnect user
+        socket.leave(idRoom);
+        idRoom = username = undefined;
+        console.log("end disconnect", username, idRoom);
+        socket.handshake.session.idRoom = undefined;
+        socket.handshake.session.username = undefined;
+        disconnectingUsers.splice(disconnectingUsers.indexOf(username), 1);
+    }
+
     io.emit("display-rooms", allRooms);
 
-    socket.on("host-room", () => {
-        // Display rooms
-        io.emit("display-rooms", allRooms);
-    })
-
     socket.on("join-room", (idRoom) => {
-        // Display rooms
-        io.emit("display-rooms", allRooms);
-
         // Check if room full
         if (allRooms[idRoom].size() === 4) {
             // Enlever room
@@ -200,9 +262,13 @@ io.on('connection', (socket) => {
     /* -------------------------------------------------------------------------- */
     /*                                Disconnection                               */
     /* -------------------------------------------------------------------------- */
-    socket.on('disconnect', () => {
+    socket.on('disconnect', (reason) => {
         const username = socket.handshake.session.username;
-        if (username) console.log(username, " disconnected");
-        else console.log('a user disconnected');
+        const idRoom = socket.handshake.session.idRoom;
+        console.log("disconnect", username, idRoom);
+
+        if (idRoom !== undefined) disconnectingUsers.push(username);
+
+        console.log('a user disconnected');
     });
 });
