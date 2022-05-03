@@ -123,10 +123,10 @@ export class Scene {
                 ObjectArray.forEach(el => {
                         obj = new Object3D(el)
                         mesh = obj.getMesh()
-                        if (!el.ray) {
-                                this.scene.add(mesh)
-                        } else {
+                        if (el.ray) {
                                 this.selectionables.add(mesh);
+                        } else {
+                                this.scene.add(mesh)
                         }
                 });
                 this.scene.add(this.selectionables);
