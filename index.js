@@ -116,6 +116,10 @@ app.delete("/removeuser/:player", (req, res) => {
         if (pUsername === player)
             pSocket.emit("disconnection");
     }
+
+    res.json({
+        state: 'deleted'
+    })
 });
 
 app.post("/host",
