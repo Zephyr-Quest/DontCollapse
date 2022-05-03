@@ -23,5 +23,5 @@ const update = () => {
 
 /* --------------------------------- Modals --------------------------------- */
 
-Modal.openShop();
+Modal.initShopListener();
 

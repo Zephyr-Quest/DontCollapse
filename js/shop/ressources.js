@@ -1,3 +1,5 @@
+import ShopItem from './shopItem.js'
+
 const rightRubric = document.querySelectorAll('#supplier div');
 
 const leftPage = document.querySelectorAll('#left-page div');
@@ -15,7 +17,6 @@ function changeRubric(id) {
             e.classList.remove('selected');
         });
         rightRubric[id].classList.add('selected')
-
     }
 };
 
@@ -23,7 +24,7 @@ function printElec() {
     leftPage[0].textContent = "Coup de Foudre";
     leftPage[1].textContent = "Petit Tonerre";
     rightPage[0].textContent = "Électricité d'Euler";
-    rightPage[1].textContent = "Durxcel";
+    rightPage[1].textContent = "Durexcel";
 }
 
 function printEau() {

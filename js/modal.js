@@ -42,15 +42,15 @@ function initModalListeners(){
     window.addEventListener('keydown', escapeClose);
 }
 
+function openShop(){
+    initModalListeners();
+    Shop.initShopListeners();
+    modal.showModal();
+}
 
-
-function openShop() {
-    openModal.addEventListener('click', () => {
-        initModalListeners();
-        Shop.initShop();
-        modal.showModal();
-    });
+function initShopListener() {
+    openModal.addEventListener('click', openShop);
 }
 export default {
-    openShop
+    initShopListener
 }

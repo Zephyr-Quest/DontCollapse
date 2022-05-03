@@ -1,3 +1,5 @@
+import ShopItem from './shopItem.js'
+
 const rightRubric = document.querySelectorAll('#supplier div');
 
 const leftPage = document.querySelectorAll('#left-page div');

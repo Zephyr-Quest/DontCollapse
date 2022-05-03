@@ -2,10 +2,11 @@ import Ressources from './shop/ressources.js';
 import Personnel from './shop/personnel.js';
 import Neuf from './shop/neuf.js';
 import Occasion from './shop/occasion.js';
+import RightListener from './shop/rightRubric.js';
+import getDescri from './shop/getDescri.js';
 
 
-
-const topRubric = document.querySelectorAll('#main-title div')
+const topRubric = document.querySelectorAll('#main-title div');
 
 const ressources = document.querySelector('#ressources');
 const personnel = document.querySelector('#personnel');
@@ -13,25 +14,26 @@ const neuf = document.querySelector('#neuf');
 const occasion = document.querySelector('#occasion');
 
 
+
 let active = undefined;
 
 
-function initShop() {
+function initShopListeners() {
     console.log("Init top rubric listeners");
 
-    ressources.addEventListener('click', printRessources);
-    personnel.addEventListener('click', printPersonnel);
-    neuf.addEventListener('click', printNeuf);
-    occasion.addEventListener('click', printOccasion);
-
-    printRessources();
+    for (const current of topRubric) {
+        current.addEventListener('click', initRightRubric)
+    }
+    initRightRubric();
 }
 
 function closeShop() {
     console.log("Remove all right rubric listeners");
     changeRubric(undefined, true);
-    active = undefined
+    active = undefined;
     console.log("Remove top rubric listeners");
+
+
 
     ressources.removeEventListener('click', printRessources);
     Ressources.removeListeners();
@@ -42,15 +44,49 @@ function closeShop() {
     neuf.removeEventListener('click', printNeuf);
     Neuf.removeListeners();
 
-    occasion.removeEventListener('click',printOccasion);
+    occasion.removeEventListener('click', printOccasion);
     Occasion.removeListeners();
+}
 
-    
+function initRightRubric(e) {
+    let id = 0;
+    let rightTitle = {};
+    if (e !== undefined) id = Number(e.target.id);
+
+    switch (id) {
+        case 0:
+            rightTitle = getDescri.getRessources(0);
+            break;
+        case 1:
+            rightTitle = getDescri.getPersonnel(0);
+            break;
+        case 2:
+            rightTitle = getDescri.getNeuf(0);
+            break;
+        case 3:
+            console.log("Afficher l'occaz")
+            break;
+        default:
+            console.warn("Oupsiiii");
+            break;
+    }
+
+    RightListener.initTitle(rightTitle)
+    RightListener.initListener(rightTitle)
 }
 
 
+
+
+
+
+
+
+
+
+
 function printRessources() {
-    changeRubric(0,false);
+    changeRubric(0, false);
     active = 0;
     Ressources.initListeners();
     Ressources.openRubric()
@@ -58,7 +94,7 @@ function printRessources() {
 }
 
 function printPersonnel() {
-    changeRubric(1,false);
+    changeRubric(1, false);
     active = 1;
     Personnel.initListeners();
     Personnel.openRubric();
@@ -85,11 +121,11 @@ function printOccasion() {
 
 
 function changeRubric(id, closing) {
-    if (closing == false) {
-        if (id <= 3) {
-            topRubric.forEach(e => {
-                e.classList.remove('selected');
-            });
+    if (id <= 3) {
+        topRubric.forEach(e => {
+            e.classList.remove('selected');
+        });
+        if (closing == false) {
             topRubric[id].classList.add('selected');
         }
     }
@@ -121,7 +157,6 @@ function changeRubric(id, closing) {
 
 
 export default {
-    initShop,
+    initShopListeners,
     closeShop
-
 }
