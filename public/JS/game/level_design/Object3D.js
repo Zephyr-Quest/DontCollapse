@@ -43,17 +43,14 @@ export class Object3D extends Locatable {
                 } else {
                         if (this.type == "wall") {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);
-                                this.material = new THREE.MeshBasicMaterial({
+                                this.material = new THREE.MeshStandardMaterial({
                                         color: this.color,
                                         side: THREE.FrontSide
                                 });
                         }
                         if (this.type == "floor") {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);
-                                this.material = new THREE.MeshBasicMaterial({
-                                        color: this.color,
-                                        side: THREE.DoubleSide,
-                                });
+                                this.material = new THREE.MeshStandardMaterial({color: this.color});
                         }
                         if (this.type == "cube") {
                                 this.geometry = new THREE.BoxGeometry(this.length, this.width, this.heigth)

@@ -44,6 +44,8 @@ export class Scene {
                 this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
                 this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color('black');
+
 
                 /* ---------------------------------- CANVA --------------------------------- */
                 this.renderer = new THREE.WebGLRenderer({
@@ -71,16 +73,14 @@ export class Scene {
 
                 this.controls.maxPolarAngle = Math.PI / 2;
 
-                // //ambient light which is for the whole scene
-                // let ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-                // ambientLight.castShadow = false;
-                // this.scene.add(ambientLight);
+                const color = 0xFFFFFF;
+                const intensity = 0.7;
+                this.light = new THREE.PointLight(color, intensity);
+                this.light.position.set(0, 0, 130);
+                this.scene.add(this.light);
 
-                // //spot light which is illuminating the chart directly
-                // let spotLight = new THREE.SpotLight(0xffffff, 0.55);
-                // spotLight.castShadow = true;
-                // spotLight.position.set(0, 40, 10);
-                // this.scene.add(spotLight);
+                this.helper = new THREE.PointLightHelper(this.light);
+                this.scene.add(this.helper);
 
 
                 //if window resizes
@@ -90,7 +90,7 @@ export class Scene {
                 this.scene.add(this.axesHelper);
 
                 this.raycaster = new THREE.Raycaster();
-                this.renderer.domElement.addEventListener('click', event => {
+                this.renderer.domElement.addEventListener('mousedown', event => {
                         this.onMouseClick(event, this);
                 });
 
@@ -142,9 +142,9 @@ export class Scene {
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
                 if (s) {
-                        s.scale.set(Config.scaleRay,Config.scaleRay,Config.scaleRay)
+                        s.scale.set(Config.scaleRay, Config.scaleRay, Config.scaleRay)
                         setTimeout(() => {
-                                s.scale.set(1,1,1)
+                                s.scale.set(1, 1, 1)
                         }, 90)
                 }
         }

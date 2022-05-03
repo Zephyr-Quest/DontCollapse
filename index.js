@@ -7,8 +7,6 @@ const sharedsession = require('express-socket.io-session');
 const ejs = require('ejs');
 const path = require('path');
 
-const path = require("path");
-
 const {
     body,
     validationResult
@@ -89,6 +87,10 @@ app.get('/game', (req, res) => {
         username: req.session.username
     });
 });
+
+app.get('/three', (req, res) => {
+    res.render('index');
+})
 
 app.delete("/removeuser/:player", (req, res) => {
     const idRoom = req.session.idRoom;
