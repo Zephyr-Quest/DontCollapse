@@ -31,33 +31,33 @@ export class Object3D extends Locatable {
                 this.rotx = el.rotx * Math.PI / 180
                 this.roty = el.roty * Math.PI / 180
                 this.rotz = el.rotz * Math.PI / 180
+                this.model = Models[this.type].model
         }
 
         getMesh() {
+                console.log(this.model)
                 if (Models[this.type].model != null) {
-                        loader.load('path/to/model.glb', function (gltf) {
-                                return gltf
-                        }, undefined, function (error) {
-                                console.error(error);
+                        this.loader.load("../../../models/desk.glb", (glb) => {
+                                this.mesh = glb.scene
+                                return this.mesh
                         });
                 } else {
                         if (this.type == "wall") {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);
-                                this.material = new THREE.MeshBasicMaterial({
+                                this.material = new THREE.MeshStandardMaterial({
                                         color: this.color,
                                         side: THREE.FrontSide
                                 });
                         }
                         if (this.type == "floor") {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);
-                                this.material = new THREE.MeshBasicMaterial({
-                                        color: this.color,
-                                        side: THREE.DoubleSide,
+                                this.material = new THREE.MeshStandardMaterial({
+                                        color: this.color
                                 });
                         }
                         if (this.type == "cube") {
                                 this.geometry = new THREE.BoxGeometry(this.length, this.width, this.heigth)
-                                this.material = new THREE.MeshBasicMaterial({
+                                this.material = new THREE.MeshStandardMaterial({
                                         side: THREE.FrontSide,
                                         color: this.color,
                                 })

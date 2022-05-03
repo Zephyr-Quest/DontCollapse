@@ -16,5 +16,10 @@ export const Models = {
                 name: "",
                 model: null,
                 scale: 1
+        },
+        desk: {
+                name: "desk",
+                model: "../../models/desk.glb",
+                scale: 1
         }
 }
