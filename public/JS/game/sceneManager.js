@@ -22,6 +22,9 @@ import {
         Object3D
 } from "./level_design/Object3D.js"
 
+
+
+
 const stats = new Stats();
 stats.showPanel(0);
 
@@ -56,6 +59,7 @@ export class Scene {
                 /* --------------------- Setting up the camera controls --------------------- */
                 this.controls = new OrbitControls(this.camera, this.renderer.domElement);
                 this.controls.listenToKeyEvents(window); // optional
+                this.controls.enableZoom = false;
 
                 this.controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
                 this.controls.dampingFactor = 0.05;
@@ -94,9 +98,11 @@ export class Scene {
         }
 
         animate() {
+                stats.begin();
                 requestAnimationFrame(this.animate.bind(this));
                 this.render();
                 this.controls.update();
+                stats.end();
         }
 
 
@@ -115,21 +121,18 @@ export class Scene {
                 let obj, mesh
                 this.selectionables = new THREE.Group();
                 ObjectArray.forEach(el => {
-                        if (el.color != "red") {
-                                obj = new Object3D(el)
-                                mesh = obj.getMesh()
+                        obj = new Object3D(el)
+                        mesh = obj.getMesh()
+                        if (!el.ray) {
                                 this.scene.add(mesh)
                         } else {
-                                obj = new Object3D(el)
-                                let cube = obj.getMesh()
-                                this.selectionables.add(cube);
+                                this.selectionables.add(mesh);
                         }
                 });
                 this.scene.add(this.selectionables);
         }
 
         onMouseClick(event, ctx) {
-                let double
                 var position = new THREE.Vector2();
                 // On conserve la position de la souris dans l'espace de coordonnées
                 // NDC (Normalized device coordinates).
@@ -139,10 +142,10 @@ export class Scene {
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
                 if (s) {
-                                s.material.color.setHex("0xe06666");
-                                setTimeout(()=>{
-                                        s.material.color.set("red");
-                                },200)
+                        s.scale.set(Config.scaleRay,Config.scaleRay,Config.scaleRay)
+                        setTimeout(() => {
+                                s.scale.set(1,1,1)
+                        }, 90)
                 }
         }
 

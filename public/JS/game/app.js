@@ -7,9 +7,6 @@ import {
 } from "./sceneManager.js"
 
 
-
-
-
 import * as THREE from 'three';
 
 

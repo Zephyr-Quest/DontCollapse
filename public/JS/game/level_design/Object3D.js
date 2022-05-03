@@ -24,6 +24,7 @@ export class Object3D extends Locatable {
                 super(el.x, el.y, el.z);
                 this.length = el.length;
                 this.width = el.width;
+                this.heigth = el.heigth;
                 this.type = el.type;
                 this.loader = new GLTFLoader();
                 this.color = el.color;
@@ -55,9 +56,9 @@ export class Object3D extends Locatable {
                                 });
                         }
                         if (this.type == "cube") {
-                                this.geometry = new THREE.BoxGeometry(this.length, this.length, this.length)
+                                this.geometry = new THREE.BoxGeometry(this.length, this.width, this.heigth)
                                 this.material = new THREE.MeshBasicMaterial({
-                                        side: THREE.fro,
+                                        side: THREE.FrontSide,
                                         color: this.color,
                                 })
                         }

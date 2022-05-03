@@ -14,6 +14,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
+                ray:false,
         },
 
         // PLAFOND
@@ -28,6 +29,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 180,
                 rotz: 0,
+                ray:false,
         },
 
         // MUR DEVANT DROITE
@@ -42,6 +44,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: -90,
                 rotz: 0,
+                ray:false,
         },
 
         // MUR BOUT GAUCHE
@@ -56,6 +59,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 90,
                 rotz: 0,
+                ray:false,
         },
 
         // MUR BOUT DROIT
@@ -70,6 +74,7 @@ export const ObjectArray = [
                 rotx: 90,
                 roty: 0,
                 rotz: 90,
+                ray:true,
         },
 
         // MUR DEVANT GAUCHE
@@ -84,18 +89,21 @@ export const ObjectArray = [
                 rotx: -90,
                 roty: 0,
                 rotz: -90,
+                ray:false,
         },
         // CUBE BUREAU
         {
                 type: "cube",
-                x: 250 - 150 / 2,
-                y: 250 - 150 / 2,
+                length: 200,
+                width: 100,
+                heigth: 150,
+                x: 250 - 200 / 2,
+                y: 250 - 100 / 2,
                 z: 150 / 2,
-                length: 150,
-                width: 50,
                 color: "red",
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
+                ray:true,
         },
 ]
