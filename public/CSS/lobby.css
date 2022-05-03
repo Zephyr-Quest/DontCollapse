@@ -1,0 +1,132 @@
+@charset "UTF-8";
+/* -------------------------------------------------------------------------- */
+/*                               Some variables                               */
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                   General                                  */
+/* -------------------------------------------------------------------------- */
+body {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  background-color: #eee;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: #000;
+  padding: 0;
+  margin: 0;
+}
+.log-out {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  font-size: 2.5rem;
+  color: #000;
+  cursor: pointer;
+}
+.log-out:hover {
+  color: #3ca50c;
+}
+/* -------------------------------------------------------------------------- */
+/*                                Main content                                */
+/* -------------------------------------------------------------------------- */
+main {
+  width: 50%;
+  margin: auto;
+}
+main h1,
+main h2,
+main h3 {
+  font-family: 'KoHo', sans-serif;
+  letter-spacing: 0.15rem;
+}
+main h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  text-shadow: 1px 2px 3px black;
+}
+main h2 {
+  display: flex;
+  align-items: center;
+}
+main ion-icon {
+  color: #3ca50c;
+  margin-right: 10px;
+}
+main .card {
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  padding-left: 30px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-family: 'KoHo', sans-serif;
+  margin-bottom: 25px;
+}
+main .card ul {
+  list-style-type: none;
+  padding: 0;
+}
+main .card .green {
+  color: #3ca50c;
+}
+main .card:hover {
+  background-color: #e4e4e4;
+  transition: background-color 0.3s;
+}
+main .scoreboard {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+main .scoreboard .card h3 {
+  font-size: 2rem;
+  margin: 0;
+  margin-left: 10px;
+}
+main .scoreboard .card ul {
+  margin-left: 50px;
+}
+main .games {
+  margin-top: 50px;
+}
+main .games .card {
+  cursor: pointer;
+  padding-left: 40px;
+}
+main .games .card ion-icon {
+  font-size: 2.5rem;
+}
+main .games .card ul {
+  margin-left: 50px;
+}
+main .games #new_game {
+  background-color: #3ca50c;
+  color: #eee;
+  border: 3px solid #3ca50c;
+  justify-content: center;
+  padding: 0;
+}
+main .games #new_game:hover {
+  background-color: transparent;
+  color: #3ca50c;
+}
+main .games #new_game:hover ion-icon {
+  color: #3ca50c;
+}
+main .games #new_game ion-icon {
+  color: #eee;
+  margin-right: 5px;
+  font-size: 1.5rem;
+}
+/* -------------------------------------------------------------------------- */
+/*                              Responsive Design                             */
+/* -------------------------------------------------------------------------- */
+@media screen and (max-width: 800px) {
+  main {
+    width: 90%;
+  }
+  main h1 {
+    margin-top: 70px;
+  }
+}

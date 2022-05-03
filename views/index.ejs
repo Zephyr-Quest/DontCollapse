@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Don't Collapse</title>
+    <style media="screen" type="text/css">
+        body {
+            background-color: #fff;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="position:absolute;margin-top:50px;font-weight:bold;">
+        <p style="color:red">X axis</p>
+        <p style="color:green">Y axis</p>
+        <p style="color:blue">Z axis</p>
+    </div>
+
+    <canvas id="myThreeJsCanvas"></canvas>
+    <!-- Debug -->
+    <script type="text/javascript" src="JS/game/stats.min.js"></script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.137.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <!-- ThreeJS -->
+    <script type="module" src="./JS/game/app.js"></script>
+</body>
+
+</html>
