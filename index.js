@@ -88,15 +88,6 @@ app.get('/game', (req, res) => {
     });
 });
 
-app.get("/roomdata", (req, res) => {
-    const idRoom = req.session.idRoom;
-    const data = {
-        room: allRooms[idRoom],
-        username: req.session.username
-    }
-    res.json(data);
-});
-
 app.delete("/removeuser/:player", (req, res) => {
     const idRoom = req.session.idRoom;
     const username = req.session.username;
@@ -155,12 +146,9 @@ app.post("/host",
         roomPlayers.push(userName)
         allRooms.push({ idRoom: allRooms.length, players: roomPlayers });
 
-        // console.log(req.session.username, " connected in room ", req.session.idRoom);
         res.send({
             state: 'host'
         });
-
-        // io.emit("host-room", "");
     })
 
 app.post("/join",
@@ -193,7 +181,6 @@ app.post("/join",
 
         // Add player in room
         allRooms[idRoom].players.push(userName);
-        // console.log(req.session.username, " connected in room ", idRoom);
 
         res.send({
             state: 'joined'

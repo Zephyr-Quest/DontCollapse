@@ -19,6 +19,17 @@ const http = (function () {
             };
 
             customFecth(url, options, resolve, reject);
+        },
+
+        delete(path, resolve, reject) {
+            const url = HOST + path;
+
+            const options = {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' }
+            };
+
+            customFecth(url, options, resolve, reject);
         }
     }
 })();

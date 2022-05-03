@@ -17,6 +17,7 @@ const WebSocket = (function () {
     
     // Data stored
     let connectedPlayers = [];
+    let deleteEvent;
 
     function updatePlayersOnScreen() {
         // Remove previous players
@@ -27,12 +28,25 @@ const WebSocket = (function () {
         // Print new players
         connectedPlayers.forEach(player => {
             const playerLi = document.createElement('li');
-            playerLi.innerText = player;
+            
+            const playerName = document.createElement('p');
+            playerName.innerText = player;
+            playerLi.appendChild(playerName);
+            
+            const playerDelete = document.createElement('button');
+            playerDelete.innerText = "Ta gueule connard";
+            playerDelete.addEventListener("click", deleteEvent);
+            playerLi.appendChild(playerDelete);
+            
             playerListUl.appendChild(playerLi);
         });
     }
 
     return {
+        init(DE) {
+            deleteEvent = DE;
+        },
+
         connect() {
             socket = io();
             for (const eventName in events) {
