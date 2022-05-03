@@ -71,16 +71,16 @@ export class Scene {
 
                 this.controls.maxPolarAngle = Math.PI / 2;
 
-                //ambient light which is for the whole scene
-                let ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-                ambientLight.castShadow = false;
-                this.scene.add(ambientLight);
+                // //ambient light which is for the whole scene
+                // let ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+                // ambientLight.castShadow = false;
+                // this.scene.add(ambientLight);
 
-                //spot light which is illuminating the chart directly
-                let spotLight = new THREE.SpotLight(0xffffff, 0.55);
-                spotLight.castShadow = true;
-                spotLight.position.set(0, 40, 10);
-                this.scene.add(spotLight);
+                // //spot light which is illuminating the chart directly
+                // let spotLight = new THREE.SpotLight(0xffffff, 0.55);
+                // spotLight.castShadow = true;
+                // spotLight.position.set(0, 40, 10);
+                // this.scene.add(spotLight);
 
 
                 //if window resizes

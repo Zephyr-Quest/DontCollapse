@@ -5,6 +5,8 @@ const io = require('socket.io')(http);
 const bodyParser = require("body-parser");
 const sharedsession = require('express-socket.io-session');
 
+const path = require("path");
+
 const {
     body,
 } = require("express-validator");
@@ -29,7 +31,7 @@ app.use(jsonParse);
 app.use(session);
 // app.use("/static", express.static('./static/'));
 app.use(express.static(__dirname + '/public'));
-
+app.set("views",path.join(__dirname,"views"))
 
 if (app.get("env") === "production") {
     app.set("trust proxy", 1);
@@ -58,7 +60,7 @@ let allRooms = [];
 /* ----------------------------------- APP ---------------------------------- */
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/front/html/index.html');
+    res.sendFile("")
 });
 
 app.get("/host", (req, res) => {
