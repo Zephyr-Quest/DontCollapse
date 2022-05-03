@@ -31,14 +31,15 @@ export class Object3D extends Locatable {
                 this.rotx = el.rotx * Math.PI / 180
                 this.roty = el.roty * Math.PI / 180
                 this.rotz = el.rotz * Math.PI / 180
-                this.model=Models[this.type].model
+                this.model = Models[this.type].model
         }
 
         getMesh() {
+                console.log(this.model)
                 if (Models[this.type].model != null) {
-                        this.loader.load(this.model, (gltf)=> {
-                                this.modelLoaded=gltf.scene
-                                return this.modelLoaded
+                        this.loader.load("../../../models/desk.glb", (glb) => {
+                                this.mesh = glb.scene
+                                return this.mesh
                         });
                 } else {
                         if (this.type == "wall") {
@@ -50,11 +51,13 @@ export class Object3D extends Locatable {
                         }
                         if (this.type == "floor") {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);
-                                this.material = new THREE.MeshStandardMaterial({color: this.color});
+                                this.material = new THREE.MeshStandardMaterial({
+                                        color: this.color
+                                });
                         }
                         if (this.type == "cube") {
                                 this.geometry = new THREE.BoxGeometry(this.length, this.width, this.heigth)
-                                this.material = new THREE.MeshBasicMaterial({
+                                this.material = new THREE.MeshStandardMaterial({
                                         side: THREE.FrontSide,
                                         color: this.color,
                                 })

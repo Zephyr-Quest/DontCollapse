@@ -19,7 +19,7 @@ export const Models = {
         },
         desk: {
                 name: "desk",
-                model: "../../../models/desk.glb",
+                model: "../../models/desk.glb",
                 scale: 1
         }
 }

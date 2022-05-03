@@ -134,6 +134,36 @@ export const ObjectArray = [
                 rotz: 0,
                 ray:true,
         },
+
+        // CUBE
+        {
+                type: "cube",
+                length: 150,
+                width: 50,
+                heigth: 5,
+                x: 65,
+                y: 50,
+                z: 2.5,
+                color: "pink",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray:false,
+        },// CUBE
+        {
+                type: "cube",
+                length: 40,
+                width: 150,
+                heigth: 30,
+                x: -100,
+                y: -80,
+                z: 10,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray:false,
+        },
         // BUREAU
         {
                 type: "desk",
@@ -147,6 +177,6 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                ray:true,
+                ray:false,
         },
 ]

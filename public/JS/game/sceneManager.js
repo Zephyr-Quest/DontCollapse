@@ -56,6 +56,8 @@ export class Scene {
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setPixelRatio(window.devicePixelRatio);
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.shadowMap.enabled = true;
+                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
                 document.body.appendChild(this.renderer.domElement);
 
                 /* --------------------- Setting up the camera controls --------------------- */
@@ -77,6 +79,14 @@ export class Scene {
                 const intensity = 0.7;
                 this.light = new THREE.PointLight(color, intensity);
                 this.light.position.set(0, 0, 130);
+                this.light.castShadow = true;
+                this.light.shadow.mapSize.width = 512; // default
+                this.light.shadow.mapSize.height = 512; // default
+                this.light.shadow.camera.near = 0.5; // default
+                this.light.shadow.camera.far = 500;
+
+
+
                 this.scene.add(this.light);
 
                 this.helper = new THREE.PointLightHelper(this.light);
@@ -123,6 +133,8 @@ export class Scene {
                 ObjectArray.forEach(el => {
                         obj = new Object3D(el)
                         mesh = obj.getMesh()
+                        mesh.castShadow = true;
+                        mesh.receiveShadow = true;
                         if (el.ray) {
                                 this.selectionables.add(mesh);
                         } else {
