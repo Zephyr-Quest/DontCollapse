@@ -134,4 +134,19 @@ export const ObjectArray = [
                 rotz: 0,
                 ray:true,
         },
+        // BUREAU
+        {
+                type: "desk",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 0,
+                y: 0,
+                z: 0,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray:true,
+        },
 ]

@@ -31,14 +31,14 @@ export class Object3D extends Locatable {
                 this.rotx = el.rotx * Math.PI / 180
                 this.roty = el.roty * Math.PI / 180
                 this.rotz = el.rotz * Math.PI / 180
+                this.model=Models[this.type].model
         }
 
         getMesh() {
                 if (Models[this.type].model != null) {
-                        loader.load('path/to/model.glb', function (gltf) {
-                                return gltf
-                        }, undefined, function (error) {
-                                console.error(error);
+                        this.loader.load(this.model, (gltf)=> {
+                                this.modelLoaded=gltf.scene
+                                return this.modelLoaded
                         });
                 } else {
                         if (this.type == "wall") {
