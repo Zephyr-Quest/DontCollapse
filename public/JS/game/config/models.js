@@ -30,5 +30,13 @@ export const Models = {
                 isModel: true,
                 instance: null,
                 rotation: [90, 0, 0]
+        },
+        welding: {
+                name: "welding",
+                model: "welding1.glb",
+                scale: 20,
+                isModel: true,
+                instance: null,
+                rotation: [90, 0, 0]
         }
 }
