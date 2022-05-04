@@ -117,8 +117,17 @@ export class Scene {
                 this.controls.maxPolarAngle = Math.PI / 2;
 
                 const color = 0xfff6D3;
-                const intensity = 0.6;
-                this.light = new THREE.PointLight(color, intensity);
+                const intensity = 0.4;
+                this.light = new THREE.DirectionalLight( color, intensity );
+                this.light.position.set(0, 0, 130);
+                this.light.castShadow = true;
+                this.light.shadow.mapSize.width = 512; // default
+                this.light.shadow.mapSize.height = 512; // default
+                this.light.shadow.camera.near = 0.5; // default
+                this.light.shadow.camera.far = 500;
+                this.scene.add(this.light);
+
+                this.light = new THREE.PointLight( color, intensity-0 );
                 this.light.position.set(0, 0, 130);
                 this.light.castShadow = true;
                 this.light.shadow.mapSize.width = 512; // default
@@ -130,7 +139,7 @@ export class Scene {
                 this.helper = new THREE.PointLightHelper(this.light);
                 this.scene.add(this.helper);
 
-                this.ambiantlight = new THREE.AmbientLight(0x303030);
+                this.ambiantlight = new THREE.AmbientLight(0x505050);
                 this.ambiantlight.position.set(0, 0, 130);
                 this.scene.add(this.ambiantlight);
 
@@ -180,8 +189,11 @@ export class Scene {
                 ObjectArray.forEach(el => {
                         obj = new Object3D(el)
                         mesh = obj.getMesh()
-                        mesh.castShadow = true;
-                        mesh.receiveShadow = true;
+                        mesh.traverse(n => { if ( n.isMesh ) {
+                                n.castShadow = true; 
+                                n.receiveShadow = true;
+                                if(n.material.map) n.material.map.anisotropy = 16; 
+                              }});
                         if (el.ray) {
                                 this.selectionables.add(mesh);
                         } else {

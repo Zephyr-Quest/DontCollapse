@@ -134,7 +134,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: true,
                 transparency: 1,
-                name:"textShop"
+                name: "textShop"
         },
 
         // CUBE
@@ -151,14 +151,15 @@ export const ObjectArray = [
                 roty: 0,
                 rotz: 0,
                 ray: false,
-        }, // CUBE
+        },
+        // CUBE
         {
                 type: "cube",
-                length: 40,
-                width: 150,
+                length: 80,
+                width: 40,
                 heigth: 30,
-                x: -100,
-                y: -80,
+                x: -76,
+                y: -140,
                 z: 10,
                 color: "red",
                 rotx: 0,
@@ -166,18 +167,79 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        // BUREAU
+        // CUBE
+        {
+                type: "cube",
+                length: 40,
+                width: 40,
+                heigth: 30,
+                x: -10,
+                y: -140,
+                z: 10,
+                color: "black",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: false,
+        },
+        // CUBE
+        {
+                type: "cube",
+                length: 40,
+                width: 180,
+                heigth: 30,
+                x: -135,
+                y: -70,
+                z: 10,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: false,
+        },
+
+        // desk
         {
                 type: "desk",
                 length: 100,
                 width: 100,
                 heigth: 100,
                 x: 130,
-                y: -30,
+                y: -140,
                 z: 1,
                 color: "red",
                 rotx: 0,
-                roty: 90,
+                roty: 0,
+                rotz: 0,
+                ray: false,
+        },
+        // desk
+        {
+                type: "desk",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 80,
+                y: -140,
+                z: 1,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: false,
+        },
+        // welding
+        {
+                type: "welding",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -65,
+                y: 0,
+                z: 1,
+                color: "red",
+                rotx: 0,
+                roty: 0,
                 rotz: 0,
                 ray: false,
         },
