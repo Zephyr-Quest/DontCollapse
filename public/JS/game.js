@@ -12,7 +12,11 @@ function deleteEvent(e) {
     );
 }
 
-WebSocket.init(deleteEvent);
+function startGame(e){
+    console.log("start game");
+}
+
+WebSocket.init(deleteEvent, startGame);
 WebSocket.connect();
 
 // console.log(document.getElementById("username").value);

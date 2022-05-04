@@ -15,9 +15,11 @@ const WebSocket = (function () {
     // HTML elements
     const playerListUl = document.getElementById("player_list");
     
-    // Data stored
+    /* -------------------------------- Variables ------------------------------- */
     let connectedPlayers = [];
+    /* -------------------- Variables for functions listeners ------------------- */
     let deleteEvent;
+    let startGame;
 
     function updatePlayersOnScreen() {
         // Remove previous players
@@ -34,13 +36,21 @@ const WebSocket = (function () {
             playerLi.appendChild(playerName);
 
             const user = document.getElementById("username").value;
-            if (user === connectedPlayers[0] && player != connectedPlayers[0]){
-            
+            const posBtnGame = document.getElementById("BtnGame");
+
+            if (user === connectedPlayers[0]){
+                if (posBtnGame.style.display !== "block") {
+                    console.log(posBtnGame.getAttribute("style"));
+                    posBtnGame.style.display = "block";
+                    posBtnGame.addEventListener("click", startGame);
+                }
+
+                if (player != connectedPlayers[0]){
                 const playerDelete = document.createElement('button');
                 playerDelete.innerText = "Ta gueule connard";
                 playerDelete.addEventListener("click", deleteEvent);
                 playerLi.appendChild(playerDelete);
-
+                }
             }
             
             playerListUl.appendChild(playerLi);
@@ -48,8 +58,9 @@ const WebSocket = (function () {
     }
 
     return {
-        init(DE) {
+        init(DE, SG) {
             deleteEvent = DE;
+            startGame = SG;
         },
 
         connect() {
