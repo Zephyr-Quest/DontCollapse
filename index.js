@@ -53,13 +53,6 @@ io.use(sharedsession(session, {
 let allRooms = [];
 let disconnectingUsers = [];
 
-// const Employee = require("./back/js/employee");
-// const Factory = require("./back/js/factory");
-// const Product = require("./back/js/product");
-// const Machine = require("./back/js/machine");
-// const Ressources = require("./back/js/ressources");
-// const Company = require("./back/js/company");
-
 /* -------------------------------- Functions ------------------------------- */
 
 /**
@@ -93,7 +86,9 @@ app.delete("/removeuser/:player", (req, res) => {
     const username = req.session.username;
     const player = req.params.player;
 
-    if (allRooms[idRoom].players.indexOf(username) !== 0) {
+    console.log("delete", username, player);
+    console.log("host", idRoom, allRooms[idRoom].host);
+    if (allRooms[idRoom].host !== username) {
         res.status(401).json({
             message: "You don't have permission."
         });
@@ -143,12 +138,11 @@ app.post("/host",
         let idRoom = Number(getMaxKey(allRooms)) + 1;
 
         req.session.idRoom = idRoom;
-        // req.session.idRoom = allRooms.length;
 
         // Create new room
         let roomPlayers = [];
         roomPlayers.push(userName)
-        allRooms.push({ idRoom: allRooms.length, players: roomPlayers });
+        allRooms.push({ idRoom: idRoom, players: roomPlayers, host: userName });
 
         res.send({
             state: 'host'
@@ -189,11 +183,6 @@ app.post("/join",
         res.send({
             state: 'joined'
         });
-
-        if (allRooms[idRoom].players.length === 4) {
-            // Enlever room
-            io.emit("hide-card", idRoom);
-        }
     })
 
 
@@ -207,7 +196,6 @@ http.listen(4200, () => {
 io.on('connection', socket => {
     let username = socket.handshake.session.username;
     let idRoom = socket.handshake.session.idRoom;
-    console.log("io.connection", username, idRoom);
     
     if (username !== undefined && allRooms[idRoom]) {
         console.log(username, " connected in room ", idRoom);
@@ -236,24 +224,14 @@ io.on('connection', socket => {
         
         // Disconnect user 
         socket.leave(idRoom);
-        console.log("disconnect1", username, "from room", idRoom);
+        console.log("disconnect", username, "from room", idRoom);
         disconnectingUsers.splice(disconnectingUsers.indexOf(username), 1);
         idRoom = username = undefined;
         socket.handshake.session.idRoom = undefined;
         socket.handshake.session.username = undefined;
-        console.log("disconnect2", username, "from room", idRoom);
     }
 
-    console.log(disconnectingUsers);
     io.emit("display-rooms", allRooms);
-
-    // socket.on("join-room", (idRoom) => {
-    //     // Check if room full
-    //     if (allRooms[idRoom].size() === 4) {
-    //         // Enlever room
-    //         io.emit("hide-card", idRoom);
-    //     }
-    // })
 
     /* -------------------------------------------------------------------------- */
     /*                                Disconnection                               */
@@ -261,12 +239,9 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         const username = socket.handshake.session.username;
         const idRoom = socket.handshake.session.idRoom;
-        console.log("socket.disconnect", username, idRoom);
         const referer = socket.handshake.headers.referer.split("/");
         const from = "/" + referer[referer.length - 1]; 
-        console.log("from", from);
 
-        // if (idRoom !== undefined && username !== undefined && allRooms[idRoom] && allRooms[idRoom].players.includes(username))
         if (from === '/game' && username !== undefined)
             disconnectingUsers.push(username);
 

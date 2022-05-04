@@ -33,14 +33,3 @@ socket.on("display-rooms", (allRooms) => {
     for (const card of document.querySelectorAll("#games-display .card"))
         card.addEventListener("click", () => connect('/join', card.getAttribute('name')));
 })
-
-/* ------------------------------- Hide a room ------------------------------ */
-socket.on("hide-card", host => {
-    console.log("hide", host);
-    for (const card of document.querySelectorAll("#games-display .card")) {
-        let usr = card.getElementsByClassName("green")[0].getAttribute("name");
-        if (usr == host) {
-            card.style.display = "none"
-        }
-    }
-})

@@ -15,4 +15,4 @@ function deleteEvent(e) {
 WebSocket.init(deleteEvent);
 WebSocket.connect();
 
-console.log(document.getElementById("username").value);
+// console.log(document.getElementById("username").value);
