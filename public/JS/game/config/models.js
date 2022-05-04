@@ -38,5 +38,13 @@ export const Models = {
                 isModel: true,
                 instance: null,
                 rotation: [90, 0, 0]
+        },
+        pallet: {
+                name: "pallet",
+                model: "pallet.glb",
+                scale: 7,
+                isModel: true,
+                instance: null,
+                rotation: [90, 0, 0]
         }
 }
