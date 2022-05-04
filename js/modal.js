@@ -1,4 +1,4 @@
-import Shop from './shop.js'
+import Shop from './shop/topRubric.js'
 
 const modal = document.querySelector('.modal');
 const openModal = document.querySelector('#shop-button');
