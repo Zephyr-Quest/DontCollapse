@@ -6,4 +6,5 @@ export const Config = {
         camY: 0,
         camZ: -500,
         scaleRay:0.95,
+        modelsPath: "../../models/"
 };

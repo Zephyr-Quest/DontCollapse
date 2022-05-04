@@ -9,9 +9,14 @@ import {
 
 import * as THREE from 'three';
 
+let sc = new Scene(onLoad);
 
-let sc = new Scene()
-sc.createScene()
+function onLoad() {
+        sc.init()
+        sc.createScene()
+}
+
+
 
 
 

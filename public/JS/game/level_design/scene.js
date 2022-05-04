@@ -1,7 +1,7 @@
 // Tableau d'objet
 // Représente l'ensemble des éléments de la scène au démarrage de la page
-const  wallColor="#909090"
-const  floorColor="#C4C4C4"
+const wallColor = "#909090"
+const floorColor = "#C4C4C4"
 export const ObjectArray = [
         // SOL
         {
@@ -11,11 +11,11 @@ export const ObjectArray = [
                 z: 0,
                 length: 500,
                 width: 500,
-                color:floorColor ,
+                color: floorColor,
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                ray:false,
+                ray: false,
         },
 
         {
@@ -29,7 +29,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                ray:false,
+                ray: false,
         },
         {
                 type: "floor",
@@ -42,7 +42,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                ray:false,
+                ray: false,
         },
 
         // PLAFOND
@@ -57,7 +57,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 180,
                 rotz: 0,
-                ray:false,
+                ray: false,
         },
 
         // MUR DEVANT DROITE
@@ -72,7 +72,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: -90,
                 rotz: 0,
-                ray:false,
+                ray: false,
         },
 
         // MUR BOUT GAUCHE
@@ -87,7 +87,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 90,
                 rotz: 0,
-                ray:false,
+                ray: false,
         },
 
         // MUR BOUT DROIT
@@ -102,7 +102,7 @@ export const ObjectArray = [
                 rotx: 90,
                 roty: 0,
                 rotz: 90,
-                ray:false,
+                ray: false,
         },
 
         // MUR DEVANT GAUCHE
@@ -117,7 +117,7 @@ export const ObjectArray = [
                 rotx: -90,
                 roty: 0,
                 rotz: -90,
-                ray:false,
+                ray: false,
         },
         // CUBE BUREAU
         {
@@ -132,7 +132,8 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                ray:true,
+                ray: true,
+                transparency: 1
         },
 
         // CUBE
@@ -148,8 +149,8 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                ray:false,
-        },// CUBE
+                ray: false,
+        }, // CUBE
         {
                 type: "cube",
                 length: 40,
@@ -162,7 +163,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                ray:false,
+                ray: false,
         },
         // BUREAU
         {
@@ -170,13 +171,13 @@ export const ObjectArray = [
                 length: 100,
                 width: 100,
                 heigth: 100,
-                x: 0,
-                y: 0,
-                z: 0,
+                x: 130,
+                y: -30,
+                z: 1,
                 color: "red",
                 rotx: 0,
-                roty: 0,
+                roty: 90,
                 rotz: 0,
-                ray:false,
+                ray: false,
         },
 ]

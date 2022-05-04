@@ -4,11 +4,11 @@ import {
 } from 'https://unpkg.com/three@0.137.0/examples/jsm/controls/OrbitControls.js';
 
 import {
-        FBXLoader
-} from 'https://unpkg.com/three@0.137.0/examples/jsm/loaders/FBXLoader.js'
+        GLTFLoader
+} from 'https://unpkg.com/three@0.137.0/examples/jsm/loaders/GLTFLoader.js';
 import {
         Config
-} from '../game/config/config.js';
+} from './config/config.js';
 import {
         LoopOnce,
         Vector3
@@ -21,6 +21,9 @@ import {
 import {
         Object3D
 } from "./level_design/Object3D.js"
+import {
+        Models
+} from "./config/models.js";
 
 
 
@@ -34,9 +37,46 @@ THREE.Object3D.DefaultUp.set(0, 0, 1);
 
 export class Scene {
 
-        constructor() {
+        constructor(onLoad) {
                 this.loadManager = new THREE.LoadingManager();
                 this.textureLoader = new THREE.TextureLoader(this.loadManager);
+                this.modelLoader = new GLTFLoader();
+                this.loadModels(onLoad);
+        }
+
+        /**
+         * Load each 3D models (recursive function)
+         * @param {Function} callback Function executed after the loading
+         */
+        loadModels(callback) {
+                let loaded = true;
+
+                // Try to find an unloaded model in 'Model3D'
+                for (let modelName in Models) {
+                        if (!Models.hasOwnProperty(modelName)) continue;
+
+                        const currentModel = Models[modelName];
+                        if (!currentModel.isModel || currentModel.instance !== null) continue;
+
+                        // The model is not loaded yet
+                        loaded = false;
+
+                        // Add the model to the load manager
+                        this.modelLoader.load(Config.modelsPath + currentModel.model, gltf => {
+                                currentModel.instance = gltf.scene;
+
+                                // Load the other models
+                                this.loadModels(callback);
+                        });
+
+                        break;
+                }
+
+                // Start ThreeJS when it's done
+                if (loaded) callback();
+        }
+
+        init() {
 
                 this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
                 this.camera.position.set(1000, -1000, 500);
@@ -75,8 +115,8 @@ export class Scene {
 
                 this.controls.maxPolarAngle = Math.PI / 2;
 
-                const color = 0xFFFFFF;
-                const intensity = 0.7;
+                const color = 0xfff6D3;
+                const intensity = 0.6;
                 this.light = new THREE.PointLight(color, intensity);
                 this.light.position.set(0, 0, 130);
                 this.light.castShadow = true;
@@ -84,17 +124,20 @@ export class Scene {
                 this.light.shadow.mapSize.height = 512; // default
                 this.light.shadow.camera.near = 0.5; // default
                 this.light.shadow.camera.far = 500;
-
-
-
                 this.scene.add(this.light);
 
                 this.helper = new THREE.PointLightHelper(this.light);
                 this.scene.add(this.helper);
 
+                this.ambiantlight = new THREE.AmbientLight(0x303030);
+                this.ambiantlight.position.set(0, 0, 130);
+                this.scene.add(this.ambiantlight);
 
                 //if window resizes
                 window.addEventListener('resize', this.onWindowResize, false);
+                window.addEventListener('keydown', (event) => {
+                        this.changeCamera(event)
+                }, false)
 
                 this.axesHelper = new THREE.AxesHelper(1000);
                 this.scene.add(this.axesHelper);
@@ -142,6 +185,13 @@ export class Scene {
                         }
                 });
                 this.scene.add(this.selectionables);
+                // this.createTitles(this.scene)
+        }
+        createTitles(sc) {
+                let txt = makeTextSprite("BAAAAAA", {
+                        "fontsize": 100
+                })
+                sc.add(txt);
         }
 
         onMouseClick(event, ctx) {
@@ -171,5 +221,72 @@ export class Scene {
                         return selectionnes[0].object;
                 }
         }
+        changeCamera(event) {
+                switch (event.keyCode) {
+                        case 49:
+                                // 1 pressed
+                                this.camera.position.set(1000, -1000, 500);
+                                break;
+                        case 50:
+                                // 2 pressed
+                                this.camera.position.set(0, -1000, 500);
+                                break;
+                        case 51:
+                                // 3 pressed
+                                this.camera.position.set(-1000, -1000, 500);
+                                break;
+                }
+        }
 
+}
+
+function makeTextSprite(message, parameters) {
+        if (parameters === undefined) parameters = {};
+        var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
+        var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 18;
+        var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
+        var borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : {
+                r: 0,
+                g: 0,
+                b: 0,
+                a: 1.0
+        };
+        var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : {
+                r: 255,
+                g: 255,
+                b: 255,
+                a: 1.0
+        };
+        var textColor = parameters.hasOwnProperty("textColor") ? parameters["textColor"] : {
+                r: 0,
+                g: 0,
+                b: 0,
+                a: 1.0
+        };
+
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        context.font = "Bold " + fontsize + "px " + fontface;
+        var metrics = context.measureText(message);
+        var textWidth = metrics.width;
+
+        context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+        context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
+
+        context.lineWidth = borderThickness;
+        // roundRect(context, borderThickness/2, borderThickness/2, (textWidth + borderThickness) * 1.1, fontsize * 1.4 + borderThickness, 8);
+
+        context.fillStyle = "rgba(" + textColor.r + ", " + textColor.g + ", " + textColor.b + ", 1.0)";
+        context.fillText(message, borderThickness, fontsize + borderThickness);
+
+        var texture = new THREE.Texture(canvas)
+        texture.needsUpdate = true;
+
+        var spriteMaterial = new THREE.SpriteMaterial({
+                map: texture,
+                useScreenCoordinates: false
+        });
+        var sprite = new THREE.Sprite(spriteMaterial);
+        sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
+        return sprite;
 }
