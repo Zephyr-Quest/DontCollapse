@@ -1,3 +1,5 @@
+let socket = io();
+
 function deleteEvent(e) {
     const player = e.target.parentElement.getElementsByTagName("p")[0].innerText;
     console.log("removing", player);
@@ -14,6 +16,7 @@ function deleteEvent(e) {
 
 function startGame(e){
     console.log("start game");
+    socket.emit("startGame");
 }
 
 WebSocket.init(deleteEvent, startGame);

@@ -1,5 +1,3 @@
-let socket = io();
-
 let messages = document.getElementById("messages")
 let chatForm = document.getElementById('chatForm');
 let inputMessage = document.getElementById('input-chat');

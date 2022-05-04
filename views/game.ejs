@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,22 +11,29 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="JS/http.js" type="text/javascript"></script>
 </head>
+
 <body>
-    <h1><%= username %></h1>
 
-    <ul id="player_list"></ul>
+    <input type="hidden" value="<%= username %>" id="username" />
 
-    <button type="submit" id="BtnGame" style="display: none;">Start Game !</button>
+    <div id="room">
+        <h1> Welcome <%= username %></h1>
+        <ul id="player_list" class="room"></ul>
+        <button type="submit" id="BtnGame" style="display: none;" class="room">Start Game !</button>
+    </div>
 
-    <input type="hidden" value="<%= username %>" id="username"/>
+    <div style="display: none;" id="game">
+        <h1> Let's play <%= username %></h1>
+    </div>
 
     <ul id="messages"></ul>
     <form id="chatForm" action="">
         <input id="input-chat" autocomplete="off" /><button>Send</button>
     </form>
-    
+
     <script src="JS/WebSocket.js" type="text/javascript"></script>
     <script src="JS/game.js" type="text/javascript"></script>
     <script src="JS/chat.js" type="text/javascript"></script>
 </body>
+
 </html>

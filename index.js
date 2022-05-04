@@ -228,12 +228,20 @@ io.on('connection', socket => {
         disconnectingUsers.splice(disconnectingUsers.indexOf(username), 1);
         idRoom = username = undefined;
         socket.handshake.session.idRoom = undefined;
-        socket.handshake.session.username = undefined;    
+        socket.handshake.session.username = undefined;
     }
-    
+
     socket.on('message', (msg) => {
         io.to(idRoom).emit('new-message', socket.handshake.session.username + ' : ' + msg);
     });
+
+    socket.on('startGame', () => {
+        const idRoom = socket.handshake.session.idRoom;
+        const username = socket.handshake.session.username;
+        if (allRooms[idRoom] && allRooms[idRoom].players.length >=2 && allRooms[idRoom].players.length <=4 )
+            io.to(idRoom).emit("startAuthorized");
+        else console.log("start unauthorized");
+    })
 
     io.emit("display-rooms", allRooms);
 
