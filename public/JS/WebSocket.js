@@ -32,11 +32,16 @@ const WebSocket = (function () {
             const playerName = document.createElement('p');
             playerName.innerText = player;
             playerLi.appendChild(playerName);
+
+            const user = document.getElementById("username").value;
+            if (user === connectedPlayers[0] && player != connectedPlayers[0]){
             
-            const playerDelete = document.createElement('button');
-            playerDelete.innerText = "Ta gueule connard";
-            playerDelete.addEventListener("click", deleteEvent);
-            playerLi.appendChild(playerDelete);
+                const playerDelete = document.createElement('button');
+                playerDelete.innerText = "Ta gueule connard";
+                playerDelete.addEventListener("click", deleteEvent);
+                playerLi.appendChild(playerDelete);
+
+            }
             
             playerListUl.appendChild(playerLi);
         });
