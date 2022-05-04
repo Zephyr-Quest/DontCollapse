@@ -1,16 +1,43 @@
+import Buy from './buyItem.js'
+
 const leftPage = document.querySelectorAll('#left-page div');
 const rightPage = document.querySelectorAll('#right-page div');
 
 function initListener(id) {
     closeAllListener();
     for (let i = id[0]; i <= id[1]; i++) {
-        leftPage[i].addEventListener('click', buyItem);
-        rightPage[i].addEventListener('click', buyItem);
+        leftPage[i].addEventListener('mouseenter', showDescri);
+        leftPage[i].addEventListener('mouseleave', hideDescri);
+        rightPage[i].addEventListener('mouseenter', showDescri);
+        rightPage[i].addEventListener('mouseleave', hideDescri);
+
+        leftPage[i].children[2].addEventListener('click', buyItem);
+        rightPage[i].children[2].addEventListener('click', buyItem);
     }
 }
 
+function showDescri(e) {
+    e.target.children[0].style.display = "none";
+    e.target.children[1].style.display = "block";
+    e.target.children[2].style.display = "block";
+
+}
+
+function hideDescri(e) {
+    e.target.children[0].style.display = "block";
+    e.target.children[1].style.display = "none"
+    e.target.children[2].style.display = "none";
+}
+
 function buyItem(e) {
-    console.log(e.target.textContent, "acheté");
+    Buy.openBuy(e.target.parentElement.children[0])
+}
+
+function closeAllListener() {
+    for (let i = 0; i < leftPage.length; i++) {
+        leftPage[i].removeEventListener('click', buyItem);
+        rightPage[i].removeEventListener('click', buyItem);
+    }
 }
 
 function changeItem(classOfRight) {
@@ -56,12 +83,6 @@ function changeItem(classOfRight) {
     initListener(toDisplay);
 }
 
-function closeAllListener() {
-    for (let i = 0; i < leftPage.length; i++) {
-        leftPage[i].removeEventListener('click', buyItem);
-        rightPage[i].removeEventListener('click', buyItem);
-    }
-}
 export default {
     changeItem,
     closeAllListener

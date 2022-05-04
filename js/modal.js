@@ -51,6 +51,8 @@ function openShop(){
 function initShopListener() {
     openModal.addEventListener('click', openShop);
 }
+
 export default {
-    initShopListener
+    initShopListener,
+    closeFunction
 }
