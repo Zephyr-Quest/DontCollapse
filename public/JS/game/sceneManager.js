@@ -42,6 +42,7 @@ export class Scene {
                 this.textureLoader = new THREE.TextureLoader(this.loadManager);
                 this.modelLoader = new GLTFLoader();
                 this.loadModels(onLoad);
+                this.animatedTextShop = false
         }
 
         /**
@@ -146,6 +147,9 @@ export class Scene {
                 this.renderer.domElement.addEventListener('mousedown', event => {
                         this.onMouseClick(event, this);
                 });
+                this.renderer.domElement.addEventListener('mousemove', event => {
+                        this.onMouseOver(event, this);
+                });
 
                 this.animate()
         }
@@ -185,12 +189,24 @@ export class Scene {
                         }
                 });
                 this.scene.add(this.selectionables);
-                // this.createTitles(this.scene)
-        }
-        createTitles(sc) {
-                let txt = makeTextSprite("BAAAAAA", {
-                        "fontsize": 100
+                this.createTitles(this.scene, {
+                        x: 250 - 200 / 2,
+                        y: 250 - 100 / 2,
+                        z: 150 / 2
                 })
+        }
+        createTitles(sc, pos) {
+                let txt = makeTextSprite(sc, pos, "shop", "SHOP", {
+                        "fontsize": 100,
+                        "fontface": 'Koulen',
+                        "textColor": {
+                                r: 255,
+                                g: 255,
+                                b: 255,
+                                a: 1.0
+                        }
+                })
+
                 sc.add(txt);
         }
 
@@ -208,6 +224,36 @@ export class Scene {
                         setTimeout(() => {
                                 s.scale.set(1, 1, 1)
                         }, 90)
+                }
+        }
+        onMouseOver(event, ctx) {
+                var position = new THREE.Vector2();
+                // On conserve la position de la souris dans l'espace de coordonnées
+                // NDC (Normalized device coordinates).
+                var domRect = document.getElementById("myThreeJsCanvas").getBoundingClientRect();
+                position.x = ((event.clientX - domRect.left) / domRect.width) * 2 - 1;
+                position.y = -((event.clientY - domRect.top) / domRect.height) * 2 + 1;
+
+                var s = ctx.getSelectionneLePlusProche(position, ctx);
+                // console.log(s)
+                if (s) {
+                        if (s.name == "textShop" && !this.animatedTextShop) {
+                                console.log("Avant :", texteShop.position.y)
+                                this.animatedTextShop = true
+                                
+
+                                for (let index = 0; index < 95; index++) {
+                                        texteShop.position.y -= 3.5
+                                }
+                                for (let index = 0; index < 20; index++) {
+                                        texteShop.position.y += 3       
+                                }
+
+                                console.log("Après :", texteShop.position.y)
+                        }
+                } else {
+                        this.animatedTextShop = false
+                        texteShop.position.y = 250 - 100 / 2
                 }
         }
 
@@ -240,11 +286,13 @@ export class Scene {
 
 }
 
-function makeTextSprite(message, parameters) {
+let texteShop
+
+function makeTextSprite(sc, pos, name, message, parameters) {
         if (parameters === undefined) parameters = {};
-        var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
+        var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Koulen";
         var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 18;
-        var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
+        var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 10;
         var borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : {
                 r: 0,
                 g: 0,
@@ -252,8 +300,8 @@ function makeTextSprite(message, parameters) {
                 a: 1.0
         };
         var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : {
-                r: 255,
-                g: 255,
+                r: 0,
+                g: 0,
                 b: 255,
                 a: 1.0
         };
@@ -265,28 +313,46 @@ function makeTextSprite(message, parameters) {
         };
 
         var canvas = document.createElement('canvas');
+        canvas.style.width="100%"
+        canvas.style.height="100%"
         var context = canvas.getContext('2d');
         context.font = "Bold " + fontsize + "px " + fontface;
+        console.log(context.font)
         var metrics = context.measureText(message);
         var textWidth = metrics.width;
 
         context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
         context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
-
-        context.lineWidth = borderThickness;
-        // roundRect(context, borderThickness/2, borderThickness/2, (textWidth + borderThickness) * 1.1, fontsize * 1.4 + borderThickness, 8);
-
         context.fillStyle = "rgba(" + textColor.r + ", " + textColor.g + ", " + textColor.b + ", 1.0)";
         context.fillText(message, borderThickness, fontsize + borderThickness);
 
         var texture = new THREE.Texture(canvas)
         texture.needsUpdate = true;
-
         var spriteMaterial = new THREE.SpriteMaterial({
                 map: texture,
                 useScreenCoordinates: false
         });
         var sprite = new THREE.Sprite(spriteMaterial);
         sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
-        return sprite;
+        const color = 0xfff6D3;
+        const intensity = 0.3;
+        sc.lightTxt = new THREE.PointLight(color, intensity);
+        sc.lightTxt.position.set(pos.x, pos.y, pos.z);
+        sc.lightTxt.castShadow = true;
+        sc.lightTxt.shadow.mapSize.width = 512; // default
+        sc.lightTxt.shadow.mapSize.height = 512; // default
+        sc.lightTxt.shadow.camera.near = 0.5; // default
+        sc.lightTxt.shadow.camera.far = 700;
+        // sc.helperTxt = new THREE.PointLightHelper(sc.lightTxt);
+        // sc.add(sc.helperTxt);
+        // sc.add(sc.lightTxt);
+        sprite.position.x = pos.x
+        sprite.position.y = pos.y
+        sprite.position.z = pos.z
+        texteShop = new THREE.Group()
+        texteShop.add(sprite)
+        texteShop.add(sc.lightTxt)
+        // texteShop.add(sc.helperTxt)
+        sc.add(texteShop)
+        return texteShop;
 }

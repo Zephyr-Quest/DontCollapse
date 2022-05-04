@@ -35,6 +35,7 @@ export class Object3D extends Locatable {
                 this.loaded = el.loaded
                 this.transp = el.transparency
                 this.scale = Models[this.type].scale
+                this.name=el.name
         }
 
         getMesh() {
@@ -75,6 +76,7 @@ export class Object3D extends Locatable {
                         }
                         this.mesh = new THREE.Mesh(this.geometry, this.material);
                 }
+                this.mesh.name=this.name
                 this.mesh.rotation.x += this.rotx;
                 this.mesh.rotation.y += this.roty;
                 this.mesh.rotation.z += this.rotz;

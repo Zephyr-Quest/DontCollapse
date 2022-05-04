@@ -133,7 +133,8 @@ export const ObjectArray = [
                 roty: 0,
                 rotz: 0,
                 ray: true,
-                transparency: 1
+                transparency: 1,
+                name:"textShop"
         },
 
         // CUBE
