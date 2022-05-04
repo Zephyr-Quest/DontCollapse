@@ -3,7 +3,9 @@ import {
         OrbitControls
 } from 'https://unpkg.com/three@0.137.0/examples/jsm/controls/OrbitControls.js';
 
-import { GLTFLoader } from 'https://unpkg.com/three@0.137.0/examples/jsm/loaders/GLTFLoader.js';
+import {
+        GLTFLoader
+} from 'https://unpkg.com/three@0.137.0/examples/jsm/loaders/GLTFLoader.js';
 import {
         Config
 } from './config/config.js';
@@ -113,8 +115,8 @@ export class Scene {
 
                 this.controls.maxPolarAngle = Math.PI / 2;
 
-                const color = 0xFFFFFF;
-                const intensity = 0.7;
+                const color = 0xfff6D3;
+                const intensity = 0.6;
                 this.light = new THREE.PointLight(color, intensity);
                 this.light.position.set(0, 0, 130);
                 this.light.castShadow = true;
@@ -122,17 +124,20 @@ export class Scene {
                 this.light.shadow.mapSize.height = 512; // default
                 this.light.shadow.camera.near = 0.5; // default
                 this.light.shadow.camera.far = 500;
-
-
-
                 this.scene.add(this.light);
 
                 this.helper = new THREE.PointLightHelper(this.light);
                 this.scene.add(this.helper);
 
+                this.ambiantlight = new THREE.AmbientLight(0x303030);
+                this.ambiantlight.position.set(0, 0, 130);
+                this.scene.add(this.ambiantlight);
 
                 //if window resizes
                 window.addEventListener('resize', this.onWindowResize, false);
+                window.addEventListener('keydown', (event) => {
+                        this.changeCamera(event)
+                }, false)
 
                 this.axesHelper = new THREE.AxesHelper(1000);
                 this.scene.add(this.axesHelper);
@@ -214,6 +219,22 @@ export class Scene {
                 var selectionnes = ctx.raycaster.intersectObjects(ctx.selectionables.children);
                 if (selectionnes.length) {
                         return selectionnes[0].object;
+                }
+        }
+        changeCamera(event) {
+                switch (event.keyCode) {
+                        case 49:
+                                // 1 pressed
+                                this.camera.position.set(1000, -1000, 500);
+                                break;
+                        case 50:
+                                // 2 pressed
+                                this.camera.position.set(0, -1000, 500);
+                                break;
+                        case 51:
+                                // 3 pressed
+                                this.camera.position.set(-1000, -1000, 500);
+                                break;
                 }
         }
 

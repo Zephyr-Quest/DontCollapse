@@ -26,7 +26,7 @@ export const Models = {
         desk: {
                 name: "desk",
                 model: "desk.glb",
-                scale: 10,
+                scale: 20,
                 isModel: true,
                 instance: null,
                 rotation: [90, 0, 0]

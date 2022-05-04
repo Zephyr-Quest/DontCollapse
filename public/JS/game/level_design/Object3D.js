@@ -38,6 +38,9 @@ export class Object3D extends Locatable {
         }
 
         getMesh() {
+                if (this.transp == undefined) {
+                        this.transp = 1
+                }
                 if (Models[this.type].isModel) {
                         this.mesh = Models[this.type].instance.clone();
                         this.mesh.scale.set(this.scale, this.scale, this.scale)
