@@ -196,7 +196,7 @@ http.listen(4200, () => {
 io.on('connection', socket => {
     let username = socket.handshake.session.username;
     let idRoom = socket.handshake.session.idRoom;
-    
+
     if (username !== undefined && allRooms[idRoom]) {
         console.log(username, " connected in room ", idRoom);
         console.log(allRooms[idRoom], "\n");
@@ -221,15 +221,19 @@ io.on('connection', socket => {
                 io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
             }
         }
-        
+
         // Disconnect user 
         socket.leave(idRoom);
         console.log("disconnect", username, "from room", idRoom);
         disconnectingUsers.splice(disconnectingUsers.indexOf(username), 1);
         idRoom = username = undefined;
         socket.handshake.session.idRoom = undefined;
-        socket.handshake.session.username = undefined;
+        socket.handshake.session.username = undefined;    
     }
+    
+    socket.on('message', (msg) => {
+        io.to(idRoom).emit('new-message', socket.handshake.session.username + ' : ' + msg);
+    });
 
     io.emit("display-rooms", allRooms);
 
@@ -240,7 +244,7 @@ io.on('connection', socket => {
         const username = socket.handshake.session.username;
         const idRoom = socket.handshake.session.idRoom;
         const referer = socket.handshake.headers.referer.split("/");
-        const from = "/" + referer[referer.length - 1]; 
+        const from = "/" + referer[referer.length - 1];
 
         if (from === '/game' && username !== undefined)
             disconnectingUsers.push(username);
