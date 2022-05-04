@@ -1,8 +1,7 @@
 class Company {
     constructor(){
         this.name;
-        this.product;
-        this.price;
+        this.product; // new Ressource
     }
 }
 
