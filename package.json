@@ -1,0 +1,26 @@
+{
+  "name": "dontcollapse",
+  "version": "1.0.0",
+  "description": "server for dontcollapse",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zephyr-Quest/DontCollapse.git"
+  },
+  "keywords": [
+    "server"
+  ],
+  "author": "moi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zephyr-Quest/DontCollapse/issues"
+  },
+  "homepage": "https://github.com/Zephyr-Quest/DontCollapse#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "socket.io": "^4.4.1"
+  }
+}

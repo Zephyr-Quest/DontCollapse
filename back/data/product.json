@@ -1,0 +1,24 @@
+{
+    "pain": {
+        "ressources": {
+            "water": {
+                "value": 1
+            },
+            "flour": {
+                "value": 1
+            },
+            "salt": {
+                "value": 1
+            },
+            "oil": {
+                "value": 1
+            }
+        },
+        "time": {
+            "value": 1
+        }
+    },
+    "price": {
+        "value": 1
+    }
+}
