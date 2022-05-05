@@ -91,11 +91,10 @@ body {
     max-width: 700px;
     margin-left: 20px;
 
-
-    #chatForm {
-        position: absolute;
-        bottom: 10px;
+    #title-modal{
+        margin: 0;
     }
+
 }
 
 .modal {
@@ -281,6 +280,10 @@ body {
 /* -------------------------------------------------------------------------- */
 
 #messages {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column-reverse;
     .sender {
         display: grid;
         justify-content: right;
@@ -292,7 +295,28 @@ body {
     }
 
     .username {
-        font-size: x-small;
+        font-size: small;
+    }
+
+    .host {
+        color: red;
+    }
+
+    .J1 {
+        color: rgb(0, 255, 0);
+    }
+
+    .J2 {
+        color: rgb(225, 0, 255);
+    }
+
+    .J3 {
+        color: blue;
+    }
+
+    #chatForm{
+        display: flex;
+        justify-content: space-around;
     }
 
 }

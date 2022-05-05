@@ -69,9 +69,8 @@ body {
   max-width: 700px;
   margin-left: 20px;
 }
-#chat-modal #chatForm {
-  position: absolute;
-  bottom: 10px;
+#chat-modal #title-modal {
+  margin: 0;
 }
 .modal {
   padding: 0;
@@ -205,6 +204,12 @@ body {
 /* -------------------------------------------------------------------------- */
 /*                                    Chat                                    */
 /* -------------------------------------------------------------------------- */
+#messages {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+}
 #messages .sender {
   display: grid;
   justify-content: right;
@@ -214,5 +219,21 @@ body {
   justify-content: left;
 }
 #messages .username {
-  font-size: x-small;
+  font-size: small;
+}
+#messages .host {
+  color: red;
+}
+#messages .J1 {
+  color: #00ff00;
+}
+#messages .J2 {
+  color: #e100ff;
+}
+#messages .J3 {
+  color: blue;
+}
+#messages #chatForm {
+  display: flex;
+  justify-content: space-around;
 }
