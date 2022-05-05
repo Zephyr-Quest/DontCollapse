@@ -75,6 +75,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/rules', (req, res) => {
+    res.render('rules');
+});
+
 app.get('/lobby', (req, res) => {
     res.render('lobby');
 });
@@ -237,7 +241,7 @@ io.on('connection', socket => {
     }
 
     socket.on('message', (msg) => {
-        io.to(idRoom).emit('new-message',socket.handshake.session.username,msg);
+        io.to(idRoom).emit('new-message', socket.handshake.session.username, allRooms[idRoom].players.indexOf(username), msg);
     });
 
     socket.on('startGame', () => {

@@ -9,10 +9,10 @@ body {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
-  background-color: #eee;
+  background-color: #383331;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  color: #000;
+  color: #eee;
   padding: 0;
   margin: 0;
 }
@@ -21,11 +21,11 @@ body {
   top: 20px;
   left: 25px;
   font-size: 2.5rem;
-  color: #000;
+  color: #eee;
   cursor: pointer;
 }
 .log-out:hover {
-  color: #3ca50c;
+  color: #f5dba6;
 }
 /* -------------------------------------------------------------------------- */
 /*                                Main content                                */
@@ -50,7 +50,7 @@ main h2 {
   align-items: center;
 }
 main ion-icon {
-  color: #3ca50c;
+  color: #f5dba6;
   margin-right: 10px;
 }
 main .card {
@@ -69,23 +69,15 @@ main .card ul {
   padding: 0;
 }
 main .card .green {
-  color: #3ca50c;
+  color: #f5dba6;
 }
 main .card:hover {
-  background-color: #e4e4e4;
+  background-color: #3f3c3a;
   transition: background-color 0.3s;
 }
 main .scoreboard {
   margin-top: 50px;
   margin-bottom: 50px;
-}
-main .scoreboard .card h3 {
-  font-size: 2rem;
-  margin: 0;
-  margin-left: 10px;
-}
-main .scoreboard .card ul {
-  margin-left: 50px;
 }
 main .games {
   margin-top: 50px;
@@ -101,23 +93,34 @@ main .games .card ul {
   margin-left: 50px;
 }
 main .games #new_game {
-  background-color: #3ca50c;
-  color: #eee;
-  border: 3px solid #3ca50c;
+  background-color: #f5dba6;
+  color: #383331;
+  border: 3px solid #f5dba6;
   justify-content: center;
   padding: 0;
 }
 main .games #new_game:hover {
   background-color: transparent;
-  color: #3ca50c;
+  color: #f5dba6;
 }
 main .games #new_game:hover ion-icon {
-  color: #3ca50c;
+  color: #f5dba6;
 }
 main .games #new_game ion-icon {
-  color: #eee;
+  color: #383331;
   margin-right: 5px;
   font-size: 1.5rem;
+}
+main #pseudo {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+main #pseudo input {
+  height: 1.7em;
+  width: 20em;
+  margin-left: 3em;
+  border-radius: 8px;
 }
 /* -------------------------------------------------------------------------- */
 /*                              Responsive Design                             */
