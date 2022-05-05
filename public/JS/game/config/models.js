@@ -46,5 +46,21 @@ export const Models = {
                 isModel: true,
                 instance: null,
                 rotation: [90, 0, 0]
+        },
+        opened_box: {
+                name: "opened_box",
+                model: "box.glb",
+                scale: 9,
+                isModel: true,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        closed_box: {
+                name: "closed_box",
+                model: "box_closed.glb",
+                scale: 9,
+                isModel: true,
+                instance: null,
+                rotation: [90, 0, 0]
         }
 }
