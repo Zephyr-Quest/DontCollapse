@@ -7,7 +7,8 @@ function initListener(id) {
     closeAllListener();
     ShopItem.changeItem(rightRubric[id].classList[0]);
     for (let i = id; i < id + 4; i++) {
-        rightRubric[i].addEventListener('click', changeSelection);
+            rightRubric[i].addEventListener('click', changeSelection);
+        
     }
 }
 
@@ -17,7 +18,6 @@ function changeSelection(e) {
     });
     e.target.classList.add("selected");
     ShopItem.changeItem(e.target.classList[0]);
-
 }
 
 function changeRubric(classOfTop) {
@@ -54,10 +54,13 @@ function changeRubric(classOfTop) {
             break;
         case "top4":
             rightRubric[12].classList.add("selected");
-            for (let i = 12; i < 16; i++) {
-                rightRubric[i].style.display = "block";
-            }
-            initListener(12);
+            rightRubric[12].style.display = "block";
+            ShopItem.changeItem("occaz");
+
+            // for (let i = 12; i < 16; i++) {
+            //     rightRubric[i].style.display = "block";
+            // }
+            //initListener(12);
 
             break;
         default:
