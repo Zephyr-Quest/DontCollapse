@@ -124,7 +124,7 @@ export class Scene {
                 const intensity = 0.4;
                 this.light = new THREE.DirectionalLight(color, intensity);
                 this.light.position.set(0, 0, 130);
-                this.light.castShadow = true;
+                // this.light.castShadow = true;
                 this.light.shadow.mapSize.width = 512; // default
                 this.light.shadow.mapSize.height = 512; // default
                 this.light.shadow.camera.near = 0.5; // default
@@ -134,9 +134,10 @@ export class Scene {
                 this.light = new THREE.PointLight(color, intensity - 0);
                 this.light.position.set(0, 0, 130);
                 this.light.castShadow = true;
-                this.light.shadow.mapSize.width = 512; // default
-                this.light.shadow.mapSize.height = 512; // default
-                this.light.shadow.camera.near = 0.5; // default
+                this.light.shadow.bias = -0.001
+                this.light.shadow.mapSize.width = 2048; // default
+                this.light.shadow.mapSize.height = 2048; // default
+                this.light.shadow.camera.near = 0.1;
                 this.light.shadow.camera.far = 500;
                 this.scene.add(this.light);
 
@@ -145,6 +146,7 @@ export class Scene {
 
                 this.ambiantlight = new THREE.AmbientLight(0x505050);
                 this.ambiantlight.position.set(0, 0, 130);
+
                 this.scene.add(this.ambiantlight);
 
                 //if window resizes
