@@ -75,6 +75,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/rules', (req, res) => {
+    res.render('rules');
+});
+
 app.get('/lobby', (req, res) => {
     res.render('lobby');
 });
