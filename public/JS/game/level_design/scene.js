@@ -128,7 +128,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: true,
                 transparency: 1,
-                name: "textShop"
+                name: "Shop"
         },
         /* ---------------------------------- CUBE ---------------------------------- */
         {
@@ -172,6 +172,21 @@ export const ObjectArray = [
                 roty: 0,
                 rotz: 0,
                 ray: false,
+        },
+        {
+                type: "cube",
+                length: 150,
+                width: 150,
+                heigth: 150,
+                x: -175,
+                y: 175,
+                z: 75,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: true,
+                name:"Chat"
         },
 
         /* --------------------------------- BUREAU --------------------------------- */

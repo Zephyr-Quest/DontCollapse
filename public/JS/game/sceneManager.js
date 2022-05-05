@@ -38,14 +38,16 @@ THREE.Object3D.DefaultUp.set(0, 0, 1);
 export class Scene {
 
         constructor(onLoad) {
+                this.GroupSprite = new THREE.Group()
                 this.loadManager = new THREE.LoadingManager();
                 this.textureLoader = new THREE.TextureLoader(this.loadManager);
                 this.modelLoader = new GLTFLoader();
                 this.loadModels(onLoad);
-                this.animatedTextShop = false,
-                this.mousePos={
-                        clientX:0,
-                        clientY:0,
+                this.animatedtextShop = false
+                this.animatedTextChat = false
+                this.mousePos = {
+                        clientX: 0,
+                        clientY: 0,
                 }
         }
 
@@ -163,8 +165,8 @@ export class Scene {
                         this.onMouseClick(event, this);
                 });
                 this.renderer.domElement.addEventListener('mousemove', event => {
-                        this.mousePos.clientX=event.clientX
-                        this.mousePos.clientY=event.clientY
+                        this.mousePos.clientX = event.clientX
+                        this.mousePos.clientY = event.clientY
                 });
 
                 // this.animate()
@@ -177,11 +179,11 @@ export class Scene {
                 this.controls.update();
                 stats.end();
         }
-        
-        
+
+
         render() {
                 this.renderer.render(this.scene, this.camera);
-                this.onMouseOver(this.mousePos,this)
+                this.onMouseOver(this.mousePos, this)
         }
 
 
@@ -211,14 +213,20 @@ export class Scene {
                         }
                 });
                 this.scene.add(this.selectionables);
-                this.createTitles(this.scene, {
+                this.createTitles(this, this.scene, {
                         x: 150,
                         y: 130,
                         z: 150 / 2,
-                })
+                }, "shop", "SHOP")
+                this.createTitles(this, this.scene, {
+                        x: -150,
+                        y: 80,
+                        z: 150 / 2,
+                }, "chat", "CHAT")
+                this.scene.add(this.GroupSprite)
         }
-        createTitles(sc, pos) {
-                let txt = makeTextSprite(sc, pos, "shop", "SHOP", {
+        createTitles(ctx, sc, pos, name, title) {
+                this.makeTextSprite(ctx, sc, pos, name, title, {
                         "fontsize": 100,
                         "fontface": 'Koulen',
                         "textColor": {
@@ -228,8 +236,6 @@ export class Scene {
                                 a: 1.0
                         }
                 })
-
-                sc.add(txt);
         }
 
         onMouseClick(event, ctx) {
@@ -242,7 +248,7 @@ export class Scene {
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
                 if (s) {
-                        s.scale.set(Config.scaleRay, Config.scaleRay, Config.scaleRay)
+                        s.scale.set(Config.scaleRay, Config.scaleRay, 1)
                         setTimeout(() => {
                                 s.scale.set(1, 1, 1)
                         }, 90)
@@ -259,17 +265,29 @@ export class Scene {
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
                 // console.log(s)
                 if (s) {
-                        if (s.name == "textShop" && !this.animatedTextShop) {
-                                this.animatedTextShop = true
-                                texteShop.visible = true
+                        if (s.name == "Shop" && !this.animatedtextShop) {
+                                this.animatedtextShop = true
+                                for (const e of this.GroupSprite.children) {
+                                        if (e.name == "shop") {
+                                                e.visible = true
+                                        }
+                                }
+                        } else if (s.name == "Chat" && !this.animatedtextShop) {
+                                this.animatedtextChat = true
+                                for (const e of this.GroupSprite.children) {
+                                        if (e.name == "chat") {
+                                                e.visible = true
+                                        }
+                                }
                         }
                 } else {
-                        texteShop.visible = false
-                        this.animatedTextShop = false
-                        // texteShop.position.y = 250 - 100 / 2
+                        for (const e of this.GroupSprite.children) {
+                                this.animatedtextShop = false
+                                this.animatedtextChat = false
+                                e.visible = false
+                        }
                 }
         }
-
 
         getSelectionneLePlusProche(position, ctx) {
                 // Mise à jour de la position du rayon à lancer.
@@ -297,69 +315,65 @@ export class Scene {
                 }
         }
 
-}
+        makeTextSprite(ctx, sc, pos, name, message, parameters) {
+                if (parameters === undefined) parameters = {};
+                var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Koulen";
+                var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 18;
+                var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 10;
+                var borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : {
+                        r: 0,
+                        g: 0,
+                        b: 0,
+                        a: 1.0
+                };
+                var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : {
+                        r: 0,
+                        g: 0,
+                        b: 255,
+                        a: 1.0
+                };
+                var textColor = parameters.hasOwnProperty("textColor") ? parameters["textColor"] : {
+                        r: 0,
+                        g: 0,
+                        b: 0,
+                        a: 1.0
+                };
 
-let texteShop
+                var canvas = document.createElement('canvas');
+                canvas.style.width = "100%"
+                canvas.style.height = "100%"
+                var context = canvas.getContext('2d');
+                context.font = "Bold " + fontsize + "px " + fontface;
+                context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+                context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
+                context.fillStyle = "rgba(" + textColor.r + ", " + textColor.g + ", " + textColor.b + ", 1.0)";
+                context.fillText(message, borderThickness, fontsize + borderThickness);
 
-function makeTextSprite(sc, pos, name, message, parameters) {
-        if (parameters === undefined) parameters = {};
-        var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Koulen";
-        var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 18;
-        var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 10;
-        var borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : {
-                r: 0,
-                g: 0,
-                b: 0,
-                a: 1.0
-        };
-        var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : {
-                r: 0,
-                g: 0,
-                b: 255,
-                a: 1.0
-        };
-        var textColor = parameters.hasOwnProperty("textColor") ? parameters["textColor"] : {
-                r: 0,
-                g: 0,
-                b: 0,
-                a: 1.0
-        };
-
-        var canvas = document.createElement('canvas');
-        canvas.style.width = "100%"
-        canvas.style.height = "100%"
-        var context = canvas.getContext('2d');
-        context.font = "Bold " + fontsize + "px " + fontface;
-        context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
-        context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
-        context.fillStyle = "rgba(" + textColor.r + ", " + textColor.g + ", " + textColor.b + ", 1.0)";
-        context.fillText(message, borderThickness, fontsize + borderThickness);
-
-        var texture = new THREE.Texture(canvas)
-        texture.needsUpdate = true;
-        var spriteMaterial = new THREE.SpriteMaterial({
-                map: texture,
-                useScreenCoordinates: false
-        });
-        var sprite = new THREE.Sprite(spriteMaterial);
-        sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
-        const color = 0xfff6D3;
-        const intensity = 0.3;
-        sc.lightTxt = new THREE.PointLight(color, intensity);
-        sc.lightTxt.position.set(pos.x, pos.y, pos.z);
-        sc.lightTxt.castShadow = true;
-        sc.lightTxt.shadow.mapSize.width = 512; // default
-        sc.lightTxt.shadow.mapSize.height = 512; // default
-        sc.lightTxt.shadow.camera.near = 0.5; // default
-        sc.lightTxt.shadow.camera.far = 700;
-        sprite.position.x = pos.x
-        sprite.position.y = pos.y
-        sprite.position.z = pos.z
-        texteShop = new THREE.Group()
-        texteShop.add(sprite)
-        texteShop.add(sc.lightTxt)
-        texteShop.visible = false
-        texteShop.name = name
-        sc.add(texteShop)
-        return texteShop;
+                var texture = new THREE.Texture(canvas)
+                texture.needsUpdate = true;
+                var spriteMaterial = new THREE.SpriteMaterial({
+                        map: texture,
+                        useScreenCoordinates: false
+                });
+                var sprite = new THREE.Sprite(spriteMaterial);
+                sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
+                const color = 0xfff6D3;
+                const intensity = 0.2;
+                sc.lightTxt = new THREE.PointLight(color, intensity);
+                sc.lightTxt.position.set(pos.x, pos.y, pos.z);
+                sc.lightTxt.castShadow = true;
+                sc.lightTxt.shadow.mapSize.width = 2048; // default
+                sc.lightTxt.shadow.mapSize.height = 2048; // default
+                sc.lightTxt.shadow.camera.near = 0.1; // default
+                sc.lightTxt.shadow.camera.far = 700;
+                sprite.position.x = pos.x
+                sprite.position.y = pos.y
+                sprite.position.z = pos.z
+                let texteSprite = new THREE.Group()
+                texteSprite.add(sprite)
+                texteSprite.add(sc.lightTxt)
+                texteSprite.visible = false
+                texteSprite.name = name
+                ctx.GroupSprite.add(texteSprite)
+        }
 }
