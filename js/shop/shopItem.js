@@ -68,10 +68,7 @@ function changeItem(classOfRight) {
         "braz": [20, 21],
         "tesla": [22, 23],
 
-        "own": [24, 25],
-        "j1": [26, 27],
-        "j2": [28, 29],
-        "j3": [30, 31]
+        "occaz": [24, 25],
     };
 
     let toDisplay = items[classOfRight];
