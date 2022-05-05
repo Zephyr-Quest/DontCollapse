@@ -14,6 +14,11 @@ const WebSocket = (function () {
         "startAuthorized": () => {
             console.log("start authorized");
             beginingGame();
+        },
+        'new-message': msg => {
+            let item = document.createElement('li');
+            item.textContent = msg;
+            messages.appendChild(item);
         }
     };
 
@@ -25,6 +30,7 @@ const WebSocket = (function () {
     /* -------------------- Variables for functions listeners ------------------- */
     let deleteEvent;
     let startGame;
+    let messages;
 
     /* -------------------------------- Function -------------------------------- */
     function updatePlayersOnScreen() {
@@ -72,9 +78,10 @@ const WebSocket = (function () {
 
     /* --------------------------------- Return --------------------------------- */
     return {
-        init(DE, SG) {
+        init(DE, SG, chatMessages) {
             deleteEvent = DE;
             startGame = SG;
+            messages = chatMessages;
         },
 
         connect() {
@@ -83,6 +90,10 @@ const WebSocket = (function () {
                 const event = events[eventName];
                 socket.on(eventName, event);
             }
+        },
+
+        emit(eventName, ...params) {
+            socket.emit(eventName, ...params);
         }
     };
 })();

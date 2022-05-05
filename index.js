@@ -223,6 +223,7 @@ io.on('connection', socket => {
                 console.log("remove", username, "from room", idRoom);
                 allRooms[idRoom].players.splice(allRooms[idRoom].players.indexOf(username), 1);
                 io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
+                socket.emit("disconnection");
             }
         }
 
