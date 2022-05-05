@@ -31,39 +31,56 @@ export class Object3D extends Locatable {
                 this.rotx = el.rotx * Math.PI / 180
                 this.roty = el.roty * Math.PI / 180
                 this.rotz = el.rotz * Math.PI / 180
-                this.model=Models[this.type].model
+                this.model = Models[this.type].model
+                this.loaded = el.loaded
+                this.transp = el.transparency
+                this.scale = Models[this.type].scale
+                this.name=el.name
         }
 
         getMesh() {
-                if (Models[this.type].model != null) {
-                        this.loader.load(this.model, (gltf)=> {
-                                this.modelLoaded=gltf.scene
-                                return this.modelLoaded
-                        });
+                if (this.transp == undefined) {
+                        this.transp = 1
+                }
+                if (Models[this.type].isModel) {
+                        this.mesh = Models[this.type].instance.clone();
+                        this.mesh.scale.set(this.scale, this.scale, this.scale)
+                        this.mesh.rotation.x = Models[this.type].rotation[0] * Math.PI / 180;
+                        this.mesh.rotation.y = Models[this.type].rotation[1] * Math.PI / 180;
+                        this.mesh.rotation.z = Models[this.type].rotation[2] * Math.PI / 180;
+                        this.mesh.cast
                 } else {
                         if (this.type == "wall") {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);
                                 this.material = new THREE.MeshStandardMaterial({
                                         color: this.color,
-                                        side: THREE.FrontSide
+                                        side: THREE.FrontSide,
+                                        opacity: this.transp
+
                                 });
                         }
                         if (this.type == "floor") {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);
-                                this.material = new THREE.MeshStandardMaterial({color: this.color});
+                                this.material = new THREE.MeshStandardMaterial({
+                                        color: this.color,
+                                        opacity: this.transp
+
+                                });
                         }
                         if (this.type == "cube") {
                                 this.geometry = new THREE.BoxGeometry(this.length, this.width, this.heigth)
-                                this.material = new THREE.MeshBasicMaterial({
+                                this.material = new THREE.MeshStandardMaterial({
                                         side: THREE.FrontSide,
                                         color: this.color,
+                                        opacity: this.transp
                                 })
                         }
+                        this.mesh = new THREE.Mesh(this.geometry, this.material);
                 }
-                this.mesh = new THREE.Mesh(this.geometry, this.material);
-                this.mesh.rotation.x = this.rotx;
-                this.mesh.rotation.y = this.roty;
-                this.mesh.rotation.z = this.rotz;
+                this.mesh.name=this.name
+                this.mesh.rotation.x += this.rotx;
+                this.mesh.rotation.y += this.roty;
+                this.mesh.rotation.z += this.rotz;
                 this.mesh.position.x = this.getPositionArray()[0]
                 this.mesh.position.y = this.getPositionArray()[1]
                 this.mesh.position.z = this.getPositionArray()[2]
