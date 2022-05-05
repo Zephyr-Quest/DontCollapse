@@ -237,7 +237,7 @@ io.on('connection', socket => {
     }
 
     socket.on('message', (msg) => {
-        io.to(idRoom).emit('new-message', socket.handshake.session.username + ' : ' + msg);
+        io.to(idRoom).emit('new-message',socket.handshake.session.username,msg);
     });
 
     socket.on('startGame', () => {

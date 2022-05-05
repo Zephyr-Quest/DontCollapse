@@ -15,11 +15,17 @@ const WebSocket = (function () {
             console.log("start authorized");
             beginingGame();
         },
-        'new-message': msg => {
-            let item = document.createElement('li');
-            item.textContent = msg;
+        'new-message': (user, msg) => {
+            let item = document.createElement('div');
+            item.classList.add(user === username ? "sender" : "receiver")
+            item.classList.add("username")
+            item.innerText = user;
             messages.appendChild(item);
-        }
+            let item2 = document.createElement('div');
+            item2.classList.add(user === username ? "sender" : "receiver")
+            item2.classList.add("message")
+            item2.innerText = msg;
+            messages.appendChild(item2);        }
     };
 
     // HTML elements
@@ -27,6 +33,7 @@ const WebSocket = (function () {
 
     /* -------------------------------- Variables ------------------------------- */
     let connectedPlayers = [];
+    const username = document.getElementById("username").value;
     /* -------------------- Variables for functions listeners ------------------- */
     let deleteEvent;
     let startGame;
@@ -69,7 +76,7 @@ const WebSocket = (function () {
         });
     }
 
-    function beginingGame(){
+    function beginingGame() {
         const eltsToDelete = document.getElementById("room");
         eltsToDelete.remove();
         const eltsToShow = document.getElementById("game");

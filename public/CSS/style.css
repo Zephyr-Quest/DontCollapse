@@ -47,13 +47,39 @@ body {
   border-radius: 10%;
   cursor: pointer;
 }
+#shop-button[open] {
+  animation: slide-up 100ms forwards, fade-in 250ms forwards;
+}
+#shop-button[open]::backdrop {
+  animation: fade-in 250ms forwards;
+}
 /* -------------------------------------------------------------------------- */
-/*                                    Modal                                   */
+/*                                    Modals                                  */
 /* -------------------------------------------------------------------------- */
-.modal {
+#shop-modal {
   height: 700px;
   width: 1200px;
+}
+#shop-modal .modal-content {
+  text-align: center;
+}
+#chat-modal {
+  height: 700px;
+  width: 300px;
+  max-width: 700px;
+  margin-left: 20px;
+}
+#chat-modal #chatForm {
+  position: absolute;
+  bottom: 10px;
+}
+.modal {
   padding: 0;
+}
+.modal .modal-content {
+  height: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .modal #title-modal {
   margin-top: 0;
@@ -61,12 +87,6 @@ body {
 }
 .modal::backdrop {
   background: rgba(0, 0, 0, 0.6);
-}
-.modal[open] {
-  animation: slide-up 100ms forwards, fade-in 250ms forwards;
-}
-.modal[open]::backdrop {
-  animation: fade-in 250ms forwards;
 }
 .modal[closing] {
   display: block;
@@ -76,12 +96,6 @@ body {
 }
 .modal[closing]::backdrop {
   animation: fade-out 250ms forwards;
-}
-.modal-content {
-  height: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  text-align: center;
 }
 @keyframes fade-in {
   0% {
@@ -107,29 +121,30 @@ body {
     transform: translateY(0%);
   }
 }
+@keyframes slide-right {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(110%);
+  }
+}
+.selected {
+  background-color: red;
+}
 /* -------------------------------------------------------------------------- */
 /*                                Close Button                                */
 /* -------------------------------------------------------------------------- */
-.close {
+.close-button {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: 1000;
 }
-.close:hover,
-.close:focus {
+.close-button:hover {
   color: #faa200;
   text-decoration: none;
   cursor: pointer;
-}
-#switch_shop span {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-#switch_shop .selected {
-  color: #faa200;
-  font-weight: bold;
 }
 /* -------------------------------------------------------------------------- */
 /*                                    Shop                                    */
@@ -187,6 +202,17 @@ body {
   margin: 1rem;
   border: dashed 2px black;
 }
-.selected {
-  background-color: red;
+/* -------------------------------------------------------------------------- */
+/*                                    Chat                                    */
+/* -------------------------------------------------------------------------- */
+#messages .sender {
+  display: grid;
+  justify-content: right;
+}
+#messages .receiver {
+  display: grid;
+  justify-content: left;
+}
+#messages .username {
+  font-size: x-small;
 }

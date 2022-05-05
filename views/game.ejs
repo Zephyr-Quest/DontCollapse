@@ -45,7 +45,7 @@
 
         <dialog class="modal" id="shop-modal">
             <div class="modal-content">
-                <span id="close-shop">&times;</span>
+                <span class="close-button" id="close-shop">&times;</span>
                 <h2 id="title-modal">Bienvenue dans le shop !</h2>
 
                 <div id="shop">
@@ -391,27 +391,32 @@
                     </div>
                 </div>
             </div>
-        </dialog>
-
-        <dialog id="confirm-modal">
-            <p>Voulez vous acheter un <span id="buying"></span></p>
-            <button id="oui-button">Oui</button>
-            <button id="non-button">Non</button>
+            <dialog id="confirm-modal">
+                <p>Voulez vous acheter un <span id="buying"></span></p>
+                <button id="oui-button">Oui</button>
+                <button id="non-button">Non</button>
+            </dialog>
         </dialog>
 
     </div>
 
-    <dialog class="chat-modal">
-        <ul id="messages"></ul>
-        <form id="chatForm" action="">
-            <input id="input-chat" autocomplete="off" /><button>Send</button>
-        </form>
+    <button id="chat-button">Open Chat</button>
+    <dialog class="modal" id="chat-modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-chat">&times;</span>
+            <h2 id="title-modal">Alors qu'est ce que ca dit ?</h2>
+
+            <div id="messages"></div>
+            <form id="chatForm" action="">
+                <input id="input-chat" autocomplete="off" /><button>Send</button>
+            </form>
+        </div>
     </dialog>
 
 
 
 
-    <script src="JS/game/hud/main.js" type="module"></script>
+    <script src="JS/game/hud/hud.js" type="module"></script>
 
     <script src="JS/WebSocket.js" type="text/javascript"></script>
     <script src="JS/game.js" type="text/javascript"></script>
