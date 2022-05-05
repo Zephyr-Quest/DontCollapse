@@ -72,6 +72,10 @@ function getMaxKey(obj) {
 /* ----------------------------------- APP ---------------------------------- */
 
 app.get('/', (req, res) => {
+    res.render('index');
+});
+
+app.get('/lobby', (req, res) => {
     res.render('lobby');
 });
 
@@ -219,6 +223,7 @@ io.on('connection', socket => {
                 console.log("remove", username, "from room", idRoom);
                 allRooms[idRoom].players.splice(allRooms[idRoom].players.indexOf(username), 1);
                 io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
+                socket.emit("disconnection");
             }
         }
 
@@ -254,9 +259,10 @@ io.on('connection', socket => {
         const referer = socket.handshake.headers.referer.split("/");
         const from = "/" + referer[referer.length - 1];
 
-        if (from === '/game' && username !== undefined)
+        console.log("disconnection", from, username, idRoom);
+        if (from === '/game' && username !== undefined && !disconnectingUsers.includes(username)) {
+            console.log("mark", username, "as disconnecting");
             disconnectingUsers.push(username);
-
-        console.log('a user disconnected');
+        }
     });
 });
