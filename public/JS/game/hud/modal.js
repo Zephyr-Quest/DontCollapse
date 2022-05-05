@@ -1,8 +1,8 @@
 import Shop from './shop/topRubric.js'
 
-const modal = document.querySelector('.modal');
+const modal = document.querySelector('#shop-modal');
 const openModal = document.querySelector('#shop-button');
-const closeModal = document.querySelector('.close');
+const closeModal = document.querySelector('#close-shop');
 
 function closeFunction() {
     modal.setAttribute('closing', "");

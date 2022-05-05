@@ -43,9 +43,9 @@
 
 
 
-        <dialog class="modal" id="modal1">
+        <dialog class="modal" id="shop-modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span id="close-shop">&times;</span>
                 <h2 id="title-modal">Bienvenue dans le shop !</h2>
 
                 <div id="shop">
@@ -72,10 +72,7 @@
                         <div class="braz clickable" style="display: none;">Braz'Air'Eau</div>
                         <div class="tesla clickable" style="display: none;">Teslassemblage</div>
 
-                        <div class="own clickable" style="display: none;">Mes occasions</div>
-                        <!-- <div class="j1 clickable" style="display: none;"></div>
-                    <div class="j2 clickable" style="display: none;"></div>
-                    <div class="j3 clickable" style="display: none;"></div> -->
+                        <div class="occaz clickable" style="display: none;">Mes occasions</div>
                     </div>
 
 
@@ -393,14 +390,10 @@
 
                     </div>
                 </div>
-
-
-
-
             </div>
         </dialog>
 
-        <dialog id="modal2">
+        <dialog id="confirm-modal">
             <p>Voulez vous acheter un <span id="buying"></span></p>
             <button id="oui-button">Oui</button>
             <button id="non-button">Non</button>
@@ -408,10 +401,15 @@
 
     </div>
 
-    <ul id="messages"></ul>
-    <form id="chatForm" action="">
-        <input id="input-chat" autocomplete="off" /><button>Send</button>
-    </form>
+    <dialog class="chat-modal">
+        <ul id="messages"></ul>
+        <form id="chatForm" action="">
+            <input id="input-chat" autocomplete="off" /><button>Send</button>
+        </form>
+    </dialog>
+
+
+
 
     <script src="JS/game/hud/main.js" type="module"></script>
 

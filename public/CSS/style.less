@@ -80,44 +80,44 @@ body {
         padding: 1rem;
     }
 
+    &::backdrop {
+        background: rgba(0, 0, 0, 0.6);
+
+    }
+
+    &[open] {
+        animation: slide-up 100ms forwards, fade-in 250ms forwards;
+
+        &::backdrop {
+            animation: fade-in 250ms forwards;
+        }
+    }
+
+    &[closing] {
+        display: block;
+        pointer-events: none;
+        inset: 0;
+        animation: fade-out 250ms forwards;
+
+        &::backdrop {
+            animation: fade-out 250ms forwards;
+        }
+    }
 }
 
-.modal::backdrop {
-    background: rgba(0, 0, 0, 0.6);
-}
 
 .modal-content {
     height: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
-
     text-align: center;
-}
-
-.modal[open] {
-    animation: slide-up 100ms forwards, fade-in 250ms forwards;
-
-}
-
-.modal[open]::backdrop {
-    animation: fade-in 250ms forwards;
-}
-
-.modal[closing] {
-    display: block;
-    pointer-events: none;
-    inset: 0;
-    animation: fade-out 250ms forwards;
-}
-
-.modal[closing]::backdrop {
-    animation: fade-out 250ms forwards;
 }
 
 @keyframes fade-in {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -127,6 +127,7 @@ body {
     100% {
         opacity: 0;
     }
+
     0% {
         opacity: 1;
     }
@@ -136,6 +137,7 @@ body {
     0% {
         transform: translateY(100%);
     }
+
     100% {
         transform: translateY(0%);
     }
@@ -160,20 +162,19 @@ body {
 }
 
 #switch_shop {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    span {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .selected {
+        color: #faa200;
+        font-weight: bold;
+    }
 }
 
-#switch_shop span {
-    cursor: pointer;
-    display: flex;
-}
 
-#switch_shop .selected {
-    color: #faa200;
-    font-weight: bold;
-}
 
 /* -------------------------------------------------------------------------- */
 /*                                    Shop                                    */
@@ -210,7 +211,7 @@ body {
         grid-template-columns: repeat(4, 1fr);
         align-items: center;
 
-        .clickable{
+        .clickable {
             padding: 5%;
         }
     }
@@ -249,15 +250,16 @@ body {
 
     }
 
-    #left-page div, #right-page div{
+    #left-page div,
+    #right-page div {
         margin: 1rem;
         // height: 8rem;
         border: dashed 2px black;
 
     }
- 
+
 }
 
-.selected{
+.selected {
     background-color: red;
 }

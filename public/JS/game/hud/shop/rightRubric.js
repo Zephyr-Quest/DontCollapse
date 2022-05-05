@@ -1,4 +1,3 @@
-import shopItem from "./shopItem.js";
 import ShopItem from "./shopItem.js";
 
 const rightRubric = document.querySelectorAll('#supplier div');
@@ -70,7 +69,7 @@ function changeRubric(classOfTop) {
 }
 
 function closeAllListener() {
-    shopItem.closeAllListener();
+    ShopItem.closeAllListener();
     for (const current of rightRubric) {
         current.removeEventListener('click', changeSelection)
     }

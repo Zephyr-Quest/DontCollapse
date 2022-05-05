@@ -1,5 +1,5 @@
 import CloseModal from '../modal.js'
-const modal = document.getElementById('modal2');
+const modal = document.getElementById('confirm-modal');
 const oui = document.getElementById('oui-button');
 const non = document.getElementById('non-button');
 

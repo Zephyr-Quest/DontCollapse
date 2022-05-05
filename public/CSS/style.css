@@ -62,12 +62,6 @@ body {
 .modal::backdrop {
   background: rgba(0, 0, 0, 0.6);
 }
-.modal-content {
-  height: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  text-align: center;
-}
 .modal[open] {
   animation: slide-up 100ms forwards, fade-in 250ms forwards;
 }
@@ -82,6 +76,12 @@ body {
 }
 .modal[closing]::backdrop {
   animation: fade-out 250ms forwards;
+}
+.modal-content {
+  height: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
 }
 @keyframes fade-in {
   0% {
@@ -122,14 +122,10 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
-#switch_shop {
+#switch_shop span {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-}
-#switch_shop span {
-  cursor: pointer;
-  display: flex;
 }
 #switch_shop .selected {
   color: #faa200;
