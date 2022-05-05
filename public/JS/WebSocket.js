@@ -15,10 +15,8 @@ const WebSocket = (function () {
             console.log("start authorized");
             beginingGame();
         },
-        'new-message': msg => {
-            let item = document.createElement('li');
-            item.textContent = msg;
-            messages.appendChild(item);
+        'new-message': (user, index, msg) => {
+            console.log("new message", user, index, msg);
         }
     };
 
@@ -69,7 +67,7 @@ const WebSocket = (function () {
         });
     }
 
-    function beginingGame(){
+    function beginingGame() {
         const eltsToDelete = document.getElementById("room");
         eltsToDelete.remove();
         const eltsToShow = document.getElementById("game");
