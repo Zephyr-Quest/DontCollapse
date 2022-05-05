@@ -8,7 +8,8 @@ const WebSocket = (function () {
             updatePlayersOnScreen();
         },
         "disconnection": () => {
-            window.location.href = "/";
+            console.log("disconnecting");
+            window.location.href = "/lobby";
         },
         "startAuthorized": () => {
             console.log("start authorized");

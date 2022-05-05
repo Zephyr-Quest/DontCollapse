@@ -1,5 +1,3 @@
-let socket = io();
-
 function deleteEvent(e) {
     const player = e.target.parentElement.getElementsByTagName("p")[0].innerText;
     console.log("removing", player);
