@@ -14,6 +14,7 @@ let sc = new Scene(onLoad);
 function onLoad() {
         sc.init()
         sc.createScene()
+        sc.animate()
 }
 
 

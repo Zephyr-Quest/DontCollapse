@@ -42,7 +42,11 @@ export class Scene {
                 this.textureLoader = new THREE.TextureLoader(this.loadManager);
                 this.modelLoader = new GLTFLoader();
                 this.loadModels(onLoad);
-                this.animatedTextShop = false
+                this.animatedTextShop = false,
+                this.mousePos={
+                        clientX:0,
+                        clientY:0,
+                }
         }
 
         /**
@@ -118,7 +122,7 @@ export class Scene {
 
                 const color = 0xfff6D3;
                 const intensity = 0.4;
-                this.light = new THREE.DirectionalLight( color, intensity );
+                this.light = new THREE.DirectionalLight(color, intensity);
                 this.light.position.set(0, 0, 130);
                 this.light.castShadow = true;
                 this.light.shadow.mapSize.width = 512; // default
@@ -127,7 +131,7 @@ export class Scene {
                 this.light.shadow.camera.far = 500;
                 this.scene.add(this.light);
 
-                this.light = new THREE.PointLight( color, intensity-0 );
+                this.light = new THREE.PointLight(color, intensity - 0);
                 this.light.position.set(0, 0, 130);
                 this.light.castShadow = true;
                 this.light.shadow.mapSize.width = 512; // default
@@ -157,10 +161,11 @@ export class Scene {
                         this.onMouseClick(event, this);
                 });
                 this.renderer.domElement.addEventListener('mousemove', event => {
-                        this.onMouseOver(event, this);
+                        this.mousePos.clientX=event.clientX
+                        this.mousePos.clientY=event.clientY
                 });
 
-                this.animate()
+                // this.animate()
         }
 
         animate() {
@@ -170,10 +175,11 @@ export class Scene {
                 this.controls.update();
                 stats.end();
         }
-
-
+        
+        
         render() {
                 this.renderer.render(this.scene, this.camera);
+                this.onMouseOver(this.mousePos,this)
         }
 
 
@@ -189,11 +195,13 @@ export class Scene {
                 ObjectArray.forEach(el => {
                         obj = new Object3D(el)
                         mesh = obj.getMesh()
-                        mesh.traverse(n => { if ( n.isMesh ) {
-                                n.castShadow = true; 
-                                n.receiveShadow = true;
-                                if(n.material.map) n.material.map.anisotropy = 16; 
-                              }});
+                        mesh.traverse(n => {
+                                if (n.isMesh) {
+                                        n.castShadow = true;
+                                        n.receiveShadow = true;
+                                        if (n.material.map) n.material.map.anisotropy = 16;
+                                }
+                        });
                         if (el.ray) {
                                 this.selectionables.add(mesh);
                         } else {
@@ -202,9 +210,9 @@ export class Scene {
                 });
                 this.scene.add(this.selectionables);
                 this.createTitles(this.scene, {
-                        x: 250 - 200 / 2,
-                        y: 250 - 100 / 2,
-                        z: 150 / 2
+                        x: 150,
+                        y: 130,
+                        z: 150 / 2,
                 })
         }
         createTitles(sc, pos) {
@@ -250,22 +258,13 @@ export class Scene {
                 // console.log(s)
                 if (s) {
                         if (s.name == "textShop" && !this.animatedTextShop) {
-                                console.log("Avant :", texteShop.position.y)
                                 this.animatedTextShop = true
-                                
-
-                                for (let index = 0; index < 95; index++) {
-                                        texteShop.position.y -= 3.5
-                                }
-                                for (let index = 0; index < 20; index++) {
-                                        texteShop.position.y += 3       
-                                }
-
-                                console.log("Après :", texteShop.position.y)
+                                texteShop.visible = true
                         }
                 } else {
+                        texteShop.visible = false
                         this.animatedTextShop = false
-                        texteShop.position.y = 250 - 100 / 2
+                        // texteShop.position.y = 250 - 100 / 2
                 }
         }
 
@@ -325,14 +324,10 @@ function makeTextSprite(sc, pos, name, message, parameters) {
         };
 
         var canvas = document.createElement('canvas');
-        canvas.style.width="100%"
-        canvas.style.height="100%"
+        canvas.style.width = "100%"
+        canvas.style.height = "100%"
         var context = canvas.getContext('2d');
         context.font = "Bold " + fontsize + "px " + fontface;
-        console.log(context.font)
-        var metrics = context.measureText(message);
-        var textWidth = metrics.width;
-
         context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
         context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
         context.fillStyle = "rgba(" + textColor.r + ", " + textColor.g + ", " + textColor.b + ", 1.0)";
@@ -355,16 +350,14 @@ function makeTextSprite(sc, pos, name, message, parameters) {
         sc.lightTxt.shadow.mapSize.height = 512; // default
         sc.lightTxt.shadow.camera.near = 0.5; // default
         sc.lightTxt.shadow.camera.far = 700;
-        // sc.helperTxt = new THREE.PointLightHelper(sc.lightTxt);
-        // sc.add(sc.helperTxt);
-        // sc.add(sc.lightTxt);
         sprite.position.x = pos.x
         sprite.position.y = pos.y
         sprite.position.z = pos.z
         texteShop = new THREE.Group()
         texteShop.add(sprite)
         texteShop.add(sc.lightTxt)
-        // texteShop.add(sc.helperTxt)
+        texteShop.visible = false
+        texteShop.name = name
         sc.add(texteShop)
         return texteShop;
 }
