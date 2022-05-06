@@ -66,6 +66,7 @@ module.exports = class Game {
         this.players.forEach((element, i) => {
             if (element.name === player) {
                 delete this.players[i]; // Replace by undefined
+                this.players.splice(this.players.indexOf(undefined), 1);
                 this.playersName.splice(this.playersName.indexOf(player), 1);
                 return true;
             }
