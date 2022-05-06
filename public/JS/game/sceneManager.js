@@ -86,13 +86,13 @@ export class Scene {
         init() {
 
                 this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-                this.camera.position.set(1000, -1000, 500);
+                this.camera.position.set(800, -800, 800);
                 // this.camera.position.set(0, 0, 0);
                 this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+                this.camera.name = "pos1"
 
                 this.scene = new THREE.Scene();
                 this.scene.background = new THREE.Color('black');
-
 
                 /* ---------------------------------- CANVA --------------------------------- */
                 this.renderer = new THREE.WebGLRenderer({
@@ -105,6 +105,7 @@ export class Scene {
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.shadowMap.enabled = true;
                 this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                this.renderer.shadowMapSoft = true;
                 document.body.appendChild(this.renderer.domElement);
 
                 /* --------------------- Setting up the camera controls --------------------- */
@@ -122,33 +123,38 @@ export class Scene {
 
                 this.controls.maxPolarAngle = Math.PI / 2;
 
-                const color = 0xfff6D3;
-                const intensity = 0.4;
+                let color = 0xfff6D3;
+                let intensity = 0.1;
                 this.light = new THREE.DirectionalLight(color, intensity);
-                this.light.position.set(0, 0, 130);
-                // this.light.castShadow = true;
-                this.light.shadow.mapSize.width = 512; // default
-                this.light.shadow.mapSize.height = 512; // default
+                this.light.position.set(0, 0, 100);
+                this.light.castShadow = true;
+                this.light.shadow.mapSize.width = 2048; // default
+                this.light.shadow.mapSize.height = 2048; // default
                 this.light.shadow.camera.near = 0.5; // default
-                this.light.shadow.camera.far = 500;
+                this.light.shadow.camera.far = 1000;
+                // this.light.shadow.autoUpdate=false
                 this.scene.add(this.light);
 
-                this.light = new THREE.PointLight(color, intensity - 0);
+                // color = 0xfff6D3;
+                intensity = 0.9;
+                this.light = new THREE.PointLight(color, intensity, 5000, 2);
                 this.light.position.set(0, 0, 130);
                 this.light.castShadow = true;
                 this.light.shadow.bias = -0.001
+                // this.light.shadow.autoUpdate=false
                 this.light.shadow.mapSize.width = 2048; // default
                 this.light.shadow.mapSize.height = 2048; // default
                 this.light.shadow.camera.near = 0.1;
                 this.light.shadow.camera.far = 500;
+                this.light.shadow.radius=10
+                this.light.decay = 10;
                 this.scene.add(this.light);
 
                 this.helper = new THREE.PointLightHelper(this.light);
                 this.scene.add(this.helper);
 
-                this.ambiantlight = new THREE.AmbientLight(0x505050);
+                this.ambiantlight = new THREE.AmbientLight(0x707070);
                 this.ambiantlight.position.set(0, 0, 130);
-
                 this.scene.add(this.ambiantlight);
 
                 //if window resizes
@@ -174,8 +180,8 @@ export class Scene {
 
         animate() {
                 stats.begin();
-                requestAnimationFrame(this.animate.bind(this));
                 this.render();
+                requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();
                 stats.end();
         }
@@ -183,6 +189,8 @@ export class Scene {
 
         render() {
                 this.renderer.render(this.scene, this.camera);
+                this.light.shadow.autoUpdate = false
+                // this.GroupSprite.shadow.autoUpdate=false
                 this.onMouseOver(this.mousePos, this)
         }
 
@@ -224,6 +232,7 @@ export class Scene {
                         z: 150 / 2,
                 }, "chat", "CHAT")
                 this.scene.add(this.GroupSprite)
+
         }
         createTitles(ctx, sc, pos, name, title) {
                 this.makeTextSprite(ctx, sc, pos, name, title, {
@@ -302,15 +311,24 @@ export class Scene {
                 switch (event.keyCode) {
                         case 49:
                                 // 1 pressed
-                                this.camera.position.set(1000, -1000, 500);
+                                if (this.camera.name != "pos1") {
+                                        this.camera.position.set(800, -800, 800);
+                                        this.camera.name = "pos1"
+                                }
                                 break;
                         case 50:
                                 // 2 pressed
-                                this.camera.position.set(0, -1000, 500);
+                                if (this.camera.name != "pos2") {
+                                        this.camera.position.set(0, -800, 800);
+                                        this.camera.name = "pos2"
+                                }
                                 break;
                         case 51:
                                 // 3 pressed
-                                this.camera.position.set(-1000, -1000, 500);
+                                if (this.camera.name != "pos3") {
+                                        this.camera.name = "pos3"
+                                        this.camera.position.set(-800, -800, 800);
+                                }
                                 break;
                 }
         }
@@ -361,7 +379,7 @@ export class Scene {
                 const intensity = 0.2;
                 sc.lightTxt = new THREE.PointLight(color, intensity);
                 sc.lightTxt.position.set(pos.x, pos.y, pos.z);
-                sc.lightTxt.castShadow = true;
+                // sc.lightTxt.castShadow = true;
                 sc.lightTxt.shadow.mapSize.width = 2048; // default
                 sc.lightTxt.shadow.mapSize.height = 2048; // default
                 sc.lightTxt.shadow.camera.near = 0.1; // default
