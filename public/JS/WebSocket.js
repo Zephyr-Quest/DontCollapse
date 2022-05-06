@@ -15,8 +15,36 @@ const WebSocket = (function () {
             console.log("start authorized");
             beginingGame();
         },
-        'new-message': (user, index, msg) => {
-            console.log("new message", user, index, msg);
+        'new-message': (user, msg) => {
+            const index = connectedPlayers.indexOf(user);
+
+            let item2 = document.createElement('div');
+            item2.classList.add(user === username ? "sender" : "receiver")
+            item2.classList.add("message")
+            item2.innerText = msg;
+            messages.appendChild(item2);
+            let item = document.createElement('div');
+            item.classList.add(user === username ? "sender" : "receiver")
+            item.classList.add("username")
+
+            switch (index) {
+                case 0:
+                    item.classList.add("host");
+                    break;
+                case 1:
+                    item.classList.add("J1");
+                    break;
+                case 2:
+                    item.classList.add("J2");
+                    break;
+                case 3:
+                    item.classList.add("J3");
+                    break;
+                default:
+                    break;
+            }
+            item.innerText = user;
+            messages.appendChild(item);
         }
     };
 
@@ -25,6 +53,7 @@ const WebSocket = (function () {
 
     /* -------------------------------- Variables ------------------------------- */
     let connectedPlayers = [];
+    const username = document.getElementById("username").value;
     /* -------------------- Variables for functions listeners ------------------- */
     let deleteEvent;
     let startGame;
@@ -50,7 +79,6 @@ const WebSocket = (function () {
 
             if (user === connectedPlayers[0]) {
                 if (posBtnGame.style.display !== "block") {
-                    console.log(posBtnGame.getAttribute("style"));
                     posBtnGame.style.display = "block";
                     posBtnGame.addEventListener("click", startGame);
                 }
