@@ -1,7 +1,47 @@
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    100% {
+        opacity: 0;
+    }
+
+    0% {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slide-right {
+    0% {
+        transform: translateX(-20%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+
+}
+
 html,
 body {
     height: 100%;
-
 }
 
 body {
@@ -11,6 +51,7 @@ body {
     margin: 0;
     padding: 0;
 
+    overflow: hidden;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -63,39 +104,12 @@ body {
     border-radius: 10%;
     cursor: pointer;
 
-    &[open] {
-        animation: slide-up 100ms forwards, fade-in 250ms forwards;
-
-        &::backdrop {
-            animation: fade-in 250ms forwards;
-        }
-    }
 }
 
 
 /* -------------------------------------------------------------------------- */
 /*                                    Modals                                  */
 /* -------------------------------------------------------------------------- */
-#shop-modal {
-    height: 700px;
-    width: 1200px;
-
-    .modal-content {
-        text-align: center;
-    }
-}
-
-#chat-modal {
-    height: 700px;
-    width: 300px;
-    max-width: 700px;
-    margin-left: 20px;
-
-    #title-modal{
-        margin: 0;
-    }
-
-}
 
 .modal {
     padding: 0;
@@ -104,16 +118,54 @@ body {
         height: 100%;
         padding-left: 1rem;
         padding-right: 1rem;
-    }
 
-    #title-modal {
-        margin-top: 0;
-        padding: 1rem;
+        .top-modal {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            ;
+            display: flex;
+            justify-content: space-between;
+
+            .title-modal {
+                margin: 0;
+                padding-left: 0;
+                padding-right: 0;
+                // padding: 1rem;
+            }
+
+            .close-button {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: 1000;
+
+                &:hover {
+                    color: #faa200;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            }
+        }
+
     }
 
     &::backdrop {
         background: rgba(0, 0, 0, 0.6);
 
+    }
+
+    &#shop-modal[open] {
+        animation: slide-up 100ms forwards, fade-in 250ms forwards;
+
+    }
+
+    &#chat-modal[open] {
+        animation: slide-right 100ms forwards, fade-in 250ms forwards;
+
+    }
+
+    &::backdrop {
+        animation: fade-in 250ms forwards;
     }
 
     &[closing] {
@@ -128,195 +180,213 @@ body {
     }
 }
 
-
-
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes fade-out {
-    100% {
-        opacity: 0;
-    }
-
-    0% {
-        opacity: 1;
-    }
-}
-
-@keyframes slide-up {
-    0% {
-        transform: translateY(100%);
-    }
-
-    100% {
-        transform: translateY(0%);
-    }
-}
-
-@keyframes slide-right {
-    0% {
-        transform: translateX(0%);
-    }
-
-    100% {
-        transform: translateX(110%);
-    }
-}
-
-
 .selected {
     background-color: red;
 }
 
+
+
+
+
 /* -------------------------------------------------------------------------- */
 /*                                Close Button                                */
 /* -------------------------------------------------------------------------- */
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: 1000;
-
-    &:hover {
-        color: #faa200;
-        text-decoration: none;
-        cursor: pointer;
-    }
-}
 
 
 
 /* -------------------------------------------------------------------------- */
 /*                                    Shop                                    */
 /* -------------------------------------------------------------------------- */
+#shop-modal {
+    height: 700px;
+    width: 1200px;
 
-#shop {
-    display: grid;
-    grid-template-columns: 2fr 2fr 1fr;
-    //grid-template-rows: 30px 3fr;
-    grid-auto-rows: minmax(30px, auto);
+    overflow: hidden;
 
-    .rubric {
-        border: solid 2px black;
-    }
+    .modal-content {
+        text-align: center;
 
-    // .clickable {
-    //     align-items: center;
-    // }
+        #shop {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr;
+            //grid-template-rows: 30px 3fr;
+            grid-auto-rows: minmax(30px, auto);
 
-    .clickable:hover:not(.selected) {
-        color: #faa200;
-        background-color: rgba(51, 255, 0, 0.2);
-        text-decoration: none;
-        cursor: pointer;
-    }
+            .rubric {
+                border: solid 2px black;
+            }
+
+            // .clickable {
+            //     align-items: center;
+            // }
+
+            .clickable:hover:not(.selected) {
+                color: #faa200;
+                background-color: rgba(51, 255, 0, 0.2);
+                text-decoration: none;
+                cursor: pointer;
+            }
 
 
-    #main-title {
-        grid-column: 1/2;
-        grid-row: 1/2;
-        border-bottom: none;
+            #main-title {
+                grid-column: 1/2;
+                grid-row: 1/2;
+                border-bottom: none;
 
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        align-items: center;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                align-items: center;
 
-        .clickable {
-            padding: 5%;
+                .clickable {
+                    padding: 5%;
+                }
+            }
+
+            #supplier {
+                grid-column: 3/4;
+                grid-row: 2/3;
+
+                display: grid;
+                grid-template-columns: 4fr;
+
+                .clickable {
+                    padding: 12.5%;
+                }
+
+            }
+
+            #left-page {
+                grid-column: 1/2;
+                grid-row: 2/3;
+
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+
+            }
+
+            #right-page {
+                grid-column: 2/3;
+                grid-row: 2/3;
+
+                border-left: none;
+                border-right: none;
+
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+
+            }
+
+            #left-page div,
+            #right-page div {
+                margin: 1rem;
+                // height: 8rem;
+                border: dashed 2px black;
+            }
         }
-    }
-
-    #supplier {
-        grid-column: 3/4;
-        grid-row: 2/3;
-
-        display: grid;
-        grid-template-columns: 4fr;
-
-        .clickable {
-            padding: 12.5%;
-        }
-
-    }
-
-    #left-page {
-        grid-column: 1/2;
-        grid-row: 2/3;
-
-        display: grid;
-        grid-template-rows: 1fr 1fr;
-
-    }
-
-    #right-page {
-        grid-column: 2/3;
-        grid-row: 2/3;
-
-        border-left: none;
-        border-right: none;
-
-        display: grid;
-        grid-template-rows: 1fr 1fr;
-
-    }
-
-    #left-page div,
-    #right-page div {
-        margin: 1rem;
-        // height: 8rem;
-        border: dashed 2px black;
     }
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                    Chat                                    */
 /* -------------------------------------------------------------------------- */
+#chat-modal {
+    height: 700px;
+    width: 300px;
+    max-width: 700px;
+    margin-left: 20px;
 
-#messages {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    display: flex;
-    flex-direction: column-reverse;
-    .sender {
-        display: grid;
-        justify-content: right;
-    }
+    overflow-y: auto;
 
-    .receiver {
-        display: grid;
-        justify-content: left;
-    }
+    // .title-modal {
+    //     margin: 0;
+    //     padding-left: 0;
+    //     padding-right: 0;
+    // }
 
-    .username {
-        font-size: small;
-    }
-
-    .host {
-        color: red;
-    }
-
-    .J1 {
-        color: rgb(0, 255, 0);
-    }
-
-    .J2 {
-        color: rgb(225, 0, 255);
-    }
-
-    .J3 {
-        color: blue;
-    }
-
-    #chatForm{
+    #chatForm {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+
+        input {
+            border-radius: 8px;
+            height: 2em;
+            width: 75%;
+        }
+
+        button {
+            border-radius: 8px;
+        }
     }
 
+    #messages {
+        padding-top: 20px;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column-reverse;
+
+        .sender {
+            display: grid;
+            justify-content: right;
+        }
+
+        .receiver {
+            display: grid;
+            justify-content: left;
+        }
+
+        .username {
+            font-size: small;
+        }
+
+        .host {
+            color: red;
+        }
+
+        .J1 {
+            color: rgb(0, 255, 0);
+        }
+
+        .J2 {
+            color: rgb(225, 0, 255);
+        }
+
+        .J3 {
+            color: blue;
+        }
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 Parameters                                 */
+/* -------------------------------------------------------------------------- */
+#parameters {
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+    padding: 1em;
+
+    .fa-volume-off,
+    .fa-volume-up {
+        grid-column: 2/3;
+        grid-row: 1/2;
+    }
+
+    .fa-sign-out {
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+
+    .fa-cogs {
+        grid-column: 2/3;
+        grid-row: 2/3;
+    }
+
+    i {
+        font-size: 3em;
+    }
 }

@@ -17,32 +17,26 @@ const WebSocket = (function () {
         },
         'new-message': (user, msg) => {
             const index = connectedPlayers.indexOf(user);
+            const names ={
+                0:"host",
+                1:"J1",
+                2:"J2",
+                3:"j3"
+            }
 
             let item2 = document.createElement('div');
             item2.classList.add(user === username ? "sender" : "receiver")
             item2.classList.add("message")
             item2.innerText = msg;
             messages.appendChild(item2);
+
             let item = document.createElement('div');
             item.classList.add(user === username ? "sender" : "receiver")
             item.classList.add("username")
 
-            switch (index) {
-                case 0:
-                    item.classList.add("host");
-                    break;
-                case 1:
-                    item.classList.add("J1");
-                    break;
-                case 2:
-                    item.classList.add("J2");
-                    break;
-                case 3:
-                    item.classList.add("J3");
-                    break;
-                default:
-                    break;
-            }
+            let name = names[index]
+            item.classList.add(name)
+            
             item.innerText = user;
             messages.appendChild(item);
         }

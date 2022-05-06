@@ -1,6 +1,7 @@
 import ProgressBar from './progressBar.js';
 import Modal from './shopModal.js';
 import Chat from './chatModal.js'
+import Parameter from './parameter.js'
 
 
 
@@ -25,4 +26,5 @@ const update = () => {
 
 Modal.initListener();
 Chat.initListener();
+Parameter.initListener();
 
