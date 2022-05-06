@@ -1,7 +1,8 @@
 // Tableau d'objet
 // Représente l'ensemble des éléments de la scène au démarrage de la page
-const wallColor = "#909090"
-const floorColor = "#C4C4C4"
+const wallColor = "#7a7886"
+const floorColor = "#BBBBBB"
+const floorDark="#787878"
 export const ObjectArray = [
         /* ---------------------------------- FLOOR --------------------------------- */
         {
@@ -25,7 +26,7 @@ export const ObjectArray = [
                 z: 1,
                 length: 200,
                 width: 330,
-                color: "#808080",
+                color: floorDark,
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
@@ -38,27 +39,64 @@ export const ObjectArray = [
                 z: 1,
                 length: 70,
                 width: 200,
-                color: "#808080",
+                color: floorDark,
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
                 ray: false,
         },
-
-        /* --------------------------------- PLAFOND -------------------------------- */
-        // {
-        //         type: "wall",
-        //         x: 0,
-        //         y: 0,
-        //         z: 150,
-        //         length: 500,
-        //         width: 500,
-        //         color: wallColor,
-        //         rotx: 0,
-        //         roty: 180,
-        //         rotz: 0,
-        //         ray: false,
-        // },
+        {
+                type: "floor",
+                x: 0,
+                y: -70,
+                z: 0.5,
+                length: 210,
+                width: 340,
+                color: "white",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "floor",
+                x: 65,
+                y: 65,
+                z: 0.5,
+                length: 80,
+                width: 210,
+                color: "white",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "floor",
+                x: -250+85,
+                y: 250-85,
+                z: 1,
+                length: 170,
+                width: 170,
+                color: floorDark,
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "floor",
+                x: -250+88,
+                y: 250-88,
+                z: 0.5,
+                length: 175,
+                width: 175,
+                color: "white",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: false,
+        },
 
         /* ---------------------------------- WALL ---------------------------------- */
         {
