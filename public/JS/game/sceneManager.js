@@ -122,33 +122,37 @@ export class Scene {
 
                 this.controls.maxPolarAngle = Math.PI / 2;
 
-                const color = 0xfff6D3;
-                const intensity = 0.4;
+                let color = 0xfff6D3;
+                let intensity = 0.1;
                 this.light = new THREE.DirectionalLight(color, intensity);
-                this.light.position.set(0, 0, 130);
-                // this.light.castShadow = true;
+                this.light.position.set(0, 0, 100);
+                this.light.castShadow = true;
                 this.light.shadow.mapSize.width = 512; // default
                 this.light.shadow.mapSize.height = 512; // default
                 this.light.shadow.camera.near = 0.5; // default
-                this.light.shadow.camera.far = 500;
+                this.light.shadow.camera.far = 1000;
+                // this.light.shadow.autoUpdate=false
                 this.scene.add(this.light);
 
-                this.light = new THREE.PointLight(color, intensity - 0);
+                // color = 0xfff6D3;
+                intensity = 0.9;
+                this.light = new THREE.PointLight(color, intensity,5000,2);
                 this.light.position.set(0, 0, 130);
                 this.light.castShadow = true;
                 this.light.shadow.bias = -0.001
+                // this.light.shadow.autoUpdate=false
                 this.light.shadow.mapSize.width = 2048; // default
                 this.light.shadow.mapSize.height = 2048; // default
                 this.light.shadow.camera.near = 0.1;
                 this.light.shadow.camera.far = 500;
+                this.light.decay = 10;
                 this.scene.add(this.light);
 
                 this.helper = new THREE.PointLightHelper(this.light);
                 this.scene.add(this.helper);
 
-                this.ambiantlight = new THREE.AmbientLight(0x505050);
+                this.ambiantlight = new THREE.AmbientLight(0x707070);
                 this.ambiantlight.position.set(0, 0, 130);
-
                 this.scene.add(this.ambiantlight);
 
                 //if window resizes
@@ -174,8 +178,8 @@ export class Scene {
 
         animate() {
                 stats.begin();
-                requestAnimationFrame(this.animate.bind(this));
                 this.render();
+                requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();
                 stats.end();
         }
@@ -183,6 +187,7 @@ export class Scene {
 
         render() {
                 this.renderer.render(this.scene, this.camera);
+                this.light.shadow.autoUpdate=false
                 this.onMouseOver(this.mousePos, this)
         }
 

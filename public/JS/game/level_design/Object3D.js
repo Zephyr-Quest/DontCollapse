@@ -74,6 +74,16 @@ export class Object3D extends Locatable {
                                         opacity: this.transp
                                 })
                         }
+                        if (this.type == "pillar") {
+                                this.geometry = new THREE.BoxGeometry(this.length, this.width, this.heigth)
+                                this.material = new THREE.MeshStandardMaterial({
+                                        side: THREE.DoubleSide,
+                                        color: this.color,
+                                        opacity: this.transp,
+                                        metalness:0.3,
+                                        roughness:0.5
+                                })
+                        }
                         this.mesh = new THREE.Mesh(this.geometry, this.material);
                 }
                 this.mesh.name=this.name

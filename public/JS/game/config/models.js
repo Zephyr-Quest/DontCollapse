@@ -62,5 +62,13 @@ export const Models = {
                 isModel: true,
                 instance: null,
                 rotation: [90, 0, 0]
+        },
+        pillar: {
+                name: "pillar",
+                model: null,
+                scale: 1,
+                isModel: false,
+                instance: null,
+                rotation: [0, 0, 0]
         }
 }
