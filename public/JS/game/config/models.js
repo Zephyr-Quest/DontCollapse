@@ -79,6 +79,22 @@ export const Models = {
                 instance: null,
                 rotation: [0, 0, 0]
         },
+        precision: {
+                name: "precision",
+                model: "accuracy1.glb",
+                scale:20,
+                isModel: true,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        shelf: {
+                name: "shelf",
+                model: "shelf.glb",
+                scale:.6,
+                isModel: true,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
         pillar: {
                 name: "pillar",
                 model: null,
