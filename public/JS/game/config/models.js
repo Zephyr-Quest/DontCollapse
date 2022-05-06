@@ -95,10 +95,10 @@ export const Models = {
                 instance: null,
                 rotation: [90, 0, 0]
         },
-        shelf: {
-                name: "shelf",
-                model: "shelf.glb",
-                scale:.6,
+        metallocker: {
+                name: "metallocker",
+                model: "metallocker.glb",
+                scale:11,
                 isModel: true,
                 instance: null,
                 rotation: [90, 0, 0]
