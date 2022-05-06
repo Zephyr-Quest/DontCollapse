@@ -978,7 +978,7 @@ export const ObjectArray = [
                 heigth: 100,
                 x: -130,
                 y: -55,
-                z: 17.5,
+                z: 22,
                 color: "#AD3C25",
                 rotx: 0,
                 roty: -90,
