@@ -103,6 +103,14 @@ export const Models = {
                 instance: null,
                 rotation: [90, 0, 0]
         },
+        ladder: {
+                name: "ladder",
+                model: "ladder.glb",
+                scale:.25,
+                isModel: true,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
         pillar: {
                 name: "pillar",
                 model: null,

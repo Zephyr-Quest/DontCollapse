@@ -1030,4 +1030,20 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
+
+        /* --------------------------------- LADDER --------------------------------- */
+        {
+                type: "ladder",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -210,
+                y: 80,
+                z: .1,
+                color: "#DFDFDF",
+                rotx: 0,
+                roty: 0,
+                rotz: 1800,
+                ray: false,
+        },
 ]
