@@ -11,9 +11,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="JS/http.js" type="text/javascript"></script>
 
-    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">s -->
-    <script src="https://kit.fontawesome.com/b89837f3ad.js" crossorigin="anonymous"></script>
-
+    <script src="https://kit.fontawesome.com/f588d3df13.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/CSS/hud.css">
 
@@ -402,10 +400,10 @@
                     </div>
                 </div>
             </div>
-            <dialog id="confirm-modal">
-                <p>Voulez vous acheter un <span id="buying"></span></p>
-                <button id="oui-button">Oui</button>
-                <button id="non-button">Non</button>
+            <dialog id="confirm-buy">
+                <p>Voulez vous vraiment vous déconnecter ?</p>
+                <button class="oui-button">Oui</button>
+                <button class="non-button">Non</button>
             </dialog>
         </dialog>
 
@@ -427,10 +425,18 @@
     </dialog>
 
     <div id="parameters">
-        <i class="fa fa-cogs" aria-hidden="true"></i>
-        <i class="param-content fa fa-volume-up" aria-hidden="true" style="display:none;"></i>
-        <i class="param-content fa fa-volume-off" aria-hidden="true" style="display:none;"></i>
-        <i class="param-content fa fa-sign-out" aria-hidden="true" style="display:none;"></i>
+        <i class="param-content fa-solid fa-volume-high" style="display:none;"></i>
+        <i class="param-content fa-sofa-sign-outlid fa-volume-xmark" style="display:none;"></i>
+        <i class="param-content fa-solid fa-music" style="display:none;"></i>
+        <i class="param-content fa-solid fa-music-slash" style="display:none;"></i>
+        <i class="param-content fa-solid fa-right-from-bracket" style="display:none;"></i>
+        <i class="fa-solid fa-gears"></i>
+        <!-- <dialog id="confirm-disconnect">
+            <p>Voulez vous acheter un <span id="buying"></span></p>
+            <button class="oui-button">Oui</button>
+            <button class="non-button">Non</button>
+
+        </dialog> -->
     </div>
 
     <!-- ------------------------------- Script -------------------------------- -->

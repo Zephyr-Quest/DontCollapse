@@ -262,23 +262,28 @@ body {
   position: fixed;
   bottom: 2em;
   right: 2em;
+  padding: 1em;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   column-gap: 20px;
   row-gap: 20px;
-  padding: 1em;
 }
-#parameters .fa-volume-off,
-#parameters .fa-volume-up {
+#parameters .fa-volume-high,
+#parameters .fa-volume-xmark {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+#parameters .fa-music,
+#parameters .fa-music-slash {
   grid-column: 2/3;
   grid-row: 1/2;
 }
-#parameters .fa-sign-out {
+#parameters .fa-right-from-bracket {
   grid-column: 1/2;
   grid-row: 2/3;
 }
-#parameters .fa-cogs {
+#parameters .fa-gears {
   grid-column: 2/3;
   grid-row: 2/3;
 }

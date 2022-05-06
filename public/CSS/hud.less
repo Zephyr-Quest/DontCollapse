@@ -363,28 +363,35 @@ body {
     position: fixed;
     bottom: 2em;
     right: 2em;
+    padding: 1em;
+
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     column-gap: 20px;
     row-gap: 20px;
-    padding: 1em;
-
-    .fa-volume-off,
-    .fa-volume-up {
+    
+    .fa-volume-high,
+    .fa-volume-xmark {
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+    .fa-music,
+    .fa-music-slash {
         grid-column: 2/3;
         grid-row: 1/2;
     }
 
-    .fa-sign-out {
+    .fa-right-from-bracket {
         grid-column: 1/2;
         grid-row: 2/3;
     }
 
-    .fa-cogs {
+    .fa-gears {
         grid-column: 2/3;
         grid-row: 2/3;
     }
+
 
     i {
         font-size: 3em;

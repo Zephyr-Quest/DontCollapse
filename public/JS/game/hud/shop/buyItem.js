@@ -1,7 +1,7 @@
 import CloseModal from '../shopModal.js'
-const modal = document.getElementById('confirm-modal');
-const oui = document.getElementById('oui-button');
-const non = document.getElementById('non-button');
+const modal = document.getElementById('confirm-buy');
+const oui = document.getElementsByClassName('oui-button')[0];
+const non = document.getElementsByClassName('non-button')[0];
 
 let item = ""
 
