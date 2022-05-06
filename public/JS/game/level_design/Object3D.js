@@ -48,7 +48,6 @@ export class Object3D extends Locatable {
                         this.mesh.rotation.x = Models[this.type].rotation[0] * Math.PI / 180;
                         this.mesh.rotation.y = Models[this.type].rotation[1] * Math.PI / 180;
                         this.mesh.rotation.z = Models[this.type].rotation[2] * Math.PI / 180;
-                        this.mesh.cast
                 } else {
                         if (this.type == "wall") {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);

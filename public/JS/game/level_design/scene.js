@@ -3,7 +3,7 @@
 const wallColor = "#909090"
 const floorColor = "#C4C4C4"
 export const ObjectArray = [
-        // SOL
+        /* ---------------------------------- FLOOR --------------------------------- */
         {
                 type: "floor",
                 x: 0,
@@ -45,22 +45,22 @@ export const ObjectArray = [
                 ray: false,
         },
 
-        // PLAFOND
-        {
-                type: "wall",
-                x: 0,
-                y: 0,
-                z: 150,
-                length: 500,
-                width: 500,
-                color: wallColor,
-                rotx: 0,
-                roty: 180,
-                rotz: 0,
-                ray: false,
-        },
+        /* --------------------------------- PLAFOND -------------------------------- */
+        // {
+        //         type: "wall",
+        //         x: 0,
+        //         y: 0,
+        //         z: 150,
+        //         length: 500,
+        //         width: 500,
+        //         color: wallColor,
+        //         rotx: 0,
+        //         roty: 180,
+        //         rotz: 0,
+        //         ray: false,
+        // },
 
-        // MUR DEVANT DROITE
+        /* ---------------------------------- WALL ---------------------------------- */
         {
                 type: "wall",
                 x: 250,
@@ -74,8 +74,6 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-
-        // MUR BOUT GAUCHE
         {
                 type: "wall",
                 x: -250,
@@ -89,8 +87,6 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-
-        // MUR BOUT DROIT
         {
                 type: "wall",
                 x: 0,
@@ -104,8 +100,6 @@ export const ObjectArray = [
                 rotz: 90,
                 ray: false,
         },
-
-        // MUR DEVANT GAUCHE
         {
                 type: "wall",
                 x: 0,
@@ -119,7 +113,7 @@ export const ObjectArray = [
                 rotz: -90,
                 ray: false,
         },
-        // CUBE BUREAU
+        /* ------------------------------- CUBE BUREAU ------------------------------ */
         {
                 type: "cube",
                 length: 200,
@@ -134,9 +128,9 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: true,
                 transparency: 1,
-                name: "textShop"
+                name: "Shop"
         },
-        // CUBE
+        /* ---------------------------------- CUBE ---------------------------------- */
         {
                 type: "cube",
                 length: 80,
@@ -151,7 +145,6 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        // CUBE
         {
                 type: "cube",
                 length: 40,
@@ -166,7 +159,6 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        // CUBE
         {
                 type: "cube",
                 length: 40,
@@ -181,8 +173,23 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
+        {
+                type: "cube",
+                length: 150,
+                width: 150,
+                heigth: 150,
+                x: -175,
+                y: 175,
+                z: 75,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: true,
+                name:"Chat"
+        },
 
-        // desk
+        /* --------------------------------- BUREAU --------------------------------- */
         {
                 type: "desk",
                 length: 100,
@@ -197,7 +204,6 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        // desk
         {
                 type: "desk",
                 length: 100,
@@ -212,7 +218,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        // welding
+        /* ----------------------------- POSTE À SOUDER ----------------------------- */
         {
                 type: "welding",
                 length: 100,
@@ -227,7 +233,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        // palette
+        /* -------------------------------- PALETTES -------------------------------- */
         {
                 type: "pallet",
                 length: 100,
@@ -241,7 +247,7 @@ export const ObjectArray = [
                 roty: 90,
                 rotz: 0,
                 ray: false,
-        }, // palette
+        },
         {
                 type: "pallet",
                 length: 100,
@@ -255,7 +261,7 @@ export const ObjectArray = [
                 roty: 95,
                 rotz: 0,
                 ray: false,
-        }, // palette
+        },
         {
                 type: "pallet",
                 length: 100,
@@ -283,7 +289,7 @@ export const ObjectArray = [
                 roty: 92,
                 rotz: 0,
                 ray: false,
-        },{
+        }, {
                 type: "pallet",
                 length: 100,
                 width: 100,
@@ -296,7 +302,7 @@ export const ObjectArray = [
                 roty: 88,
                 rotz: 0,
                 ray: false,
-        },{
+        }, {
                 type: "pallet",
                 length: 100,
                 width: 100,
@@ -309,7 +315,7 @@ export const ObjectArray = [
                 roty: 93,
                 rotz: 0,
                 ray: false,
-        },{
+        }, {
                 type: "pallet",
                 length: 100,
                 width: 100,
@@ -322,7 +328,7 @@ export const ObjectArray = [
                 roty: 85,
                 rotz: 0,
                 ray: false,
-        },{
+        }, {
                 type: "pallet",
                 length: 100,
                 width: 100,
@@ -335,7 +341,7 @@ export const ObjectArray = [
                 roty: 95,
                 rotz: 0,
                 ray: false,
-        },{
+        }, {
                 type: "pallet",
                 length: 100,
                 width: 100,
@@ -348,7 +354,7 @@ export const ObjectArray = [
                 roty: 0,
                 rotz: 0,
                 ray: false,
-        },{
+        }, {
                 type: "pallet",
                 length: 100,
                 width: 100,
@@ -361,7 +367,7 @@ export const ObjectArray = [
                 roty: 5,
                 rotz: 0,
                 ray: false,
-        },{
+        }, {
                 type: "pallet",
                 length: 100,
                 width: 100,
@@ -372,6 +378,134 @@ export const ObjectArray = [
                 color: "red",
                 rotx: 0,
                 roty: -10,
+                rotz: 0,
+                ray: false,
+        },
+        /* ------------------------------- BOX CLOSED ------------------------------- */
+        {
+                type: "closed_box",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -25,
+                y: 0,
+                z:1,
+                color: "red",
+                rotx: 0,
+                roty: 98,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "closed_box",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 50,
+                y: 75,
+                z:7,
+                color: "red",
+                rotx: 0,
+                roty: 90,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "closed_box",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 75,
+                y: 75,
+                z:7,
+                color: "red",
+                rotx: 0,
+                roty: 110,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "closed_box",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 230,
+                y: -160,
+                z:1,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "closed_box",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 200,
+                y: -160,
+                z:1,
+                color: "red",
+                rotx: 0,
+                roty: 10,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "closed_box",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 235,
+                y: -140,
+                z:1,
+                color: "red",
+                rotx: 0,
+                roty: 5,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "closed_box",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 205,
+                y: -135,
+                z:1,
+                color: "red",
+                rotx: 0,
+                roty: -15,
+                rotz: 0,
+                ray: false,
+        },
+        /* ------------------------------- OPENED BOX ------------------------------- */
+        {
+                type: "opened_box",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 70,
+                y: 45,
+                z:8,
+                color: "red",
+                rotx: 0,
+                roty: -15,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "opened_box",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 225,
+                y: -145,
+                z:18,
+                color: "red",
+                rotx: 0,
+                roty: -15,
                 rotz: 0,
                 ray: false,
         },
