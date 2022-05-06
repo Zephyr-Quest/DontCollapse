@@ -274,8 +274,8 @@ export const ObjectArray = [
                 name: "Shop"
         },
         /* ---------------------------------- CUBE ---------------------------------- */
-        
-        
+
+
         {
                 type: "cube",
                 length: 150,
@@ -1012,6 +1012,21 @@ export const ObjectArray = [
                 color: "#AD3C25",
                 rotx: 0,
                 roty: -90,
+                rotz: 0,
+                ray: false,
+        },
+        /* ------------------------------ METAL LOCKER ------------------------------ */
+        {
+                type: "metallocker",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 0,
+                y: 0,
+                z: .3,
+                color: "#AD3C25",
+                rotx: 0,
+                roty: 0,
                 rotz: 0,
                 ray: false,
         },
