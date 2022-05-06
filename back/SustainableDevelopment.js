@@ -5,7 +5,7 @@ module.exports = class SustainableDevelopment {
         this.economic = 0;
         this.ecologic = 0;
         this.social = 0;
-    };
+    }
 
     /**
      * update the sustainable development
@@ -23,7 +23,7 @@ module.exports = class SustainableDevelopment {
     }
 
     machineCalculation(level) {
-        return Math.min(Math.max((5 * level ^ 4) / 24 - 1.25 * level ^ 3 + (55 * level ^ 2) / 24 + 1.25 * level, 0), 15)
+        return Math.min(Math.max((5 * level ^ 4) / 24 - 1.25 * level ^ 3 + (55 * level ^ 2) / 24 + 1.25 * level, 0), 15);
     }
 
     /**
@@ -36,6 +36,10 @@ module.exports = class SustainableDevelopment {
      * @returns ratio
      */
     socialCalculation(employees, maintainers, cleaners, supervisors, engineers) {
-        return Math.max(Math.min((maintainers / employees + engineers / employees + cleaners / employees + supervisors / employees) * 100, 100), 0)
+        return Math.max(Math.min((maintainers / employees + engineers / employees + cleaners / employees + supervisors / employees) * 100, 100), 0);
     }
-}
+
+    isFinished() {
+        return this.global === 100;
+    }
+};

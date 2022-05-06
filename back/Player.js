@@ -1,5 +1,5 @@
-const SustainableDevelopment = require("./SustainableDevelopment")
-const machines = require('./config.json');
+const SustainableDevelopment = require("./SustainableDevelopment");
+const machines = require("./config.json");
 
 // const machines = {
 //     0: {
@@ -79,14 +79,14 @@ const furnishers = {
             4: 4000
         }
     }
-}
+};
 
 module.exports = class Player {
     constructor(name) {
         this.name = name;
         this.money = 5000;
         this.sd = new SustainableDevelopment();
-        this.machines = [{ level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }] // machines level
+        this.machines = [{ level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }]; // machines level
         this.furnishers = [1, 1, 1, 1];
         this.expenses = 0;
         this.employees = {
@@ -107,7 +107,7 @@ module.exports = class Player {
 
     sdUpdate() {
         // ecologic
-        let ecologic = 0
+        let ecologic = 0;
 
         // machine
         this.machines.forEach(machine => {
@@ -120,14 +120,13 @@ module.exports = class Player {
         });
 
         // economic
-        let economic = Math.max(((this.money - this.expenses) / this.money) * 100, 0)
+        let economic = Math.max(((this.money - this.expenses) / this.money) * 100, 0);
 
         // social
 
         let social = this.sd.socialCalculation(this.employees.number, this.employees.maintainers.length,
             this.employees.cleaners.length, this.employees.supervisors.length,
-            this.employees.engineers.length)
-
+            this.employees.engineers.length);
         this.sd.updateOverall(economic, ecologic, social);
 
     }
@@ -136,11 +135,21 @@ module.exports = class Player {
         return true;
     }
 
-    machineUpgrade(machine, level, secondHand) {
+    machineUpgrade(machine, level) {
         if (this.machines[machine].level < level && this.asEnoughMoney(machines[machine].price[level])) {
             this.money -= machines[machine].price[level];
             this.machines[machine].level = level;
-            this.machines[machine].secondHand = secondHand;
+            this.machines[machine].secondHand = false;
+            this.sdUpdate();
+            return true;
+        }
+        return false;
+    }
+    machineUpgradeSecondhand(machine, level, price) {
+        if (this.machines[machine].level < level && this.asEnoughMoney(price)) {
+            this.money -= price;
+            this.machines[machine].level = level;
+            this.machines[machine].secondHand = true;
             this.sdUpdate();
             return true;
         }
@@ -148,7 +157,7 @@ module.exports = class Player {
     }
 
     generateExpenses() {
-        let expenses = 0
+        let expenses = 0;
         this.furnishers.forEach((element, index) => {
             expenses += furnishers[index].price[element];
         });
@@ -166,15 +175,19 @@ module.exports = class Player {
         return false;
     }
 
+    isFinished () {
+        if (this.machines === [4,4,4,4] && this.sd.isFinished()) {
+            return true;
+        }
+        return false;   
+    }
+
     updateAll() {
         this.sdUpdate();
         // Expenses
         this.money -= this.expenses;
         this.generateExpenses();
     }
-}
+};
 
-// Test
-
-let damien = new Player("Damien");
 
