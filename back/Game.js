@@ -7,6 +7,7 @@ module.exports = class Game {
     }
 
     addPlayer(player) {
+        console.log("--- new player join ---");
         if(this.players.length < 4 && player ) {
             this.players.push(new Player(player));
         }
@@ -57,6 +58,7 @@ module.exports = class Game {
     }
 
     removePlayer(player) {
+        console.log("--- player", player, "quit ---");
         this.players.forEach((element, i) => {
             if (element.name === player) {
                 delete this.players[i]; // Replace by undefined

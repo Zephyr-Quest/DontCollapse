@@ -7,6 +7,8 @@ const sharedsession = require('express-socket.io-session');
 const ejs = require('ejs');
 const path = require('path');
 
+const manageUser = require("./back/manageUser.js");
+
 const {
     body,
     validationResult
@@ -210,6 +212,7 @@ io.on('connection', socket => {
         console.log(allRooms[idRoom], "\n");
         if (idRoom !== undefined) {
             socket.join(idRoom);
+            manageUser.connect(username);
             io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
         }
     } else console.log('a user connected');
@@ -235,6 +238,7 @@ io.on('connection', socket => {
         socket.leave(idRoom);
         console.log("disconnect", username, "from room", idRoom);
         disconnectingUsers.splice(disconnectingUsers.indexOf(username), 1);
+        manageUser.disconnect(username);
         idRoom = username = undefined;
         socket.handshake.session.idRoom = undefined;
         socket.handshake.session.username = undefined;
