@@ -1,15 +1,19 @@
 const Player = require("./Player");
 
 module.exports = class Game {
-    constructor() {
+    constructor(id, host) {
         this.players = [];
+        this.playersName = [];
         this.shop = [];
+        this.idRoom = id;
+        this.host = host;
     }
 
     addPlayer(player) {
         console.log("--- new player join ---");
-        if(this.players.length < 4 && player ) {
+        if (this.players.length < 4 && player) {
             this.players.push(new Player(player));
+            this.playersName.push(player);
         }
     }
 
@@ -46,8 +50,8 @@ module.exports = class Game {
 
     buySecondhandItem(buyer, seller) {
         let machine = this.checkPlayerItem(seller);
-        if (this.searchPlayer(buyer) != false ) {
-            this.searchPlayer(buyer).machineUpgradeSecondhand(parseInt(machine.machine),machine.level,machine.price);
+        if (this.searchPlayer(buyer) != false) {
+            this.searchPlayer(buyer).machineUpgradeSecondhand(parseInt(machine.machine), machine.level, machine.price);
             this.searchPlayer(seller).money += machine.price;
             this.shop.forEach((element, i) => {
                 if (element == machine) delete this.shop[i];
@@ -62,6 +66,7 @@ module.exports = class Game {
         this.players.forEach((element, i) => {
             if (element.name === player) {
                 delete this.players[i]; // Replace by undefined
+                this.playersName.splice(this.playersName.indexOf(player), 1);
                 return true;
             }
             return false;

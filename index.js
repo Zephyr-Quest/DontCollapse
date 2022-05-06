@@ -7,7 +7,7 @@ const sharedsession = require('express-socket.io-session');
 const ejs = require('ejs');
 const path = require('path');
 
-const manageUser = require("./back/manageUser.js");
+const DCGame = require("./back/Game.js");
 
 const {
     body,
@@ -105,7 +105,7 @@ app.delete("/removeuser/:player", (req, res) => {
         return;
     }
 
-    if (!allRooms[idRoom].players.includes(player)) {
+    if (!allRooms[idRoom].playersName.includes(player)) {
         res.status(400).json({
             message: "The player doesn't exist."
         });
@@ -151,8 +151,9 @@ app.post("/host",
 
         // Create new room
         let roomPlayers = [];
-        roomPlayers.push(userName)
-        allRooms.push({ idRoom: idRoom, players: roomPlayers, host: userName });
+        roomPlayers.push(userName);
+        allRooms[idRoom] = new DCGame(idRoom, userName);
+        allRooms[idRoom].addPlayer(userName);
 
         res.send({
             state: 'host'
@@ -188,7 +189,7 @@ app.post("/join",
         req.session.idRoom = idRoom;
 
         // Add player in room
-        allRooms[idRoom].players.push(userName);
+        allRooms[idRoom].addPlayer(userName);
 
         res.send({
             state: 'joined'
@@ -212,15 +213,14 @@ io.on('connection', socket => {
         console.log(allRooms[idRoom], "\n");
         if (idRoom !== undefined) {
             socket.join(idRoom);
-            manageUser.connect(username);
-            io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
+            io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].playersName);
         }
     } else console.log('a user connected');
 
     if (username !== undefined && idRoom !== undefined && disconnectingUsers.includes(username)) {
         if (allRooms[idRoom]) {
             // Check the exiting room
-            if (allRooms[idRoom].players.indexOf(username) === 0) {
+            if (allRooms[idRoom].playersName.indexOf(username) === 0) {
                 // Delete the room
                 console.log("delete room", idRoom);
                 allRooms.splice(idRoom, 1);
@@ -228,8 +228,8 @@ io.on('connection', socket => {
             } else {
                 // Remove the user from the room
                 console.log("remove", username, "from room", idRoom);
-                allRooms[idRoom].players.splice(allRooms[idRoom].players.indexOf(username), 1);
-                io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].players);
+                allRooms[idRoom].removePlayer(username);
+                io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].playersName);
                 socket.emit("disconnection");
             }
         }
@@ -238,7 +238,6 @@ io.on('connection', socket => {
         socket.leave(idRoom);
         console.log("disconnect", username, "from room", idRoom);
         disconnectingUsers.splice(disconnectingUsers.indexOf(username), 1);
-        manageUser.disconnect(username);
         idRoom = username = undefined;
         socket.handshake.session.idRoom = undefined;
         socket.handshake.session.username = undefined;
@@ -251,7 +250,7 @@ io.on('connection', socket => {
     socket.on('startGame', () => {
         const idRoom = socket.handshake.session.idRoom;
         const username = socket.handshake.session.username;
-        if (allRooms[idRoom] && allRooms[idRoom].players.length >=2 && allRooms[idRoom].players.length <=4 )
+        if (allRooms[idRoom] && allRooms[idRoom].playersName.length >=2 && allRooms[idRoom].playersName.length <=4 )
             io.to(idRoom).emit("startAuthorized");
         else console.log("start unauthorized");
     })
