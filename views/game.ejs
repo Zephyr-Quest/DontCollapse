@@ -227,13 +227,13 @@
 
                         <!-- ------------------------------ Occasions ------------------------------ -->
 
-                        <div class="own clickable" style="display: none;">
+                        <div buyable class="own clickable" style="display: none;">
                             <p> Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
                             </p>
                         </div>
-                        <div class="j1 clickable" style="display: none;">
+                        <div buyable class="j1 clickable" style="display: none;">
                             <p>Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
@@ -386,12 +386,12 @@
 
                         <!-- ------------------------------ Occasions ------------------------------ -->
 
-                        <div class="j2 clickable" style="display: none;">
+                        <div buyable class="j2 clickable" style="display: none;">
                             <p>Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
                         </div>
-                        <div class="j3 clickable" style="display: none;">
+                        <div  buyable class="j3 void clickable" style="display: none;">
                             <p>Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
@@ -401,7 +401,8 @@
                 </div>
             </div>
             <dialog id="confirm-buy">
-                <p>Voulez vous acheter un <span id="buying"></span></p>
+                <h2>Devis</h2>
+                <p id="buying"></p>
                 <button class="oui-button">Oui</button>
                 <button class="non-button">Non</button>
             </dialog>

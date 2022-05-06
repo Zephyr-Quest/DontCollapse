@@ -1,18 +1,42 @@
-import Buy from './buyItem.js'
+import Buy from './manageItem.js'
 
 const leftPage = document.querySelectorAll('#left-page div');
 const rightPage = document.querySelectorAll('#right-page div');
 
 function initListener(id) {
     closeAllListener();
-    for (let i = id[0]; i <= id[1]; i++) {
-        leftPage[i].addEventListener('mouseenter', showDescri);
-        leftPage[i].addEventListener('mouseleave', hideDescri);
-        rightPage[i].addEventListener('mouseenter', showDescri);
-        rightPage[i].addEventListener('mouseleave', hideDescri);
 
-        leftPage[i].children[2].addEventListener('click', buyItem);
-        rightPage[i].children[2].addEventListener('click', buyItem);
+    if (id[0] != 24) {
+        for (let i = id[0]; i <= id[1]; i++) {
+            leftPage[i].addEventListener('mouseenter', showDescri);
+            leftPage[i].addEventListener('mouseleave', hideDescri);
+            rightPage[i].addEventListener('mouseenter', showDescri);
+            rightPage[i].addEventListener('mouseleave', hideDescri);
+
+            leftPage[i].children[2].addEventListener('click', buyItem); // listener button for buy
+            rightPage[i].children[2].addEventListener('click', buyItem);
+        }
+    } else {
+        setOccaz(id)
+    }
+}
+
+function setOccaz(id) {
+    for (let i = id[0]; i <= id[1]; i++) {
+        if (leftPage[i].hasAttribute("buyable")) {
+            leftPage[i].addEventListener('mouseenter', showDescri);
+            leftPage[i].addEventListener('mouseleave', hideDescri);
+
+            leftPage[i].children[2].addEventListener('click', occasion); // button for buy
+        }
+    }
+    for (let i = id[0]; i <= id[1]; i++) {
+        if (rightPage[i].hasAttribute("buyable")) {
+            rightPage[i].addEventListener('mouseenter', showDescri);
+            rightPage[i].addEventListener('mouseleave', hideDescri);
+
+            rightPage[i].children[2].addEventListener('click', occasion); // button for buy
+        }
     }
 }
 
@@ -30,15 +54,38 @@ function hideDescri(e) {
 }
 
 function buyItem(e) {
-    Buy.openBuy(e.target.parentElement.children[0])
+    Buy.buyItem(e.target.parentElement)
+}
+
+function occasion(e) {
+    if (e.target.parentElement.classList[0] == "own") {
+        Buy.deleteItem(e.target.parentElement)
+    }
+    else{
+        Buy.buyItem(e.target.parentElement)
+    }
 }
 
 function closeAllListener() {
-    for (let i = 0; i < leftPage.length; i++) {
+    for (let i = 0; i < leftPage.length - 2; i++) {
         leftPage[i].removeEventListener('click', buyItem);
         rightPage[i].removeEventListener('click', buyItem);
+        leftPage[i].removeEventListener('mouseenter', showDescri);
+        leftPage[i].removeEventListener('mouseleave', hideDescri);
+        rightPage[i].removeEventListener('mouseenter', showDescri);
+        rightPage[i].removeEventListener('mouseleave', hideDescri);
+    }
+    for (let i = leftPage.length - 2; i < leftPage.length; i++) {
+        leftPage[i].removeEventListener('click', occasion);
+        rightPage[i].removeEventListener('click', occasion);
+        leftPage[i].removeEventListener('mouseenter', showDescri);
+        leftPage[i].removeEventListener('mouseleave', hideDescri);
+        rightPage[i].removeEventListener('mouseenter', showDescri);
+        rightPage[i].removeEventListener('mouseleave', hideDescri);
     }
 }
+
+
 
 function changeItem(classOfRight) {
     leftPage.forEach(element => {
