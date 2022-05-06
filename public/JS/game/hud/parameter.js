@@ -2,23 +2,23 @@ const modal = document.getElementById('confirm-disconnect');
 const oui = document.getElementsByClassName('oui-button')[1];
 const non = document.getElementsByClassName('non-button')[1];
 
-
 const openParameter = document.querySelector('.fa-gears');
 const paramContent = document.querySelectorAll('.param-content');
 const divParam = document.querySelector('#parameters')
 
-const musicUp = document.querySelector('.fa-music');
-const musicOff = document.querySelector('.fa-music-slash');
-const effectUp = document.querySelector('.fa-volume-high');
-const effectOff = document.querySelector('.fa-volume-xmark');
+const musicUp = document.querySelector('.fa-volume-high');
+const musicOff = document.querySelector('.fa-volume-off');
+const effectUp = document.querySelector('.fa-bell');
+const effectOff = document.querySelector('.fa-bell-slash');
 const signOut = document.querySelector('.fa-right-from-bracket');
 
 let sound = true;
 let effect = true;
 
 function showParameter() {
-    //divParam.addEventListener('mouseleave', closeParam, { once: true });
-
+    divParam.addEventListener('mouseleave', closeParam, {
+        once: true
+    });
     paramContent.forEach(elem => {
         elem.addEventListener('click', fctParam)
     })
@@ -34,19 +34,19 @@ function showParameter() {
 
 function fctParam(e) {
     switch (e.target.classList[2]) {
-        case 'fa-music-note':
-            putMusic();
-            break;
-        case 'fa-music-note-slash':
-            cutMusic();
-            break;
-        case 'fa-volume-up':
-            putEffect();
-            break;
-        case 'fa-volume-off':
+        case 'fa-bell':
             cutEffect();
             break;
-        case 'fa-sign-out':
+        case 'fa-bell-slash':
+            putEffect();
+            break;
+        case 'fa-volume-high':
+            cutMusic();
+            break;
+        case 'fa-volume-off':
+            putMusic();
+            break;
+        case 'fa-right-from-bracket':
             ilveutsedeco();
             break;
         default:
@@ -84,13 +84,13 @@ function ilveutsedeco() {
 }
 
 function cutMusic() {
-    console.log('coupe volume');
+    console.log('coupe musique');
     sound = false;
     changeMusic();
 }
 
 function putMusic() {
-    console.log('met volume');
+    console.log('met musique');
     sound = true;
     changeMusic();
 }
@@ -99,33 +99,31 @@ function changeMusic() {
     if (sound) {
         musicUp.style.display = "block";
         musicOff.style.display = "none";
-    }
-    else {
+    } else {
         musicUp.style.display = "none";
         musicOff.style.display = "block";
     }
 }
 
 function cutEffect() {
-    console.log('coupe volume');
+    console.log('coupe effet');
     effect = false;
     changeEffect();
 }
 
 function putEffect() {
-    console.log('met volume');
+    console.log('met effet');
     effect = true;
     changeEffect();
 }
 
 function changeEffect() {
     if (effect) {
-        musicUp.style.display = "block";
-        musicOff.style.display = "none";
-    }
-    else {
-        musicUp.style.display = "none";
-        musicOff.style.display = "block";
+        effectUp.style.display = "block";
+        effectOff.style.display = "none";
+    } else {
+        effectUp.style.display = "none";
+        effectOff.style.display = "block";
     }
 }
 

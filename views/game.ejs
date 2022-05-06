@@ -401,7 +401,7 @@
                 </div>
             </div>
             <dialog id="confirm-buy">
-                <p>Voulez vous vraiment vous déconnecter ?</p>
+                <p>Voulez vous acheter un <span id="buying"></span></p>
                 <button class="oui-button">Oui</button>
                 <button class="non-button">Non</button>
             </dialog>
@@ -423,20 +423,22 @@
 
         </div>
     </dialog>
+    <i class="fa-sofa-sign-outlid fa-volume-xmark"></i>
 
     <div id="parameters">
+        <i class="param-content fa-solid fa-bell" style="display:none;"></i>
+        <i class="param-content fa-solid fa-bell-slash" style="display:none;"></i>
         <i class="param-content fa-solid fa-volume-high" style="display:none;"></i>
-        <i class="param-content fa-sofa-sign-outlid fa-volume-xmark" style="display:none;"></i>
-        <i class="param-content fa-solid fa-music" style="display:none;"></i>
-        <i class="param-content fa-solid fa-music-slash" style="display:none;"></i>
+        <i class="param-content fa-solid fa-volume-off" style="display:none;"></i>
         <i class="param-content fa-solid fa-right-from-bracket" style="display:none;"></i>
         <i class="fa-solid fa-gears"></i>
-        <!-- <dialog id="confirm-disconnect">
-            <p>Voulez vous acheter un <span id="buying"></span></p>
+        <dialog id="confirm-disconnect">
+            <p>Voulez vous vraiment vous déconnecter ?</p>
+
             <button class="oui-button">Oui</button>
             <button class="non-button">Non</button>
 
-        </dialog> -->
+        </dialog>
     </div>
 
     <!-- ------------------------------- Script -------------------------------- -->

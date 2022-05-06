@@ -268,14 +268,15 @@ body {
   grid-template-rows: 1fr 1fr;
   column-gap: 20px;
   row-gap: 20px;
+  justify-items: center;
 }
 #parameters .fa-volume-high,
-#parameters .fa-volume-xmark {
+#parameters .fa-volume-off {
   grid-column: 1/2;
   grid-row: 1/2;
 }
-#parameters .fa-music,
-#parameters .fa-music-slash {
+#parameters .fa-bell,
+#parameters .fa-bell-slash {
   grid-column: 2/3;
   grid-row: 1/2;
 }
