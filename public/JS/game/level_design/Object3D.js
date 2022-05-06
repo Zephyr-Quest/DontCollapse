@@ -35,7 +35,7 @@ export class Object3D extends Locatable {
                 this.loaded = el.loaded
                 this.transp = el.transparency
                 this.scale = Models[this.type].scale
-                this.name=el.name
+                this.name = el.name
         }
 
         getMesh() {
@@ -44,6 +44,16 @@ export class Object3D extends Locatable {
                 }
                 if (Models[this.type].isModel) {
                         this.mesh = Models[this.type].instance.clone();
+                        if (Models[this.type].name == "barrel") {
+                                this.mesh.children[0].material=new THREE.MeshStandardMaterial({
+                                        color: this.color,
+                                        side: THREE.FrontSide,
+                                        opacity: this.transp,
+                                        metalness: 0.3,
+                                        roughness: .6                                  
+
+                                });
+                        }
                         this.mesh.scale.set(this.scale, this.scale, this.scale)
                         this.mesh.rotation.x = Models[this.type].rotation[0] * Math.PI / 180;
                         this.mesh.rotation.y = Models[this.type].rotation[1] * Math.PI / 180;
@@ -54,7 +64,8 @@ export class Object3D extends Locatable {
                                 this.material = new THREE.MeshStandardMaterial({
                                         color: this.color,
                                         side: THREE.FrontSide,
-                                        opacity: this.transp
+                                        opacity: this.transp,
+                                        
 
                                 });
                         }
@@ -80,13 +91,13 @@ export class Object3D extends Locatable {
                                         side: THREE.DoubleSide,
                                         color: this.color,
                                         opacity: this.transp,
-                                        metalness:0.3,
-                                        roughness:0.5
+                                        metalness: 0.3,
+                                        roughness: 0.5
                                 })
                         }
                         this.mesh = new THREE.Mesh(this.geometry, this.material);
                 }
-                this.mesh.name=this.name
+                this.mesh.name = this.name
                 this.mesh.rotation.x += this.rotx;
                 this.mesh.rotation.y += this.roty;
                 this.mesh.rotation.z += this.rotz;

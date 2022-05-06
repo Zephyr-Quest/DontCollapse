@@ -63,6 +63,22 @@ export const Models = {
                 instance: null,
                 rotation: [90, 0, 0]
         },
+        bins: {
+                name: "bins",
+                model: "bins.glb",
+                scale: 9,
+                isModel: true,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        barrel: {
+                name: "barrel",
+                model: "barrel.glb",
+                scale: 2.4,
+                isModel: true,
+                instance: null,
+                rotation: [0, 0, 0]
+        },
         pillar: {
                 name: "pillar",
                 model: null,
