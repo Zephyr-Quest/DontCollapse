@@ -127,7 +127,7 @@ export class Scene {
                 let intensity = 0.1;
                 this.light = new THREE.DirectionalLight(color, intensity);
                 this.light.position.set(0, 0, 100);
-                //! this.light.castShadow = true;
+                this.light.castShadow = true;
                 this.light.shadow.mapSize.width = 2048; // default
                 this.light.shadow.mapSize.height = 2048; // default
                 this.light.shadow.camera.near = 0.5; // default
@@ -174,6 +174,7 @@ export class Scene {
                         this.mousePos.clientX = event.clientX
                         this.mousePos.clientY = event.clientY
                 });
+                
 
                 // this.animate()
         }
@@ -190,7 +191,6 @@ export class Scene {
         render() {
                 this.renderer.render(this.scene, this.camera);
                 this.light.shadow.autoUpdate = false
-                // this.GroupSprite.shadow.autoUpdate=false
                 this.onMouseOver(this.mousePos, this)
         }
 
@@ -232,8 +232,16 @@ export class Scene {
                         z: 150 / 2,
                 }, "chat", "CHAT")
                 this.scene.add(this.GroupSprite)
+                this.scene.children.forEach(el=>{
+                        try {
+                                el.castShadow=false
+                        } catch (error) {
+                                console.log(error)
+                        }
+                })
 
         }
+
         createTitles(ctx, sc, pos, name, title) {
                 this.makeTextSprite(ctx, sc, pos, name, title, {
                         "fontsize": 100,
@@ -257,10 +265,7 @@ export class Scene {
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
                 if (s) {
-                        s.scale.set(Config.scaleRay, Config.scaleRay, 1)
-                        setTimeout(() => {
-                                s.scale.set(1, 1, 1)
-                        }, 90)
+                        //! If clicked
                 }
         }
         onMouseOver(event, ctx) {
@@ -272,7 +277,6 @@ export class Scene {
                 position.y = -((event.clientY - domRect.top) / domRect.height) * 2 + 1;
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
-                // console.log(s)
                 if (s) {
                         if (s.name == "Shop" && !this.animatedtextShop) {
                                 this.animatedtextShop = true
@@ -281,7 +285,7 @@ export class Scene {
                                                 e.visible = true
                                         }
                                 }
-                        } else if (s.name == "Chat" && !this.animatedtextShop) {
+                        } else if (s.name == "Chat" && !this.animatedtextChat) {
                                 this.animatedtextChat = true
                                 for (const e of this.GroupSprite.children) {
                                         if (e.name == "chat") {

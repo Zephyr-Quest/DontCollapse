@@ -75,6 +75,7 @@ export class Object3D extends Locatable {
                                         color: this.color,
                                         side: THREE.FrontSide,
                                         opacity: this.transp,
+                                        transparent:true
                                         
 
                                 });
@@ -85,6 +86,7 @@ export class Object3D extends Locatable {
                                         color: this.color,
                                         opacity: this.transp,
                                         side: THREE.DoubleSide,
+                                        transparent:true
 
                                 });
                         }
@@ -93,7 +95,8 @@ export class Object3D extends Locatable {
                                 this.material = new THREE.MeshStandardMaterial({
                                         side: THREE.FrontSide,
                                         color: this.color,
-                                        opacity: this.transp
+                                        opacity: this.transp,
+                                        transparent:true
                                 })
                         }
                         if (this.type == "pillar") {
