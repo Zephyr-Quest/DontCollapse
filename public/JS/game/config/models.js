@@ -82,7 +82,7 @@ export const Models = {
         precision: {
                 name: "precision",
                 model: "accuracy1.glb",
-                scale:20,
+                scale: 20,
                 isModel: true,
                 instance: null,
                 rotation: [90, 0, 0]
@@ -90,7 +90,7 @@ export const Models = {
         shelf: {
                 name: "shelf",
                 model: "shelf.glb",
-                scale:.6,
+                scale: .6,
                 isModel: true,
                 instance: null,
                 rotation: [90, 0, 0]
@@ -98,7 +98,7 @@ export const Models = {
         metallocker: {
                 name: "metallocker",
                 model: "metallocker.glb",
-                scale:11,
+                scale: 11,
                 isModel: true,
                 instance: null,
                 rotation: [90, 0, 0]
@@ -106,10 +106,42 @@ export const Models = {
         ladder: {
                 name: "ladder",
                 model: "ladder.glb",
-                scale:.25,
+                scale: .25,
                 isModel: true,
                 instance: null,
                 rotation: [90, 0, 0]
+        },
+        office: {
+                name: "office",
+                model: "office.gltf",
+                scale: .3,
+                isModel: true,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        window: {
+                name: "window",
+                model: "window.gltf",
+                scale: 50,
+                isModel: true,
+                instance: null,
+                rotation: [90, 180, 0]
+        },
+        cork: {
+                name: "cork",
+                model: "cork.gltf",
+                scale: 8,
+                isModel: true,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        door: {
+                name: "door",
+                model: "door.glb",
+                scale: 1.3,
+                isModel: true,
+                instance: null,
+                rotation: [90, 180, 0]
         },
         pillar: {
                 name: "pillar",
