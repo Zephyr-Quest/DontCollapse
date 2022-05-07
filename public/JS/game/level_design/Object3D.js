@@ -47,7 +47,7 @@ export class Object3D extends Locatable {
                         if (Models[this.type].name == "barrel") {
                                 this.mesh.children[0].material=new THREE.MeshStandardMaterial({
                                         color: this.color,
-                                        side: THREE.FrontSide,
+                                        side: THREE.DoubleSide,
                                         opacity: this.transp,
                                         metalness: 0.3,
                                         roughness: .6                                  
@@ -57,13 +57,14 @@ export class Object3D extends Locatable {
                         if (Models[this.type].name == "ladder") {
                                 this.mesh.children[0].material=new THREE.MeshStandardMaterial({
                                         color: this.color,
-                                        side: THREE.FrontSide,
+                                        side: THREE.DoubleSide,
                                         opacity: this.transp,
                                         metalness: 0.3,
                                         roughness: .6                                  
 
                                 });
                         }
+                        
                         this.mesh.scale.set(this.scale, this.scale, this.scale)
                         this.mesh.rotation.x = Models[this.type].rotation[0] * Math.PI / 180;
                         this.mesh.rotation.y = Models[this.type].rotation[1] * Math.PI / 180;
@@ -93,7 +94,7 @@ export class Object3D extends Locatable {
                         if (this.type == "cube") {
                                 this.geometry = new THREE.BoxGeometry(this.length, this.width, this.heigth)
                                 this.material = new THREE.MeshStandardMaterial({
-                                        side: THREE.FrontSide,
+                                        side: THREE.DoubleSide,
                                         color: this.color,
                                         opacity: this.transp,
                                         transparent:true

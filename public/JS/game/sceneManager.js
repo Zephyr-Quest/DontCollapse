@@ -105,7 +105,7 @@ export class Scene {
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.shadowMap.enabled = true;
                 this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-                this.renderer.shadowMapSoft = true;
+                this.renderer.shadowMapSoft = false;
                 document.body.appendChild(this.renderer.domElement);
 
                 /* --------------------- Setting up the camera controls --------------------- */
@@ -127,7 +127,7 @@ export class Scene {
                 let intensity = 0.1;
                 this.light = new THREE.DirectionalLight(color, intensity);
                 this.light.position.set(0, 0, 100);
-                this.light.castShadow = true;
+                this.light.castShadow = false;
                 this.light.shadow.mapSize.width = 2048; // default
                 this.light.shadow.mapSize.height = 2048; // default
                 this.light.shadow.camera.near = 0.5; // default
@@ -139,9 +139,8 @@ export class Scene {
                 intensity = 0.9;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
                 this.light.position.set(0, 0, 130);
-                //! this.light.castShadow = true;
+                this.light.castShadow = true;
                 this.light.shadow.bias = -0.001
-                // this.light.shadow.autoUpdate=false
                 this.light.shadow.mapSize.width = 2048; // default
                 this.light.shadow.mapSize.height = 2048; // default
                 this.light.shadow.camera.near = 0.1;
@@ -184,13 +183,13 @@ export class Scene {
                 this.render();
                 requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();
+                this.light.shadow.autoUpdate = false
                 stats.end();
         }
-
-
+        
+        
         render() {
                 this.renderer.render(this.scene, this.camera);
-                this.light.shadow.autoUpdate = false
                 this.onMouseOver(this.mousePos, this)
         }
 
@@ -232,13 +231,13 @@ export class Scene {
                         z: 150 / 2,
                 }, "chat", "CHAT")
                 this.scene.add(this.GroupSprite)
-                this.scene.children.forEach(el=>{
-                        try {
-                                el.castShadow=false
-                        } catch (error) {
-                                console.log(error)
-                        }
-                })
+                // this.scene.children.forEach(el=>{
+                //         try {
+                //                 el.castShadow=false
+                //         } catch (error) {
+                //                 console.log(error)
+                //         }
+                // })
 
         }
 
