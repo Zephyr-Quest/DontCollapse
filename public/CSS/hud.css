@@ -74,9 +74,9 @@ body {
 #top .containers .progress-container .text {
   text-align: center;
 }
-#shop-button {
+.button {
   height: 50px;
-  width: 50px;
+  width: 70px;
   border-radius: 10%;
   cursor: pointer;
 }
@@ -138,9 +138,6 @@ body {
   background-color: red;
 }
 /* -------------------------------------------------------------------------- */
-/*                                Close Button                                */
-/* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- */
 /*                                    Shop                                    */
 /* -------------------------------------------------------------------------- */
 #shop-modal {
@@ -154,7 +151,7 @@ body {
 #shop-modal .modal-content #shop {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
-  grid-auto-rows: minmax(30px, auto);
+  grid-auto-rows: minmax(40px, auto);
 }
 #shop-modal .modal-content #shop .rubric {
   border: solid 2px black;
@@ -173,17 +170,24 @@ body {
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
 }
-#shop-modal .modal-content #shop #main-title .clickable {
-  padding: 5%;
+#shop-modal .modal-content #shop #main-title div {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 #shop-modal .modal-content #shop #supplier {
   grid-column: 3/4;
   grid-row: 2/3;
   display: grid;
-  grid-template-columns: 4fr;
+  grid-template-rows: repeat(4, 1fr);
+  grid-auto-rows: minmax(100px, auto);
 }
-#shop-modal .modal-content #shop #supplier .clickable {
-  padding: 12.5%;
+#shop-modal .modal-content #shop #supplier div {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 #shop-modal .modal-content #shop #left-page {
   grid-column: 1/2;
@@ -203,6 +207,14 @@ body {
 #shop-modal .modal-content #shop #right-page div {
   margin: 1rem;
   border: dashed 2px black;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-between;
+}
+#shop-modal .modal-content #shop .buy-button {
+  height: 30px;
 }
 /* -------------------------------------------------------------------------- */
 /*                                    Chat                                    */

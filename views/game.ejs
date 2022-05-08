@@ -25,7 +25,7 @@
         <h1> Welcome <%= username %>
         </h1>
         <ul id="player_list" class="room"></ul>
-        <button type="submit" id="BtnGame" style="display: none;" class="room">Start Game !</button>
+        <button type="submit" id="BtnGame" style="display: none;" class="room button">Start Game !</button>
     </div>
 
     <div style="display: none;" id="game">
@@ -46,7 +46,7 @@
             </div>
 
             <!-- Modal Shop -->
-            <button id="shop-button">Shop</button>
+            <button class="button" id="shop-button">Shop</button>
         </div>
 
 
@@ -230,16 +230,13 @@
                         <div buyable class="own clickable" style="display: none;">
                             <p> Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
-                            </p>
+                            <button class="buy-button" style="display: none;">Supprimer</button>
                         </div>
                         <div buyable class="j1 clickable" style="display: none;">
                             <p>Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
                         </div>
-
-
                     </div>
 
                     <!-- ----------------------------------------------------------------------- -->
@@ -410,7 +407,7 @@
 
     </div>
 
-    <button id="chat-button">Open Chat</button>
+    <button class="button" id="chat-button">Open Chat</button>
     <dialog class="modal" id="chat-modal">
         <div class="modal-content">
             <div class="top-modal">

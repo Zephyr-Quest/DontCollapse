@@ -21,7 +21,7 @@ function changeSelection(e) {
 
 function changeRubric(classOfTop) {
     rightRubric.forEach(element => {
-        if (element.style.display === "block") {
+        if (element.style.display === "flex") {
             element.style.display = "none";
             if (element.classList.contains("selected")) element.classList.remove("selected");
         }
@@ -31,14 +31,14 @@ function changeRubric(classOfTop) {
         case "top1":
             rightRubric[0].classList.add("selected");
             for (let i = 0; i < 4; i++) {
-                rightRubric[i].style.display = "block";
+                rightRubric[i].style.display = "flex";
             }
             initListener(0);
             break;
         case "top2":
             rightRubric[4].classList.add("selected");
             for (let i = 4; i < 8; i++) {
-                rightRubric[i].style.display = "block";
+                rightRubric[i].style.display = "flex";
             }
             initListener(4);
 
@@ -46,18 +46,18 @@ function changeRubric(classOfTop) {
         case "top3":
             rightRubric[8].classList.add("selected");
             for (let i = 8; i < 12; i++) {
-                rightRubric[i].style.display = "block";
+                rightRubric[i].style.display = "flex";
             }
             initListener(8);
 
             break;
         case "top4":
             rightRubric[12].classList.add("selected");
-            rightRubric[12].style.display = "block";
+            rightRubric[12].style.display = "flex";
             ShopItem.changeItem("occaz");
 
             // for (let i = 12; i < 16; i++) {
-            //     rightRubric[i].style.display = "block";
+            //     rightRubric[i].style.display = "flex";
             // }
             //initListener(12);
 

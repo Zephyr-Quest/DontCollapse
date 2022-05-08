@@ -89,12 +89,12 @@ function closeAllListener() {
 
 function changeItem(classOfRight) {
     leftPage.forEach(element => {
-        if (element.style.display === "block") {
+        if (element.style.display === "flex") {
             element.style.display = "none";
         }
     });
     rightPage.forEach(element => {
-        if (element.style.display === "block") {
+        if (element.style.display === "flex") {
             element.style.display = "none";
         }
     });
@@ -121,8 +121,8 @@ function changeItem(classOfRight) {
     let toDisplay = items[classOfRight];
 
     for (let i = toDisplay[0]; i <= toDisplay[1]; i++) {
-        leftPage[i].style.display = "block";
-        rightPage[i].style.display = "block";
+        leftPage[i].style.display = "flex";
+        rightPage[i].style.display = "flex";
     }
     initListener(toDisplay);
 }
