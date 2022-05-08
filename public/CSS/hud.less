@@ -1,3 +1,18 @@
+@charset "UTF-8";
+
+@text-color: #eee;
+@bg-color: #383331;
+@primary-color: #f5dba6;
+@grey: #3f3c3a;
+@header-bg-color: #383331;
+
+@backdrop-color: rgba(0, 0, 0, 0.6);
+
+// Fonts
+@text-font: 'Aclonica';
+@primary-font: 'KoHo';
+@secondary-font: sans-serif;
+
 @keyframes fade-in {
     0% {
         opacity: 0;
@@ -42,11 +57,14 @@
 html,
 body {
     height: 100%;
+
 }
 
 body {
-    background: #726868;
-    font-family: 'Raleway', sans-serif;
+    background-color: @bg-color;
+    font-family: @primary-font, @secondary-font;
+
+    color: @text-color;
 
     margin: 0;
     padding: 0;
@@ -74,12 +92,11 @@ body {
             // background-color: black;
             height: 30px;
             width: 400px;
-            background: rgb(255, 0, 0);
             background: linear-gradient(90deg, rgba(255, 0, 0, 1) 54%, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 1) 100%);
             text-align: center;
             font-size: x-large;
             font-style: italic;
-            color: white;
+            color: @text-color;
 
             .progress {
                 height: 100%;
@@ -103,6 +120,16 @@ body {
     width: 70px;
     border-radius: 10%;
     cursor: pointer;
+    border: 3px solid @primary-color;
+    color: @bg-color;
+    background-color: @primary-color;
+
+    &:hover {
+        background-color: transparent;
+        color: @primary-color;
+        transition: background-color 0.3s;
+
+    }
 
 }
 
@@ -134,13 +161,13 @@ body {
             }
 
             .close-button {
-                color: #aaa;
+                color: @primary-color;
                 float: right;
                 font-size: 28px;
                 font-weight: 1000;
 
                 &:hover {
-                    color: #faa200;
+                    color: @grey;
                     text-decoration: none;
                     cursor: pointer;
                 }
@@ -150,7 +177,7 @@ body {
     }
 
     &::backdrop {
-        background: rgba(0, 0, 0, 0.6);
+        background: @backdrop-color;
 
     }
 
@@ -181,7 +208,8 @@ body {
 }
 
 .selected {
-    background-color: red;
+    background-color: @primary-color;
+    color: @bg-color
 }
 
 
@@ -194,6 +222,11 @@ body {
     width: 1200px;
 
     overflow: hidden;
+    border-radius: 2%;
+    background-color: @bg-color;
+    border: 3px solid @primary-color;
+    color: @primary-color;
+
 
     .modal-content {
         text-align: center;
@@ -205,12 +238,13 @@ body {
             grid-auto-rows: minmax(40px, auto);
 
             .rubric {
-                border: solid 2px black
+                border-radius: 1%;
+                border: solid 2px @primary-color;
             }
 
             .clickable:hover:not(.selected) {
-                color: #faa200;
-                background-color: rgba(51, 255, 0, 0.2);
+                color: @primary-color;
+                background-color: @backdrop-color; //rgba(51, 255, 0, 0.2);
                 text-decoration: none;
                 cursor: pointer;
             }
@@ -278,16 +312,30 @@ body {
             #right-page div {
                 margin: 1rem;
                 // height: 8rem;
-                border: dashed 2px black;
+                border-radius: 1%;
+                border: dashed 1px @primary-color;
                 height: 100px;
                 display: flex;
                 flex-direction: column;
                 align-content: center;
                 justify-content: space-between;
+                cursor: default;
 
             }
-            .buy-button{
+
+            .buy-button {
                 height: 30px;
+                background-color: transparent;
+                color: @primary-color;
+                border-top: 1px solid @primary-color;
+                border-radius: 5%;
+                cursor: pointer;
+
+
+                &:hover {
+                    background-color: @primary-color;
+                    color: @bg-color;
+                }
             }
         }
     }
@@ -301,6 +349,10 @@ body {
     width: 300px;
     max-width: 700px;
     margin-left: 20px;
+
+    background-color: @bg-color;
+    color: @primary-color;
+    border: 3px solid @bg-color;
 
     overflow-y: auto;
 
@@ -330,6 +382,7 @@ body {
         padding-bottom: 10px;
         display: flex;
         flex-direction: column-reverse;
+        color: @text-color;
 
         .sender {
             display: grid;
@@ -379,6 +432,19 @@ body {
     row-gap: 20px;
     justify-items: center;
 
+    .param-content[open] {
+        animation: fade-in 250ms forwards;
+    }
+
+    .param-content[closing] {
+        display: block;
+        pointer-events: none;
+        inset: 0;
+        animation: fade-out 250ms forwards;
+
+    }
+
+
     .fa-volume-high,
     .fa-volume-off {
         grid-column: 1/2;
@@ -399,6 +465,7 @@ body {
     .fa-gears {
         grid-column: 2/3;
         grid-row: 2/3;
+
     }
 
 

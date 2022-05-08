@@ -21,15 +21,22 @@ function showParameter() {
     });
     paramContent.forEach(elem => {
         elem.addEventListener('click', fctParam)
+        elem.setAttribute('open', "");
     })
 
     signOut.style.display = "block";
 
-    if (sound) musicUp.style.display = "block";
-    else musicOff.style.display = "block";
+    if (sound) {
+        musicUp.style.display = "block";
+    } else {
+        musicOff.style.display = "block";
+    }
 
-    if (effect) effectUp.style.display = "block";
-    else effectOff.style.display = "block";
+    if (effect) {
+        effectUp.style.display = "block";
+    } else {
+        effectOff.style.display = "block";
+    }
 }
 
 function fctParam(e) {
@@ -58,6 +65,12 @@ function closeParam() {
     paramContent.forEach(element => {
         element.style.display = "none";
         element.removeEventListener('click', fctParam);
+        element.removeAttribute('open');
+
+        // element.setAttribute('closing', "");
+        // element.addEventListener('animationend', () => {
+        //     element.removeAttribute('closing');
+        // });
     });
 }
 

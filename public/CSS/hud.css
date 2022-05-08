@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -35,8 +36,9 @@ body {
   height: 100%;
 }
 body {
-  background: #726868;
-  font-family: 'Raleway', sans-serif;
+  background-color: #383331;
+  font-family: 'KoHo', sans-serif;
+  color: #eee;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -57,12 +59,11 @@ body {
   border: solid #35354d;
   height: 30px;
   width: 400px;
-  background: #ff0000;
   background: linear-gradient(90deg, #ff0000 54%, #000000 55%, #000000 100%);
   text-align: center;
   font-size: x-large;
   font-style: italic;
-  color: white;
+  color: #eee;
 }
 #top .containers .progress-container .progress {
   height: 100%;
@@ -79,6 +80,14 @@ body {
   width: 70px;
   border-radius: 10%;
   cursor: pointer;
+  border: 3px solid #f5dba6;
+  color: #383331;
+  background-color: #f5dba6;
+}
+.button:hover {
+  background-color: transparent;
+  color: #f5dba6;
+  transition: background-color 0.3s;
 }
 /* -------------------------------------------------------------------------- */
 /*                                    Modals                                  */
@@ -103,13 +112,13 @@ body {
   padding-right: 0;
 }
 .modal .modal-content .top-modal .close-button {
-  color: #aaa;
+  color: #f5dba6;
   float: right;
   font-size: 28px;
   font-weight: 1000;
 }
 .modal .modal-content .top-modal .close-button:hover {
-  color: #faa200;
+  color: #3f3c3a;
   text-decoration: none;
   cursor: pointer;
 }
@@ -135,7 +144,8 @@ body {
   animation: fade-out 250ms forwards;
 }
 .selected {
-  background-color: red;
+  background-color: #f5dba6;
+  color: #383331;
 }
 /* -------------------------------------------------------------------------- */
 /*                                    Shop                                    */
@@ -144,6 +154,10 @@ body {
   height: 700px;
   width: 1200px;
   overflow: hidden;
+  border-radius: 2%;
+  background-color: #383331;
+  border: 3px solid #f5dba6;
+  color: #f5dba6;
 }
 #shop-modal .modal-content {
   text-align: center;
@@ -154,11 +168,12 @@ body {
   grid-auto-rows: minmax(40px, auto);
 }
 #shop-modal .modal-content #shop .rubric {
-  border: solid 2px black;
+  border-radius: 1%;
+  border: solid 2px #f5dba6;
 }
 #shop-modal .modal-content #shop .clickable:hover:not(.selected) {
-  color: #faa200;
-  background-color: rgba(51, 255, 0, 0.2);
+  color: #f5dba6;
+  background-color: rgba(0, 0, 0, 0.6);
   text-decoration: none;
   cursor: pointer;
 }
@@ -206,15 +221,26 @@ body {
 #shop-modal .modal-content #shop #left-page div,
 #shop-modal .modal-content #shop #right-page div {
   margin: 1rem;
-  border: dashed 2px black;
+  border-radius: 1%;
+  border: dashed 1px #f5dba6;
   height: 100px;
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: space-between;
+  cursor: default;
 }
 #shop-modal .modal-content #shop .buy-button {
   height: 30px;
+  background-color: transparent;
+  color: #f5dba6;
+  border-top: 1px solid #f5dba6;
+  border-radius: 5%;
+  cursor: pointer;
+}
+#shop-modal .modal-content #shop .buy-button:hover {
+  background-color: #f5dba6;
+  color: #383331;
 }
 /* -------------------------------------------------------------------------- */
 /*                                    Chat                                    */
@@ -224,6 +250,9 @@ body {
   width: 300px;
   max-width: 700px;
   margin-left: 20px;
+  background-color: #383331;
+  color: #f5dba6;
+  border: 3px solid #383331;
   overflow-y: auto;
 }
 #chat-modal #chatForm {
@@ -243,6 +272,7 @@ body {
   padding-bottom: 10px;
   display: flex;
   flex-direction: column-reverse;
+  color: #eee;
 }
 #chat-modal #messages .sender {
   display: grid;
@@ -281,6 +311,15 @@ body {
   column-gap: 20px;
   row-gap: 20px;
   justify-items: center;
+}
+#parameters .param-content[open] {
+  animation: fade-in 250ms forwards;
+}
+#parameters .param-content[closing] {
+  display: block;
+  pointer-events: none;
+  inset: 0;
+  animation: fade-out 250ms forwards;
 }
 #parameters .fa-volume-high,
 #parameters .fa-volume-off {
