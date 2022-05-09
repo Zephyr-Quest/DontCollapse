@@ -1028,8 +1028,26 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: -90,
                 rotz: 0,
-                ray: false,
+                ray: true,
+                name:"Mac_Assembleur"
         },
+
+        // {
+        //         type: "cube",
+        //         length: 40,
+        //         width: 180,
+        //         heigth: 40,
+        //         x: -130,
+        //         y: -55,
+        //         z: 20.5,
+        //         color: 0x000000,
+        //         rotx: 0,
+        //         roty: -90,
+        //         rotz: 0,
+        //         transparency:0,
+        //         ray: true,
+        //         name:"Assembleur"
+        // },
         /* ---------------------------------- SHELF --------------------------------- */
 
         {

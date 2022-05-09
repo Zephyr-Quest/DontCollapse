@@ -36,6 +36,7 @@ export class Object3D extends Locatable {
                 this.transp = el.transparency
                 this.scale = Models[this.type].scale
                 this.name = el.name
+
         }
 
         getMesh() {
@@ -45,26 +46,26 @@ export class Object3D extends Locatable {
                 if (Models[this.type].isModel) {
                         this.mesh = Models[this.type].instance.clone();
                         if (Models[this.type].name == "barrel") {
-                                this.mesh.children[0].material=new THREE.MeshStandardMaterial({
+                                this.mesh.children[0].material = new THREE.MeshStandardMaterial({
                                         color: this.color,
                                         side: THREE.DoubleSide,
                                         opacity: this.transp,
                                         metalness: 0.3,
-                                        roughness: .6                                  
+                                        roughness: .6
 
                                 });
                         }
                         if (Models[this.type].name == "ladder") {
-                                this.mesh.children[0].material=new THREE.MeshStandardMaterial({
+                                this.mesh.children[0].material = new THREE.MeshStandardMaterial({
                                         color: this.color,
                                         side: THREE.DoubleSide,
                                         opacity: this.transp,
                                         metalness: 0.3,
-                                        roughness: .6                                  
+                                        roughness: .6
 
                                 });
                         }
-                        
+
                         this.mesh.scale.set(this.scale, this.scale, this.scale)
                         this.mesh.rotation.x = Models[this.type].rotation[0] * Math.PI / 180;
                         this.mesh.rotation.y = Models[this.type].rotation[1] * Math.PI / 180;
@@ -76,8 +77,8 @@ export class Object3D extends Locatable {
                                         color: this.color,
                                         side: THREE.FrontSide,
                                         opacity: this.transp,
-                                        transparent:true
-                                        
+                                        transparent: true
+
 
                                 });
                         }
@@ -85,9 +86,9 @@ export class Object3D extends Locatable {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);
                                 this.material = new THREE.MeshStandardMaterial({
                                         color: this.color,
+                                        transparent: true,
                                         opacity: this.transp,
                                         side: THREE.DoubleSide,
-                                        transparent:true
 
                                 });
                         }
@@ -96,8 +97,8 @@ export class Object3D extends Locatable {
                                 this.material = new THREE.MeshStandardMaterial({
                                         side: THREE.DoubleSide,
                                         color: this.color,
+                                        transparent: true,
                                         opacity: this.transp,
-                                        transparent:true
                                 })
                         }
                         if (this.type == "pillar") {
@@ -112,6 +113,12 @@ export class Object3D extends Locatable {
                         }
                         this.mesh = new THREE.Mesh(this.geometry, this.material);
                 }
+                if (this.name == "Assembleur") {
+                        this.mesh.visible = true;
+                        console.log(this.mesh)
+                }
+
+                this.mesh.receiveShadow = true;
                 this.mesh.name = this.name
                 this.mesh.rotation.x += this.rotx;
                 this.mesh.rotation.y += this.roty;
