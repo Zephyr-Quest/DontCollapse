@@ -49,6 +49,9 @@ export class Scene {
                         clientX: 0,
                         clientY: 0,
                 }
+                this.mixers = [];
+                this.currentMixerId = 0;
+                this.clock = new THREE.Clock();
         }
 
         /**
@@ -70,11 +73,15 @@ export class Scene {
 
                         // Add the model to the load manager
                         this.modelLoader.load(Config.modelsPath + currentModel.model, gltf => {
+                                // Manage animations
+                                if (gltf.animations && gltf.animations.length > 0) {
+                                        const mixer = new THREE.AnimationMixer(gltf.scene);
+                                        gltf.animations.forEach(anim => mixer.clipAction(anim).play());
+                                        this.mixers.push(mixer);
+                                }
+                                
                                 currentModel.instance = gltf.scene;
-                                // this.mixer = new THREE.AnimationMixer(gltf.scene);
-                                // gltf.animations.forEach((clip) => {
-                                //         this.mixer.clipAction(clip).play();
-                                // });
+                                
                                 // Load the other models
                                 this.loadModels(callback);
                         });
@@ -173,10 +180,9 @@ export class Scene {
         animate() {
                 stats.begin();
 
-
-                // this.delta = this.clock.getDelta();
-                // if (this.mixer) this.mixer.update(this.delta);
-
+                // Play animations
+                const delta = this.clock.getDelta();
+                this.mixers.forEach(mixer => mixer.update(delta));
 
                 this.render();
                 requestAnimationFrame(this.animate.bind(this));
@@ -219,25 +225,6 @@ export class Scene {
                         }
                 });
                 this.scene.add(this.selectionables);
-                // this.createTitles(this, this.scene, {
-                //         x: 150,
-                //         y: 130,
-                //         z: 150 / 2,
-                // }, "shop", "SHOP")
-                // this.createTitles(this, this.scene, {
-                //         x: -150,
-                //         y: 80,
-                //         z: 150 / 2,
-                // }, "chat", "CHAT")
-                // this.scene.add(this.GroupSprite)
-                // this.scene.children.forEach(el=>{
-                //         try {
-                //                 el.castShadow=false
-                //         } catch (error) {
-                //                 console.log(error)
-                //         }
-                // })
-
         }
 
         createTitles(ctx, sc, pos, name, title) {
