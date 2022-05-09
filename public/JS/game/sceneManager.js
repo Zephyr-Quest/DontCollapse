@@ -79,9 +79,9 @@ export class Scene {
                                         gltf.animations.forEach(anim => mixer.clipAction(anim).play());
                                         this.mixers.push(mixer);
                                 }
-                                
+
                                 currentModel.instance = gltf.scene;
-                                
+
                                 // Load the other models
                                 this.loadModels(callback);
                         });
@@ -109,13 +109,14 @@ export class Scene {
                         canvas: document.getElementById('myThreeJsCanvas'),
                         alpha: true,
                         antialias: true,
-                        logarithmicDepthBuffer: true
+                        logarithmicDepthBuffer: false,
+                        powerPreference: "high-performance",
                 });
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setPixelRatio(window.devicePixelRatio);
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.shadowMap.enabled = true;
-                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                this.renderer.shadowMap.type = THREE.BasicShadowMap;
                 this.renderer.shadowMapSoft = false;
                 this.renderer.setClearColor(0x000000, 0);
                 document.body.appendChild(this.renderer.domElement);
@@ -139,13 +140,13 @@ export class Scene {
                 let intensity = 0.85;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
                 this.light.position.set(0, 0, 130);
-                this.light.castShadow = false;
-                this.light.shadow.bias = -0.001
-                this.light.shadow.mapSize.width = 2048; // default
-                this.light.shadow.mapSize.height = 2048; // default
+                this.light.castShadow = true;
+                this.light.shadow.bias = -0.0001
+                this.light.shadow.mapSize.width = 1024; // default
+                this.light.shadow.mapSize.height = 1024; // default
                 this.light.shadow.camera.near = 0.1;
                 this.light.shadow.camera.far = 500;
-                this.light.shadow.radius = 10
+                // this.light.shadow.radius = 10
                 this.light.decay = 2;
                 this.light.penumbra = 1;
                 this.scene.add(this.light);
@@ -187,7 +188,7 @@ export class Scene {
                 this.render();
                 requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();
-                this.light.shadow.autoUpdate = false
+                // this.light.shadow.autoUpdate = false
                 stats.end();
         }
 
@@ -229,11 +230,11 @@ export class Scene {
 
         createTitles(ctx, sc, pos, name, title) {
                 this.makeTextSprite(ctx, sc, pos, name, title, {
-                        "fontsize": 100,
+                        "fontsize": 50,
                         "fontface": 'Koulen',
                         "textColor": {
                                 r: 255,
-                                g: 0,
+                                g: 255,
                                 b: 255,
                                 a: 1.0
                         }
@@ -270,22 +271,22 @@ export class Scene {
                                 while (!s.name.includes(prefix)) {
                                         s = s.parent
                                 }
-                                if (s.name == "Shop" || s.name == "Chat") {
+                                let tempname = s.name
+                                tempname = tempname.replace(prefix, "")
+                                if (tempname == "Shop" || tempname == "Chat") {
                                         tempos = {
                                                 x: s.position.x,
-                                                y: s.position.y - 100,
+                                                y: s.position.y - (250 - s.position.y + 45),
                                                 z: s.position.z,
                                         }
                                 } else {
                                         tempos = {
                                                 x: s.position.x,
                                                 y: s.position.y,
-                                                z: s.position.z + 40,
+                                                z: s.position.z * 2,
                                         }
 
                                 }
-                                let tempname = s.name
-                                tempname = tempname.replace(prefix, "")
                                 this.createTitles(this, this.scene, tempos, "Sprite" + tempname, tempname)
                                 this.scene.add(this.GroupSprite)
                                 this.animatedText = true
@@ -338,9 +339,9 @@ export class Scene {
 
         makeTextSprite(ctx, sc, pos, name, message, parameters) {
                 if (parameters === undefined) parameters = {};
-                var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Koulen";
+                var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
                 var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 18;
-                var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 10;
+                var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
                 var borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : {
                         r: 0,
                         g: 0,
@@ -348,55 +349,61 @@ export class Scene {
                         a: 1.0
                 };
                 var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : {
-                        r: 0,
-                        g: 0,
+                        r: 255,
+                        g: 255,
                         b: 255,
                         a: 1.0
                 };
                 var textColor = parameters.hasOwnProperty("textColor") ? parameters["textColor"] : {
                         r: 0,
                         g: 0,
-                        b: 255,
+                        b: 0,
                         a: 1.0
                 };
-
                 var canvas = document.createElement('canvas');
-                // console.log(canvas)
-                // canvas.style.width = "100%"
-                // canvas.style.height = "100%"
-                // canvas.style.background="red"
                 var context = canvas.getContext('2d');
                 context.font = "Bold " + fontsize + "px " + fontface;
+                var metrics = context.measureText(message);
+                var textWidth = metrics.width;
                 context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
                 context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
+                context.lineWidth = borderThickness;
                 context.fillStyle = "rgba(" + textColor.r + ", " + textColor.g + ", " + textColor.b + ", 1.0)";
                 context.fillText(message, borderThickness, fontsize + borderThickness);
+                context.imageSmoothingQuality = "high"
+                context.textAlign = "center"
 
                 var texture = new THREE.Texture(canvas)
                 texture.needsUpdate = true;
+
                 var spriteMaterial = new THREE.SpriteMaterial({
                         map: texture,
-                        useScreenCoordinates: false
+                        useScreenCoordinates: false,
+                        depthWrite: false,
+                        depthTest: true
                 });
                 var sprite = new THREE.Sprite(spriteMaterial);
-                sprite.scale.set(0.5 * fontsize, 0.25 * fontsize, 0.75 * fontsize);
+                sprite.scale.set(0.5 * fontsize + 70, 50 + 0.25 * fontsize, 50 + 0.75 * fontsize);
+
                 const color = 0xfff6D3;
                 const intensity = 0.2;
-                sc.lightTxt = new THREE.PointLight(color, intensity);
-                sc.lightTxt.position.set(pos.x, pos.y, pos.z);
+                // sc.lightTxt = new THREE.PointLight(color, intensity);
+                // sc.lightTxt.position.set(pos.x, pos.y, pos.z);
                 // sc.lightTxt.castShadow = true;
-                sc.lightTxt.shadow.mapSize.width = 2048; // default
-                sc.lightTxt.shadow.mapSize.height = 2048; // default
-                sc.lightTxt.shadow.camera.near = 0.1; // default
-                sc.lightTxt.shadow.camera.far = 700;
+                // sc.lightTxt.shadow.mapSize.width = 2048; // default
+                // sc.lightTxt.shadow.mapSize.height = 2048; // default
+                // sc.lightTxt.shadow.camera.near = 0.1; // default
+                // sc.lightTxt.shadow.camera.far = 700;
                 sprite.position.x = pos.x
                 sprite.position.y = pos.y
                 sprite.position.z = pos.z
                 let texteSprite = new THREE.Group()
                 texteSprite.add(sprite)
-                texteSprite.add(sc.lightTxt)
+                // texteSprite.add(sc.lightTxt)
                 texteSprite.visible = true
                 texteSprite.name = name
                 ctx.GroupSprite.add(texteSprite)
         }
+
+
 }

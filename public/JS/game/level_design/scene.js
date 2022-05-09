@@ -271,7 +271,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: true,
                 transparency: 1,
-                name: "Shop"
+                name: "Mac_Shop"
         },
         /* ---------------------------------- CUBE ---------------------------------- */
 
@@ -290,7 +290,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: true,
                 transparency:1,
-                name: "Chat"
+                name: "Mac_Chat"
         },
         {
                 type: "cube",
@@ -305,7 +305,7 @@ export const ObjectArray = [
                 roty: 0,
                 rotz: 0,
                 ray: true,
-                name: "Chat",
+                name: "Mac_Chat",
                 transparency:0
         },
 
@@ -374,12 +374,13 @@ export const ObjectArray = [
                 heigth: 100,
                 x: -65,
                 y: 0,
-                z: .3,
+                z: 13,
                 color: "red",
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                ray: false,
+                ray: true,
+                name:"Mac_Poste a souder"
         },
         /* -------------------------------- PALETTES -------------------------------- */
         {
