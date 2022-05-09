@@ -14,6 +14,7 @@ const {
     validationResult
 } = require("express-validator");
 const { all } = require('express/lib/application');
+const { connected } = require('process');
 
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
@@ -212,6 +213,7 @@ io.on('connection', socket => {
     let username = socket.handshake.session.username;
     let idRoom = socket.handshake.session.idRoom;
 
+    // User connected in a room
     if (username !== undefined && allRooms[idRoom]) {
         console.log(username, " connected in room ", idRoom);
         console.log(allRooms[idRoom], "\n");
@@ -221,7 +223,9 @@ io.on('connection', socket => {
         }
     } else console.log('a user connected');
 
+    // Disconnect Room or specific user from host
     if (username !== undefined && idRoom !== undefined && disconnectingUsers.includes(username)) {
+        // Delete room
         if (allRooms[idRoom]) {
             // Check the exiting room
             if (allRooms[idRoom].playersName.indexOf(username) === 0) {
@@ -229,8 +233,9 @@ io.on('connection', socket => {
                 console.log("delete room", idRoom);
                 allRooms.splice(idRoom, 1);
                 io.to(idRoom).emit("disconnection");
-            } else {
-                // Remove the user from the room
+            } 
+            // Host remove an user from the room
+            else {
                 console.log("remove", username, "from room", idRoom);
                 allRooms[idRoom].removePlayer(username);
                 io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].playersName);
@@ -247,10 +252,12 @@ io.on('connection', socket => {
         socket.handshake.session.username = undefined;
     }
 
+    // Socket for chat
     socket.on('message', (msg) => {
         io.to(idRoom).emit('new-message', socket.handshake.session.username, msg);
     });
 
+    // Socket to start game
     socket.on('startGame', () => {
         const idRoom = socket.handshake.session.idRoom;
         const username = socket.handshake.session.username;
@@ -261,7 +268,28 @@ io.on('connection', socket => {
         else console.log("start unauthorized");
     })
 
+    // Socket to display room on lobby
     io.emit("display-rooms", allRooms);
+
+    // Socket to change engine
+    socket.on('buyEngine', (idEngine, levelEngine) => {
+        allRooms[idRoom].searchPlayer(username).machineUpgrade(idEngine, levelEngine);
+    })
+
+    // Socket to sell second-hand engine
+    socket.on('sellEngine', (idEngine, levelEngine, price) => {
+        allRooms[idRoom].searchPlayer(username).addSecondhandItem(username, idEngine, levelEngine, price);
+    })
+
+    // Socket to buy second-hand engine
+    socket.on('buySecondHandEngine', (seller) => {
+        allRooms[idRoom].searchPlayer(username).buySecondhandItem(username, seller);
+    })
+
+    // Socket to change contract
+    socket.on('buyContract', (idFournisseur, contractNumber) => {
+        allRooms[idRoom].searchPlayer(username).furnisherUpgrade(idFournisseur, contractNumber);
+    })
 
     /* -------------------------------------------------------------------------- */
     /*                                Disconnection                               */
