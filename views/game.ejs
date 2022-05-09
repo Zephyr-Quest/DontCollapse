@@ -41,8 +41,11 @@
                 <div class="progress-container">Ecologic</div>
             </div>
 
+            <div>
+                <p><span id="minutes"></span>:<span id="seconds"></span></p>
+            </div>
             <div id="money-container">
-                <p id="money-amount"></p>
+                <p><span id="money-amount">50000</span>€</p>
             </div>
 
             <!-- Modal Shop -->
@@ -388,7 +391,7 @@
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
                         </div>
-                        <div  buyable class="j3 void clickable" style="display: none;">
+                        <div buyable class="j3 void clickable" style="display: none;">
                             <p>Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
@@ -415,7 +418,8 @@
                 <span class="close-button" id="close-chat">&times;</span>
             </div>
             <form id="chatForm" action="">
-                <input id="input-chat" autocomplete="off" placeholder="Message..." /><button class="button">Send</button>
+                <input id="input-chat" autocomplete="off" placeholder="Message..." /><button
+                    class="button">Send</button>
             </form>
             <div id="messages"></div>
 

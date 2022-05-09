@@ -116,6 +116,7 @@ function changeMusic() {
         musicUp.style.display = "none";
         musicOff.style.display = "block";
     }
+    if (musicCB) musicCB(sound);
 }
 
 function cutEffect() {
@@ -141,6 +142,23 @@ function changeEffect() {
 }
 
 
+let musicCB = null;
+
+function setMusicCallBack(cb) {
+    musicCB = cb
+}
+
+function isMusicON() {
+    return sound
+}
+
+function isEffectOn() {
+    return effect
+}
+
 export default {
     initListener,
+    setMusicCallBack,
+    isMusicON,
+    isEffectOn
 }
