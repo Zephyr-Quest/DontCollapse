@@ -2,7 +2,7 @@ const delay = 1000;
 
 module.exports = class Chrono{
     constructor(){
-        this.minutes = 0;
+        this.minutes = 10;
         this.seconds = 0;
         this.stopChrono = false;
     }
@@ -11,14 +11,14 @@ module.exports = class Chrono{
      * Increment the chrono each second
      */
     incrementChrono() {
-        // Increment seconds
-        this.seconds++;
-    
         // Increment minutes
-        if (this.seconds > 59) {
-            this.seconds = 0;
-            this.minutes++;
+        if (this.seconds <= 0) {
+            this.seconds = 60;
+            this.minutes--;
         }
+        
+        // Increment seconds
+        this.seconds--;
     
         // Continue
         if (!this.stopChrono) setTimeout(() => this.incrementChrono(), delay);

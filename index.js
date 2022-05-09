@@ -214,6 +214,7 @@ io.on('connection', socket => {
         if (idRoom !== undefined) {
             socket.join(idRoom);
             io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].playersName);
+            allRooms[idRoom].chrono.incrementChrono();
         }
     } else console.log('a user connected');
 
