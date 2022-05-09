@@ -2,9 +2,9 @@ import ProgressBar from './progressBar.js';
 // import Modal from './shopModal.js';
 //import Chat from './chatModal.js'
 import Parameter from './parameter.js'
-import Chrono from './chrono.js'
+// import Chrono from './chrono.js'
 
-import Modal from './modal/modalManager.js'
+import Modal from './modalManager.js'
 
 
 /* ------------------------------ progress bar ------------------------------ */

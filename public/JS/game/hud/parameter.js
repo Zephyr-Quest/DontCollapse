@@ -94,7 +94,6 @@ function closeParam() {
             element.removeEventListener('click', fctParam);
 
             element.addEventListener('animationend', () => {
-                console.log("ok");
                 element.removeAttribute('closing');
                 element.style.display = "none";
             }, { once: true });
