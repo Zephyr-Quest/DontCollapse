@@ -86,6 +86,10 @@ app.get('/lobby', (req, res) => {
 });
 
 app.get('/game', (req, res) => {
+    if (!req.session.idRoom) {
+        res.redirect('/lobby');
+        return;
+    }
     res.render('game', {
         username: req.session.username
     });
@@ -214,7 +218,6 @@ io.on('connection', socket => {
         if (idRoom !== undefined) {
             socket.join(idRoom);
             io.to(idRoom).emit("updatePlayerList", allRooms[idRoom].playersName);
-            allRooms[idRoom].chrono.incrementChrono();
         }
     } else console.log('a user connected');
 
@@ -251,8 +254,10 @@ io.on('connection', socket => {
     socket.on('startGame', () => {
         const idRoom = socket.handshake.session.idRoom;
         const username = socket.handshake.session.username;
-        if (allRooms[idRoom] && allRooms[idRoom].playersName.length >=2 && allRooms[idRoom].playersName.length <=4 )
+        if (allRooms[idRoom] && allRooms[idRoom].playersName.length >= 2 && allRooms[idRoom].playersName.length <= 4) {
+            allRooms[idRoom].chrono.incrementChrono();
             io.to(idRoom).emit("startAuthorized");
+        }
         else console.log("start unauthorized");
     })
 
