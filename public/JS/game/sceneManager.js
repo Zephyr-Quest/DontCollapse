@@ -251,7 +251,42 @@ export class Scene {
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
                 if (s) {
-                        //! If clicked
+                        if (this.staticText) {
+                                this.scene.remove(this.copyGroupSprite)
+                                this.copyGroupSprite = new THREE.Group()
+                        }
+                        let tempos
+                        let prefix = "Mac_"
+                        while (!s.name.includes(prefix)) {
+                                s = s.parent
+                        }
+                        let tempname = s.name
+                        tempname = tempname.replace(prefix, "")
+                        if (tempname == "Shop" || tempname == "Chat") {
+                                tempos = {
+                                        x: s.position.x,
+                                        y: s.position.y - (250 - s.position.y + 45),
+                                        z: s.position.z,
+                                }
+                        } else {
+                                tempos = {
+                                        x: s.position.x,
+                                        y: s.position.y,
+                                        z: s.position.z * 2,
+                                }
+
+                        }
+                        this.createTitles(this, this.scene, tempos, "Sprite" + tempname, tempname)
+                        this.copyGroupSprite = this.GroupSprite.clone()
+                        this.scene.add(this.copyGroupSprite)
+                        this.staticText = true
+                } else {
+                        if (this.staticText) {
+                                this.staticText = false
+                                this.scene.remove(this.copyGroupSprite)
+                                this.copyGroupSprite = new THREE.Group()
+                                this.GroupSprite = new THREE.Group()
+                        }
                 }
         }
         onMouseOver(event, ctx) {
@@ -351,8 +386,8 @@ export class Scene {
                 var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : {
                         r: 255,
                         g: 255,
-                        b: 255,
-                        a: 1.0
+                        b: 0,
+                        a: 0.0
                 };
                 var textColor = parameters.hasOwnProperty("textColor") ? parameters["textColor"] : {
                         r: 0,
