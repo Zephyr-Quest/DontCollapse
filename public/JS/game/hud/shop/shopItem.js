@@ -3,9 +3,14 @@ import Buy from './manageItem.js'
 const leftPage = document.querySelectorAll('#left-page div');
 const rightPage = document.querySelectorAll('#right-page div');
 
+/**
+ * init listeners from id[0] to id[1]
+ * @param {Document} id 
+ */
 function initListener(id) {
     closeAllListener();
 
+    // if the occasion is not selected
     if (id[0] != 24) {
         for (let i = id[0]; i <= id[1]; i++) {
             leftPage[i].addEventListener('mouseenter', showDescri);
@@ -21,6 +26,10 @@ function initListener(id) {
     }
 }
 
+/**
+ * init occasion listeners from id[0] to id[1]
+ * @param {Document} id 
+ */
 function setOccaz(id) {
     for (let i = id[0]; i <= id[1]; i++) {
         if (leftPage[i].hasAttribute("buyable")) {
@@ -40,6 +49,10 @@ function setOccaz(id) {
     }
 }
 
+/**
+ * show the description when the mouse is hover the card
+ * @param {EventTarget} e 
+ */
 function showDescri(e) {
     e.target.children[0].style.display = "none";
     e.target.children[1].style.display = "block";
@@ -47,25 +60,39 @@ function showDescri(e) {
 
 }
 
+/**
+ * hide the description when the mouse leave the card
+ * @param {EventTarget} e 
+ */
 function hideDescri(e) {
     e.target.children[0].style.display = "block";
     e.target.children[1].style.display = "none"
     e.target.children[2].style.display = "none";
 }
 
+/**
+ * open confirm modal when player click on buy
+ * @param {EventTarget} e 
+ */
 function buyItem(e) {
     Buy.buyItem(e.target.parentElement)
 }
 
+/**
+ * open confirm modal to delet or shop an item in occasion
+ * @param {EventTarget} e 
+ */
 function occasion(e) {
     if (e.target.parentElement.classList[0] == "own") {
         Buy.deleteItem(e.target.parentElement)
-    }
-    else{
+    } else {
         Buy.buyItem(e.target.parentElement)
     }
 }
 
+/**
+ * remove all listeners
+ */
 function closeAllListener() {
     for (let i = 0; i < leftPage.length - 2; i++) {
         leftPage[i].removeEventListener('click', buyItem);
@@ -85,8 +112,10 @@ function closeAllListener() {
     }
 }
 
-
-
+/**
+ * display the elements selected
+ * @param {Document} classOfRight 
+ */
 function changeItem(classOfRight) {
     leftPage.forEach(element => {
         if (element.style.display === "flex") {

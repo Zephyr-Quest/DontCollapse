@@ -13,44 +13,60 @@ const level = {
     "braz": 2,
     "tesla": 3,
 };
-
+/**
+ * Open confirm modal to buy the item currently selected
+ * @param {Document} divOfItem 
+ */
 function buyItem(divOfItem) {
-    itemLevel = level[divOfItem.classList[0]];
-    itemToBuy = divOfItem.children[0].textContent;
-    document.getElementById('buying').textContent = "Achat de : " + itemToBuy;
-    modal.showModal();
+    itemLevel = level[divOfItem.classList[0]];      // set the item level
+    itemToBuy = divOfItem.children[0].textContent;  // set the item name
+    document.getElementById('buying').textContent = "Achat de : " + itemToBuy;  // replace modal text
+    modal.showModal();  // open confirm modal
     initListener();
 }
 
+/**
+ * Open the confirm mdoal to delete the occasion item
+ * @param {Document} divOfItem 
+ */
 function deleteItem(divOfItem) {
-    itemLevel = level[divOfItem.classList[0]];
+    itemLevel = level[divOfItem.classList[0]];  // same as buy
     itemToDelete = divOfItem.children[0].textContent;
     document.getElementById('buying').textContent = "Voulez vous vraiment vous débarasser de votre " + itemToDelete + " ?";
     modal.showModal();
     initListener();
 }
 
+/**
+ * init "oui" and "non" listeners to buy or not buy the item (or delete it)
+ */
 function initListener() {
     oui.addEventListener('click', buy);
     non.addEventListener('click', notBuy);
 }
-
+/**
+ * remove listeners and reset the items
+ */
 function removeListeners() {
-    oui.removeEventListener('click', buyItem)
-    non.removeEventListener('click', notBuy)
+    oui.removeEventListener('click', buyItem);
+    non.removeEventListener('click', notBuy);
     itemToBuy = "";
     itemToDelete = "";
 
 }
 
+/**
+ * not buy the item : close modal and remove oui/non listeners
+ */
 function notBuy() {
-    modal.close();
+    modal.close();  // close confirm modal
     removeListeners();
 }
 
+/**
+ * buy item : transmit the item to buy or delete to back, close confirm and shop modals and remove listeners
+ */
 function buy() {
-    console.log(itemToBuy);
-    console.log(itemToBuy.length);
     if (itemToBuy.length != 0) {
         //TODO transmettre à rémi l'achat de l'article
         // itemToBuy | itemLevel
@@ -61,8 +77,8 @@ function buy() {
 
 
 
-    modal.close();
-    Modal.closeFunction();
+    modal.close();          // close confirm modal
+    Modal.closeFunction();  // close shop modal
     removeListeners();
 }
 

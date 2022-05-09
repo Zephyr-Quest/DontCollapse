@@ -15,6 +15,9 @@ const signOut = document.querySelector('.fa-right-from-bracket');
 let sound = true;
 let effect = true;
 
+/**
+ * display parameters
+ */
 function showParameter() {
     divParam.addEventListener('mouseleave', closeParam, {
         once: true
@@ -39,6 +42,10 @@ function showParameter() {
     }
 }
 
+/**
+ * select the function to trigger with the item clicked
+ * @param {EventTarget} e 
+ */
 function fctParam(e) {
     switch (e.target.classList[2]) {
         case 'fa-bell':
@@ -61,6 +68,9 @@ function fctParam(e) {
     }
 }
 
+/**
+ * hide parameters
+ */
 function closeParam() {
     paramContent.forEach(element => {
         element.style.display = "none";
@@ -74,10 +84,16 @@ function closeParam() {
     });
 }
 
+/**
+ * init the listener for the mouse over
+ */
 function initListener() {
     openParameter.addEventListener('mouseover', showParameter);
 }
 
+/**
+ * disconnection button clicked
+ */
 function ilveutsedeco() {
     console.log('deconnexion');
     modal.showModal();
@@ -96,18 +112,27 @@ function ilveutsedeco() {
     });
 }
 
+/**
+ * cut the music sound
+ */
 function cutMusic() {
     console.log('coupe musique');
     sound = false;
     changeMusic();
 }
 
+/**
+ * put the music sound
+ */
 function putMusic() {
     console.log('met musique');
     sound = true;
     changeMusic();
 }
 
+/**
+ * change the music logo
+ */
 function changeMusic() {
     if (sound) {
         musicUp.style.display = "block";
@@ -119,18 +144,27 @@ function changeMusic() {
     if (musicCB) musicCB(sound);
 }
 
+/**
+ * cut the sound effect
+ */
 function cutEffect() {
     console.log('coupe effet');
     effect = false;
     changeEffect();
 }
 
+/**
+ * put the sound effect
+ */
 function putEffect() {
     console.log('met effet');
     effect = true;
     changeEffect();
 }
 
+/**
+ * change the effect logo
+ */
 function changeEffect() {
     if (effect) {
         effectUp.style.display = "block";
@@ -144,14 +178,26 @@ function changeEffect() {
 
 let musicCB = null;
 
+/**
+ * set the callback to trigger when the player wants to cut music
+ * @param {Function} cb 
+ */
 function setMusicCallBack(cb) {
-    musicCB = cb
+    musicCB = cb;
 }
 
+/**
+ * return the state of music
+ * @returns {Bool} sound
+ */
 function isMusicON() {
-    return sound
+    return sound;
 }
 
+/**
+ * return the state of effect
+ * @returns {Bool} effect
+ */
 function isEffectOn() {
     return effect
 }

@@ -4,6 +4,9 @@ const shopModal = document.querySelector('#shop-modal');
 const openShop = document.querySelector('#shop-button');
 const closeShop = document.querySelector('#close-shop');
 
+/**
+ * close the modal and remove all event listeners
+ */
 function closeFunction() {
     shopModal.setAttribute('closing', "");
     shopModal.addEventListener('animationend', () => {
@@ -19,12 +22,20 @@ function closeFunction() {
     window.removeEventListener('keydown', escapeClose); // Escape
 }
 
+/**
+ * close modal if  player click outside the modal
+ * @param {EventTarget} e 
+ */
 function outsideClose(e) {
     if (e.target.nodeName === "DIALOG") {
         closeFunction();
     }
 }
 
+/**
+ * close modal if player clik on escape button
+ * @param {EventTarget} e 
+ */
 function escapeClose(e) {
     if ((e.key === "Escape" || e.key === "Esc") && shopModal.hasAttribute('open')) {
         closeFunction();

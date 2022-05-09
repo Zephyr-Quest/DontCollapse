@@ -2,8 +2,12 @@ import ShopItem from "./shopItem.js";
 
 const rightRubric = document.querySelectorAll('#supplier div');
 
+/**
+ * init listeners from id[0] to id[1]
+ * @param {object} id 
+ */
 function initListener(id) {
-    closeAllListener();
+    closeAllListener(); // delete all listeners
     ShopItem.changeItem(rightRubric[id].classList[0]);
     for (let i = id; i < id + 4; i++) {
             rightRubric[i].addEventListener('click', changeSelection);
@@ -11,6 +15,10 @@ function initListener(id) {
     }
 }
 
+/**
+ * display background of the item selected and display his items  
+ * @param {EventTarget} e 
+ */
 function changeSelection(e) {
     rightRubric.forEach(element => {
         if (element.classList.contains("selected")) element.classList.remove("selected");
@@ -19,7 +27,12 @@ function changeSelection(e) {
     ShopItem.changeItem(e.target.classList[0]);
 }
 
+/**
+ * Display the element clicked
+ * @param {Document} classOfTop 
+ */
 function changeRubric(classOfTop) {
+    // hide everything
     rightRubric.forEach(element => {
         if (element.style.display === "flex") {
             element.style.display = "none";
@@ -27,6 +40,7 @@ function changeRubric(classOfTop) {
         }
     });
 
+    // select the element to display
     switch (classOfTop) {
         case "top1":
             rightRubric[0].classList.add("selected");
@@ -56,11 +70,6 @@ function changeRubric(classOfTop) {
             rightRubric[12].style.display = "flex";
             ShopItem.changeItem("occaz");
 
-            // for (let i = 12; i < 16; i++) {
-            //     rightRubric[i].style.display = "flex";
-            // }
-            //initListener(12);
-
             break;
         default:
             console.warn("Error while changing the right rubric");
@@ -68,6 +77,9 @@ function changeRubric(classOfTop) {
     }
 }
 
+/**
+ * remove all listeners
+ */
 function closeAllListener() {
     ShopItem.closeAllListener();
     for (const current of rightRubric) {

@@ -7,11 +7,14 @@ let chronoMinutes = 12;
 let chronoSeconds = 0;
 let stopChrono = true;
 
+/**
+ * decrement chrono
+ */
 function descendLeChronoMonAmi() {
-    // Increment seconds
+    // decrement seconds
     chronoSeconds--;
 
-    // Increment minutes
+    // decrement minutes
     if (chronoSeconds < 0) {
         chronoSeconds = 59;
         chronoMinutes--;

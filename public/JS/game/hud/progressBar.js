@@ -4,6 +4,10 @@ const sizeEcolo = 200; */
 
 //import config from "./config.js";
 
+/**
+ * set the value of the social bar
+ * @param {Number} amount value/100 
+ */
 function updateSocial(amount) {
     let bar = document.getElementsByClassName("progress-container")[0];
     let gradSocial = amount;
@@ -21,8 +25,10 @@ function updateSocial(amount) {
     bar.innerText = "Social " + gradSocial + "%";
 }
 
-
-
+/**
+ * set the value of the economic bar
+ * @param {Number} amount value/100 
+ */
 function updateEconomic(amount) {
     let bar = document.getElementsByClassName("progress-container")[1];
     let gradEcono = amount;
@@ -40,6 +46,10 @@ function updateEconomic(amount) {
     bar.innerText = "Economic     " + gradEcono + "%";
 }
 
+/**
+ * set the value of the ecologic bar
+ * @param {Number} amount value/100 
+ */
 function updateEcologic(amount) {
     let bar = document.getElementsByClassName("progress-container")[2];
     let gradEcolo = amount;
