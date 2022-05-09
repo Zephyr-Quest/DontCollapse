@@ -34,6 +34,10 @@ module.exports = class Game {
         return result;
     }
 
+    getPlayerMoney(player) {
+        return this.searchPlayer(player).money
+    }
+
     addSecondhandItem(player, machine, level, price) {
         if (this.checkPlayerItem(player)) return false;
         else {
