@@ -12,15 +12,21 @@
     <style media="screen" type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
 
-        body {
+        html, body {
             background-color: #fff;
             margin: 0;
-            padding: 0
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        *{
+            padding:0;
+            margin:0
         }
 
         #myThreeJsCanvas {
-            width: 100%;
-            height: 100%
+            width: 90%;
+            height: 90%
         }
 
         #myMenuShop {
@@ -29,7 +35,7 @@
             bottom: 0;
             margin-bottom: 30px;
             border-radius: 20px;
-            padding:20px;
+            padding: 20px;
             margin-left: 50%;
             transform: translateX(-50%);
             z-index: 100;
@@ -38,6 +44,7 @@
             display: flex;
             flex-direction: column;
             display: none;
+            transition: all 2s ease;
         }
 
         #myMenuShop #title_menuShop {
@@ -47,7 +54,7 @@
             letter-spacing: 2px;
             font-size: 30px;
             padding: 0;
-            margin:0
+            margin: 0
         }
 
         #myMenuShop div #icon1 {
@@ -57,7 +64,16 @@
             margin-left: 50%;
             transform: translateX(-50%);
             border-radius: 20px;
-
+            text-align: center;
+            font-size: 50px;
+            color: white
+        }
+        #icon1 ion-icon{
+            margin-top :10px;
+            font-weight: bold;
+        }
+        #icon1:hover{
+            cursor: pointer;
         }
     </style>
 </head>
@@ -74,7 +90,9 @@
     <div id="myMenuShop">
         <h1 id="title_menuShop">Titre</h1>
         <div>
-            <div id="icon1"></div>
+            <div id="icon1">
+                <ion-icon name="pricetag-outline"></ion-icon>
+            </div>
 
         </div>
     </div>
@@ -90,6 +108,8 @@
     </script>
 
     <!-- ThreeJS -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script type="module" src="./JS/game/app.js"></script>
 </body>
 

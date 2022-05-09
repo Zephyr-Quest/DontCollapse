@@ -53,7 +53,7 @@ export class Scene {
                 this.mixers = [];
                 this.currentMixerId = 0;
                 this.clock = new THREE.Clock();
-                this.openedMenu=false
+                this.openedMenu = false
         }
 
         /**
@@ -282,8 +282,10 @@ export class Scene {
                         this.copyGroupSprite = this.GroupSprite.clone()
                         this.scene.add(this.copyGroupSprite)
                         this.staticText = true
-                        if(!this.openedMenu){
+                        if (!this.openedMenu && (tempname != "Shop" && tempname != "Chat")) {
                                 this.openMenu(tempname)
+                        } else if (tempname == "Shop" || tempname == "Chat"){
+                                this.closeMenu()
                         }
                 } else {
                         if (this.staticText) {
@@ -295,14 +297,14 @@ export class Scene {
                         }
                 }
         }
-        openMenu(s){
-                let menu=document.getElementById("myMenuShop")
-                document.getElementById("title_menuShop").innerText="Menu : "+s
-                if(menu.style.display!="block") menu.style.display="block"
+        openMenu(s) {
+                let menu = document.getElementById("myMenuShop")
+                document.getElementById("title_menuShop").innerText = "Menu : " + s
+                menu.style.display = "block"
         }
-        closeMenu(){
-                let menu=document.getElementById("myMenuShop")
-                if(menu.style.display=="block") menu.style.display="none"
+        closeMenu() {
+                let menu = document.getElementById("myMenuShop")
+                if (menu.style.display == "block") menu.style.display = "none"
 
         }
         onMouseOver(event, ctx) {
