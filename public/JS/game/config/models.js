@@ -7,6 +7,7 @@ export const Models = {
                 model: null,
                 scale: 1,
                 isModel: false,
+                isClonable: true,
                 instance: null
         },
         floor: {
@@ -14,6 +15,7 @@ export const Models = {
                 model: null,
                 scale: 1,
                 isModel: false,
+                isClonable: true,
                 instance: null
         },
         cube: {
@@ -21,6 +23,7 @@ export const Models = {
                 model: null,
                 scale: 1,
                 isModel: false,
+                isClonable: true,
                 instance: null
         },
         desk: {
@@ -28,6 +31,7 @@ export const Models = {
                 model: "desk.glb",
                 scale: 20,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -36,6 +40,7 @@ export const Models = {
                 model: "welding1.glb",
                 scale: 20,
                 isModel: true,
+                isClonable: false,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -44,6 +49,7 @@ export const Models = {
                 model: "pallet.glb",
                 scale: 7,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -52,6 +58,7 @@ export const Models = {
                 model: "box.glb",
                 scale: 9,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -60,6 +67,7 @@ export const Models = {
                 model: "box_closed.glb",
                 scale: 9,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -68,6 +76,7 @@ export const Models = {
                 model: "bins.glb",
                 scale: 9,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -76,6 +85,7 @@ export const Models = {
                 model: "barrel.glb",
                 scale: 2.4,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [0, 0, 0]
         },
@@ -84,6 +94,7 @@ export const Models = {
                 model: "accuracy1.glb",
                 scale: 20,
                 isModel: true,
+                isClonable: false,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -92,6 +103,7 @@ export const Models = {
                 model: "shelf.glb",
                 scale: .6,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -100,6 +112,7 @@ export const Models = {
                 model: "metallocker.glb",
                 scale: 11,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -108,6 +121,7 @@ export const Models = {
                 model: "ladder.glb",
                 scale: .25,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -116,6 +130,7 @@ export const Models = {
                 model: "office.gltf",
                 scale: .3,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -124,6 +139,7 @@ export const Models = {
                 model: "window.gltf",
                 scale: 50,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 180, 0]
         },
@@ -132,6 +148,7 @@ export const Models = {
                 model: "cork.gltf",
                 scale: 8,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 0, 0]
         },
@@ -140,6 +157,7 @@ export const Models = {
                 model: "door.glb",
                 scale: 1.3,
                 isModel: true,
+                isClonable: true,
                 instance: null,
                 rotation: [90, 180, 0]
         },
@@ -148,6 +166,7 @@ export const Models = {
                 model: null,
                 scale: 1,
                 isModel: false,
+                isClonable: true,
                 instance: null,
                 rotation: [0, 0, 0]
         }

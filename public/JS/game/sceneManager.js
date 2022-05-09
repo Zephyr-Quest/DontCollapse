@@ -49,6 +49,9 @@ export class Scene {
                         clientX: 0,
                         clientY: 0,
                 }
+                this.mixers = [];
+                this.currentMixerId = 0;
+                this.clock = new THREE.Clock();
         }
 
         /**
@@ -70,8 +73,15 @@ export class Scene {
 
                         // Add the model to the load manager
                         this.modelLoader.load(Config.modelsPath + currentModel.model, gltf => {
+                                // Manage animations
+                                if (gltf.animations && gltf.animations.length > 0) {
+                                        const mixer = new THREE.AnimationMixer(gltf.scene);
+                                        gltf.animations.forEach(anim => mixer.clipAction(anim).play());
+                                        this.mixers.push(mixer);
+                                }
+                                
                                 currentModel.instance = gltf.scene;
-
+                                
                                 // Load the other models
                                 this.loadModels(callback);
                         });
@@ -98,7 +108,7 @@ export class Scene {
                 this.renderer = new THREE.WebGLRenderer({
                         canvas: document.getElementById('myThreeJsCanvas'),
                         alpha: true,
-                        antialias: true,
+                        antialias: false,
                 });
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -180,6 +190,11 @@ export class Scene {
 
         animate() {
                 stats.begin();
+
+                // Play animations
+                const delta = this.clock.getDelta();
+                this.mixers.forEach(mixer => mixer.update(delta));
+
                 this.render();
                 requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();

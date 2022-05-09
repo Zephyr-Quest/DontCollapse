@@ -43,7 +43,8 @@ export class Object3D extends Locatable {
                         this.transp = 1
                 }
                 if (Models[this.type].isModel) {
-                        this.mesh = Models[this.type].instance.clone();
+                        this.mesh = Models[this.type].instance;
+                        if (Models[this.type].isClonable) this.mesh = this.mesh.clone();
                         if (Models[this.type].name == "barrel") {
                                 this.mesh.children[0].material=new THREE.MeshStandardMaterial({
                                         color: this.color,

@@ -6,18 +6,11 @@ import {
         Scene
 } from "./sceneManager.js"
 
-
-import * as THREE from 'three';
-
 let sc = new Scene(onLoad);
 
 function onLoad() {
+        console.log(sc.mixers);
         sc.init()
         sc.createScene()
         sc.animate()
 }
-
-
-
-
-
