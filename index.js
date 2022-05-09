@@ -86,7 +86,7 @@ app.get('/lobby', (req, res) => {
 });
 
 app.get('/game', (req, res) => {
-    if (!req.session.idRoom) {
+    if (!req.session.username) {
         res.redirect('/lobby');
         return;
     }
