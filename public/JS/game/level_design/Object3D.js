@@ -78,7 +78,7 @@ export class Object3D extends Locatable {
                                         color: this.color,
                                         side: THREE.FrontSide,
                                         opacity: this.transp,
-                                        transparent: true
+                                        transparent: false
 
 
                                 });
@@ -87,9 +87,10 @@ export class Object3D extends Locatable {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);
                                 this.material = new THREE.MeshStandardMaterial({
                                         color: this.color,
-                                        transparent: true,
+                                        transparent: false,
                                         opacity: this.transp,
                                         side: THREE.DoubleSide,
+                                        depthTest:true,
 
                                 });
                         }
