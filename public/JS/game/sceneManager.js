@@ -109,14 +109,14 @@ export class Scene {
                         canvas: document.getElementById('myThreeJsCanvas'),
                         alpha: true,
                         antialias: true,
-                        logarithmicDepthBuffer: true,
+                        logarithmicDepthBuffer: false,
                         powerPreference: "high-performance",
                 });
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setPixelRatio(window.devicePixelRatio);
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.shadowMap.enabled = true;
-                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                this.renderer.shadowMap.type = THREE.BasicShadowMap;
                 this.renderer.shadowMapSoft = false;
                 this.renderer.setClearColor(0x000000, 0);
                 document.body.appendChild(this.renderer.domElement);
@@ -140,13 +140,13 @@ export class Scene {
                 let intensity = 0.85;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
                 this.light.position.set(0, 0, 130);
-                this.light.castShadow = false;
-                this.light.shadow.bias = -0.001
-                this.light.shadow.mapSize.width = 2048; // default
-                this.light.shadow.mapSize.height = 2048; // default
+                this.light.castShadow = true;
+                this.light.shadow.bias = -0.0001
+                this.light.shadow.mapSize.width = 1024; // default
+                this.light.shadow.mapSize.height = 1024; // default
                 this.light.shadow.camera.near = 0.1;
                 this.light.shadow.camera.far = 500;
-                this.light.shadow.radius = 10
+                // this.light.shadow.radius = 10
                 this.light.decay = 2;
                 this.light.penumbra = 1;
                 this.scene.add(this.light);
@@ -188,7 +188,7 @@ export class Scene {
                 this.render();
                 requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();
-                this.light.shadow.autoUpdate = false
+                // this.light.shadow.autoUpdate = false
                 stats.end();
         }
 
@@ -273,18 +273,17 @@ export class Scene {
                                 }
                                 let tempname = s.name
                                 tempname = tempname.replace(prefix, "")
-                                console.log(s)
                                 if (tempname == "Shop" || tempname == "Chat") {
                                         tempos = {
                                                 x: s.position.x,
-                                                y: s.position.y - 100,
+                                                y: s.position.y - (250 - s.position.y + 45),
                                                 z: s.position.z,
                                         }
                                 } else {
                                         tempos = {
                                                 x: s.position.x,
                                                 y: s.position.y,
-                                                z: s.position.z *2,
+                                                z: s.position.z * 2,
                                         }
 
                                 }
@@ -372,29 +371,29 @@ export class Scene {
                 context.fillStyle = "rgba(" + textColor.r + ", " + textColor.g + ", " + textColor.b + ", 1.0)";
                 context.fillText(message, borderThickness, fontsize + borderThickness);
                 context.imageSmoothingQuality = "high"
-                context.textAlign="center"
+                context.textAlign = "center"
 
                 var texture = new THREE.Texture(canvas)
                 texture.needsUpdate = true;
-                
+
                 var spriteMaterial = new THREE.SpriteMaterial({
                         map: texture,
                         useScreenCoordinates: false,
-                        depthWrite:false,
-                        depthTest:true
+                        depthWrite: false,
+                        depthTest: true
                 });
                 var sprite = new THREE.Sprite(spriteMaterial);
-                sprite.scale.set(0.5 * fontsize+70, 50+0.25 * fontsize,50+ 0.75 * fontsize);
+                sprite.scale.set(0.5 * fontsize + 70, 50 + 0.25 * fontsize, 50 + 0.75 * fontsize);
 
                 const color = 0xfff6D3;
                 const intensity = 0.2;
-                sc.lightTxt = new THREE.PointLight(color, intensity);
-                sc.lightTxt.position.set(pos.x, pos.y, pos.z);
+                // sc.lightTxt = new THREE.PointLight(color, intensity);
+                // sc.lightTxt.position.set(pos.x, pos.y, pos.z);
                 // sc.lightTxt.castShadow = true;
-                sc.lightTxt.shadow.mapSize.width = 2048; // default
-                sc.lightTxt.shadow.mapSize.height = 2048; // default
-                sc.lightTxt.shadow.camera.near = 0.1; // default
-                sc.lightTxt.shadow.camera.far = 700;
+                // sc.lightTxt.shadow.mapSize.width = 2048; // default
+                // sc.lightTxt.shadow.mapSize.height = 2048; // default
+                // sc.lightTxt.shadow.camera.near = 0.1; // default
+                // sc.lightTxt.shadow.camera.far = 700;
                 sprite.position.x = pos.x
                 sprite.position.y = pos.y
                 sprite.position.z = pos.z
@@ -406,5 +405,5 @@ export class Scene {
                 ctx.GroupSprite.add(texteSprite)
         }
 
-        
+
 }

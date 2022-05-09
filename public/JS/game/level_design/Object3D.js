@@ -117,7 +117,6 @@ export class Object3D extends Locatable {
                 }
                 if (this.name == "Assembleur") {
                         this.mesh.visible = true;
-                        console.log(this.mesh)
                 }
 
                 this.mesh.receiveShadow = true;
