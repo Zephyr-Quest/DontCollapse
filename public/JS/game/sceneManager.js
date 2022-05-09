@@ -45,6 +45,7 @@ export class Scene {
                 this.loadModels(onLoad);
                 this.animatedtextShop = false
                 this.animatedTextChat = false
+                this.staticText = false
                 this.mousePos = {
                         clientX: 0,
                         clientY: 0,
@@ -52,6 +53,7 @@ export class Scene {
                 this.mixers = [];
                 this.currentMixerId = 0;
                 this.clock = new THREE.Clock();
+                this.openedMenu=false
         }
 
         /**
@@ -140,7 +142,7 @@ export class Scene {
                 let intensity = 0.85;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
                 this.light.position.set(0, 0, 130);
-                this.light.castShadow = true;
+                this.light.castShadow = false;
                 this.light.shadow.bias = -0.0001
                 this.light.shadow.mapSize.width = 1024; // default
                 this.light.shadow.mapSize.height = 1024; // default
@@ -280,14 +282,28 @@ export class Scene {
                         this.copyGroupSprite = this.GroupSprite.clone()
                         this.scene.add(this.copyGroupSprite)
                         this.staticText = true
+                        if(!this.openedMenu){
+                                this.openMenu(tempname)
+                        }
                 } else {
                         if (this.staticText) {
+                                this.closeMenu()
                                 this.staticText = false
                                 this.scene.remove(this.copyGroupSprite)
                                 this.copyGroupSprite = new THREE.Group()
                                 this.GroupSprite = new THREE.Group()
                         }
                 }
+        }
+        openMenu(s){
+                let menu=document.getElementById("myMenuShop")
+                document.getElementById("title_menuShop").innerText="Menu : "+s
+                if(menu.style.display!="block") menu.style.display="block"
+        }
+        closeMenu(){
+                let menu=document.getElementById("myMenuShop")
+                if(menu.style.display=="block") menu.style.display="none"
+
         }
         onMouseOver(event, ctx) {
                 var position = new THREE.Vector2();

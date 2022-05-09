@@ -11,9 +11,54 @@
     <title>Don't Collapse</title>
     <style media="screen" type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
+
         body {
             background-color: #fff;
-        }      
+            margin: 0;
+            padding: 0
+        }
+
+        #myThreeJsCanvas {
+            width: 100%;
+            height: 100%
+        }
+
+        #myMenuShop {
+            background-color: rgba(0, 0, 0, 0.349);
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            padding:20px;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            height: 150px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            display: none;
+        }
+
+        #myMenuShop #title_menuShop {
+            color: white;
+            font-family: "Koulen";
+            text-align: center;
+            letter-spacing: 2px;
+            font-size: 30px;
+            padding: 0;
+            margin:0
+        }
+
+        #myMenuShop div #icon1 {
+            height: 70px;
+            width: 70px;
+            background-color: rgba(255, 255, 255, 0.603);
+            margin-left: 50%;
+            transform: translateX(-50%);
+            border-radius: 20px;
+
+        }
     </style>
 </head>
 
@@ -24,7 +69,15 @@
         <p style="color:blue">Z axis</p>
     </div>
 
-    <canvas id="myThreeJsCanvas"></canvas>  
+    <canvas id="myThreeJsCanvas"></canvas>
+
+    <div id="myMenuShop">
+        <h1 id="title_menuShop">Titre</h1>
+        <div>
+            <div id="icon1"></div>
+
+        </div>
+    </div>
     <!-- Debug -->
     <script type="text/javascript" src="JS/game/stats.min.js"></script>
 
