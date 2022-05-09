@@ -89,6 +89,15 @@ export const Models = {
                 instance: null,
                 rotation: [0, 0, 0]
         },
+        mechanic: {
+                name: "mechanic",
+                model: "mechanic1.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
         precision: {
                 name: "precision",
                 model: "accuracy1.glb",

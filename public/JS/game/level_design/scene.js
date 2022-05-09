@@ -281,15 +281,15 @@ export const ObjectArray = [
                 length: 150,
                 width: 150,
                 heigth: 30,
-                x: -175-.1,
-                y: 175+.1,
-                z: 135+.1,
+                x: -175 - .1,
+                y: 175 + .1,
+                z: 135 + .1,
                 color: wallColor,
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
                 ray: true,
-                transparency:1,
+                transparency: 1,
                 name: "Mac_Chat"
         },
         {
@@ -306,7 +306,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: true,
                 name: "Mac_Chat",
-                transparency:0
+                transparency: 0
         },
 
         /* --------------------------------- BUREAU --------------------------------- */
@@ -380,7 +380,7 @@ export const ObjectArray = [
                 roty: 0,
                 rotz: 0,
                 ray: true,
-                name:"Mac_Poste a souder"
+                name: "Mac_Poste a souder"
         },
         /* -------------------------------- PALETTES -------------------------------- */
         {
@@ -1030,7 +1030,7 @@ export const ObjectArray = [
                 roty: -90,
                 rotz: 0,
                 ray: true,
-                name:"Mac_Assembleur"
+                name: "Mac_Assembleur"
         },
 
         // {
@@ -1271,7 +1271,7 @@ export const ObjectArray = [
         {
                 type: "cork",
                 x: -99.8,
-                y:205,
+                y: 205,
                 z: 70,
                 length: 70,
                 width: 15,
@@ -1280,6 +1280,22 @@ export const ObjectArray = [
                 roty: 90,
                 rotz: 0,
                 ray: false,
-                name:"Chat"
+                name: "Chat"
+        },
+
+        /* -------------------------------- MECHANIC -------------------------------- */
+        {
+                type: "mechanic",
+                x: -65,
+                y: -155,
+                z: 22,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: true,
+                name: "Mac_Mecanique"
         },
 ]
