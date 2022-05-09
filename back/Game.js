@@ -1,4 +1,5 @@
 const Player = require("./Player");
+const Chrono = require("./chrono");
 
 module.exports = class Game {
     constructor(id, host) {
@@ -7,6 +8,7 @@ module.exports = class Game {
         this.shop = [];
         this.idRoom = id;
         this.host = host;
+        this.chrono = new Chrono();
     }
 
     addPlayer(player) {

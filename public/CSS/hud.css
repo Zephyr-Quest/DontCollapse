@@ -286,16 +286,16 @@ body {
   font-size: small;
 }
 #chat-modal #messages .host {
-  color: red;
+  color: #fa4b4b;
 }
 #chat-modal #messages .J1 {
-  color: #00ff00;
+  color: #1ea802;
 }
 #chat-modal #messages .J2 {
-  color: #e100ff;
+  color: #e403d1;
 }
 #chat-modal #messages .J3 {
-  color: blue;
+  color: #58a8eb;
 }
 /* -------------------------------------------------------------------------- */
 /*                                 Parameters                                 */
