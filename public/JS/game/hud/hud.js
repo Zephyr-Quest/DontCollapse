@@ -28,4 +28,4 @@ const update = () => {
 Modal.initListener();
 Chat.initListener();
 Parameter.initListener();
-Chrono.startChrono();
+//Chrono.startChrono();

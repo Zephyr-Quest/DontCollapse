@@ -91,7 +91,7 @@ function getChronoSeconds() {
 }
 
 export default {
-    incrementChrono: descendLeChronoMonAmi,
+    descendLeChronoMonAmi,
     startChronoFrom,
     updateChronoHUD,
     stopChronoo,

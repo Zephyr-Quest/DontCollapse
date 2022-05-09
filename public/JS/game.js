@@ -1,3 +1,5 @@
+import WebSocket from "./WebSocket.js";
+
 const messages = document.getElementById("messages")
 const chatForm = document.getElementById('chatForm');
 const inputMessage = document.getElementById('input-chat');
@@ -25,7 +27,7 @@ function deleteEvent(e) {
     );
 }
 
-function startGame(e){
+function startGame(e) {
     console.log("start game");
     WebSocket.emit("startGame");
 }
