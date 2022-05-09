@@ -49,6 +49,9 @@ export class Scene {
                         clientX: 0,
                         clientY: 0,
                 }
+                this.mixers = [];
+                this.currentMixerId = 0;
+                this.clock = new THREE.Clock();
         }
 
         /**
@@ -70,8 +73,15 @@ export class Scene {
 
                         // Add the model to the load manager
                         this.modelLoader.load(Config.modelsPath + currentModel.model, gltf => {
+                                // Manage animations
+                                if (gltf.animations && gltf.animations.length > 0) {
+                                        const mixer = new THREE.AnimationMixer(gltf.scene);
+                                        gltf.animations.forEach(anim => mixer.clipAction(anim).play());
+                                        this.mixers.push(mixer);
+                                }
+                                
                                 currentModel.instance = gltf.scene;
-
+                                
                                 // Load the other models
                                 this.loadModels(callback);
                         });
@@ -84,7 +94,7 @@ export class Scene {
         }
 
         init() {
-
+                this.clock = new THREE.Clock();
                 this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
                 this.camera.position.set(800, -800, 800);
                 // this.camera.position.set(0, 0, 0);
@@ -99,6 +109,7 @@ export class Scene {
                         canvas: document.getElementById('myThreeJsCanvas'),
                         alpha: true,
                         antialias: true,
+                        logarithmicDepthBuffer: true
                 });
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -106,6 +117,7 @@ export class Scene {
                 this.renderer.shadowMap.enabled = true;
                 this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
                 this.renderer.shadowMapSoft = false;
+                this.renderer.setClearColor(0x000000, 0);
                 document.body.appendChild(this.renderer.domElement);
 
                 /* --------------------- Setting up the camera controls --------------------- */
@@ -123,36 +135,23 @@ export class Scene {
 
                 this.controls.maxPolarAngle = Math.PI / 2;
 
-                let color = 0xfff6D3;
-                let intensity = 0.1;
-                this.light = new THREE.DirectionalLight(color, intensity);
-                this.light.position.set(0, 0, 100);
-                this.light.castShadow = false;
-                this.light.shadow.mapSize.width = 2048; // default
-                this.light.shadow.mapSize.height = 2048; // default
-                this.light.shadow.camera.near = 0.5; // default
-                this.light.shadow.camera.far = 1000;
-                // this.light.shadow.autoUpdate=false
-                this.scene.add(this.light);
-
-                // color = 0xfff6D3;
-                intensity = 0.9;
+                let color = 0xffffff;
+                let intensity = 0.85;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
                 this.light.position.set(0, 0, 130);
-                this.light.castShadow = true;
+                this.light.castShadow = false;
                 this.light.shadow.bias = -0.001
                 this.light.shadow.mapSize.width = 2048; // default
                 this.light.shadow.mapSize.height = 2048; // default
                 this.light.shadow.camera.near = 0.1;
                 this.light.shadow.camera.far = 500;
-                this.light.shadow.radius=10
-                this.light.decay = 10;
+                this.light.shadow.radius = 10
+                this.light.decay = 2;
+                this.light.penumbra = 1;
                 this.scene.add(this.light);
 
-                this.helper = new THREE.PointLightHelper(this.light);
-                this.scene.add(this.helper);
 
-                this.ambiantlight = new THREE.AmbientLight(0x707070);
+                this.ambiantlight = new THREE.AmbientLight(0x505050);
                 this.ambiantlight.position.set(0, 0, 130);
                 this.scene.add(this.ambiantlight);
 
@@ -173,22 +172,28 @@ export class Scene {
                         this.mousePos.clientX = event.clientX
                         this.mousePos.clientY = event.clientY
                 });
-                
+
 
                 // this.animate()
         }
 
         animate() {
                 stats.begin();
+
+                // Play animations
+                const delta = this.clock.getDelta();
+                this.mixers.forEach(mixer => mixer.update(delta));
+
                 this.render();
                 requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();
                 this.light.shadow.autoUpdate = false
                 stats.end();
         }
-        
-        
+
+
         render() {
+
                 this.renderer.render(this.scene, this.camera);
                 this.onMouseOver(this.mousePos, this)
         }
@@ -220,25 +225,6 @@ export class Scene {
                         }
                 });
                 this.scene.add(this.selectionables);
-                this.createTitles(this, this.scene, {
-                        x: 150,
-                        y: 130,
-                        z: 150 / 2,
-                }, "shop", "SHOP")
-                this.createTitles(this, this.scene, {
-                        x: -150,
-                        y: 80,
-                        z: 150 / 2,
-                }, "chat", "CHAT")
-                this.scene.add(this.GroupSprite)
-                // this.scene.children.forEach(el=>{
-                //         try {
-                //                 el.castShadow=false
-                //         } catch (error) {
-                //                 console.log(error)
-                //         }
-                // })
-
         }
 
         createTitles(ctx, sc, pos, name, title) {
@@ -247,7 +233,7 @@ export class Scene {
                         "fontface": 'Koulen',
                         "textColor": {
                                 r: 255,
-                                g: 255,
+                                g: 0,
                                 b: 255,
                                 a: 1.0
                         }
@@ -277,26 +263,40 @@ export class Scene {
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
                 if (s) {
-                        if (s.name == "Shop" && !this.animatedtextShop) {
-                                this.animatedtextShop = true
-                                for (const e of this.GroupSprite.children) {
-                                        if (e.name == "shop") {
-                                                e.visible = true
-                                        }
+                        if (!this.animatedText) {
+                                let tempos
+                                document.getElementsByTagName("body")[0].style.cursor = "pointer"
+                                let prefix = "Mac_"
+                                while (!s.name.includes(prefix)) {
+                                        s = s.parent
                                 }
-                        } else if (s.name == "Chat" && !this.animatedtextChat) {
-                                this.animatedtextChat = true
-                                for (const e of this.GroupSprite.children) {
-                                        if (e.name == "chat") {
-                                                e.visible = true
+                                if (s.name == "Shop" || s.name == "Chat") {
+                                        tempos = {
+                                                x: s.position.x,
+                                                y: s.position.y - 100,
+                                                z: s.position.z,
                                         }
+                                } else {
+                                        tempos = {
+                                                x: s.position.x,
+                                                y: s.position.y,
+                                                z: s.position.z + 40,
+                                        }
+
                                 }
+                                let tempname = s.name
+                                tempname = tempname.replace(prefix, "")
+                                this.createTitles(this, this.scene, tempos, "Sprite" + tempname, tempname)
+                                this.scene.add(this.GroupSprite)
+                                this.animatedText = true
                         }
                 } else {
-                        for (const e of this.GroupSprite.children) {
-                                this.animatedtextShop = false
-                                this.animatedtextChat = false
-                                e.visible = false
+                        if (this.animatedText) {
+                                this.animatedText = false
+                                this.scene.remove(this.GroupSprite)
+                                this.GroupSprite = new THREE.Group()
+                                document.getElementsByTagName("body")[0].style.cursor = "auto"
+
                         }
                 }
         }
@@ -356,13 +356,15 @@ export class Scene {
                 var textColor = parameters.hasOwnProperty("textColor") ? parameters["textColor"] : {
                         r: 0,
                         g: 0,
-                        b: 0,
+                        b: 255,
                         a: 1.0
                 };
 
                 var canvas = document.createElement('canvas');
-                canvas.style.width = "100%"
-                canvas.style.height = "100%"
+                // console.log(canvas)
+                // canvas.style.width = "100%"
+                // canvas.style.height = "100%"
+                // canvas.style.background="red"
                 var context = canvas.getContext('2d');
                 context.font = "Bold " + fontsize + "px " + fontface;
                 context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
@@ -393,7 +395,7 @@ export class Scene {
                 let texteSprite = new THREE.Group()
                 texteSprite.add(sprite)
                 texteSprite.add(sc.lightTxt)
-                texteSprite.visible = false
+                texteSprite.visible = true
                 texteSprite.name = name
                 ctx.GroupSprite.add(texteSprite)
         }
