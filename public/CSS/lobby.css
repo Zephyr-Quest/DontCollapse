@@ -117,9 +117,18 @@ main #pseudo {
   align-items: center;
 }
 main #pseudo input {
+  background-color: #383331;
+  color: #f5dba6;
+  font-family: 'KoHo', sans-serif;
+  font-size: medium;
+  font-weight: bold;
+  border: 3px solid #f5dba6;
+  outline: none;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
   height: 1.7em;
   width: 20em;
   margin-left: 3em;
+  padding: 8px 12px 8px 12px;
   border-radius: 8px;
 }
 /* -------------------------------------------------------------------------- */

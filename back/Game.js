@@ -1,5 +1,6 @@
 const Player = require("./Player");
 const Chrono = require("./chrono");
+const events = require("./events.json");
 
 module.exports = class Game {
     constructor(id, host) {
@@ -9,6 +10,7 @@ module.exports = class Game {
         this.idRoom = id;
         this.host = host;
         this.chrono = new Chrono();
+        this.runningEvent = undefined;
     }
 
     addPlayer(player) {
@@ -35,7 +37,7 @@ module.exports = class Game {
     }
 
     getPlayerMoney(player) {
-        return this.searchPlayer(player).money
+        return this.searchPlayer(player).money;
     }
 
     addSecondhandItem(player, machine, level, price) {
@@ -51,7 +53,40 @@ module.exports = class Game {
         return true;
     }
 
-    // && this.searchPlayer(buyer).asEnoughMoney(machine.price)
+    applyFactor(eventId, factor) {
+        switch (eventId) {
+        case 0:
+            this.players.forEach(player => {
+                player.money += factor;
+            });
+            break;
+        case 1:
+            this.players.forEach(player => {
+                player.sd.ecologic += player.sd.ecologic * (factor / 100);
+            });
+            break;
+        case 2:
+            this.players.forEach(player => {
+                player.sd.social += player.sd.social * (factor / 100);
+            });
+            break;
+        default:
+            break;
+        }
+    }
+
+    applyEvent() {
+        if (this.runningEvent) this.runningEvent = undefined;
+        else {
+            let random = Math.floor(Math.random() * 100);
+            if (random < 20) {
+                this.runningEvent = events[random % events.length];
+                this.applyFactor(this.runningEvent.type, this.runningEvent.factor);
+                return this.runningEvent;
+            }
+        }
+        return false;
+    }
 
     buySecondhandItem(buyer, seller) {
         let machine = this.checkPlayerItem(seller);

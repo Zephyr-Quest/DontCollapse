@@ -7,10 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game</title>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=KoHo:wght@300&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="img/ZephyrStudio_logo.png" />
+
+    <script src="https://kit.fontawesome.com/f588d3df13.js" crossorigin="anonymous"></script>
+
     <!-- JS modules -->
     <script src="/socket.io/socket.io.js"></script>
 
-    <script src="https://kit.fontawesome.com/f588d3df13.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/CSS/hud.css">
 
@@ -21,14 +28,15 @@
     <input type="hidden" value="<%= username %>" id="username" />
 
     <div id="room">
-        <h1> Welcome <%= username %>
+        <h1>Welcome <%= username %>
         </h1>
-        <ul id="player_list" class="room"></ul>
-        <button type="submit" id="BtnGame" style="display: none;" class="room button">Start Game !</button>
+        <div id="player_list"></div>
+        <button type="submit" id="BtnGame" style="display: none;">Start Game !</button>
+        <button id="chat-button">Open Chat</button>
     </div>
 
     <div style="display: none;" id="game">
-        <h1> Let's play <%= username %>
+        <h1>Let's play <%= username %>
         </h1>
 
 
@@ -419,7 +427,7 @@
         </dialog>
     </div>
 
-    <button class="button" id="chat-button">Open Chat</button>
+
     <dialog class="modal" id="chat-modal">
         <div class="modal-content">
             <div class="top-modal">

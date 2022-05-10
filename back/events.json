@@ -1,0 +1,37 @@
+[
+    {
+        "event": "Guerre Russie-Ukraine",
+        "type": 0,
+        "factor": -200
+    },
+    {
+        "event": "Grêve générale",
+        "type": 2,
+        "factor": -20
+    },
+    {
+        "event": "13ème mois",
+        "type": 2,
+        "factor": 20
+    },
+    {
+        "event": "Maladies hivernales",
+        "type":2,
+        "factor": -200
+    },
+    {
+        "event": "Pic de pollution",
+        "type":1,
+        "factor": -40
+    },
+    {
+        "event": "Mois ",
+        "type":0,
+        "factor": 20
+    },
+    {
+        "event": "13ème mois",
+        "type":0,
+        "factor": 20
+    }
+]

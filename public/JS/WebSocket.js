@@ -43,7 +43,7 @@ const events = {
 };
 
 // HTML elements
-const playerListUl = document.getElementById("player_list");
+const playerList = document.getElementById("player_list");
 
 /* -------------------------------- Variables ------------------------------- */
 let connectedPlayers = [];
@@ -56,36 +56,41 @@ let messages;
 /* -------------------------------- Function -------------------------------- */
 function updatePlayersOnScreen() {
     // Remove previous players
-    while (playerListUl.children && playerListUl.children.length > 0) {
-        playerListUl.children[0].remove();
+    while (playerList.children && playerList.children.length > 0) {
+        playerList.children[0].remove();
     }
 
     // Print new players
     connectedPlayers.forEach(player => {
-        const playerLi = document.createElement('li');
 
-        const playerName = document.createElement('p');
+        const divPlayerName = document.createElement('div');
+        divPlayerName.classList.add("card");
+
+        const playerName = document.createElement('h2');
         playerName.innerText = player;
-        playerLi.appendChild(playerName);
 
+        divPlayerName.appendChild(playerName);
+
+        
         const user = document.getElementById("username").value;
         const posBtnGame = document.getElementById("BtnGame");
-
-        if (user === connectedPlayers[0]) {
+        
+        if (user === connectedPlayers[0] && connectedPlayers.length >=2) {
             if (posBtnGame.style.display !== "block") {
                 posBtnGame.style.display = "block";
                 posBtnGame.addEventListener("click", startGame);
             }
-
+            
             if (player != connectedPlayers[0]) {
                 const playerDelete = document.createElement('button');
-                playerDelete.innerText = "Ta gueule connard";
+                playerDelete.classList.add('removePlayerButton');
+                playerDelete.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                 playerDelete.addEventListener("click", deleteEvent);
-                playerLi.appendChild(playerDelete);
+                divPlayerName.appendChild(playerDelete);
             }
         }
-
-        playerListUl.appendChild(playerLi);
+        
+        playerList.appendChild(divPlayerName);
     });
 }
 

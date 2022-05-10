@@ -58,6 +58,27 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  /* width */
+  /* Track */
+  /* Handle */
+}
+body ::-webkit-scrollbar {
+  width: 10px;
+}
+body ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+body ::-webkit-scrollbar-thumb {
+  background: #f5dba6;
+  border-radius: 10px;
+}
+body h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  text-shadow: 1px 2px 3px black;
+  font-family: 'KoHo', sans-serif;
+  letter-spacing: 0.15rem;
 }
 /* -------------------------------------------------------------------------- */
 /*                                Progress Bar                                */
@@ -92,9 +113,9 @@ body {
   text-align: center;
 }
 .button {
-  height: 50px;
-  width: 70px;
-  border-radius: 10%;
+  height: 40px;
+  width: 50px;
+  border-radius: 8px;
   cursor: pointer;
   border: 3px solid #f5dba6;
   color: #383331;
@@ -163,9 +184,6 @@ body {
   background-color: #f5dba6;
   color: #383331;
 }
-/* -------------------------------------------------------------------------- */
-/*                                    Shop                                    */
-/* -------------------------------------------------------------------------- */
 #shop-modal {
   height: 700px;
   width: 1200px;
@@ -266,6 +284,7 @@ body {
   width: 300px;
   max-width: 700px;
   margin-left: 20px;
+  font-weight: bold;
   background-color: #383331;
   color: #f5dba6;
   border: 3px solid #383331;
@@ -276,9 +295,18 @@ body {
   justify-content: space-between;
 }
 #chat-modal #chatForm input {
+  background-color: #383331;
+  color: white;
+  font-family: 'KoHo', sans-serif;
+  font-size: medium;
+  font-weight: bold;
+  border: 3px solid #f5dba6;
+  outline: none;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+  height: 20px;
+  width: 70%;
+  padding: 5px 5px 5px 5px;
   border-radius: 8px;
-  height: 2em;
-  width: 75%;
 }
 #chat-modal #chatForm button {
   border-radius: 8px;
@@ -312,6 +340,65 @@ body {
 }
 #chat-modal #messages .J3 {
   color: #58a8eb;
+}
+/* -------------------------------------------------------------------------- */
+/*                                Waiting room                                */
+/* -------------------------------------------------------------------------- */
+#room {
+  width: 50%;
+  margin: auto;
+}
+#room #player_list {
+  padding: 0;
+  margin-top: 10%;
+}
+#room button {
+  padding: 0;
+  cursor: pointer;
+  border: 3px solid #f5dba6;
+  color: #383331;
+  background-color: #f5dba6;
+}
+#room button:hover {
+  background-color: transparent;
+  color: #f5dba6;
+  transition: background-color 0.3s;
+}
+#room #BtnGame {
+  width: 50%;
+  height: 70px;
+  margin: auto;
+  border-radius: 10px;
+  font-size: 1em;
+  margin-top: 5em;
+}
+#room #chat-button {
+  width: 35%;
+  height: 50px;
+  display: block;
+  margin: auto;
+  border-radius: 8px;
+  font-size: 1em;
+  margin-top: 2em;
+}
+#room .removePlayerButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  font-size: 1em;
+}
+#room .card {
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+  border: 3px solid #f5dba6;
+  margin-bottom: 2em;
+  padding: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+  border-radius: 10px;
+  align-items: center;
+  font-family: 'KoHo', sans-serif;
+  display: flex;
+  justify-content: space-between;
 }
 /* -------------------------------------------------------------------------- */
 /*                                 Parameters                                 */
