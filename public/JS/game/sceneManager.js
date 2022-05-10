@@ -280,18 +280,22 @@ export class Scene {
                         }
                         this.createTitles(this, this.scene, tempos, "Sprite" + tempname, tempname)
                         this.copyGroupSprite = this.GroupSprite.clone()
+                        this.scene.remove(this.GroupSprite)
+                        this.GroupSprite=new THREE.Group()
                         this.scene.add(this.copyGroupSprite)
                         this.staticText = true
                         if (!this.openedMenu && (tempname != "Shop" && tempname != "Chat")) {
                                 this.openMenu(tempname)
-                        } else if (tempname == "Shop" || tempname == "Chat"){
+                        } else if (tempname == "Shop" || tempname == "Chat") {
                                 this.closeMenu()
                         }
                 } else {
                         if (this.staticText) {
                                 this.closeMenu()
+                                this.animatedText = false
                                 this.staticText = false
                                 this.scene.remove(this.copyGroupSprite)
+                                this.scene.remove(this.GroupSprite)
                                 this.copyGroupSprite = new THREE.Group()
                                 this.GroupSprite = new THREE.Group()
                         }
@@ -338,11 +342,12 @@ export class Scene {
                                                 y: s.position.y,
                                                 z: s.position.z * 2,
                                         }
-
                                 }
-                                this.createTitles(this, this.scene, tempos, "Sprite" + tempname, tempname)
-                                this.scene.add(this.GroupSprite)
-                                this.animatedText = true
+                                if(this.copyGroupSprite!=this.GroupSprite) {
+                                        this.createTitles(this, this.scene, tempos, "Sprite" + tempname, tempname)
+                                        this.scene.add(this.GroupSprite)
+                                        this.animatedText = true
+                                }
                         }
                 } else {
                         if (this.animatedText) {
