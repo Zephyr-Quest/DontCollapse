@@ -1298,4 +1298,20 @@ export const ObjectArray = [
                 ray: true,
                 name: "Mac_Assembleur Mecanique"
         },
+
+        /* ---------------------------------- BELT ---------------------------------- */
+        {
+                type: "belt",
+                x: 37,
+                y: -125,
+                z: 22,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 90,
+                rotz: 0,
+                ray: false,
+                name: "Tapis"
+        },
 ]
