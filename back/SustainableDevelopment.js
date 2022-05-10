@@ -36,7 +36,12 @@ module.exports = class SustainableDevelopment {
      * @returns ratio
      */
     socialCalculation(employees, maintainers, cleaners, supervisors, engineers) {
-        return Math.max(Math.min((maintainers / employees + engineers / employees + cleaners / employees + supervisors / employees) * 100, 100), 0);
+        let humanRessources = [maintainers, cleaners, supervisors, engineers];
+        let result = 0;
+        humanRessources.forEach(categories => {
+            result += categories/employees < 0.35 && categories/employees > 0.15 ? 25 : 0;
+        }); 
+        return result;
     }
 
     isFinished() {
