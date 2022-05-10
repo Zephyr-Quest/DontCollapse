@@ -281,7 +281,7 @@ export class Scene {
                         this.createTitles(this, this.scene, tempos, "Sprite" + tempname, tempname)
                         this.copyGroupSprite = this.GroupSprite.clone()
                         this.scene.remove(this.GroupSprite)
-                        this.GroupSprite=new THREE.Group()
+                        this.GroupSprite = new THREE.Group()
                         this.scene.add(this.copyGroupSprite)
                         this.staticText = true
                         if (!this.openedMenu && (tempname != "Shop" && tempname != "Chat")) {
@@ -321,15 +321,22 @@ export class Scene {
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
                 if (s) {
+                        let prefix = "Mac_"
+                        while (!s.name.includes(prefix)) {
+                                s = s.parent
+                        }
+                        let tempname = s.name
+                        tempname = tempname.replace(prefix, "")
+                        let tempnameSprite = "Sprite" + tempname
+                        if (this.GroupSprite.children.length != 0) {
+                                if (tempnameSprite != this.GroupSprite.children[0].name) {
+                                        this.scene.remove(this.GroupSprite)
+                                        this.GroupSprite = new THREE.Group();
+                                        this.animatedText = false
+                                }
+                        }
                         if (!this.animatedText) {
                                 let tempos
-                                document.getElementsByTagName("body")[0].style.cursor = "pointer"
-                                let prefix = "Mac_"
-                                while (!s.name.includes(prefix)) {
-                                        s = s.parent
-                                }
-                                let tempname = s.name
-                                tempname = tempname.replace(prefix, "")
                                 if (tempname == "Shop" || tempname == "Chat") {
                                         tempos = {
                                                 x: s.position.x,
@@ -343,10 +350,12 @@ export class Scene {
                                                 z: s.position.z * 2,
                                         }
                                 }
-                                if(this.copyGroupSprite!=this.GroupSprite) {
+                                if (this.copyGroupSprite != this.GroupSprite) {
                                         this.createTitles(this, this.scene, tempos, "Sprite" + tempname, tempname)
                                         this.scene.add(this.GroupSprite)
                                         this.animatedText = true
+                                        document.getElementsByTagName("body")[0].style.cursor = "pointer"
+
                                 }
                         }
                 } else {
@@ -433,16 +442,16 @@ export class Scene {
 
                 var texture = new THREE.Texture(canvas)
                 texture.needsUpdate = true;
-
                 var spriteMaterial = new THREE.SpriteMaterial({
                         map: texture,
                         useScreenCoordinates: false,
                         depthWrite: false,
-                        depthTest: true
+                        depthTest: true,
                 });
                 var sprite = new THREE.Sprite(spriteMaterial);
+                sprite.center.set(0.5, 0.5)
                 sprite.scale.set(0.5 * fontsize + 70, 50 + 0.25 * fontsize, 50 + 0.75 * fontsize);
-
+                console.log(sprite)
                 const color = 0xfff6D3;
                 const intensity = 0.2;
                 // sc.lightTxt = new THREE.PointLight(color, intensity);
