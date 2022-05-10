@@ -111,7 +111,12 @@ export class Scene {
                 this.camera.name = "pos1"
 
                 this.scene = new THREE.Scene();
-                this.scene.background = new THREE.Color('black');
+                // this.scene.background = new THREE.Color('white');
+                const near = 700;
+                const far = 1000;
+                const colorFog = 'lightblue';
+                this.scene.fog = new THREE.Fog(colorFog, near, far);
+                this.scene.background = new THREE.Color(colorFog);
 
                 /* ---------------------------------- CANVA --------------------------------- */
                 this.renderer = new THREE.WebGLRenderer({
@@ -456,9 +461,9 @@ export class Scene {
                         depthTest: true,
                 });
                 var sprite = new THREE.Sprite(spriteMaterial);
-                sprite.center.set(0.5*textWidth*0.003, 0.65)
-                let sca=120
-                sprite.scale.set(0.5 * fontsize + sca+20, sca + 0.25 * fontsize, sca-10 + 0.75 * fontsize);
+                sprite.center.set(0.5 * textWidth * 0.003, 0.65)
+                let sca = 120
+                sprite.scale.set(0.5 * fontsize + sca + 40, sca + 0.25 * fontsize, sca - 10 + 0.75 * fontsize);
                 sprite.position.x = pos.x
                 sprite.position.y = pos.y
                 sprite.position.z = pos.z
