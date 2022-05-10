@@ -1314,4 +1314,20 @@ export const ObjectArray = [
                 ray: false,
                 name: "Tapis"
         },
+
+        /* -------------------------------- NEW DOOR -------------------------------- */
+        {
+                type: "new_door",
+                x: -15,
+                y: 250,
+                z: 52,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 90,
+                rotz: 0,
+                ray:true,
+                name: "Mac_Sortie"
+        },
 ]
