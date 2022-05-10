@@ -271,7 +271,7 @@ export class Scene {
                         }
                         let tempname = s.name
                         tempname = tempname.replace(prefix, "")
-                        if (tempname == "Shop" || tempname == "Chat") {
+                        if (tempname == "Boutique" || tempname == "Chat") {
                                 tempos = {
                                         x: s.position.x,
                                         y: s.position.y - (250 - s.position.y + 45),
@@ -291,9 +291,9 @@ export class Scene {
                         this.GroupSprite = new THREE.Group()
                         this.scene.add(this.copyGroupSprite)
                         this.staticText = true
-                        if (!this.openedMenu && (tempname != "Shop" && tempname != "Chat")) {
+                        if (!this.openedMenu && (tempname != "Boutique" && tempname != "Chat")) {
                                 this.openMenu(tempname)
-                        } else if (tempname == "Shop" || tempname == "Chat") {
+                        } else if (tempname == "Boutique" || tempname == "Chat") {
                                 this.closeMenu()
                         }
                 } else {
@@ -344,7 +344,7 @@ export class Scene {
                         }
                         if (!this.animatedText) {
                                 let tempos
-                                if (tempname == "Shop" || tempname == "Chat") {
+                                if (tempname == "Boutique" || tempname == "Chat") {
                                         tempos = {
                                                 x: s.position.x,
                                                 y: s.position.y - (250 - s.position.y + 45),
@@ -459,21 +459,11 @@ export class Scene {
                 sprite.center.set(0.5*textWidth*0.003, 0.65)
                 let sca=120
                 sprite.scale.set(0.5 * fontsize + sca+20, sca + 0.25 * fontsize, sca-10 + 0.75 * fontsize);
-                const color = 0xfff6D3;
-                const intensity = 0.2;
-                // sc.lightTxt = new THREE.PointLight(color, intensity);
-                // sc.lightTxt.position.set(pos.x, pos.y, pos.z);
-                // sc.lightTxt.castShadow = true;
-                // sc.lightTxt.shadow.mapSize.width = 2048; // default
-                // sc.lightTxt.shadow.mapSize.height = 2048; // default
-                // sc.lightTxt.shadow.camera.near = 0.1; // default
-                // sc.lightTxt.shadow.camera.far = 700;
                 sprite.position.x = pos.x
                 sprite.position.y = pos.y
                 sprite.position.z = pos.z
                 let texteSprite = new THREE.Group()
                 texteSprite.add(sprite)
-                // texteSprite.add(sc.lightTxt)
                 texteSprite.visible = true
                 texteSprite.name = name
                 ctx.GroupSprite.add(texteSprite)

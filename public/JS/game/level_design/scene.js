@@ -271,7 +271,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: true,
                 transparency: 1,
-                name: "Mac_Shop"
+                name: "Mac_Boutique"
         },
         /* ---------------------------------- CUBE ---------------------------------- */
 
