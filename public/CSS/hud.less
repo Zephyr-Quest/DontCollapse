@@ -157,7 +157,7 @@ body {
 }
 
 .button {
-    height: 2rem;
+    height: 40px;
     width: 50px;
     border-radius: 8px;
     cursor: pointer;
@@ -372,6 +372,8 @@ body {
     max-width: 700px;
     margin-left: 20px;
 
+    font-weight: bold;
+
     background-color: @bg-color;
     color: @primary-color;
     border: 3px solid @bg-color;
@@ -383,9 +385,18 @@ body {
         justify-content: space-between;
 
         input {
+            background-color: @bg-color;
+            color: white;
+            font-family: @primary-font, @secondary-font;
+            font-size: medium;
+            font-weight: bold;
+            border: 3px solid @primary-color;
+            outline: none;
+            box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+            height: 20px;
+            width: 70%;
+            padding: 5px 5px 5px 5px;
             border-radius: 8px;
-            height: 2em;
-            width: 75%;
         }
 
         button {
@@ -486,6 +497,7 @@ body {
 
     .card {
         box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+        border: 3px solid @primary-color;
         margin-bottom: 2em;
         padding: 10px;
         padding-right: 30px;
