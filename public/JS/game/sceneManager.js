@@ -54,6 +54,13 @@ export class Scene {
                 this.currentMixerId = 0;
                 this.clock = new THREE.Clock();
                 this.openedMenu = false
+
+                this.levels = {
+                        precision: 1,
+                        general: 1,
+                        welding: 1,
+                        mechanic: 1
+                }
         }
 
         /**
@@ -232,7 +239,7 @@ export class Scene {
 
         createTitles(ctx, sc, pos, name, title) {
                 this.makeTextSprite(ctx, sc, pos, name, title, {
-                        "fontsize": 50,
+                        "fontsize": 25,
                         "fontface": 'Koulen',
                         "textColor": {
                                 r: 255,
@@ -412,19 +419,19 @@ export class Scene {
                 var borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : {
                         r: 0,
                         g: 0,
-                        b: 0,
+                        b: 255,
                         a: 1.0
                 };
                 var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : {
                         r: 255,
                         g: 255,
                         b: 0,
-                        a: 0.0
+                        a: 1.0
                 };
                 var textColor = parameters.hasOwnProperty("textColor") ? parameters["textColor"] : {
                         r: 0,
                         g: 0,
-                        b: 0,
+                        b: 255,
                         a: 1.0
                 };
                 var canvas = document.createElement('canvas');
@@ -444,14 +451,14 @@ export class Scene {
                 texture.needsUpdate = true;
                 var spriteMaterial = new THREE.SpriteMaterial({
                         map: texture,
-                        useScreenCoordinates: false,
+                        // useScreenCoordinates: false,
                         depthWrite: false,
                         depthTest: true,
                 });
                 var sprite = new THREE.Sprite(spriteMaterial);
-                sprite.center.set(0.5, 0.5)
-                sprite.scale.set(0.5 * fontsize + 70, 50 + 0.25 * fontsize, 50 + 0.75 * fontsize);
-                console.log(sprite)
+                sprite.center.set(0.5*textWidth*0.003, 0.65)
+                let sca=120
+                sprite.scale.set(0.5 * fontsize + sca+20, sca + 0.25 * fontsize, sca-10 + 0.75 * fontsize);
                 const color = 0xfff6D3;
                 const intensity = 0.2;
                 // sc.lightTxt = new THREE.PointLight(color, intensity);

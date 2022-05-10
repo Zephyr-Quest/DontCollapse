@@ -1030,7 +1030,7 @@ export const ObjectArray = [
                 roty: -90,
                 rotz: 0,
                 ray: true,
-                name: "Mac_Assembleur"
+                name: "Mac_Assembleur de Precision"
         },
 
         // {
@@ -1296,6 +1296,6 @@ export const ObjectArray = [
                 roty: 0,
                 rotz: 0,
                 ray: true,
-                name: "Mac_Mecanique"
+                name: "Mac_Assembleur Mecanique"
         },
 ]
