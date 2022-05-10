@@ -86,7 +86,7 @@ function updatePlayersOnScreen() {
             if (player != connectedPlayers[0]) {
                 const playerDelete = document.createElement('button');
                 playerDelete.classList.add('removePlayerButton');
-                playerDelete.innerText = "Ta gueule connard";
+                playerDelete.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                 playerDelete.addEventListener("click", deleteEvent);
                 playerLi.appendChild(playerDelete);
             }
