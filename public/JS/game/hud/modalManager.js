@@ -18,7 +18,7 @@ export default class modal {
         this.close = document.getElementById(close);
         this.isShop = isShop;
         this.isFactory = isFactory;
-        console.log(this.modal)
+        console.log(this.modal);
     }
 
     /**
@@ -32,8 +32,8 @@ export default class modal {
         }, {
             once: true
         });
-        if (this.isShop) Shop.closeShop()
-        if (this.isFactory) OtherFactory.close()
+        if (this.isShop) Shop.closeShop();
+        if (this.isFactory) OtherFactory.close();
 
 
         this.close.removeEventListener('click', this.closeFunction.bind(this)); // cross
@@ -80,8 +80,8 @@ export default class modal {
      */
     openModal() {
         this.initCloseListeners();
-        if (this.isShop) Shop.initShopListeners()
-        if (this.isFactory) OtherFactory.refresh()
+        if (this.isShop) Shop.initShopListeners();
+        if (this.isFactory) OtherFactory.refresh();
         this.modal.showModal();
     }
 
@@ -93,6 +93,6 @@ export default class modal {
     }
 
     destroyListener(){
-        this.open.removeEventListener('click',this.openModal.bind(thid))
+        this.open.removeEventListener('click',this.openModal.bind(this));
     }
 }

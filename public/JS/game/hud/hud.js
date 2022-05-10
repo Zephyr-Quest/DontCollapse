@@ -1,11 +1,7 @@
 import ProgressBar from './progressBar.js';
 import Item from './shop/manageItem.js'
 import Parameter from './parameter.js'
-// import Chrono from './chrono.js'
-
 import Modal from './modalManager.js'
-import otherFactory from './otherFactory.js';
-
 
 /* ------------------------------ progress bar ------------------------------ */
 let id = 1;
@@ -15,12 +11,12 @@ const update = () => {
     id += stat ? 5 : -5;
     if (id > 100 || id < 0) stat = !stat;
 
-    ProgressBar.updateSocial(id)
-    ProgressBar.updateEconomic(id)
-    ProgressBar.updateEcologic(id)
+    ProgressBar.updateSocial(id);
+    ProgressBar.updateEconomic(id);
+    ProgressBar.updateEcologic(id);
     setTimeout(update, 400);
 }
-//update();
+update();
 
 /* --------------------------------- Modals --------------------------------- */
 

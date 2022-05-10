@@ -26,18 +26,15 @@ const events = {
 
         
         let item2 = document.createElement('div');
-        item2.classList.add(user === username ? "sender" : "receiver")
-        item2.classList.add("message")
+        item2.classList.add(user === username ? "sender" : "receiver");
+        item2.classList.add("message");
         item2.innerText = msg;
         messages.appendChild(item2);
         
         let item = document.createElement('div');
-        item.classList.add(user === username ? "sender" : "receiver")
-        item.classList.add("username")
-        
-        let name = names[index]
-        item.classList.add(name)
-        
+        item.classList.add(user === username ? "sender" : "receiver");
+        item.classList.add("username");
+        item.classList.add(names[index]);
         item.innerText = user;
         messages.appendChild(item);
         
