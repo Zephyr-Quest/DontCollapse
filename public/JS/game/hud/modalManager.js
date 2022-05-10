@@ -18,6 +18,7 @@ export default class modal {
         this.isShop = isShop;
         console.log(this.modal)
     }
+    
     /**
      * close the modal and remove all event listeners
      */
