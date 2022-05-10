@@ -29,6 +29,7 @@ function showParameter() {
         elem.addEventListener('click', fctParam)
         elem.setAttribute('open', "");
     })
+    openParameter.style.color="#f5dba6"
 
     signOut.style.display = "block";
 
@@ -87,6 +88,7 @@ function fctParam(e) {
  * hide parameters
  */
 function closeParam() {
+    openParameter.style.color="white";
     paramContent.forEach(element => {
         element.removeAttribute('open');
         if (element.style.display !== "none") {

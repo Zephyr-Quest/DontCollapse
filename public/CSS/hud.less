@@ -193,6 +193,7 @@ body {
             justify-content: space-between;
 
             .title-modal {
+                color: @text-color;
                 margin: 0;
                 padding-left: 0;
                 padding-right: 0;
@@ -386,7 +387,7 @@ body {
 
         input {
             background-color: @bg-color;
-            color: white;
+            color: @text-color;
             font-family: @primary-font, @secondary-font;
             font-size: medium;
             font-weight: bold;
@@ -405,7 +406,6 @@ body {
     }
 
     #messages {
-        padding-top: 20px;
         padding-bottom: 10px;
         display: flex;
         flex-direction: column-reverse;
@@ -528,6 +528,10 @@ body {
 
     .param-content[open] {
         animation: slide-left-params 100ms forwards, fade-in 250ms forwards;
+
+        &:hover {
+            color: @primary-color;
+        }
     }
 
     .param-content[closing] {

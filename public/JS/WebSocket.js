@@ -21,24 +21,30 @@ const events = {
             0: "host",
             1: "J1",
             2: "J2",
-            3: "j3"
+            3: "J3"
         }
 
+        
         let item2 = document.createElement('div');
         item2.classList.add(user === username ? "sender" : "receiver")
         item2.classList.add("message")
         item2.innerText = msg;
         messages.appendChild(item2);
-
+        
         let item = document.createElement('div');
         item.classList.add(user === username ? "sender" : "receiver")
         item.classList.add("username")
-
+        
         let name = names[index]
         item.classList.add(name)
-
+        
         item.innerText = user;
         messages.appendChild(item);
+        
+        let item3 = document.createElement('div');
+        item3.classList.add("message");
+        item3.innerHTML = "<p></p>";
+        messages.appendChild(item3);
     }
 };
 
