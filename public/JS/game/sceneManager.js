@@ -299,7 +299,7 @@ export class Scene {
                         if (!this.openedMenu && (tempname != "Boutique" && tempname != "Chat" && tempname != "Sortie")) {
                                 this.openMenu(tempname)
                         } else if (tempname == "Sortie") {
-                                this.openMenuSortie(tempname)
+                                this.openMenuSortie()
 
                         } else if (tempname == "Boutique" || tempname == "Chat" || tempname == "Sortie") {
                                 this.closeMenu()
@@ -323,7 +323,7 @@ export class Scene {
                 menu = document.getElementById("myMenuSortie")
                 if (menu.style.display == "block") menu.style.display = "none"
         }
-        openMenuSortie(s) {
+        openMenuSortie() {
                 let menu = document.getElementById("myMenuShop")
                 if (menu.style.display == "block") menu.style.display = "none"
                 menu = document.getElementById("myMenuSortie")
