@@ -43,9 +43,21 @@ HUD.initFacButton();
 HUD.initShopButton();
 
 
+HUD.setContractCallback((id, level) => {
+    WebSocket.emit("buyContract", id, level);
+})
 
-HUD.setPurchaseCallback((id, level) => {
-    WebSocket.emit("buyEngine", id,level +1);
+HUD.setPersoCallback((id, level) => {
+    WebSocket.emit("buyEmployee", "");
+})
+
+HUD.setMachineCallback((id, level) => {
+    WebSocket.emit("buyEngine", id, level);
+})
+
+HUD.setBuyOccazCallback((username) => {
+    WebSocket.emit("buySecondHandEngine", username);
+
 })
 
 // console.log(document.getElementById("username").value);

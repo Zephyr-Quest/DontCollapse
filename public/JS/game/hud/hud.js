@@ -50,7 +50,7 @@ function openShopModal() {
     shop.openModal();
 }
 
-function closeShopModal(){
+function closeShopModal() {
     shop.closeFunction()
 }
 
@@ -70,14 +70,25 @@ function updateSocialBar(value) {
     ProgressBar.updateSocial(value);
 }
 
-function setPurchaseCallback(callback) {
-    Item.setBuyCB(callback);
+function setContractCallback(callback) {
+    Item.setContractCB(callback);
 }
 
-function setDeleteCallback(callback) {
-    Item.setDelCB(callback);
+function setPersoCallback(callback) {
+    Item.setPersoCB(callback);
 }
 
+function setMachineCallback(callback) {
+    Item.setMachineCB(callback);
+}
+
+function setBuyOccazCallback(callback) {
+    Item.setBuyOccazCB(callback);
+}
+
+function setSellOccazCallback(callback) {
+    Item.setSellOccazCB(callback);
+}
 
 // function setChatCallback(callback) {
 
@@ -86,7 +97,6 @@ function setDeleteCallback(callback) {
 // function addMessage() {
 
 // }
-
 
 
 export default {
@@ -103,6 +113,9 @@ export default {
     updateEconomicBar,
     updateSocialBar,
 
-    setDeleteCallback,
-    setPurchaseCallback,
+    setContractCallback,
+    setPersoCallback,
+    setMachineCallback,
+    setBuyOccazCallback,
+    setSellOccazCallback
 }

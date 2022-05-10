@@ -275,22 +275,31 @@ io.on('connection', socket => {
 
     // Socket to change engine
     socket.on('buyEngine', (idEngine, levelEngine) => {
+        console.log("buy engine");
         allRooms[idRoom].searchPlayer(username).machineUpgrade(idEngine, levelEngine);
     })
 
     // Socket to sell second-hand engine
     socket.on('sellEngine', (idEngine, levelEngine, price) => {
+        console.log("sell engine");
         allRooms[idRoom].searchPlayer(username).addSecondhandItem(username, idEngine, levelEngine, price);
     })
 
     // Socket to buy second-hand engine
     socket.on('buySecondHandEngine', (seller) => {
+        console.log("buy second hand");
         allRooms[idRoom].searchPlayer(username).buySecondhandItem(username, seller);
     })
 
     // Socket to change contract
     socket.on('buyContract', (idFournisseur, contractNumber) => {
+        console.log("buy contract");
         allRooms[idRoom].searchPlayer(username).furnisherUpgrade(idFournisseur, contractNumber);
+    })
+
+    // Socket to change contract
+    socket.on('buyEmployee', () => {
+        console.log("buy employee");
     })
 
     // Socket actu

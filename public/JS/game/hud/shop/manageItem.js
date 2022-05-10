@@ -5,25 +5,27 @@ const oui = document.getElementsByClassName('oui-button')[0];
 const non = document.getElementsByClassName('non-button')[0];
 
 let itemId = "";
-let itemToDelete = "";
 let itemLevel = undefined;
+let itemType = 0;
+
 const level = {
     "manix": 1,
     "droit": 2,
     "braz": 3,
     "tesla": 4,
 
-    "elec":0,
-    "eau":1,
-    "cartons":2,
-    "etain":3
+    "elec": 0,
+    "eau": 1,
+    "cartons": 2,
+    "etain": 3
 };
 
 /**
  * Open confirm modal to buy the item currently selected
  * @param {Document} divOfItem 
  */
-function buyItem(divOfItem) {
+function buyItem(divOfItem, type) {
+    itemType = type;
     itemLevel = level[divOfItem.classList[0]]; // set the item level
     itemId = divOfItem.classList[1]; // set the item id
     let itemName = divOfItem.children[0].textContent; // set the item name
@@ -58,8 +60,10 @@ function initListener() {
 function removeListeners() {
     oui.removeEventListener('click', buyItem);
     non.removeEventListener('click', notBuy);
+
     itemId = "";
-    itemToDelete = "";
+    itemLevel = undefined;
+    itemType = 0;
 
 }
 
@@ -71,25 +75,40 @@ function notBuy() {
     removeListeners();
 }
 
-let buyCB;
-let deleteCB;
+let buyContractCB;
+let buyPersoCB;
+let buyMachineCB;
+let buyOccazCB;
+let sellOccazCB;
 
 
 /**
  * buy item : transmit the item to buy or delete to back, close confirm and shop modals and remove listeners
  */
 function buy() {
-    if (itemId.length != 0) {
-    
-        console.log("itemID : ",itemId, "itel lvl : ", itemLevel);
-        buyCB(itemId,itemLevel);
-    } else if (itemToDelete != 0) {
-        let obj = {
-            name: itemToDelete,
-            level: itemLevel
-        };
-        deleteCB(obj);
-    }
+
+        switch (itemType) {
+            case 0:
+                buyContractCB(itemId, itemLevel);
+                break;
+            case 1:
+                buyPersoCB(itemId, itemLevel);
+                break;
+            case 2:
+                buyMachineCB(itemId, itemLevel);
+                break;
+            case 3:
+                let price = 0;
+                buyOccazCB(itemId, itemLevel, price);
+                break;
+            case 4:
+                let username = "michel";
+                sellOccazCB(username)
+                break;
+            default:
+                break;
+        }
+ 
 
 
 
@@ -98,15 +117,33 @@ function buy() {
     removeListeners();
 }
 
-function setBuyCB(cb) {
-    buyCB = cb;
-} function setDelCB(cb) {
-    deleteCB = cb;
+function setContractCB(cb) {
+    buyContractCB = cb;
+}
+
+function setPersoCB(cb) {
+    buyPersoCB = cb;
+}
+
+function setMachineCB(cb) {
+    buyMachineCB = cb;
+}
+
+function setBuyOccazCB(cb) {
+    buyOccazCB = cb;
+}
+
+function setSellOccazCB(cb) {
+    sellOccazCB = cb;
 }
 
 export default {
     buyItem,
     deleteItem,
-    setBuyCB,
-    setDelCB
+
+    setContractCB,
+    setPersoCB,
+    setMachineCB,
+    setBuyOccazCB,
+    setSellOccazCB
 };
