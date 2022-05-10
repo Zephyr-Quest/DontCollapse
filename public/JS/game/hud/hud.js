@@ -50,6 +50,10 @@ function openShopModal() {
     shop.openModal();
 }
 
+function closeShopModal(){
+    shop.closeFunction()
+}
+
 function openOtherPLayer() {
     player.openModal();
 }
@@ -74,6 +78,7 @@ function setDeleteCallback(callback) {
     Item.setDelCB(callback);
 }
 
+
 // function setChatCallback(callback) {
 
 // }
@@ -92,6 +97,7 @@ export default {
     openChatModal,
     openOtherPLayer,
     openShopModal,
+    closeShopModal,
 
     updateEcologicBar,
     updateEconomicBar,

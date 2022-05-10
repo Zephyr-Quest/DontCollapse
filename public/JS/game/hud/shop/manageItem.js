@@ -4,14 +4,19 @@ const modal = document.getElementById('confirm-buy');
 const oui = document.getElementsByClassName('oui-button')[0];
 const non = document.getElementsByClassName('non-button')[0];
 
-let itemToBuy = "";
+let itemId = "";
 let itemToDelete = "";
 let itemLevel = undefined;
 const level = {
-    "manix": 0,
-    "droit": 1,
-    "braz": 2,
-    "tesla": 3,
+    "manix": 1,
+    "droit": 2,
+    "braz": 3,
+    "tesla": 4,
+
+    "elec":0,
+    "eau":1,
+    "cartons":2,
+    "etain":3
 };
 
 /**
@@ -20,8 +25,10 @@ const level = {
  */
 function buyItem(divOfItem) {
     itemLevel = level[divOfItem.classList[0]]; // set the item level
-    itemToBuy = divOfItem.children[0].textContent; // set the item name
-    document.getElementById('buying').textContent = "Achat de : " + itemToBuy; // replace modal text
+    itemId = divOfItem.classList[1]; // set the item id
+    let itemName = divOfItem.children[0].textContent; // set the item name
+
+    document.getElementById('buying').textContent = "Achat de : " + itemName; // replace modal text
     modal.showModal(); // open confirm modal
     initListener();
 }
@@ -51,7 +58,7 @@ function initListener() {
 function removeListeners() {
     oui.removeEventListener('click', buyItem);
     non.removeEventListener('click', notBuy);
-    itemToBuy = "";
+    itemId = "";
     itemToDelete = "";
 
 }
@@ -67,16 +74,15 @@ function notBuy() {
 let buyCB;
 let deleteCB;
 
+
 /**
  * buy item : transmit the item to buy or delete to back, close confirm and shop modals and remove listeners
  */
 function buy() {
-    if (itemToBuy.length != 0) {
-        let obj = {
-            name: itemToBuy,
-            level: itemLevel
-        };
-        buyCB(obj);
+    if (itemId.length != 0) {
+    
+        console.log("itemID : ",itemId, "itel lvl : ", itemLevel);
+        buyCB(itemId,itemLevel);
     } else if (itemToDelete != 0) {
         let obj = {
             name: itemToDelete,
@@ -88,14 +94,14 @@ function buy() {
 
 
     modal.close(); // close confirm modal
-    Modal.shop.closeFunction(); // close shop modal
+    Modal.closeShopModal(); // close shop modal
     removeListeners();
 }
 
-function setBuyCB(cb){
-    buyCB=cb;
-}function setDelCB(cb){
-    deleteCB=cb;
+function setBuyCB(cb) {
+    buyCB = cb;
+} function setDelCB(cb) {
+    deleteCB = cb;
 }
 
 export default {

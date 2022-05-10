@@ -136,13 +136,16 @@ module.exports = class Player {
     }
 
     machineUpgrade(machine, level) {
-        if (this.machines[machine].level < level && this.asEnoughMoney(machines[machine].price[level])) {
+        console.log("--- Player ", this.name, " wants to buy a new machine", machine, level)
+        if (machine && level && this.machines[machine].level < level && this.asEnoughMoney(machines[machine].price[level])) {
             this.money -= machines[machine].price[level];
             this.machines[machine].level = level;
             this.machines[machine].secondHand = false;
             this.sdUpdate();
+            console.log("--- Player ", this.name, " has bought machine", machine, level)
             return true;
         }
+        console.log("--- Player ", this.name, " doesn't have all the requirements for machine", machine, level)
         return false;
     }
     machineUpgradeSecondhand(machine, level, price) {

@@ -213,6 +213,9 @@ io.on('connection', socket => {
     let username = socket.handshake.session.username;
     let idRoom = socket.handshake.session.idRoom;
 
+    // Socket to display room on lobby
+    io.emit("display-rooms", allRooms);
+
     // User connected in a room
     if (username !== undefined && allRooms[idRoom]) {
         console.log(username, " connected in room ", idRoom);
@@ -263,13 +266,12 @@ io.on('connection', socket => {
         const username = socket.handshake.session.username;
         if (allRooms[idRoom] && allRooms[idRoom].playersName.length >= 2 && allRooms[idRoom].playersName.length <= 4) {
             allRooms[idRoom].chrono.incrementChrono();
+            allRooms[idRoom].gameStart = true;
+            io.emit("display-rooms", allRooms);
             io.to(idRoom).emit("startAuthorized");
         }
         else console.log("start unauthorized");
     })
-
-    // Socket to display room on lobby
-    io.emit("display-rooms", allRooms);
 
     // Socket to change engine
     socket.on('buyEngine', (idEngine, levelEngine) => {

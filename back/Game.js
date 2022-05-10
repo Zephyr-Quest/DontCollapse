@@ -11,6 +11,7 @@ module.exports = class Game {
         this.host = host;
         this.chrono = new Chrono();
         this.runningEvent = undefined;
+        this.gameStart = false;
     }
 
     addPlayer(player) {

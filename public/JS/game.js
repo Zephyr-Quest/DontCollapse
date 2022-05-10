@@ -30,7 +30,7 @@ function deleteEvent(e) {
     );
 }
 
-function startGame(e) {
+function startGame() {
     console.log("start game");
     WebSocket.emit("startGame");
 }
@@ -42,5 +42,10 @@ HUD.initChatButton()
 HUD.initFacButton();
 HUD.initShopButton();
 
+
+
+HUD.setPurchaseCallback((id, level) => {
+    WebSocket.emit("buyEngine", id,level +1);
+})
 
 // console.log(document.getElementById("username").value);

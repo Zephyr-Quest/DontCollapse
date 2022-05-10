@@ -8,7 +8,6 @@ function connect(path, idRoom = null) {
     const pseudo = pseudoInput.value;
     const data = { pseudo };
     if (idRoom) data.idRoom = Number(idRoom);
-    console.log(idRoom);
     http.post(
         path,
         data,
@@ -23,8 +22,9 @@ hostCard.addEventListener("click", () => connect('/host'));
 socket.on("display-rooms", (allRooms) => {
     let htmlScore = "";
     Object.keys(allRooms).forEach(key => {
-        if (allRooms[key].playersName.length < 4)
+        if (allRooms[key].playersName.length < 4 && !allRooms[key].gameStart) {
             htmlScore += '<div class="card" title="Click to join ' + allRooms[key].playersName[0] + '\'s game" name="' + key + '"><ion-icon name="log-in"></ion-icon><ul><li class="name">Host : <strong class="green">' + allRooms[key].playersName[0] + '</strong></li><li class="score">Number of players : <strong>' + allRooms[key].playersName.length + '</strong></li></ul></div>'
+        }
     });
     document.getElementById("games-display").innerHTML = htmlScore;
 

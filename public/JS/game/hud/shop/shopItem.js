@@ -3,6 +3,9 @@ import Buy from './manageItem.js'
 const leftPage = document.querySelectorAll('#left-page div');
 const rightPage = document.querySelectorAll('#right-page div');
 
+let leftBtn = document.querySelectorAll('#left-page button')
+let rightBtn = document.querySelectorAll('#right-page button')
+
 /**
  * init listeners from id[0] to id[1]
  * @param {Document} id 
@@ -13,13 +16,13 @@ function initListener(id) {
     // if the occasion is not selected
     if (id[0] != 24) {
         for (let i = id[0]; i <= id[1]; i++) {
-            leftPage[i].addEventListener('mouseenter', showDescri);
-            leftPage[i].addEventListener('mouseleave', hideDescri);
-            rightPage[i].addEventListener('mouseenter', showDescri);
-            rightPage[i].addEventListener('mouseleave', hideDescri);
-
-            leftPage[i].children[2].addEventListener('click', buyItem); // listener button for buy
-            rightPage[i].children[2].addEventListener('click', buyItem);
+            leftPage[i].addEventListener('mouseenter', toggleDescri);
+            leftPage[i].addEventListener('mouseleave', toggleDescri);
+            rightPage[i].addEventListener('mouseenter', toggleDescri);
+            rightPage[i].addEventListener('mouseleave', toggleDescri);
+            
+            leftBtn[i].addEventListener('click',buyItem);
+            rightBtn[i].addEventListener('click',buyItem);
         }
     } else {
         setOccaz(id)
@@ -33,16 +36,16 @@ function initListener(id) {
 function setOccaz(id) {
     for (let i = id[0]; i <= id[1]; i++) {
         if (leftPage[i].hasAttribute("buyable")) {
-            leftPage[i].addEventListener('mouseenter', showDescri);
-            leftPage[i].addEventListener('mouseleave', hideDescri);
+            leftPage[i].addEventListener('mouseenter', toggleDescri);
+            leftPage[i].addEventListener('mouseleave', toggleDescri);
 
-            leftPage[i].children[2].addEventListener('click', occasion); // button for buy
+            leftPage[i].children[i].addEventListener('click', occasion); // button for buy
         }
     }
     for (let i = id[0]; i <= id[1]; i++) {
         if (rightPage[i].hasAttribute("buyable")) {
-            rightPage[i].addEventListener('mouseenter', showDescri);
-            rightPage[i].addEventListener('mouseleave', hideDescri);
+            rightPage[i].addEventListener('mouseenter', toggleDescri);
+            rightPage[i].addEventListener('mouseleave', toggleDescri);
 
             rightPage[i].children[2].addEventListener('click', occasion); // button for buy
         }
@@ -53,22 +56,16 @@ function setOccaz(id) {
  * show the description when the mouse is hover the card
  * @param {EventTarget} e 
  */
-function showDescri(e) {
-    e.target.children[0].style.display = "none";
-    e.target.children[1].style.display = "block";
-    e.target.children[2].style.display = "block";
-
+function toggleDescri(e) {
+    for (const child of e.target.children) {
+        if(child.style.display === "none"){
+            child.style.display = "block";
+        }else{
+            child.style.display = "none";
+        }
+    }
 }
 
-/**
- * hide the description when the mouse leave the card
- * @param {EventTarget} e 
- */
-function hideDescri(e) {
-    e.target.children[0].style.display = "block";
-    e.target.children[1].style.display = "none"
-    e.target.children[2].style.display = "none";
-}
 
 /**
  * open confirm modal when player click on buy
@@ -95,20 +92,20 @@ function occasion(e) {
  */
 function closeAllListener() {
     for (let i = 0; i < leftPage.length - 2; i++) {
-        leftPage[i].removeEventListener('click', buyItem);
-        rightPage[i].removeEventListener('click', buyItem);
-        leftPage[i].removeEventListener('mouseenter', showDescri);
-        leftPage[i].removeEventListener('mouseleave', hideDescri);
-        rightPage[i].removeEventListener('mouseenter', showDescri);
-        rightPage[i].removeEventListener('mouseleave', hideDescri);
+        leftBtn[i].removeEventListener('click', buyItem);
+        rightBtn[i].removeEventListener('click', buyItem);
+        leftPage[i].removeEventListener('mouseenter', toggleDescri);
+        leftPage[i].removeEventListener('mouseleave', toggleDescri);
+        rightPage[i].removeEventListener('mouseenter', toggleDescri);
+        rightPage[i].removeEventListener('mouseleave', toggleDescri);
     }
     for (let i = leftPage.length - 2; i < leftPage.length; i++) {
         leftPage[i].removeEventListener('click', occasion);
         rightPage[i].removeEventListener('click', occasion);
-        leftPage[i].removeEventListener('mouseenter', showDescri);
-        leftPage[i].removeEventListener('mouseleave', hideDescri);
-        rightPage[i].removeEventListener('mouseenter', showDescri);
-        rightPage[i].removeEventListener('mouseleave', hideDescri);
+        leftPage[i].removeEventListener('mouseenter', toggleDescri);
+        leftPage[i].removeEventListener('mouseleave', toggleDescri);
+        rightPage[i].removeEventListener('mouseenter', toggleDescri);
+        rightPage[i].removeEventListener('mouseleave', toggleDescri);
     }
 }
 
