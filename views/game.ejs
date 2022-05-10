@@ -7,11 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game</title>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=KoHo:wght@300&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="img/ZephyrStudio_logo.png" />
+
+    <script src="https://kit.fontawesome.com/f588d3df13.js" crossorigin="anonymous"></script>
+
     <!-- JS modules -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="JS/http.js" type="text/javascript"></script>
 
-    <script src="https://kit.fontawesome.com/f588d3df13.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/CSS/hud.css">
 
@@ -22,14 +29,14 @@
     <input type="hidden" value="<%= username %>" id="username" />
 
     <div id="room">
-        <h1> Welcome <%= username %>
+        <h1>Welcome <%= username %>
         </h1>
-        <ul id="player_list" class="room"></ul>
-        <button type="submit" id="BtnGame" style="display: none;" class="room button">Start Game !</button>
+        <ul id="player_list"></ul>
+        <button type="submit" id="BtnGame" style="display: none;">Start Game !</button>
     </div>
 
     <div style="display: none;" id="game">
-        <h1> Let's play <%= username %>
+        <h1>Let's play <%= username %>
         </h1>
 
 
@@ -447,7 +454,6 @@
 
     <!-- ------------------------------- Script -------------------------------- -->
     <script src="JS/game/hud/hud.js" type="module"></script>
-    <script src="JS/WebSocket.js" type="module"></script>
     <script src="JS/game.js" type="module"></script>
 </body>
 

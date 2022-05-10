@@ -12,8 +12,7 @@ let id = 1;
 let stat = true;
 
 const update = () => {
-    if (stat) id += 5;
-    else id -= 5;
+    id += stat ? 5 : -5;
     if (id > 100 || id < 0) stat = !stat;
 
     ProgressBar.updateSocial(id)

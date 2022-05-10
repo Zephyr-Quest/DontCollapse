@@ -59,6 +59,13 @@ body {
   padding: 0;
   overflow: hidden;
 }
+body h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  text-shadow: 1px 2px 3px black;
+  font-family: 'KoHo', sans-serif;
+  letter-spacing: 0.15rem;
+}
 /* -------------------------------------------------------------------------- */
 /*                                Progress Bar                                */
 /* -------------------------------------------------------------------------- */
@@ -94,7 +101,7 @@ body {
 .button {
   height: 50px;
   width: 70px;
-  border-radius: 10%;
+  border-radius: 8px;
   cursor: pointer;
   border: 3px solid #f5dba6;
   color: #383331;
@@ -163,9 +170,6 @@ body {
   background-color: #f5dba6;
   color: #383331;
 }
-/* -------------------------------------------------------------------------- */
-/*                                    Shop                                    */
-/* -------------------------------------------------------------------------- */
 #shop-modal {
   height: 700px;
   width: 1200px;
@@ -312,6 +316,58 @@ body {
 }
 #chat-modal #messages .J3 {
   color: #58a8eb;
+}
+/* -------------------------------------------------------------------------- */
+/*                                Waiting room                                */
+/* -------------------------------------------------------------------------- */
+#room {
+  width: 60%;
+  margin: auto;
+}
+#room #player_list {
+  padding: 0;
+  margin-top: 10%;
+}
+#room button {
+  padding: 0;
+  cursor: pointer;
+  border: 3px solid #f5dba6;
+  color: #383331;
+  background-color: #f5dba6;
+}
+#room button:hover {
+  background-color: transparent;
+  color: #f5dba6;
+  transition: background-color 0.3s;
+}
+#room #BtnGame {
+  width: 50%;
+  height: 70px;
+  margin: auto;
+  border-radius: 10px;
+  font-size: 1em;
+  margin-top: 5em;
+}
+#room .removePlayerButton {
+  width: 90px;
+  height: 90px;
+  border-radius: 8px;
+  font-size: 1em;
+}
+#room .card {
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  padding-left: 30px;
+  border-radius: 10px;
+  align-items: center;
+  font-family: 'KoHo', sans-serif;
+  width: 80%;
+}
+#room li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
 }
 /* -------------------------------------------------------------------------- */
 /*                                 Parameters                                 */

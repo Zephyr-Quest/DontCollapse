@@ -308,7 +308,7 @@ io.on('connection', socket => {
         console.log("disconnection", from, username, idRoom);
         if (from === '/game' && username !== undefined && !disconnectingUsers.includes(username)) {
             console.log("mark", username, "as disconnecting");
-            disconnectingUsers.push(username);
+            // disconnectingUsers.push(username);
         }
     });
 });

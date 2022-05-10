@@ -64,14 +64,20 @@ function updatePlayersOnScreen() {
     connectedPlayers.forEach(player => {
         const playerLi = document.createElement('li');
 
-        const playerName = document.createElement('p');
+        const divPlayerName = document.createElement('div');
+        divPlayerName.classList.add("card");
+
+        const playerName = document.createElement('h2');
         playerName.innerText = player;
-        playerLi.appendChild(playerName);
+
+        divPlayerName.appendChild(playerName);
+
+        playerLi.appendChild(divPlayerName);
 
         const user = document.getElementById("username").value;
         const posBtnGame = document.getElementById("BtnGame");
 
-        if (user === connectedPlayers[0]) {
+        if (user === connectedPlayers[0] && connectedPlayers.length >=2) {
             if (posBtnGame.style.display !== "block") {
                 posBtnGame.style.display = "block";
                 posBtnGame.addEventListener("click", startGame);
@@ -79,6 +85,7 @@ function updatePlayersOnScreen() {
 
             if (player != connectedPlayers[0]) {
                 const playerDelete = document.createElement('button');
+                playerDelete.classList.add('removePlayerButton');
                 playerDelete.innerText = "Ta gueule connard";
                 playerDelete.addEventListener("click", deleteEvent);
                 playerLi.appendChild(playerDelete);

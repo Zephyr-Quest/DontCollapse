@@ -90,6 +90,14 @@ body {
     padding: 0;
 
     overflow: hidden;
+
+    h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        text-shadow: 1px 2px 3px black;
+        font-family: @primary-font, @secondary-font;
+        letter-spacing: 0.15rem;
+    }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -106,10 +114,7 @@ body {
         flex-direction: column;
 
         .progress-container {
-            //@margin:100px;
-            //margin-left: @margin;
             border: solid rgb(53, 53, 77);
-            // background-color: black;
             height: 30px;
             width: 400px;
             background: linear-gradient(90deg, rgba(255, 0, 0, 1) 54%, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 1) 100%);
@@ -128,7 +133,6 @@ body {
 
             .text {
                 text-align: center;
-
             }
         }
 
@@ -138,7 +142,7 @@ body {
 .button {
     height: 50px;
     width: 70px;
-    border-radius: 10%;
+    border-radius: 8px;
     cursor: pointer;
     border: 3px solid @primary-color;
     color: @bg-color;
@@ -148,9 +152,7 @@ body {
         background-color: transparent;
         color: @primary-color;
         transition: background-color 0.3s;
-
     }
-
 }
 
 
@@ -177,7 +179,6 @@ body {
                 margin: 0;
                 padding-left: 0;
                 padding-right: 0;
-                // padding: 1rem;
             }
 
             .close-button {
@@ -230,11 +231,6 @@ body {
     color: @bg-color
 }
 
-
-
-/* -------------------------------------------------------------------------- */
-/*                                    Shop                                    */
-/* -------------------------------------------------------------------------- */
 #shop-modal {
     height: 700px;
     width: 1200px;
@@ -252,7 +248,6 @@ body {
         #shop {
             display: grid;
             grid-template-columns: 2fr 2fr 1fr;
-            //grid-template-rows: 30px 3fr;
             grid-auto-rows: minmax(40px, auto);
 
             .rubric {
@@ -262,7 +257,7 @@ body {
 
             .clickable:hover:not(.selected) {
                 color: @primary-color;
-                background-color: @backdrop-color; //rgba(51, 255, 0, 0.2);
+                background-color: @backdrop-color;
                 text-decoration: none;
                 cursor: pointer;
             }
@@ -289,7 +284,6 @@ body {
                 grid-row: 2/3;
 
                 display: grid;
-                //grid-template-columns: 4fr;
                 grid-template-rows: repeat(4, 1fr);
                 grid-auto-rows: minmax(100px, auto);
 
@@ -309,8 +303,6 @@ body {
 
                 display: grid;
                 grid-template-rows: 1fr 1fr;
-
-
             }
 
             #right-page {
@@ -322,14 +314,11 @@ body {
 
                 display: grid;
                 grid-template-rows: 1fr 1fr;
-
-
             }
 
             #left-page div,
             #right-page div {
                 margin: 1rem;
-                // height: 8rem;
                 border-radius: 1%;
                 border: dashed 1px @primary-color;
                 height: 100px;
@@ -338,7 +327,6 @@ body {
                 align-content: center;
                 justify-content: space-between;
                 cursor: default;
-
             }
 
             .buy-button {
@@ -348,7 +336,6 @@ body {
                 border-top: 1px solid @primary-color;
                 border-radius: 5%;
                 cursor: pointer;
-
 
                 &:hover {
                     background-color: @primary-color;
@@ -373,12 +360,6 @@ body {
     border: 3px solid @bg-color;
 
     overflow-y: auto;
-
-    // .title-modal {
-    //     margin: 0;
-    //     padding-left: 0;
-    //     padding-right: 0;
-    // }
 
     #chatForm {
         display: flex;
@@ -431,6 +412,66 @@ body {
         .J3 {
             color: rgb(88, 168, 235);
         }
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                Waiting room                                */
+/* -------------------------------------------------------------------------- */
+#room {
+    width: 60%;
+    margin: auto;
+
+    #player_list {
+        padding: 0;
+        margin-top: 10%;
+    }
+
+    button {
+        padding: 0;
+        cursor: pointer;
+        border: 3px solid @primary-color;
+        color: @bg-color;
+        background-color: @primary-color;
+
+        &:hover {
+            background-color: transparent;
+            color: @primary-color;
+            transition: background-color 0.3s;
+        }
+    }
+
+    #BtnGame {
+        width: 50%;
+        height: 70px;
+        margin: auto;
+        border-radius: 10px;
+        font-size: 1em;
+        margin-top: 5em;
+    }
+
+    .removePlayerButton {
+        width: 90px;
+        height: 90px;
+        border-radius: 8px;
+        font-size: 1em;
+    }
+
+    .card {
+        box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        padding-left: 30px;
+        border-radius: 10px;
+        align-items: center;
+        font-family: @primary-font, @secondary-font;
+        width: 80%;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
     }
 }
 
