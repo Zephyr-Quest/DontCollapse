@@ -1,9 +1,10 @@
 import ProgressBar from './progressBar.js';
-import Modal from './shopModal.js';
-import Chat from './chatModal.js'
+// import Modal from './shopModal.js';
+//import Chat from './chatModal.js'
 import Parameter from './parameter.js'
-import Chrono from './chrono.js'
+// import Chrono from './chrono.js'
 
+import Modal from './modalManager.js'
 
 
 /* ------------------------------ progress bar ------------------------------ */
@@ -25,7 +26,15 @@ const update = () => {
 
 /* --------------------------------- Modals --------------------------------- */
 
-Modal.initListener();
-Chat.initListener();
 Parameter.initListener();
-//Chrono.startChrono();
+
+let shop = new Modal('shop-modal', 'shop-button', 'close-shop' ,true);
+shop.initListener();
+let chat = new Modal('chat-modal', 'chat-button', 'close-chat');
+chat.initListener();
+
+
+export default {
+    shop,
+    chat
+}

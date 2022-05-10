@@ -1,4 +1,4 @@
-import Modal from '../shopModal.js'
+import Modal from '../hud.js'
 
 const modal = document.getElementById('confirm-buy');
 const oui = document.getElementsByClassName('oui-button')[0];
@@ -13,6 +13,7 @@ const level = {
     "braz": 2,
     "tesla": 3,
 };
+
 /**
  * Open confirm modal to buy the item currently selected
  * @param {Document} divOfItem 
@@ -78,7 +79,7 @@ function buy() {
 
 
     modal.close();          // close confirm modal
-    Modal.closeFunction();  // close shop modal
+    Modal.shop.closeFunction();  // close shop modal
     removeListeners();
 }
 

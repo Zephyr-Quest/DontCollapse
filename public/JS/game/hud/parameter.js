@@ -11,9 +11,12 @@ const musicOff = document.querySelector('.fa-volume-off');
 const effectUp = document.querySelector('.fa-bell');
 const effectOff = document.querySelector('.fa-bell-slash');
 const signOut = document.querySelector('.fa-right-from-bracket');
+const cloud = document.querySelector('.fa-cloud');
+const sun = document.querySelector('.fa-sun');
 
 let sound = true;
 let effect = true;
+let shadow = true;
 
 /**
  * display parameters
@@ -40,6 +43,12 @@ function showParameter() {
     } else {
         effectOff.style.display = "block";
     }
+
+    if (shadow) {
+        cloud.style.display = "block";
+    } else {
+        sun.style.display = "block";
+    }
 }
 
 /**
@@ -63,6 +72,12 @@ function fctParam(e) {
         case 'fa-right-from-bracket':
             ilveutsedeco();
             break;
+        case 'fa-cloud':
+            removeShadow();
+            break;
+        case 'fa-sun':
+            putShadow();
+            break;
         default:
             break;
     }
@@ -73,14 +88,16 @@ function fctParam(e) {
  */
 function closeParam() {
     paramContent.forEach(element => {
-        element.style.display = "none";
-        element.removeEventListener('click', fctParam);
         element.removeAttribute('open');
+        if (element.style.display !== "none") {
+            element.setAttribute('closing', "");
+            element.removeEventListener('click', fctParam);
 
-        // element.setAttribute('closing', "");
-        // element.addEventListener('animationend', () => {
-        //     element.removeAttribute('closing');
-        // });
+            element.addEventListener('animationend', () => {
+                element.removeAttribute('closing');
+                element.style.display = "none";
+            }, { once: true });
+        }
     });
 }
 
@@ -175,6 +192,38 @@ function changeEffect() {
     }
 }
 
+/**
+ * remove shadow model 3D
+ */
+function removeShadow() {
+    console.log('enleve ombre');
+    shadow = false;
+    changeShadow();
+}
+
+/**
+ * put shadow model 3D
+ */
+function putShadow() {
+    console.log('met ombre');
+    shadow = true;
+    changeShadow();
+}
+
+/**
+ * change shadow model 3D
+ */
+function changeShadow() {
+    if (shadow) {
+        cloud.style.display = "block";
+        sun.style.display = "none";
+    } else {
+        cloud.style.display = "none";
+        sun.style.display = "block";
+    }
+    if (shadowCB) shadowCB(shadow);
+}
+
 
 let musicCB = null;
 
@@ -202,9 +251,29 @@ function isEffectOn() {
     return effect
 }
 
+let shadowCB = null;
+
+/**
+ * set the callback to trigger when the player wants to cut shadow
+ * @param {Function} cb 
+ */
+function setShadowCallBack(cb) {
+    shadowCB = cb;
+}
+
+/**
+ * return the state of shadow
+ * @returns {Bool} shadow
+ */
+function isShadowOn() {
+    return shadow;
+}
+
 export default {
     initListener,
     setMusicCallBack,
     isMusicON,
-    isEffectOn
+    isEffectOn,
+    setShadowCallBack,
+    isShadowOn
 }

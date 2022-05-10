@@ -133,7 +133,7 @@ app.delete("/removeuser/:player", (req, res) => {
 });
 
 app.post("/host",
-    body("pseudo").isLength({ min: 3 }).trim().escape(),
+    body("pseudo").trim().isLength({ min: 3 }).escape(),
     (req, res) => {
         const userName = req.body.pseudo;
 
@@ -166,7 +166,7 @@ app.post("/host",
     })
 
 app.post("/join",
-    body("pseudo").isLength({ min: 3 }).trim().escape(),
+    body("pseudo").trim().isLength({ min: 3 }).escape(),
     body("idRoom"),
     (req, res) => {
 
@@ -233,7 +233,7 @@ io.on('connection', socket => {
                 console.log("delete room", idRoom);
                 allRooms.splice(idRoom, 1);
                 io.to(idRoom).emit("disconnection");
-            } 
+            }
             // Host remove an user from the room
             else {
                 console.log("remove", username, "from room", idRoom);
@@ -289,6 +289,11 @@ io.on('connection', socket => {
     // Socket to change contract
     socket.on('buyContract', (idFournisseur, contractNumber) => {
         allRooms[idRoom].searchPlayer(username).furnisherUpgrade(idFournisseur, contractNumber);
+    })
+
+    // Socket actu
+    socket.on('actu', () => {
+        allRooms[idRoom].updateMonth();
     })
 
     /* -------------------------------------------------------------------------- */
