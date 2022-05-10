@@ -9,7 +9,6 @@
 
     <!-- JS modules -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="JS/http.js" type="text/javascript"></script>
 
     <script src="https://kit.fontawesome.com/f588d3df13.js" crossorigin="anonymous"></script>
 
@@ -48,12 +47,12 @@
                 <p><span id="money-amount">50000</span>€</p>
             </div>
 
-            <!-- Modal Shop -->
-            <button class="button" id="shop-button">Shop</button>
         </div>
 
 
 
+        <!-- Modal Shop -->
+        <button class="button" id="shop-button">Shop</button>
         <dialog class="modal" id="shop-modal">
             <div class="modal-content">
                 <div class="top-modal">
@@ -408,6 +407,16 @@
             </dialog>
         </dialog>
 
+        <button class="button" id="player-button">See others players</button>
+        <dialog class="modal" id="player-modal">
+            <div class="modal-content">
+                <div class="top-modal">
+                    <h2 class="title-modal">Qu'est ce que font les autres ?</h2>
+                    <span class="close-button" id="close-player">&times;</span>
+                </div>
+                <ul id="display-player"></ul>
+            </div>
+        </dialog>
     </div>
 
     <button class="button" id="chat-button">Open Chat</button>
@@ -425,8 +434,8 @@
 
         </div>
     </dialog>
-    <i class="fa-sofa-sign-outlid fa-volume-xmark"></i>
 
+    <i class="fa-sofa-sign-outlid fa-volume-xmark"></i>
     <div id="parameters">
         <i class="param-content fa-solid fa-bell" style="display:none;"></i>
         <i class="param-content fa-solid fa-bell-slash" style="display:none;"></i>
@@ -446,8 +455,8 @@
     </div>
 
     <!-- ------------------------------- Script -------------------------------- -->
-    <script src="JS/game/hud/hud.js" type="module"></script>
-    <script src="JS/WebSocket.js" type="module"></script>
+    <!-- <script src="JS/main.js" type="module"></script> -->
+    <!-- <script src="JS/WebSocket.js" type="module"></script> -->
     <script src="JS/game.js" type="module"></script>
 </body>
 

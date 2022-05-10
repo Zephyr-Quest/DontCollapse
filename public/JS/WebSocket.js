@@ -95,6 +95,7 @@ function beginingGame() {
     const eltsToShow = document.getElementById("game");
     eltsToShow.style.display = "block";
     Chrono.startChronoFrom(10, 0);
+
 }
 
 /* --------------------------------- Return --------------------------------- */
@@ -118,8 +119,11 @@ function emit(eventName, ...params) {
     socket.emit(eventName, ...params);
 }
 
+const getConnectedPlayers = () => connectedPlayers;
+
 export default{
     init,
     connect,
-    emit
+    emit,
+    getConnectedPlayers
 }

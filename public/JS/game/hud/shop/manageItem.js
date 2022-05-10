@@ -19,10 +19,10 @@ const level = {
  * @param {Document} divOfItem 
  */
 function buyItem(divOfItem) {
-    itemLevel = level[divOfItem.classList[0]];      // set the item level
-    itemToBuy = divOfItem.children[0].textContent;  // set the item name
-    document.getElementById('buying').textContent = "Achat de : " + itemToBuy;  // replace modal text
-    modal.showModal();  // open confirm modal
+    itemLevel = level[divOfItem.classList[0]]; // set the item level
+    itemToBuy = divOfItem.children[0].textContent; // set the item name
+    document.getElementById('buying').textContent = "Achat de : " + itemToBuy; // replace modal text
+    modal.showModal(); // open confirm modal
     initListener();
 }
 
@@ -31,7 +31,7 @@ function buyItem(divOfItem) {
  * @param {Document} divOfItem 
  */
 function deleteItem(divOfItem) {
-    itemLevel = level[divOfItem.classList[0]];  // same as buy
+    itemLevel = level[divOfItem.classList[0]]; // same as buy
     itemToDelete = divOfItem.children[0].textContent;
     document.getElementById('buying').textContent = "Voulez vous vraiment vous débarasser de votre " + itemToDelete + " ?";
     modal.showModal();
@@ -60,30 +60,47 @@ function removeListeners() {
  * not buy the item : close modal and remove oui/non listeners
  */
 function notBuy() {
-    modal.close();  // close confirm modal
+    modal.close(); // close confirm modal
     removeListeners();
 }
+
+let buyCB;
+let deleteCB;
 
 /**
  * buy item : transmit the item to buy or delete to back, close confirm and shop modals and remove listeners
  */
 function buy() {
     if (itemToBuy.length != 0) {
-        //TODO transmettre à rémi l'achat de l'article
-        // itemToBuy | itemLevel
+        let obj = {
+            name: itemToBuy,
+            level: itemLevel
+        };
+        buyCB(obj);
     } else if (itemToDelete != 0) {
-        //TODO transmettre à rémi la suppression de l'article
-        // itemToDelete | itemLevel
+        let obj = {
+            name: itemToDelete,
+            level: itemLevel
+        };
+        deleteCB(obj);
     }
 
 
 
-    modal.close();          // close confirm modal
-    Modal.shop.closeFunction();  // close shop modal
+    modal.close(); // close confirm modal
+    Modal.shop.closeFunction(); // close shop modal
     removeListeners();
+}
+
+function setBuyCB(cb){
+    buyCB=cb;
+}function setDelCB(cb){
+    deleteCB=cb;
 }
 
 export default {
     buyItem,
-    deleteItem
-}
+    deleteItem,
+    setBuyCB,
+    setDelCB
+};

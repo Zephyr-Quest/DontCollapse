@@ -1,4 +1,5 @@
 import Shop from './shop/topRubric.js';
+import OtherFactory from './otherFactory.js'
 
 /**
  * la jolie classe des modales
@@ -11,14 +12,15 @@ export default class modal {
      * @param {String} close 
      * @param {Boolean} isShop 
      */
-    constructor(modal, open, close, isShop = false) {
+    constructor(modal, open, close, isShop = false, isFactory = false) {
         this.modal = document.getElementById(modal);
         this.open = document.getElementById(open);
         this.close = document.getElementById(close);
         this.isShop = isShop;
+        this.isFactory = isFactory;
         console.log(this.modal)
     }
-    
+
     /**
      * close the modal and remove all event listeners
      */
@@ -31,6 +33,8 @@ export default class modal {
             once: true
         });
         if (this.isShop) Shop.closeShop()
+        if (this.isFactory) OtherFactory.close()
+
 
         this.close.removeEventListener('click', this.closeFunction.bind(this)); // cross
         this.modal.removeEventListener('click', this.outsideClose.bind(this)); // outside
@@ -38,7 +42,7 @@ export default class modal {
     }
 
     /**
-     * close modal if  player click outside the modal
+     * close modal if player click outside the modal
      * @param {EventTarget} e 
      */
     outsideClose(e) {
@@ -72,11 +76,12 @@ export default class modal {
     }
 
     /**
-     * open the chat modal
+     * open the modal
      */
     openModal() {
         this.initCloseListeners();
         if (this.isShop) Shop.initShopListeners()
+        if (this.isFactory) OtherFactory.refresh()
         this.modal.showModal();
     }
 
@@ -85,5 +90,9 @@ export default class modal {
      */
     initListener() {
         this.open.addEventListener('click', this.openModal.bind(this));
+    }
+
+    destroyListener(){
+        this.open.removeEventListener('click',this.openModal.bind(thid))
     }
 }
