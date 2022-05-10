@@ -107,6 +107,24 @@ export const Models = {
                 instance: null,
                 rotation: [90, 0, 0]
         },
+        belt: {
+                name: "belt",
+                model: "belt_3_to_4.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        new_door: {
+                name: "new_door",
+                model: "new_door.glb",
+                scale: 25,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
         shelf: {
                 name: "shelf",
                 model: "shelf.glb",

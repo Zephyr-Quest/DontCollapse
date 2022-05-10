@@ -276,7 +276,7 @@ export class Scene {
                         }
                         let tempname = s.name
                         tempname = tempname.replace(prefix, "")
-                        if (tempname == "Boutique" || tempname == "Chat") {
+                        if (tempname == "Boutique" || tempname == "Chat" || tempname == "Sortie") {
                                 tempos = {
                                         x: s.position.x,
                                         y: s.position.y - (250 - s.position.y + 45),
@@ -296,9 +296,12 @@ export class Scene {
                         this.GroupSprite = new THREE.Group()
                         this.scene.add(this.copyGroupSprite)
                         this.staticText = true
-                        if (!this.openedMenu && (tempname != "Boutique" && tempname != "Chat")) {
+                        if (!this.openedMenu && (tempname != "Boutique" && tempname != "Chat" && tempname != "Sortie")) {
                                 this.openMenu(tempname)
-                        } else if (tempname == "Boutique" || tempname == "Chat") {
+                        } else if (tempname == "Sortie") {
+                                this.openMenuSortie()
+
+                        } else if (tempname == "Boutique" || tempname == "Chat" || tempname == "Sortie") {
                                 this.closeMenu()
                         }
                 } else {
@@ -317,10 +320,22 @@ export class Scene {
                 let menu = document.getElementById("myMenuShop")
                 document.getElementById("title_menuShop").innerText = "Menu : " + s
                 menu.style.display = "block"
+                menu = document.getElementById("myMenuSortie")
+                if (menu.style.display == "block") menu.style.display = "none"
+        }
+        openMenuSortie() {
+                let menu = document.getElementById("myMenuShop")
+                if (menu.style.display == "block") menu.style.display = "none"
+                menu = document.getElementById("myMenuSortie")
+                document.getElementById("title_menuSortie").innerText = "Aller voir le joueur :"
+                menu.style.display = "block"
         }
         closeMenu() {
                 let menu = document.getElementById("myMenuShop")
                 if (menu.style.display == "block") menu.style.display = "none"
+                menu = document.getElementById("myMenuSortie")
+                if (menu.style.display == "block") menu.style.display = "none"
+
 
         }
         onMouseOver(event, ctx) {
@@ -349,7 +364,7 @@ export class Scene {
                         }
                         if (!this.animatedText) {
                                 let tempos
-                                if (tempname == "Boutique" || tempname == "Chat") {
+                                if (tempname == "Boutique" || tempname == "Chat" || tempname == "Sortie") {
                                         tempos = {
                                                 x: s.position.x,
                                                 y: s.position.y - (250 - s.position.y + 45),
