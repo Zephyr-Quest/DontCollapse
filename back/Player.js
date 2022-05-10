@@ -176,10 +176,7 @@ module.exports = class Player {
     }
 
     isFinished () {
-        if (this.machines === [4,4,4,4] && this.sd.isFinished()) {
-            return true;
-        }
-        return false;   
+        return this.machines === [4,4,4,4] && this.sd.isFinished();
     }
 
     updateAll() {
