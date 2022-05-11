@@ -1,4 +1,5 @@
 import Chrono from "./game/hud/chrono.js";
+import Item from './game/hud/shop/manageItem.js'
 
 let socket;
 const events = {
@@ -46,8 +47,8 @@ const events = {
         getAllShop(infoPlayer);
     },
     "confirmPurchase": (isBought, machineOrContractOrOccaz) => {
-        confirmation = { bought: isBought, type: machineOrContractOrOccaz };
-        purchaseConfirmation(/* isBought, machineOrContractOrOccaz */);
+        let confirm = { bought: isBought, type: machineOrContractOrOccaz };
+        Item.confirmation(confirm);
     }
 };
 
@@ -125,10 +126,10 @@ function getMoney() {
 }
 
 function purchaseConfirmation(/* isBought, machineOrContractOrOccaz */) {
-    // console.log(isBought, machineOrContractOrOccaz);
-    console.log(confirmation);
+    let tmp = confirmation
     confirmation = undefined;
-    console.log(confirmation);
+    console.log(tmp)
+    return tmp;
 }
 
 /* --------------------------------- Return --------------------------------- */
