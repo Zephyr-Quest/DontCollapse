@@ -154,7 +154,7 @@ export class Scene {
                 let intensity = 0.85;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
                 this.light.position.set(0, 0, 130);
-                this.light.castShadow = false;
+                this.light.castShadow = true;
                 this.light.shadow.bias = -0.0001
                 this.light.shadow.mapSize.width = 1024; // default
                 this.light.shadow.mapSize.height = 1024; // default
@@ -166,12 +166,12 @@ export class Scene {
                 this.scene.add(this.light);
 
 
-                this.ambiantlight = new THREE.AmbientLight(0x505050);
+                this.ambiantlight = new THREE.AmbientLight(0x7b7065);
                 this.ambiantlight.position.set(0, 0, 130);
                 this.scene.add(this.ambiantlight);
 
                 //if window resizes
-                window.addEventListener('resize', this.onWindowResize, false);
+                window.addEventListener('resize', this.onWindowResize.bind(this), false);
                 window.addEventListener('keydown', (event) => {
                         this.changeCamera(event)
                 }, false)
@@ -202,7 +202,7 @@ export class Scene {
                 this.render();
                 requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();
-                // this.light.shadow.autoUpdate = false
+                this.light.shadow.autoUpdate = false
                 stats.end();
         }
 

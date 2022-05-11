@@ -324,20 +324,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        {
-                type: "desk",
-                length: 100,
-                width: 100,
-                heigth: 100,
-                x: 80,
-                y: -140,
-                z: .3,
-                color: "red",
-                rotx: 0,
-                roty: 0,
-                rotz: 0,
-                ray: false,
-        },
+        
         {
                 type: "desk",
                 length: 100,
@@ -657,20 +644,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        {
-                type: "closed_box",
-                length: 100,
-                width: 100,
-                heigth: 100,
-                x: 80,
-                y: -140,
-                z: .3,
-                color: "red",
-                rotx: 0,
-                roty: 5,
-                rotz: 0,
-                ray: false,
-        },
+        
         {
                 type: "closed_box",
                 length: 100,
@@ -739,6 +713,20 @@ export const ObjectArray = [
                 color: "red",
                 rotx: 0,
                 roty: -5,
+                rotz: 0,
+                ray: false,
+        },
+        {
+                type: "opened_box",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: 125,
+                y: -65,
+                z:0.3,
+                color: "red",
+                rotx: 0,
+                roty: -90,
                 rotz: 0,
                 ray: false,
         },
@@ -1033,22 +1021,7 @@ export const ObjectArray = [
                 name: "Mac_Assembleur de Precision"
         },
 
-        // {
-        //         type: "cube",
-        //         length: 40,
-        //         width: 180,
-        //         heigth: 40,
-        //         x: -130,
-        //         y: -55,
-        //         z: 20.5,
-        //         color: 0x000000,
-        //         rotx: 0,
-        //         roty: -90,
-        //         rotz: 0,
-        //         transparency:0,
-        //         ray: true,
-        //         name:"Assembleur"
-        // },
+       
         /* ---------------------------------- SHELF --------------------------------- */
 
         {
@@ -1079,22 +1052,6 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        /* ------------------------------ METAL LOCKER ------------------------------ */
-        // {
-        //         type: "metallocker",
-        //         length: 100,
-        //         width: 100,
-        //         heigth: 100,
-        //         x: 239,
-        //         y: -18,
-        //         z: .1,
-        //         color: "#AD3C25",
-        //         rotx: 0,
-        //         roty: 180,
-        //         rotz: 0,
-        //         ray: false,
-        // },
-
         /* --------------------------------- LADDER --------------------------------- */
         {
                 type: "ladder",
@@ -1327,7 +1284,23 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 90,
                 rotz: 0,
-                ray:true,
+                ray: true,
                 name: "Mac_Sortie"
+        },
+
+        /* --------------------------------- GENERAL -------------------------------- */
+        {
+                type: "general",
+                x: 70,
+                y: -65,
+                z: 22,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: true,
+                name: "Mac_Assembleur General"
         },
 ]
