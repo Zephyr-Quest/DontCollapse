@@ -5,11 +5,11 @@
 /* -------------------------------------------------------------------------- */
 
 // Colors
-@text-color: #000;
-@bg-color: #eee;
-@primary-color: #3ca50c;
-@grey: #e4e4e4;
-@header-bg-color: #eee;
+@text-color: #eee;
+@bg-color: #383331;
+@primary-color: #f5dba6;
+@grey: #3f3c3a;
+@header-bg-color: #383331;
 
 // Fonts
 @text-font: 'Aclonica';
@@ -57,11 +57,13 @@ main {
     width: 50%;
     margin: auto;
 
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
         font-family: @primary-font, @secondary-font;
         letter-spacing: 0.15rem;
     }
-    
+
     h1 {
         font-size: 2.5rem;
         text-align: center;
@@ -72,7 +74,7 @@ main {
         display: flex;
         align-items: center;
     }
-    
+
     ion-icon {
         color: @primary-color;
         margin-right: 10px;
@@ -107,18 +109,6 @@ main {
     .scoreboard {
         margin-top: 50px;
         margin-bottom: 50px;
-        
-        .card {
-            h3 {
-                font-size: 2rem;
-                margin: 0;
-                margin-left: 10px;
-            }
-
-            ul {
-                margin-left: 50px;
-            }
-        }
     }
 
     .games {
@@ -158,6 +148,28 @@ main {
                 margin-right: 5px;
                 font-size: 1.5rem;
             }
+        }
+    }
+
+    #pseudo {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+        input {
+            background-color: @bg-color;
+            color: @text-color;
+            font-family: @primary-font, @secondary-font;
+            font-size: medium;
+            font-weight: bold;
+            border: 3px solid @primary-color;
+            outline: none;
+            box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+            height: 1.7em;
+            width: 20em;
+            margin-left: 3em;
+            padding: 8px 12px 8px 12px;
+            border-radius: 8px;
         }
     }
 }

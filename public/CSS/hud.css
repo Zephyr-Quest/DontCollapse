@@ -1,0 +1,452 @@
+@charset "UTF-8";
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  100% {
+    opacity: 0;
+  }
+  0% {
+    opacity: 1;
+  }
+}
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes slide-right {
+  0% {
+    transform: translateX(-20%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+@keyframes slide-right-params {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(80%);
+  }
+}
+@keyframes slide-left-params {
+  0% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  background-color: #383331;
+  font-family: 'KoHo', sans-serif;
+  color: #eee;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* width */
+  /* Track */
+  /* Handle */
+}
+body ::-webkit-scrollbar {
+  width: 10px;
+}
+body ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+body ::-webkit-scrollbar-thumb {
+  background: #f5dba6;
+  border-radius: 10px;
+}
+body h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  text-shadow: 1px 2px 3px black;
+  font-family: 'KoHo', sans-serif;
+  letter-spacing: 0.15rem;
+}
+/* -------------------------------------------------------------------------- */
+/*                                Progress Bar                                */
+/* -------------------------------------------------------------------------- */
+#top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+#top .containers {
+  display: flex;
+  flex-direction: column;
+}
+#top .containers .progress-container {
+  border: solid #35354d;
+  height: 30px;
+  width: 400px;
+  background: linear-gradient(90deg, #ff0000 54%, #000000 55%, #000000 100%);
+  text-align: center;
+  font-size: x-large;
+  font-style: italic;
+  color: #eee;
+}
+#top .containers .progress-container .progress {
+  height: 100%;
+  width: 200;
+  min-width: 0px;
+  max-width: 400px;
+  z-index: 1;
+}
+#top .containers .progress-container .text {
+  text-align: center;
+}
+.button {
+  height: 40px;
+  width: 50px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 3px solid #f5dba6;
+  color: #383331;
+  background-color: #f5dba6;
+}
+.button:hover {
+  background-color: transparent;
+  color: #f5dba6;
+  transition: background-color 0.3s;
+}
+/* -------------------------------------------------------------------------- */
+/*                                    Modals                                  */
+/* -------------------------------------------------------------------------- */
+.modal {
+  padding: 0;
+}
+.modal .modal-content {
+  height: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.modal .modal-content .top-modal {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.modal .modal-content .top-modal .title-modal {
+  color: #eee;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.modal .modal-content .top-modal .close-button {
+  color: #f5dba6;
+  float: right;
+  font-size: 28px;
+  font-weight: 1000;
+}
+.modal .modal-content .top-modal .close-button:hover {
+  color: #3f3c3a;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal#shop-modal[open] {
+  animation: slide-up 100ms forwards, fade-in 250ms forwards;
+}
+.modal#chat-modal[open] {
+  animation: slide-right 100ms forwards, fade-in 250ms forwards;
+}
+.modal::backdrop {
+  animation: fade-in 250ms forwards;
+}
+.modal[closing] {
+  display: block;
+  pointer-events: none;
+  inset: 0;
+  animation: fade-out 250ms forwards;
+}
+.modal[closing]::backdrop {
+  animation: fade-out 250ms forwards;
+}
+.selected {
+  background-color: #f5dba6;
+  color: #383331;
+}
+#shop-modal {
+  height: 700px;
+  width: 1200px;
+  overflow: hidden;
+  border-radius: 2%;
+  background-color: #383331;
+  border: 3px solid #f5dba6;
+  color: #f5dba6;
+}
+#shop-modal .modal-content {
+  text-align: center;
+}
+#shop-modal .modal-content #shop {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  grid-auto-rows: minmax(40px, auto);
+}
+#shop-modal .modal-content #shop .rubric {
+  border-radius: 1%;
+  border: solid 2px #f5dba6;
+}
+#shop-modal .modal-content #shop .clickable:hover:not(.selected) {
+  color: #f5dba6;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+  cursor: pointer;
+}
+#shop-modal .modal-content #shop #main-title {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  border-bottom: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+}
+#shop-modal .modal-content #shop #main-title div {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+#shop-modal .modal-content #shop #supplier {
+  grid-column: 3/4;
+  grid-row: 2/3;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+}
+#shop-modal .modal-content #shop #supplier div {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+#shop-modal .modal-content #shop #left-page {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+#shop-modal .modal-content #shop #right-page {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  border-left: none;
+  border-right: none;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+#shop-modal .modal-content #shop #left-page div,
+#shop-modal .modal-content #shop #right-page div {
+  margin: 1rem;
+  border-radius: 1%;
+  border: dashed 1px #f5dba6;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-between;
+  cursor: default;
+}
+#shop-modal .modal-content #shop .buy-button {
+  height: 30px;
+  background-color: transparent;
+  color: #f5dba6;
+  border-top: 1px solid #f5dba6;
+  border-radius: 5%;
+  cursor: pointer;
+}
+#shop-modal .modal-content #shop .buy-button:hover {
+  background-color: #f5dba6;
+  color: #383331;
+}
+/* -------------------------------------------------------------------------- */
+/*                                    Chat                                    */
+/* -------------------------------------------------------------------------- */
+#chat-modal {
+  height: 700px;
+  width: 300px;
+  max-width: 700px;
+  margin-left: 20px;
+  font-weight: bold;
+  background-color: #383331;
+  color: #f5dba6;
+  border: 3px solid #383331;
+  overflow-y: auto;
+}
+#chat-modal #chatForm {
+  display: flex;
+  justify-content: space-between;
+}
+#chat-modal #chatForm input {
+  background-color: #383331;
+  color: #eee;
+  font-family: 'KoHo', sans-serif;
+  font-size: medium;
+  font-weight: bold;
+  border: 3px solid #f5dba6;
+  outline: none;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+  height: 20px;
+  width: 70%;
+  padding: 5px 5px 5px 5px;
+  border-radius: 8px;
+}
+#chat-modal #chatForm button {
+  border-radius: 8px;
+}
+#chat-modal #messages {
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  color: #eee;
+}
+#chat-modal #messages .sender {
+  display: grid;
+  justify-content: right;
+}
+#chat-modal #messages .receiver {
+  display: grid;
+  justify-content: left;
+}
+#chat-modal #messages .username {
+  font-size: small;
+}
+#chat-modal #messages .host {
+  color: #fa4b4b;
+}
+#chat-modal #messages .J1 {
+  color: #1ea802;
+}
+#chat-modal #messages .J2 {
+  color: #e403d1;
+}
+#chat-modal #messages .J3 {
+  color: #58a8eb;
+}
+/* -------------------------------------------------------------------------- */
+/*                                Waiting room                                */
+/* -------------------------------------------------------------------------- */
+#room {
+  width: 50%;
+  margin: auto;
+}
+#room #player_list {
+  padding: 0;
+  margin-top: 10%;
+}
+#room button {
+  padding: 0;
+  cursor: pointer;
+  border: 3px solid #f5dba6;
+  color: #383331;
+  background-color: #f5dba6;
+}
+#room button:hover {
+  background-color: transparent;
+  color: #f5dba6;
+  transition: background-color 0.3s;
+}
+#room #BtnGame {
+  width: 50%;
+  height: 70px;
+  margin: auto;
+  border-radius: 10px;
+  font-size: 1em;
+  margin-top: 5em;
+}
+#room #chat-button {
+  width: 35%;
+  height: 50px;
+  display: block;
+  margin: auto;
+  border-radius: 8px;
+  font-size: 1em;
+  margin-top: 2em;
+}
+#room .removePlayerButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  font-size: 1em;
+}
+#room .card {
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+  border: 3px solid #f5dba6;
+  margin-bottom: 2em;
+  padding: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+  border-radius: 10px;
+  align-items: center;
+  font-family: 'KoHo', sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+/* -------------------------------------------------------------------------- */
+/*                                 Parameters                                 */
+/* -------------------------------------------------------------------------- */
+#parameters {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  column-gap: 20px;
+  row-gap: 20px;
+  justify-items: center;
+}
+#parameters .param-content[open] {
+  animation: slide-left-params 100ms forwards, fade-in 250ms forwards;
+}
+#parameters .param-content[open]:hover {
+  color: #f5dba6;
+}
+#parameters .param-content[closing] {
+  animation: slide-right-params 100ms forwards, fade-out 250ms forwards;
+}
+#parameters .fa-volume-high,
+#parameters .fa-volume-off {
+  grid-column: 4/5;
+  grid-row: 1/2;
+}
+#parameters .fa-bell,
+#parameters .fa-bell-slash {
+  grid-column: 3/4;
+  grid-row: 1/2;
+}
+#parameters .fa-right-from-bracket {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+#parameters .fa-cloud,
+#parameters .fa-sun {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+#parameters .fa-gears {
+  grid-column: 5/6;
+  grid-row: 1/2;
+}
+#parameters i {
+  font-size: 3em;
+}

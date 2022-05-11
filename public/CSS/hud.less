@@ -1,0 +1,572 @@
+@charset "UTF-8";
+
+@text-color: #eee;
+@bg-color: #383331;
+@primary-color: #f5dba6;
+@grey: #3f3c3a;
+@header-bg-color: #383331;
+
+@backdrop-color: rgba(0, 0, 0, 0.6);
+
+// Fonts
+@text-font: 'Aclonica';
+@primary-font: 'KoHo';
+@secondary-font: sans-serif;
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    100% {
+        opacity: 0;
+    }
+
+    0% {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slide-right {
+    0% {
+        transform: translateX(-20%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slide-right-params {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(80%);
+    }
+}
+
+
+@keyframes slide-left-params {
+    0% {
+        transform: translateX(120%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+html,
+body {
+    height: 100%;
+
+}
+
+body {
+    background-color: @bg-color;
+    font-family: @primary-font, @secondary-font;
+
+    color: @text-color;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: @primary-color;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        text-shadow: 1px 2px 3px black;
+        font-family: @primary-font, @secondary-font;
+        letter-spacing: 0.15rem;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                Progress Bar                                */
+/* -------------------------------------------------------------------------- */
+
+#top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+
+    .containers {
+        display: flex;
+        flex-direction: column;
+
+        .progress-container {
+            border: solid rgb(53, 53, 77);
+            height: 30px;
+            width: 400px;
+            background: linear-gradient(90deg, rgba(255, 0, 0, 1) 54%, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 1) 100%);
+            text-align: center;
+            font-size: x-large;
+            font-style: italic;
+            color: @text-color;
+
+            .progress {
+                height: 100%;
+                width: 200;
+                min-width: 0px;
+                max-width: 400px;
+                z-index: 1;
+            }
+
+            .text {
+                text-align: center;
+            }
+        }
+
+    }
+}
+
+.button {
+    height: 40px;
+    width: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 3px solid @primary-color;
+    color: @bg-color;
+    background-color: @primary-color;
+
+    &:hover {
+        background-color: transparent;
+        color: @primary-color;
+        transition: background-color 0.3s;
+    }
+}
+
+
+/* -------------------------------------------------------------------------- */
+/*                                    Modals                                  */
+/* -------------------------------------------------------------------------- */
+
+.modal {
+    padding: 0;
+
+    .modal-content {
+        height: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+        .top-modal {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            ;
+            display: flex;
+            justify-content: space-between;
+
+            .title-modal {
+                color: @text-color;
+                margin: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .close-button {
+                color: @primary-color;
+                float: right;
+                font-size: 28px;
+                font-weight: 1000;
+
+                &:hover {
+                    color: @grey;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+
+    &::backdrop {
+        background: @backdrop-color;
+    }
+
+    &#shop-modal[open] {
+        animation: slide-up 100ms forwards, fade-in 250ms forwards;
+
+    }
+
+    &#chat-modal[open] {
+        animation: slide-right 100ms forwards, fade-in 250ms forwards;
+    }
+
+    &::backdrop {
+        animation: fade-in 250ms forwards;
+    }
+
+    &[closing] {
+        display: block;
+        pointer-events: none;
+        inset: 0;
+        animation: fade-out 250ms forwards;
+
+        &::backdrop {
+            animation: fade-out 250ms forwards;
+        }
+    }
+}
+
+.selected {
+    background-color: @primary-color;
+    color: @bg-color
+}
+
+#shop-modal {
+    height: 700px;
+    width: 1200px;
+
+    overflow: hidden;
+    border-radius: 2%;
+    background-color: @bg-color;
+    border: 3px solid @primary-color;
+    color: @primary-color;
+
+
+    .modal-content {
+        text-align: center;
+
+        #shop {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr;
+            grid-auto-rows: minmax(40px, auto);
+
+            .rubric {
+                border-radius: 1%;
+                border: solid 2px @primary-color;
+            }
+
+            .clickable:hover:not(.selected) {
+                color: @primary-color;
+                background-color: @backdrop-color;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+
+            #main-title {
+                grid-column: 1/2;
+                grid-row: 1/2;
+                border-bottom: none;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                align-items: center;
+
+                div {
+                    display: flex;
+                    height: 100%;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
+            #supplier {
+                grid-column: 3/4;
+                grid-row: 2/3;
+
+                display: grid;
+                grid-template-rows: repeat(4, 1fr);
+                grid-auto-rows: minmax(100px, auto);
+
+
+                div {
+                    display: flex;
+                    height: 100%;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+            }
+
+            #left-page {
+                grid-column: 1/2;
+                grid-row: 2/3;
+
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+            }
+
+            #right-page {
+                grid-column: 2/3;
+                grid-row: 2/3;
+
+                border-left: none;
+                border-right: none;
+
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+            }
+
+            #left-page div,
+            #right-page div {
+                margin: 1rem;
+                border-radius: 1%;
+                border: dashed 1px @primary-color;
+                height: 100px;
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: space-between;
+                cursor: default;
+            }
+
+            .buy-button {
+                height: 30px;
+                background-color: transparent;
+                color: @primary-color;
+                border-top: 1px solid @primary-color;
+                border-radius: 5%;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: @primary-color;
+                    color: @bg-color;
+                }
+            }
+        }
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                    Chat                                    */
+/* -------------------------------------------------------------------------- */
+#chat-modal {
+    height: 700px;
+    width: 300px;
+    max-width: 700px;
+    margin-left: 20px;
+
+    font-weight: bold;
+
+    background-color: @bg-color;
+    color: @primary-color;
+    border: 3px solid @bg-color;
+
+    overflow-y: auto;
+
+    #chatForm {
+        display: flex;
+        justify-content: space-between;
+
+        input {
+            background-color: @bg-color;
+            color: @text-color;
+            font-family: @primary-font, @secondary-font;
+            font-size: medium;
+            font-weight: bold;
+            border: 3px solid @primary-color;
+            outline: none;
+            box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+            height: 20px;
+            width: 70%;
+            padding: 5px 5px 5px 5px;
+            border-radius: 8px;
+        }
+
+        button {
+            border-radius: 8px;
+        }
+    }
+
+    #messages {
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column-reverse;
+        color: @text-color;
+
+        .sender {
+            display: grid;
+            justify-content: right;
+        }
+
+        .receiver {
+            display: grid;
+            justify-content: left;
+        }
+
+        .username {
+            font-size: small;
+        }
+
+        .host {
+            color: rgb(250, 75, 75);
+        }
+
+        .J1 {
+            color: rgb(30, 168, 2);
+        }
+
+        .J2 {
+            color: rgb(228, 3, 209);
+        }
+
+        .J3 {
+            color: rgb(88, 168, 235);
+        }
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                Waiting room                                */
+/* -------------------------------------------------------------------------- */
+#room {
+    width: 50%;
+    margin: auto;
+
+    #player_list {
+        padding: 0;
+        margin-top: 10%;
+    }
+
+    button {
+        padding: 0;
+        cursor: pointer;
+        border: 3px solid @primary-color;
+        color: @bg-color;
+        background-color: @primary-color;
+
+        &:hover {
+            background-color: transparent;
+            color: @primary-color;
+            transition: background-color 0.3s;
+        }
+    }
+
+    #BtnGame {
+        width: 50%;
+        height: 70px;
+        margin: auto;
+        border-radius: 10px;
+        font-size: 1em;
+        margin-top: 5em;
+    }
+
+    #chat-button {
+        width: 35%;
+        height: 50px;
+        display: block;
+        margin: auto;
+        border-radius: 8px;
+        font-size: 1em;
+        margin-top: 2em;
+    }
+
+    .removePlayerButton {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        font-size: 1em;
+    }
+
+    .card {
+        box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+        border: 3px solid @primary-color;
+        margin-bottom: 2em;
+        padding: 10px;
+        padding-right: 30px;
+        padding-left: 30px;
+        border-radius: 10px;
+        align-items: center;
+        font-family: @primary-font, @secondary-font;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 Parameters                                 */
+/* -------------------------------------------------------------------------- */
+#parameters {
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    padding: 1em;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+    justify-items: center;
+
+    .param-content[open] {
+        animation: slide-left-params 100ms forwards, fade-in 250ms forwards;
+
+        &:hover {
+            color: @primary-color;
+        }
+    }
+
+    .param-content[closing] {
+        animation: slide-right-params 100ms forwards, fade-out 250ms forwards;
+    }
+
+    .fa-volume-high,
+    .fa-volume-off {
+        grid-column: 4/5;
+        grid-row: 1/2;
+    }
+
+    .fa-bell,
+    .fa-bell-slash {
+        grid-column: 3/4;
+        grid-row: 1/2;
+    }
+
+    .fa-right-from-bracket {
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+
+    .fa-cloud,
+    .fa-sun {
+        grid-column: 2/3;
+        grid-row: 1/2;
+    }
+
+    .fa-gears {
+        grid-column: 5/6;
+        grid-row: 1/2;
+    }
+
+    i {
+        font-size: 3em;
+    }
+}
