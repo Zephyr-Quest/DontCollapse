@@ -971,6 +971,20 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
+        {
+                type: "bin",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -90,
+                y: 240,
+                z: 10,
+                color: pillarColor,
+                rotx: 0,
+                roty: 180,
+                rotz: 0,
+                ray: false,
+        },
 
         /* -------------------------------- BARREL ------------------------------- */
         {

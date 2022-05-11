@@ -331,7 +331,6 @@ export class Scene {
                 s.rotation.y = Math.PI
                 s.position.x = 10
                 s.position.y = 225
-                console.log(s)
                 this.selectionables.remove(s)
                 this.scene.add(s)
         }
@@ -342,7 +341,6 @@ export class Scene {
                 if (menu.style.display == "block") menu.style.display = "none"
                 this.scene.children.forEach(el => {
                         if (el.name == "Mac_Sortie") {
-                                console.log(el)
                                 this.scene.remove(el)
                                 this.selectionables.add(el)
                                 el.rotation.y = Math.PI / 2
