@@ -53,7 +53,7 @@ io.use(sharedsession(session, {
 
 /* -------------------------------- Variables ------------------------------- */
 
-let allRooms = [];
+let allRooms = {};
 let disconnectingUsers = [];
 
 /* -------------------------------- Functions ------------------------------- */
@@ -182,7 +182,7 @@ app.post("/join",
             return;
         }
 
-        if (allRooms.includes(userName)) {
+        if (allRooms[idRoom].playersName.includes(userName)) {
             res.status(400).json({
                 errors: "Pseudo already exists in this room",
             });
@@ -213,9 +213,6 @@ io.on('connection', socket => {
     let username = socket.handshake.session.username;
     let idRoom = socket.handshake.session.idRoom;
 
-    // Socket to display room on lobby
-    io.emit("display-rooms", allRooms);
-
     // User connected in a room
     if (username !== undefined && allRooms[idRoom]) {
         console.log(username, " connected in room ", idRoom);
@@ -234,7 +231,7 @@ io.on('connection', socket => {
             if (allRooms[idRoom].playersName.indexOf(username) === 0) {
                 // Delete the room
                 console.log("delete room", idRoom);
-                allRooms.splice(idRoom, 1);
+                delete allRooms[idRoom];
                 io.to(idRoom).emit("disconnection");
             }
             // Host remove an user from the room
@@ -245,7 +242,6 @@ io.on('connection', socket => {
                 socket.emit("disconnection");
             }
         }
-
         // Disconnect user 
         socket.leave(idRoom);
         console.log("disconnect", username, "from room", idRoom);
@@ -271,6 +267,9 @@ io.on('connection', socket => {
         }
         else console.log("start unauthorized");
     });
+
+    // Socket to display room on lobby
+    io.emit("display-rooms", allRooms);
 
     // Socket to change engine
     socket.on('buyEngine', (idEngine, levelEngine) => {
