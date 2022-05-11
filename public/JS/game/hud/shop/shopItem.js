@@ -19,7 +19,7 @@ function initListener(id) {
             leftPage[i].addEventListener('mouseenter', toggleDescri);
             leftPage[i].addEventListener('mouseleave', toggleDescri);
         }
-        if (rightPage[i].hasAttribute("disable")) {
+        if (!rightPage[i].hasAttribute("disable")) {
             rightPage[i].addEventListener('mouseenter', toggleDescri);
             rightPage[i].addEventListener('mouseleave', toggleDescri);
         }

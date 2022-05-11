@@ -270,13 +270,14 @@ io.on('connection', socket => {
             io.to(idRoom).emit("startAuthorized");
         }
         else console.log("start unauthorized");
-    })
+    });
 
     // Socket to change engine
     socket.on('buyEngine', (idEngine, levelEngine) => {
         console.log("buy engine");
-        allRooms[idRoom].searchPlayer(username).machineUpgrade(idEngine, levelEngine);
-    })
+        let confirmation = allRooms[idRoom].searchPlayer(username).machineUpgrade(idEngine, levelEngine);
+        socket.emit("confirmPurchase", confirmation, true);
+    });
 
     // Socket to sell second-hand engine
     socket.on('sellEngine', (idEngine, levelEngine, price) => {
@@ -287,31 +288,34 @@ io.on('connection', socket => {
     // Socket to buy second-hand engine
     socket.on('buySecondHandEngine', (seller) => {
         console.log("buy second hand");
-        allRooms[idRoom].buySecondhandItem(username, seller);
+        const confirmation = allRooms[idRoom].buySecondhandItem(username, seller);
+        socket.emit("confirmPurchase", confirmation, true);
     })
 
     // Socket to change contract
     socket.on('buyContract', (idFournisseur, contractNumber) => {
         console.log("buy contract");
-        allRooms[idRoom].searchPlayer(username).furnisherUpgrade(idFournisseur, contractNumber);
-    })
+        const confirmation = allRooms[idRoom].searchPlayer(username).furnisherUpgrade(idFournisseur, contractNumber);
+        socket.emit("confirmPurchase", confirmation, true);
+    });
 
     // Socket to change contract
     socket.on('buyEmployee', (category) => {
         console.log("buy employee", category);
-        allRooms[idRoom].searchPlayer(username).recruteEmployee(category);
-    })
+        const confirmation = allRooms[idRoom].searchPlayer(username).recruteEmployee(category);
+        socket.emit("confirmPurchase", confirmation, false);
+    });
 
     // Socket actu
     socket.on('actu', () => {
         allRooms[idRoom].updateMonth();
-    })
+    });
 
     // Socket shop
     socket.on("openShop", () => {
-        let infos = allRooms[idRoom].getInfo(username);
+        const infos = allRooms[idRoom].getInfo(username);
         socket.emit("sendPlayerInfoShop", infos);
-    })
+    });
 
     /* -------------------------------------------------------------------------- */
     /*                                Disconnection                               */

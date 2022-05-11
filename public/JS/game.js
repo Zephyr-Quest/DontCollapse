@@ -31,7 +31,6 @@ function deleteEvent(e) {
 }
 
 function startGame() {
-    console.log("start game");
     WebSocket.emit("startGame");
 }
 

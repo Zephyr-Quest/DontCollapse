@@ -1,4 +1,5 @@
 import Modal from '../hud.js'
+// import WebSocket from '../../WebSocket.js';
 
 const modal = document.getElementById('confirm-buy');
 const oui = document.getElementsByClassName('oui-button')[0];
@@ -121,7 +122,6 @@ function buy() {
  
 
 
-
     modal.close(); // close confirm modal
     Modal.closeShopModal(); // close shop modal
     removeListeners();
@@ -145,6 +145,10 @@ function setBuyOccazCB(cb) {
 
 function setSellOccazCB(cb) {
     sellOccazCB = cb;
+}
+
+function purchaseConfirmation(){
+
 }
 
 export default {

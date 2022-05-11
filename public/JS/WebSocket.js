@@ -44,6 +44,10 @@ const events = {
     },
     "sendPlayerInfoShop": (infoPlayer) => {
         getAllShop(infoPlayer);
+    },
+    "confirmPurchase": (isBought, machineOrContractOrOccaz) => {
+        confirmation = { bought: isBought, type: machineOrContractOrOccaz };
+        purchaseConfirmation(/* isBought, machineOrContractOrOccaz */);
     }
 };
 
@@ -57,6 +61,7 @@ const username = document.getElementById("username").value;
 let deleteEvent;
 let startGame;
 let messages;
+let confirmation;
 
 /* -------------------------------- Function -------------------------------- */
 function updatePlayersOnScreen() {
@@ -107,20 +112,23 @@ function beginingGame() {
     Chrono.startChronoFrom(10, 0);
 }
 
-function getAllShop(infoPlayer){
+function getAllShop(infoPlayer) {
     console.log(infoPlayer);
 }
 
-function getChrono(){
-    
+function getChrono() {
+
 }
 
-function getMoney(){
-    
+function getMoney() {
+
 }
 
-function purchaseConfirmation(){
-    
+function purchaseConfirmation(/* isBought, machineOrContractOrOccaz */) {
+    // console.log(isBought, machineOrContractOrOccaz);
+    console.log(confirmation);
+    confirmation = undefined;
+    console.log(confirmation);
 }
 
 /* --------------------------------- Return --------------------------------- */
