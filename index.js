@@ -263,7 +263,6 @@ io.on('connection', socket => {
     // Socket to start game
     socket.on('startGame', () => {
         const idRoom = socket.handshake.session.idRoom;
-        const username = socket.handshake.session.username;
         if (allRooms[idRoom] && allRooms[idRoom].playersName.length >= 2 && allRooms[idRoom].playersName.length <= 4) {
             allRooms[idRoom].chrono.incrementChrono();
             allRooms[idRoom].gameStart = true;
@@ -282,13 +281,13 @@ io.on('connection', socket => {
     // Socket to sell second-hand engine
     socket.on('sellEngine', (idEngine, levelEngine, price) => {
         console.log("sell engine");
-        allRooms[idRoom].searchPlayer(username).addSecondhandItem(username, idEngine, levelEngine, price);
+        allRooms[idRoom].addSecondhandItem(username, idEngine, levelEngine, price);
     })
 
     // Socket to buy second-hand engine
     socket.on('buySecondHandEngine', (seller) => {
         console.log("buy second hand");
-        allRooms[idRoom].searchPlayer(username).buySecondhandItem(username, seller);
+        allRooms[idRoom].buySecondhandItem(username, seller);
     })
 
     // Socket to change contract
@@ -298,13 +297,20 @@ io.on('connection', socket => {
     })
 
     // Socket to change contract
-    socket.on('buyEmployee', () => {
-        console.log("buy employee");
+    socket.on('buyEmployee', (category) => {
+        console.log("buy employee", category);
+        allRooms[idRoom].searchPlayer(username).recruteEmployee(category);
     })
 
     // Socket actu
     socket.on('actu', () => {
         allRooms[idRoom].updateMonth();
+    })
+
+    // Socket shop
+    socket.on("openShop", () => {
+        let infos = allRooms[idRoom].getInfo(username);
+        socket.emit("sendPlayerInfoShop", infos);
     })
 
     /* -------------------------------------------------------------------------- */

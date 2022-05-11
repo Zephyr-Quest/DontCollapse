@@ -24,24 +24,26 @@ const events = {
             3: "J3"
         }
 
-        
         let item2 = document.createElement('div');
         item2.classList.add(user === username ? "sender" : "receiver");
         item2.classList.add("message");
         item2.innerText = msg;
         messages.appendChild(item2);
-        
+
         let item = document.createElement('div');
         item.classList.add(user === username ? "sender" : "receiver");
         item.classList.add("username");
         item.classList.add(names[index]);
         item.innerText = user;
         messages.appendChild(item);
-        
+
         let item3 = document.createElement('div');
         item3.classList.add("message");
         item3.innerHTML = "<p></p>";
         messages.appendChild(item3);
+    },
+    "sendPlayerInfoShop": (infoPlayer) => {
+        getAllShop(infoPlayer);
     }
 };
 
@@ -74,16 +76,16 @@ function updatePlayersOnScreen() {
 
         divPlayerName.appendChild(playerName);
 
-        
+
         const user = document.getElementById("username").value;
         const posBtnGame = document.getElementById("BtnGame");
-        
-        if (user === connectedPlayers[0] && connectedPlayers.length >=2) {
+
+        if (user === connectedPlayers[0] && connectedPlayers.length >= 2) {
             if (posBtnGame.style.display !== "block") {
                 posBtnGame.style.display = "block";
                 posBtnGame.addEventListener("click", startGame);
             }
-            
+
             if (player != connectedPlayers[0]) {
                 const playerDelete = document.createElement('button');
                 playerDelete.classList.add('removePlayerButton');
@@ -92,7 +94,7 @@ function updatePlayersOnScreen() {
                 divPlayerName.appendChild(playerDelete);
             }
         }
-        
+
         playerList.appendChild(divPlayerName);
     });
 }
@@ -103,7 +105,22 @@ function beginingGame() {
     const eltsToShow = document.getElementById("game");
     eltsToShow.style.display = "block";
     Chrono.startChronoFrom(10, 0);
+}
 
+function getAllShop(infoPlayer){
+    console.log(infoPlayer);
+}
+
+function getChrono(){
+    
+}
+
+function getMoney(){
+    
+}
+
+function purchaseConfirmation(){
+    
 }
 
 /* --------------------------------- Return --------------------------------- */
@@ -129,9 +146,14 @@ function emit(eventName, ...params) {
 
 const getConnectedPlayers = () => connectedPlayers;
 
-export default{
+export default {
     init,
     connect,
     emit,
-    getConnectedPlayers
+    getConnectedPlayers,
+
+    getAllShop,
+    getChrono,
+    getMoney,
+    purchaseConfirmation
 }

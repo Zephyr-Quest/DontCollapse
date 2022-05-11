@@ -14,57 +14,41 @@ function initListener(id) {
     closeAllListener();
 
     // if the occasion is not selected
-    if (id[0] != 24) {
-        for (let i = id[0]; i <= id[1]; i++) {
+    for (let i = id[0]; i <= id[1]; i++) {
+        if (!leftPage[i].hasAttribute("disable")) {
             leftPage[i].addEventListener('mouseenter', toggleDescri);
             leftPage[i].addEventListener('mouseleave', toggleDescri);
+        }
+        if (rightPage[i].hasAttribute("disable")) {
             rightPage[i].addEventListener('mouseenter', toggleDescri);
             rightPage[i].addEventListener('mouseleave', toggleDescri);
         }
-    } else {
+    }
+    if (id[0] < 8) {
         for (let i = id[0]; i <= id[1]; i++) {
-            if (leftPage[i].hasAttribute("buyable")) {
-                leftPage[i].addEventListener('mouseenter', toggleDescri);
-                leftPage[i].addEventListener('mouseleave', toggleDescri);
-            }
-            if (rightPage[i].hasAttribute("buyable")) {
-                rightPage[i].addEventListener('mouseenter', toggleDescri);
-                rightPage[i].addEventListener('mouseleave', toggleDescri);
-            }
+            leftBtn[i].addEventListener('click', buyContract);
+            rightBtn[i].addEventListener('click', buyContract);
+        }
+    } else if (id[0] < 16) {
+        for (let i = id[0]; i <= id[1]; i++) {
+            leftBtn[i].addEventListener('click', buyPerso);
+            rightBtn[i].addEventListener('click', buyPerso);
+        }
+    } else if (id[0] < 24) {
+        for (let i = id[0]; i <= id[1]; i++) {
+            leftBtn[i].addEventListener('click', buyMachine);
+            rightBtn[i].addEventListener('click', buyMachine);
         }
     }
-
-    switch (id[0]) {
-        case 0:
-            for (let i = 0; i < id[1]; i++) {
-                leftBtn[i].addEventListener('click', buyContract);
-                rightBtn[i].addEventListener('click', buyContract);
-            }
-            break;
-        case 8:
-            for (let i = 0; i < id[1]; i++) {
-                leftBtn[i].addEventListener('click', buyPerso);
-                rightBtn[i].addEventListener('click', buyPerso);
-            }
-            break;
-        case 16:
-            for (let i = 0; i < id[1]; i++) {
-                leftBtn[i].addEventListener('click', buyMachine);
-                rightBtn[i].addEventListener('click', buyMachine);
-            }
-            break;
-        case 24:
-            for (let i = 0; i < 4; i++) {
-                leftBtn[i].addEventListener('click', buyOccaz);
-                rightBtn[i].addEventListener('click', buyOccaz);
-            }
-            break;
-        default:
-            console.warn('ERROR')
-            break;
+    else if (id[0] < 26) {
+        for (let i = id[0]; i <= id[1]; i++) {
+            leftBtn[i].addEventListener('click', buyOccaz);
+            rightBtn[i].addEventListener('click', buyOccaz);
+        }
     }
-
+    else console.warn('ERROR');
 }
+
 
 /**
  * show the description when the mouse is hover the card
@@ -95,7 +79,7 @@ function buyMachine(e) {
     Buy.buyItem(e.target.parentElement, 2);
 }
 function buyOccaz(e) {
-    if (e.target.parent.classList[0] !== "own")
+    if (e.target.parentElement.classList[0] !== "own")
         Buy.buyItem(e.target.parentElement, 3);
     else
         Buy.buyItem(e.target.parentElement, 4);
@@ -106,22 +90,22 @@ function buyOccaz(e) {
  * remove all listeners
  */
 function closeAllListener() {
-    // for (let i = 0; i < leftPage.length - 2; i++) {
-    //     leftBtn[i].removeEventListener('click', buyItem);
-    //     rightBtn[i].removeEventListener('click', buyItem);
-    //     leftPage[i].removeEventListener('mouseenter', toggleDescri);
-    //     leftPage[i].removeEventListener('mouseleave', toggleDescri);
-    //     rightPage[i].removeEventListener('mouseenter', toggleDescri);
-    //     rightPage[i].removeEventListener('mouseleave', toggleDescri);
-    // }
-    // for (let i = leftPage.length - 2; i < leftPage.length; i++) {
-    //     leftPage[i].removeEventListener('click', buyItem);
-    //     rightPage[i].removeEventListener('click', buyItem);
-    //     leftPage[i].removeEventListener('mouseenter', toggleDescri);
-    //     leftPage[i].removeEventListener('mouseleave', toggleDescri);
-    //     rightPage[i].removeEventListener('mouseenter', toggleDescri);
-    //     rightPage[i].removeEventListener('mouseleave', toggleDescri);
-    // }
+    for (let i = 0; i < 8; i++) {
+        leftBtn[i].addEventListener('click', buyContract);
+        rightBtn[i].addEventListener('click', buyContract);
+    }
+    for (let i = 8; i < 16; i++) {
+        leftBtn[i].addEventListener('click', buyPerso);
+        rightBtn[i].addEventListener('click', buyPerso);
+    }
+    for (let i = 16; i < 24; i++) {
+        leftBtn[i].addEventListener('click', buyMachine);
+        rightBtn[i].addEventListener('click', buyMachine);
+    }
+    for (let i = 24; i < 26; i++) {
+        leftBtn[i].addEventListener('click', buyOccaz);
+        rightBtn[i].addEventListener('click', buyOccaz);
+    }
 }
 
 /**

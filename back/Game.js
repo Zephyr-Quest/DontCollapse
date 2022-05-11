@@ -15,6 +15,7 @@ module.exports = class Game {
     }
 
     addPlayer(player) {
+        console.log("--- Player ", player, " join the game")
         if (this.players.length < 4 && player) {
             this.players.push(new Player(player));
             this.playersName.push(player);
@@ -37,11 +38,24 @@ module.exports = class Game {
         return result;
     }
 
+    getInfo(playerName) {
+        let player = this.searchPlayer(playerName);
+        if (player) {
+            return {
+                machines : player.machines,
+                furnishers : player.furnishers,
+                shop : this.shop
+            }
+        }
+        return undefined;
+    }
+
     getPlayerMoney(player) {
         return this.searchPlayer(player).money;
     }
 
     addSecondhandItem(player, machine, level, price) {
+        console.log("--- Player ", player, " wants to sell", machine, level, price);
         if (this.checkPlayerItem(player)) return false;
         else {
             this.shop.push({
@@ -90,8 +104,9 @@ module.exports = class Game {
     }
 
     buySecondhandItem(buyer, seller) {
+        console.log("--- Player ", buyer, " wants to buy", seller);
         let machine = this.checkPlayerItem(seller);
-        if (this.searchPlayer(buyer) != false) {
+        if (machine != false && this.searchPlayer(buyer) != false) {
             this.searchPlayer(buyer).machineUpgradeSecondhand(parseInt(machine.machine), machine.level, machine.price);
             this.searchPlayer(seller).money += machine.price;
             this.shop.forEach((element, i) => {

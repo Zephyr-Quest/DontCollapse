@@ -1,0 +1,47 @@
+{
+    "name": [
+        "Josiane",
+        "Nicolas",
+        "Mikael Morelle",
+        "Maxime",
+        "Tom",
+        "Enguerrand",
+        "Martin",
+        "Thierry Occre",
+        "Célia",
+        "Jacob",
+        "David",
+        "Enzo",
+        "Simon",
+        "Marc-Antoine",
+        "Edouard",
+        "Paul",
+        "Damien",
+        "Xavier",
+        "Marie",
+        "Ysoline",
+        "Céline",
+        "Eddie",
+        "Cindy",
+        "Florence",
+        "Marie"
+    ],
+    "salaries": {
+        "engineers": {
+            "min": 4,
+            "max": 5
+        },
+        "maintainers": {
+            "min": 4,
+            "max": 5
+        },
+        "cleaners": {
+            "min": 4,
+            "max": 5
+        },
+        "supervisors": {
+            "min": 4,
+            "max": 5
+        }
+    }
+}

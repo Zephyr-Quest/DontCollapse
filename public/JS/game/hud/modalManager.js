@@ -1,6 +1,8 @@
 import Shop from './shop/topRubric.js';
 import OtherFactory from './otherFactory.js'
 
+import WebSocket from '../../WebSocket.js';
+
 /**
  * la jolie classe des modales
  */
@@ -18,7 +20,7 @@ export default class modal {
         this.close = document.getElementById(close);
         this.isShop = isShop;
         this.isFactory = isFactory;
-        console.log(this.modal);
+        this.shopCB;
     }
 
     /**
@@ -74,13 +76,17 @@ export default class modal {
         // When the user clicks on Escape, close the modal
         window.addEventListener('keydown', this.escapeClose.bind(this));
     }
-
+    
     /**
      * open the modal
      */
     openModal() {
         this.initCloseListeners();
-        if (this.isShop) Shop.initShopListeners();
+        if (this.isShop){
+            Shop.initShopListeners();
+            WebSocket.emit('openShop',"");
+
+        }
         if (this.isFactory) OtherFactory.refresh();
         this.modal.showModal();
     }

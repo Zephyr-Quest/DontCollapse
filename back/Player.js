@@ -1,45 +1,7 @@
 const SustainableDevelopment = require("./SustainableDevelopment");
 const machines = require("./config.json");
-
-// const machines = {
-//     0: {
-//         name: "Poste à souder",
-//         price: {
-//             1: 1000,
-//             2: 2000,
-//             3: 3000,
-//             4: 4000
-//         }
-//     },
-
-//     1: {
-//         name: "Assembleur de précision",
-//         price: {
-//             1: 1000,
-//             2: 2000,
-//             3: 3000,
-//             4: 4000
-//         }
-//     },
-//     2: {
-//         name: "Assembleur mécanique",
-//         price: {
-//             1: 1000,
-//             2: 2000,
-//             3: 3000,
-//             4: 4000
-//         }
-//     },
-//     3: {
-//         name: "Assembleur général",
-//         price: {
-//             1: 1000,
-//             2: 2000,
-//             3: 3000,
-//             4: 4000
-//         }
-//     }
-// }
+const Employee = require("./Employee")
+const employees = require("./employees.json")
 
 const furnishers = {
     0: {
@@ -169,6 +131,7 @@ module.exports = class Player {
     }
 
     furnisherUpgrade(furnisher, level) {
+        console.log("--- Player ", this.name, " wants to change Orange to SFR",furnisher, level);
         if (this.asEnoughMoney(furnishers[furnisher].price[level])) {
             this.furnishers[furnisher] = level;
             // this.sdUpdate();
@@ -176,6 +139,17 @@ module.exports = class Player {
             return true;
         }
         return false;
+    }
+
+    recruteEmployee(categorie) {
+        console.log("--- Player ", this.name, " wants to recrute", categorie);
+        let name = employees["name"][Math.floor(Math.random() * employees["name"].length)];
+        let salary = employees["salaries"][categorie].min + employees["salaries"][categorie].max;
+        this.employees[categorie].push(new Employee(name,salary));
+        ++this.employees.number;
+        this.expenses += salary;
+
+        console.log(this.employees);
     }
 
     isFinished () {

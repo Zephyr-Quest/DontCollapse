@@ -16,5 +16,5 @@ const Game = require("./Game");
 let party = new Game();
 party.addPlayer("Damien");
 party.addPlayer("Xavier");
-party.applyEvent();
-console.log(party.runningEvent);
+party.searchPlayer("Damien").recruteEmployee("engineers",1000);
+console.log(party.searchPlayer("Damien").employees)

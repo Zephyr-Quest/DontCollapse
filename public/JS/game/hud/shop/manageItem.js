@@ -17,7 +17,12 @@ const level = {
     "elec": 0,
     "eau": 1,
     "cartons": 2,
-    "etain": 3
+    "etain": 3,
+
+    "inge":"engineers",
+    "super":"supervisors",
+    "maint":"maintainers",
+    "menage":"cleaners"
 };
 
 /**
@@ -86,24 +91,29 @@ let sellOccazCB;
  * buy item : transmit the item to buy or delete to back, close confirm and shop modals and remove listeners
  */
 function buy() {
-
         switch (itemType) {
             case 0:
-                buyContractCB(itemId, itemLevel);
+                buyContractCB(itemLevel, itemId); // id fournisseur / num contrat
                 break;
             case 1:
-                buyPersoCB(itemId, itemLevel);
+                console.log(itemId, itemLevel)
+                buyPersoCB(itemLevel/* , itemLevel */);  // string métier / salaire
                 break;
             case 2:
-                buyMachineCB(itemId, itemLevel);
+                console.log(itemId, itemLevel)
+                buyMachineCB(itemId, itemLevel);    // id machine / level
                 break;
             case 3:
-                let price = 0;
-                buyOccazCB(itemId, itemLevel, price);
+                let username = "michel";
+                console.log(username)
+                buyOccazCB(username);   // nom du joueur qui vend
                 break;
             case 4:
-                let username = "michel";
-                sellOccazCB(username)
+                let price = 0;
+                itemId = 2;
+                itemLevel = 1;
+                console.log(itemId, itemLevel, price)
+                sellOccazCB(itemId, itemLevel, price)   // id machine / level / prix de vente
                 break;
             default:
                 break;

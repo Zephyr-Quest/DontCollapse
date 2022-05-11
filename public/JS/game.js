@@ -38,26 +38,28 @@ function startGame() {
 WebSocket.init(deleteEvent, startGame, messages);
 WebSocket.connect();
 
-HUD.initChatButton()
+HUD.initChatButton();
 HUD.initFacButton();
 HUD.initShopButton();
 
 
 HUD.setContractCallback((id, level) => {
     WebSocket.emit("buyContract", id, level);
-})
+});
 
-HUD.setPersoCallback((id, level) => {
-    WebSocket.emit("buyEmployee", "");
-})
+HUD.setPersoCallback((id/* , level */) => {
+    WebSocket.emit("buyEmployee", id/* , level */);
+});
 
 HUD.setMachineCallback((id, level) => {
     WebSocket.emit("buyEngine", id, level);
-})
+});
 
 HUD.setBuyOccazCallback((username) => {
     WebSocket.emit("buySecondHandEngine", username);
+});
 
-})
+HUD.setSellOccazCallback((id, level, price) => {
+    WebSocket.emit("sellEngine", id, level, price);
+});
 
-// console.log(document.getElementById("username").value);
