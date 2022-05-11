@@ -299,7 +299,7 @@ export class Scene {
                         if (!this.openedMenu && (tempname != "Boutique" && tempname != "Chat" && tempname != "Sortie")) {
                                 this.openMenu(tempname)
                         } else if (tempname == "Sortie") {
-                                this.openMenuSortie()
+                                this.openMenuSortie(s)
 
                         } else if (tempname == "Boutique" || tempname == "Chat" || tempname == "Sortie") {
                                 this.closeMenu()
@@ -323,18 +323,34 @@ export class Scene {
                 menu = document.getElementById("myMenuSortie")
                 if (menu.style.display == "block") menu.style.display = "none"
         }
-        openMenuSortie() {
+        openMenuSortie(s) {
                 let menu = document.getElementById("myMenuShop")
                 if (menu.style.display == "block") menu.style.display = "none"
                 menu = document.getElementById("myMenuSortie")
                 document.getElementById("title_menuSortie").innerText = "Aller voir le joueur :"
                 menu.style.display = "block"
+                s.rotation.y = Math.PI
+                s.position.x = 10
+                s.position.y = 225
+                console.log(s)
+                this.selectionables.remove(s)
+                this.scene.add(s)
         }
         closeMenu() {
                 let menu = document.getElementById("myMenuShop")
                 if (menu.style.display == "block") menu.style.display = "none"
                 menu = document.getElementById("myMenuSortie")
                 if (menu.style.display == "block") menu.style.display = "none"
+                this.scene.children.forEach(el => {
+                        if (el.name == "Mac_Sortie") {
+                                console.log(el)
+                                this.scene.remove(el)
+                                this.selectionables.add(el)
+                                el.rotation.y = Math.PI / 2
+                                el.position.x = -15
+                                el.position.y = 250.5
+                        }
+                })
 
 
         }
