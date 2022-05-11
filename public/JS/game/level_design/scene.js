@@ -314,7 +314,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                ray: true,
+                ray: false,
                 transparency: 1,
                 name: "Mac_Chat"
         },
