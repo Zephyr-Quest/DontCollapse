@@ -1276,7 +1276,7 @@ export const ObjectArray = [
         {
                 type: "new_door",
                 x: -15,
-                y: 250,
+                y: 250.5,
                 z: 52,
                 length: 70,
                 width: 15,
