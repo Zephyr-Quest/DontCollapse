@@ -108,5 +108,6 @@ dist
 
 .vscode/
 .cache/
-package-lock.json
+
 *.blend1
+package-lock.json

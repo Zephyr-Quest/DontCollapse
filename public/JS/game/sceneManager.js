@@ -25,6 +25,8 @@ import {
         Models
 } from "./config/models.js";
 
+import HUD from "../game/hud/hud.js"
+import WebSocket from '../WebSocket.js';
 
 
 
@@ -129,7 +131,7 @@ export class Scene {
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setPixelRatio(window.devicePixelRatio);
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
-                this.renderer.shadowMap.enabled = true;
+                this.renderer.shadowMap.enabled = false;
                 this.renderer.shadowMap.type = THREE.BasicShadowMap;
                 this.renderer.shadowMapSoft = false;
                 this.renderer.setClearColor(0x000000, 0);
@@ -154,7 +156,7 @@ export class Scene {
                 let intensity = 0.85;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
                 this.light.position.set(0, 0, 130);
-                this.light.castShadow = true;
+                this.light.castShadow = false;
                 this.light.shadow.bias = -0.0001
                 this.light.shadow.mapSize.width = 1024; // default
                 this.light.shadow.mapSize.height = 1024; // default
@@ -263,6 +265,7 @@ export class Scene {
                 position.y = -((event.clientY - domRect.top) / domRect.height) * 2 + 1;
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
+                console.log("S : ", s)
                 if (s) {
                         if (this.staticText) {
                                 this.scene.remove(this.copyGroupSprite)
@@ -299,12 +302,31 @@ export class Scene {
                                 this.openMenu(tempname)
                         } else if (tempname == "Sortie") {
                                 this.openMenuSortie(s)
+                        } else if (tempname == "Chat") {
+                                HUD.openChatModal()
+                                this.scene.remove(this.copyGroupSprite)
+                                this.scene.remove(this.GroupSprite)
+                                this.copyGroupSprite = new THREE.Group()
+                                this.GroupSprite = new THREE.Group()
+                                this.closeMenu()
+                                this.animatedText = false
+                                this.staticText = false
 
+                        } else if (tempname == "Boutique") {
+                                HUD.openShopModal()
+                                this.scene.remove(this.copyGroupSprite)
+                                this.scene.remove(this.GroupSprite)
+                                this.copyGroupSprite = new THREE.Group()
+                                this.GroupSprite = new THREE.Group()
+                                this.closeMenu()
+                                this.animatedText = false
+                                this.staticText = false
                         } else if (tempname == "Boutique" || tempname == "Chat" || tempname == "Sortie") {
                                 this.closeMenu()
                         }
                 } else {
                         if (this.staticText) {
+                                HUD.closeAllModals()
                                 this.closeMenu()
                                 this.animatedText = false
                                 this.staticText = false
@@ -323,6 +345,24 @@ export class Scene {
                 if (menu.style.display == "block") menu.style.display = "none"
         }
         openMenuSortie(s) {
+                let players = WebSocket.getConnectedPlayers()
+                let sortie = document.getElementById("SortiWrap");
+                sortie.innerHTML=""
+                players.forEach(el => {
+                        let divWrap = document.createElement("div")
+                        divWrap.classList.add("Sicon1")
+                        let ion = "<ion-icon name='person-outline'></ion-icon>"
+                        let pe = document.createElement("p")
+                        pe.innerText=el    
+                        
+                        divWrap.innerHTML=ion
+                        
+                        console.log(pe)
+                        divWrap.appendChild(pe)
+                        sortie.appendChild(divWrap)
+                })
+
+
                 let menu = document.getElementById("myMenuShop")
                 if (menu.style.display == "block") menu.style.display = "none"
                 menu = document.getElementById("myMenuSortie")

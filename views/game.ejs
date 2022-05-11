@@ -23,136 +23,6 @@
 
     <!-- JS modules -->
 
-    <style media="screen" type="text/css">
-        @import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
-
-        html,
-        body {
-            background-color: #fff;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-        }
-
-        * {
-            padding: 0;
-            margin: 0
-        }
-
-        #myThreeJsCanvas {
-            width: 90%;
-            height: 90%
-        }
-
-        #myMenuShop {
-            background-color: rgba(0, 0, 0, 0.349);
-            position: absolute;
-            bottom: 0;
-            margin-bottom: 30px;
-            border-radius: 20px;
-            padding: 20px;
-            margin-left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            height: 150px;
-            width: auto;
-            display: flex;
-            flex-direction: column;
-            display: none;
-            transition: all 2s ease;
-        }
-
-        #myMenuShop #title_menuShop {
-            color: white;
-            font-family: "Koulen";
-            text-align: center;
-            letter-spacing: 2px;
-            font-size: 30px;
-            padding: 0;
-            margin: 0
-        }
-
-        #myMenuShop div #icon1 {
-            height: 70px;
-            width: 70px;
-            background-color: rgba(255, 255, 255, 0.603);
-            margin-left: 50%;
-            transform: translateX(-50%);
-            border-radius: 20px;
-            text-align: center;
-            font-size: 50px;
-            color: white
-        }
-
-        #icon1 ion-icon {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        #icon1:hover {
-            cursor: pointer;
-        }
-
-
-        #myMenuSortie {
-            background-color: rgba(0, 0, 0, 0.349);
-            position: absolute;
-            bottom: 0;
-            margin-bottom: 30px;
-            border-radius: 20px;
-            padding: 20px;
-            margin-left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            height: 150px;
-            width: auto;
-            display: flex;
-            flex-direction: column;
-            display: none;
-            transition: all 2s ease;
-        }
-
-        #myMenuSortie #title_menuSortie {
-            color: white;
-            font-family: "Koulen";
-            text-align: center;
-            letter-spacing: 2px;
-            font-size: 30px;
-            padding: 0;
-            margin: 0
-        }
-
-        #myMenuSortie #SortiWrap {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-        }
-
-        #Sicon1,
-        #Sicon2,
-        #Sicon3 {
-            height: 70px;
-            width: 70px;
-            background-color: rgba(255, 255, 255, 0.603);
-            border-radius: 20px;
-            text-align: center;
-            font-size: 50px;
-            color: white
-        }
-
-        #Sicon1 ion-icon,
-        #Sicon2 ion-icon,
-        #Sicon3 ion-icon {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        #icon1:hover #icon3:hover #icon2:hover {
-            cursor: pointer;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -168,13 +38,13 @@
     </div>
 
 
-    <div style="position:absolute;margin-top:50px;font-weight:bold;">
+    <!-- <div style="position:absolute;margin-top:50px;font-weight:bold;">
         <p style="color:red">X axis</p>
         <p style="color:green">Y axis</p>
         <p style="color:blue">Z axis</p>
-    </div>
+    </div> -->
 
-    <canvas id="myThreeJsCanvas"></canvas>
+    <canvas id="myThreeJsCanvas" style="display:none"></canvas>
 
     <div id="myMenuShop">
         <h1 id="title_menuShop">Titre</h1>
@@ -188,16 +58,7 @@
     <div id="myMenuSortie">
         <h1 id="title_menuSortie">Titre</h1>
         <div id="SortiWrap">
-            <div id="Sicon1">
-                <ion-icon name="person-outline"></ion-icon>
-            </div>
-            <div id="Sicon2">
-                <ion-icon name="person-outline"></ion-icon>
-            </div>
-            <div id="Sicon3">
-                <ion-icon name="person-outline"></ion-icon>
-            </div>
-
+           <!-- Bla -->
         </div>
     </div>
 
@@ -227,7 +88,6 @@
 
 
         <!-- Modal Shop -->
-        <button class="button" id="shop-button">Shop</button>
         <dialog class="modal" id="shop-modal">
             <div class="modal-content">
                 <div class="top-modal">
@@ -598,7 +458,6 @@
             </dialog>
         </dialog>
 
-        <button class="button" id="player-button">See others players</button>
         <dialog class="modal" id="player-modal">
             <div class="modal-content">
                 <div class="top-modal">

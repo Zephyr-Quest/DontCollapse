@@ -47,7 +47,10 @@ const events = {
         getAllShop(infoPlayer);
     },
     "confirmPurchase": (isBought, machineOrContractOrOccaz) => {
-        let confirm = { bought: isBought, type: machineOrContractOrOccaz };
+        let confirm = {
+            bought: isBought,
+            type: machineOrContractOrOccaz
+        };
         Item.confirmation(confirm);
     }
 };
@@ -106,6 +109,7 @@ function updatePlayersOnScreen() {
 }
 
 function beginingGame() {
+    document.getElementById("myThreeJsCanvas").style.display = "block"
     const eltsToDelete = document.getElementById("room");
     eltsToDelete.remove();
     const eltsToShow = document.getElementById("game");
@@ -125,7 +129,7 @@ function getMoney() {
 
 }
 
-function purchaseConfirmation(/* isBought, machineOrContractOrOccaz */) {
+function purchaseConfirmation( /* isBought, machineOrContractOrOccaz */ ) {
     let tmp = confirmation
     confirmation = undefined;
     console.log(tmp)

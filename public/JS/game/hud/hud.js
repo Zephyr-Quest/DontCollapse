@@ -99,6 +99,10 @@ function setSellOccazCallback(callback) {
 
 // }
 
+function closeAllModals(){
+    shop.closeFunction();
+    chat.closeFunction();
+}
 
 export default {
     initShopButton,
@@ -109,11 +113,12 @@ export default {
     openOtherPLayer,
     openShopModal,
     closeShopModal,
-
+    closeAllModals,
+    
     updateEcologicBar,
     updateEconomicBar,
     updateSocialBar,
-
+    
     setContractCallback,
     setPersoCallback,
     setMachineCallback,

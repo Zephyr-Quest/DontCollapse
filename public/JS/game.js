@@ -38,8 +38,6 @@ WebSocket.init(deleteEvent, startGame, messages);
 WebSocket.connect();
 
 HUD.initChatButton();
-HUD.initFacButton();
-HUD.initShopButton();
 
 
 HUD.setContractCallback((id, level) => {

@@ -23,6 +23,11 @@ export default class modal {
         this.shopCB;
     }
 
+
+    isOpen(){
+        return this.modal.hasAttribute("open")
+    }
+
     /**
      * close the modal and remove all event listeners
      */
