@@ -276,7 +276,7 @@ io.on('connection', socket => {
     socket.on('buyEngine', (idEngine, levelEngine) => {
         console.log("buy engine");
         let confirmation = allRooms[idRoom].searchPlayer(username).machineUpgrade(idEngine, levelEngine);
-        socket.emit("confirmPurchase", confirmation, true);
+        socket.emit("confirmPurchase", confirmation, "engine");
     });
 
     // Socket to sell second-hand engine
@@ -289,21 +289,21 @@ io.on('connection', socket => {
     socket.on('buySecondHandEngine', (seller) => {
         console.log("buy second hand");
         const confirmation = allRooms[idRoom].buySecondhandItem(username, seller);
-        socket.emit("confirmPurchase", confirmation, true);
+        socket.emit("confirmPurchase", confirmation, "occaz");
     })
 
     // Socket to change contract
     socket.on('buyContract', (idFournisseur, contractNumber) => {
         console.log("buy contract");
         const confirmation = allRooms[idRoom].searchPlayer(username).furnisherUpgrade(idFournisseur, contractNumber);
-        socket.emit("confirmPurchase", confirmation, true);
+        socket.emit("confirmPurchase", confirmation, "contract");
     });
 
     // Socket to change contract
     socket.on('buyEmployee', (category) => {
         console.log("buy employee", category);
         const confirmation = allRooms[idRoom].searchPlayer(username).recruteEmployee(category);
-        socket.emit("confirmPurchase", confirmation, false);
+        socket.emit("confirmPurchase", confirmation, "employee");
     });
 
     // Socket actu

@@ -1,6 +1,9 @@
 import Modal from '../hud.js'
 import WebSocket from '../../../WebSocket.js';
 
+const leftPage = document.querySelectorAll('#left-page div');
+const rightPage = document.querySelectorAll('#right-page div');
+
 const modal = document.getElementById('confirm-buy');
 const oui = document.getElementsByClassName('oui-button')[0];
 const non = document.getElementsByClassName('non-button')[0];
@@ -8,6 +11,7 @@ const non = document.getElementsByClassName('non-button')[0];
 let itemId = "";
 let itemLevel = undefined;
 let itemType = 0;
+let itemDiv = "";
 
 const level = {
     "manix": 1,
@@ -24,6 +28,8 @@ const level = {
     "super": "supervisors",
     "maint": "maintainers",
     "menage": "cleaners"
+
+
 };
 
 /**
@@ -31,6 +37,7 @@ const level = {
  * @param {Document} divOfItem 
  */
 function buyItem(divOfItem, type) {
+    itemDiv = divOfItem;
     itemType = type;
     itemLevel = level[divOfItem.classList[0]]; // set the item level
     itemId = divOfItem.classList[1]; // set the item id
@@ -91,38 +98,35 @@ let sellOccazCB;
 /**
  * buy item : transmit the item to buy or delete to back, close confirm and shop modals and remove listeners
  */
-async function buy() {
+function buy() {
     switch (itemType) {
         case 0:
-            await buyContractCB(itemLevel, itemId); // id fournisseur / num contrat
+            buyContractCB(itemLevel, itemId); // id fournisseur / num contrat
             break;
         case 1:
             console.log(itemId, itemLevel)
-            await buyPersoCB(itemLevel /* , itemLevel */ ); // string métier / salaire
+            buyPersoCB(itemLevel /* , itemLevel */ ); // string métier / salaire
             break;
         case 2:
             console.log(itemId, itemLevel)
-            await buyMachineCB(itemId, itemLevel); // id machine / level
+            buyMachineCB(itemId, itemLevel); // id machine / level
             break;
         case 3:
             let username = "michel";
             console.log(username)
-            await buyOccazCB(username); // nom du joueur qui vend
+            buyOccazCB(username); // nom du joueur qui vend
             break;
         case 4:
             let price = 0;
             itemId = 2;
             itemLevel = 1;
             console.log(itemId, itemLevel, price)
-            await sellOccazCB(itemId, itemLevel, price) // id machine / level / prix de vente
+            sellOccazCB(itemId, itemLevel, price) // id machine / level / prix de vente
             break;
         default:
             console.warn('ERROR');
             break;
     }
-//    modal.close(); // close confirm modal
-    // Modal.closeShopModal(); // close shop modal
-    // removeListeners();
 }
 
 function setContractCB(cb) {
@@ -145,8 +149,65 @@ function setSellOccazCB(cb) {
     sellOccazCB = cb;
 }
 
-function confirmation(obj){
-    console.log(obj)
+function confirmation(obj) {
+    if (obj.bought === true) {
+        let nb;
+        console.log("Item  acheté")
+        if (obj.type !== "employee") {
+            let allElem = [];
+            switch (itemType) {
+                case 0:
+                    nb = {
+                        0: 0,
+                        1: 1,
+                        2: 2,
+                        3: 3,
+                    }
+
+                    let contract = Array.from(document.getElementsByClassName(itemDiv.classList[0]));
+                    contract.shift();
+                    for (const item of contract) {
+                        if (item.hasAttribute('disable')) item.removeAttribute('disable')
+                    }
+
+
+                    break;
+                case 2:
+                    for (let i = 0; i < leftPage.length; i += 2) {
+                        allElem.push(leftPage[i])
+                        allElem.push(leftPage[i + 1])
+                        allElem.push(rightPage[i])
+                        allElem.push(rightPage[i + 1])
+                    }
+                    nb = {
+                        0: 16,
+                        1: 17,
+                        2: 18,
+                        3: 19,
+                    }
+                    for (let i = nb[itemDiv.classList[1]]; i < allElem.length; i += 4) {
+                        if (allElem[i].hasAttribute('disable')) {
+                            allElem[i].removeAttribute('disable')
+                        }
+                    }
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    console.warn('ERROR');
+                    break;
+            }
+
+            itemDiv.setAttribute('disable', '')
+            Modal.closeShopModal(); // close shop modal
+            removeListeners();
+        }
+    } else {
+        console.log("Item non acheté")
+    }
+    modal.close(); // close confirm modal
 
 }
 

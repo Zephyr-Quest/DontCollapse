@@ -62,7 +62,6 @@ const username = document.getElementById("username").value;
 let deleteEvent;
 let startGame;
 let messages;
-let confirmation;
 
 /* -------------------------------- Function -------------------------------- */
 function updatePlayersOnScreen() {
@@ -125,13 +124,6 @@ function getMoney() {
 
 }
 
-function purchaseConfirmation(/* isBought, machineOrContractOrOccaz */) {
-    let tmp = confirmation
-    confirmation = undefined;
-    console.log(tmp)
-    return tmp;
-}
-
 /* --------------------------------- Return --------------------------------- */
 
 // return {
@@ -164,5 +156,4 @@ export default {
     getAllShop,
     getChrono,
     getMoney,
-    purchaseConfirmation
 }

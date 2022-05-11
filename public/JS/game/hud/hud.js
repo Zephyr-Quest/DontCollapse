@@ -90,6 +90,10 @@ function setSellOccazCallback(callback) {
     Item.setSellOccazCB(callback);
 }
 
+function closeAllModals(){
+    shop.closeFunction();
+    chat.closeFunction();
+}
 
 // function setChatCallback(callback) {
 
