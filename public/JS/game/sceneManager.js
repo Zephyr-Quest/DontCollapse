@@ -198,11 +198,10 @@ export class Scene {
                 // Play animations
                 const delta = this.clock.getDelta();
                 this.mixers.forEach(mixer => mixer.update(delta));
-
                 this.render();
                 requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();
-                this.light.shadow.autoUpdate = false
+                // this.light.shadow.autoUpdate = false
                 stats.end();
         }
 

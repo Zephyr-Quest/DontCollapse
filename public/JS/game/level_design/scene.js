@@ -1006,7 +1006,7 @@ export const ObjectArray = [
                 length: 100,
                 width: 100,
                 heigth: 100,
-                x: 265,
+                x: 263,
                 y: 115,
                 z: 27,
                 color: "#AD3C25",
