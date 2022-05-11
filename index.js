@@ -133,7 +133,7 @@ app.delete("/removeuser/:player", (req, res) => {
 });
 
 app.post("/host",
-    body("pseudo").trim().isLength({ min: 3 }).escape(),
+    body("pseudo").trim().isLength({ min: 3, max: 12 }).escape(),
     (req, res) => {
         const userName = req.body.pseudo;
 
@@ -166,7 +166,7 @@ app.post("/host",
     })
 
 app.post("/join",
-    body("pseudo").trim().isLength({ min: 3 }).escape(),
+    body("pseudo").trim().isLength({ min: 3, max: 12 }).escape(),
     body("idRoom"),
     (req, res) => {
 

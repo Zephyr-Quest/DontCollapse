@@ -128,7 +128,6 @@ function purchaseConfirmation(/* isBought, machineOrContractOrOccaz */) {
     // console.log(isBought, machineOrContractOrOccaz);
     console.log(confirmation);
     confirmation = undefined;
-    console.log(confirmation);
 }
 
 /* --------------------------------- Return --------------------------------- */
