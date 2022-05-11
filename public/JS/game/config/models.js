@@ -47,7 +47,7 @@ export const Models = {
         pallet: {
                 name: "pallet",
                 model: "pallet1.glb",
-                scale: 7,
+                scale: 15,
                 isModel: true,
                 isClonable: true,
                 instance: null,
