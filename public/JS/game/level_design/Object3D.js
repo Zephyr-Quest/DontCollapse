@@ -76,7 +76,7 @@ export class Object3D extends Locatable {
                                 this.geometry = new THREE.PlaneGeometry(this.width, this.length);
                                 this.material = new THREE.MeshStandardMaterial({
                                         color: this.color,
-                                        side: THREE.DoubleSide,
+                                        side: THREE.FrontSide,
                                         opacity: this.transp,
                                         transparent: false
 
