@@ -1,5 +1,5 @@
 import Modal from '../hud.js'
-// import WebSocket from '../../WebSocket.js';
+import WebSocket from '../../../WebSocket.js';
 
 const modal = document.getElementById('confirm-buy');
 const oui = document.getElementsByClassName('oui-button')[0];
@@ -20,10 +20,10 @@ const level = {
     "cartons": 2,
     "etain": 3,
 
-    "inge":"engineers",
-    "super":"supervisors",
-    "maint":"maintainers",
-    "menage":"cleaners"
+    "inge": "engineers",
+    "super": "supervisors",
+    "maint": "maintainers",
+    "menage": "cleaners"
 };
 
 /**
@@ -91,40 +91,38 @@ let sellOccazCB;
 /**
  * buy item : transmit the item to buy or delete to back, close confirm and shop modals and remove listeners
  */
-function buy() {
-        switch (itemType) {
-            case 0:
-                buyContractCB(itemLevel, itemId); // id fournisseur / num contrat
-                break;
-            case 1:
-                console.log(itemId, itemLevel)
-                buyPersoCB(itemLevel/* , itemLevel */);  // string métier / salaire
-                break;
-            case 2:
-                console.log(itemId, itemLevel)
-                buyMachineCB(itemId, itemLevel);    // id machine / level
-                break;
-            case 3:
-                let username = "michel";
-                console.log(username)
-                buyOccazCB(username);   // nom du joueur qui vend
-                break;
-            case 4:
-                let price = 0;
-                itemId = 2;
-                itemLevel = 1;
-                console.log(itemId, itemLevel, price)
-                sellOccazCB(itemId, itemLevel, price)   // id machine / level / prix de vente
-                break;
-            default:
-                break;
-        }
- 
-
-
-    modal.close(); // close confirm modal
-    Modal.closeShopModal(); // close shop modal
-    removeListeners();
+async function buy() {
+    switch (itemType) {
+        case 0:
+            await buyContractCB(itemLevel, itemId); // id fournisseur / num contrat
+            break;
+        case 1:
+            console.log(itemId, itemLevel)
+            await buyPersoCB(itemLevel /* , itemLevel */ ); // string métier / salaire
+            break;
+        case 2:
+            console.log(itemId, itemLevel)
+            await buyMachineCB(itemId, itemLevel); // id machine / level
+            break;
+        case 3:
+            let username = "michel";
+            console.log(username)
+            await buyOccazCB(username); // nom du joueur qui vend
+            break;
+        case 4:
+            let price = 0;
+            itemId = 2;
+            itemLevel = 1;
+            console.log(itemId, itemLevel, price)
+            await sellOccazCB(itemId, itemLevel, price) // id machine / level / prix de vente
+            break;
+        default:
+            console.warn('ERROR');
+            break;
+    }
+//    modal.close(); // close confirm modal
+    // Modal.closeShopModal(); // close shop modal
+    // removeListeners();
 }
 
 function setContractCB(cb) {
@@ -147,7 +145,8 @@ function setSellOccazCB(cb) {
     sellOccazCB = cb;
 }
 
-function purchaseConfirmation(){
+function confirmation(obj){
+    console.log(obj)
 
 }
 
@@ -159,5 +158,7 @@ export default {
     setPersoCB,
     setMachineCB,
     setBuyOccazCB,
-    setSellOccazCB
+    setSellOccazCB,
+
+    confirmation
 };
