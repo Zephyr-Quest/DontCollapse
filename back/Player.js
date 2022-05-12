@@ -46,9 +46,9 @@ const furnishers = {
 module.exports = class Player {
     constructor(name) {
         this.name = name;
-        this.money = 50000000;
+        this.money = 50000;
         this.sd = new SustainableDevelopment();
-        this.machines = [{ level: 3, secondHand: false }, { level: 1, secondHand: false }, { level: 4, secondHand: false }, { level: 2, secondHand: false }]; // machines level
+        this.machines = [{ level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }]; // machines level
         this.furnishers = [1, 1, 1, 1];
         this.expenses = 0;
         this.employees = {

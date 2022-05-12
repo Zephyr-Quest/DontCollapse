@@ -7,10 +7,10 @@ module.exports = class Game {
         this.players = [];
         this.playersName = [];
         this.shop = [{
-            player: "David",
-            machine: 0,
-            level: 4,
-            price: 7
+            player: "",
+            machine: undefined,
+            level: undefined,
+            price: undefined
         }];
         this.idRoom = id;
         this.host = host;

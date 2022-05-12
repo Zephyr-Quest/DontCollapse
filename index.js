@@ -80,7 +80,7 @@ const updateMonth = game => {
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
         const pUsername = pSocket.handshake.session.username;
-        const infos = {chrono: game.chrono.getTime(), moula: game.playersName[pUsername], barres: game.players[game.playersName.indexOf(pUsername)].sd}
+        const infos = {chrono: game.chrono.getTime(), moula: game.players[game.playersName.indexOf(pUsername)].money, barres: game.players[game.playersName.indexOf(pUsername)].sd}
         pSocket.emit("infoActu", infos);
     }
 };
@@ -280,6 +280,7 @@ io.on('connection', socket => {
             allRooms[idRoom].gameStart = true;
             io.emit("display-rooms", allRooms);
             io.to(idRoom).emit("startAuthorized");
+            updateMonth(allRooms[idRoom]);
         }
         else console.log("start unauthorized");
     });

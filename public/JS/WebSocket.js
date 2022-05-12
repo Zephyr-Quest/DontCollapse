@@ -52,7 +52,7 @@ const events = {
         Item.confirmation(confirm);
     },
     "infoActu" : (infoPlayer) => {
-        console.log(infoPlayer);
+        HUD.refreshHud(infoPlayer);
     }
 };
 

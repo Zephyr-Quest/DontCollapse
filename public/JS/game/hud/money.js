@@ -29,5 +29,4 @@ function updateHUD() {
 export default {
     setMoney,
     getMoney,
-    updateHUD,
 }

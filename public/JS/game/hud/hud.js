@@ -3,21 +3,8 @@ import Item from './shop/manageItem.js'
 import Parameter from './parameter.js'
 import Modal from './modalManager.js'
 import ShopItem from './shop/shopItem.js'
-
-/* ------------------------------ progress bar ------------------------------ */
-let id = 1;
-let stat = true;
-
-const update = () => {
-    id += stat ? 5 : -5;
-    if (id > 100 || id < 0) stat = !stat;
-
-    ProgressBar.updateSocial(id);
-    ProgressBar.updateEconomic(id);
-    ProgressBar.updateEcologic(id);
-    setTimeout(update, 400);
-}
-update();
+import Chrono from './chrono.js'
+import Money from './money.js'
 
 /* --------------------------------- Modals --------------------------------- */
 
@@ -102,6 +89,16 @@ function refreshShop(infos){
     ShopItem.refreshOccaz(infos.shop);
 
 }
+
+function refreshHud(infos){
+    console.log(infos)
+    ProgressBar.updateEcologic(Math.round(infos.barres.ecologic));
+    ProgressBar.updateEconomic(Math.round(infos.barres.economic));
+    ProgressBar.updateSocial(Math.round(infos.barres.social));
+
+    Chrono.startChronoFrom(infos.chrono.min,infos.chrono.sec);
+    Money.setMoney(infos.moula);
+}
 // function setChatCallback(callback) {
 
 // }
@@ -121,6 +118,7 @@ export default {
     openShopModal,
     closeShopModal,
     refreshShop,
+    refreshHud,
 
     updateEcologicBar,
     updateEconomicBar,
