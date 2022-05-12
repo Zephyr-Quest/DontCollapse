@@ -1,12 +1,16 @@
 const delay = 1000;
 
-module.exports = class Chrono{
-    constructor(){
+module.exports = class Chrono {
+    constructor(monthCallback) {
         this.minutes = 10;
         this.seconds = 0;
         this.stopChrono = false;
+
+        this.lastMonth = 10 * 60;
+        this.monthStep = 60;
+        this.monthCallback = monthCallback;
     }
-    
+
     /**
      * Increment the chrono each second
      */
@@ -16,11 +20,14 @@ module.exports = class Chrono{
             this.seconds = 60;
             this.minutes--;
         }
-        
+
         // Increment seconds
         this.seconds--;
-    
-        // Continue
+
+        if (this.seconds === 0)
+            this.monthCallback();
+        
+            // Continue
         if (!this.stopChrono) setTimeout(() => this.incrementChrono(), delay);
     }
 
@@ -31,12 +38,20 @@ module.exports = class Chrono{
     getTimeSeconds() {
         let seconds = Number(this.seconds);
         let minutes = Number(this.minutes);
-        
+
         while (minutes > 0) {
             seconds += 60;
             minutes--;
         }
 
         return seconds;
+    }
+
+    /**
+     * Get elapased time since the start of the chrono
+     * @returns All elapsed time
+     */
+     getTime() {
+        return {min: this.minutes, sec: this.seconds};
     }
 }

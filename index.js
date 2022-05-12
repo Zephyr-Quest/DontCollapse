@@ -15,6 +15,7 @@ const {
 } = require("express-validator");
 const { all } = require('express/lib/application');
 const { connected } = require('process');
+const { info } = require('console');
 
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
@@ -71,6 +72,19 @@ function getMaxKey(obj) {
     });
     return result;
 }
+
+const updateMonth = game => {
+    // console.log(io);
+    // console.log(game);
+    const players = io.sockets.adapter.rooms.get(game.idRoom);
+    console.log(players);
+    for (const p of players) {
+        const pSocket = io.sockets.sockets.get(p);
+        const pUsername = pSocket.handshake.session.username;
+        const infos = {chrono: game.chrono.getTime(), moula: game.playersName[pUsername]}
+        pSocket.emit("infoActu", infos);
+    }
+};
 
 /* ----------------------------------- APP ---------------------------------- */
 
@@ -159,6 +173,9 @@ app.post("/host",
         roomPlayers.push(userName);
         allRooms[idRoom] = new DCGame(idRoom, userName);
         allRooms[idRoom].addPlayer(userName);
+
+        allRooms[idRoom].updateMonth = updateMonth;
+
 
         res.send({
             state: 'host'
@@ -260,7 +277,7 @@ io.on('connection', socket => {
     socket.on('startGame', () => {
         const idRoom = socket.handshake.session.idRoom;
         if (allRooms[idRoom] && allRooms[idRoom].playersName.length >= 2 && allRooms[idRoom].playersName.length <= 4) {
-            allRooms[idRoom].chrono.incrementChrono();
+            allRooms[idRoom].startChrono();
             allRooms[idRoom].gameStart = true;
             io.emit("display-rooms", allRooms);
             io.to(idRoom).emit("startAuthorized");
@@ -307,6 +324,7 @@ io.on('connection', socket => {
 
     // Socket actu
     socket.on('actu', () => {
+        console.log("actualisation");
         allRooms[idRoom].updateMonth();
     });
 

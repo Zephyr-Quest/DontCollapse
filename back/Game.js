@@ -9,9 +9,13 @@ module.exports = class Game {
         this.shop = [];
         this.idRoom = id;
         this.host = host;
-        this.chrono = new Chrono();
+
+        this.chrono;
+
         this.runningEvent = undefined;
         this.gameStart = false;
+
+        this.updateMonth = null;
     }
 
     addPlayer(player) {
@@ -19,6 +23,7 @@ module.exports = class Game {
         if (this.players.length < 4 && player) {
             this.players.push(new Player(player));
             this.playersName.push(player);
+            console.log("jhiwsefdiusdkhfgsd")
         }
     }
 
@@ -42,9 +47,9 @@ module.exports = class Game {
         let player = this.searchPlayer(playerName);
         if (player) {
             return {
-                machines : player.machines,
-                furnishers : player.furnishers,
-                shop : this.shop
+                machines: player.machines,
+                furnishers: player.furnishers,
+                shop: this.shop
             }
         }
         return undefined;
@@ -70,23 +75,23 @@ module.exports = class Game {
 
     applyFactor(eventId, factor) {
         switch (eventId) {
-        case 0:
-            this.players.forEach(player => {
-                player.money += factor;
-            });
-            break;
-        case 1:
-            this.players.forEach(player => {
-                player.sd.ecologic += player.sd.ecologic * (factor / 100);
-            });
-            break;
-        case 2:
-            this.players.forEach(player => {
-                player.sd.social += player.sd.social * (factor / 100);
-            });
-            break;
-        default:
-            break;
+            case 0:
+                this.players.forEach(player => {
+                    player.money += factor;
+                });
+                break;
+            case 1:
+                this.players.forEach(player => {
+                    player.sd.ecologic += player.sd.ecologic * (factor / 100);
+                });
+                break;
+            case 2:
+                this.players.forEach(player => {
+                    player.sd.social += player.sd.social * (factor / 100);
+                });
+                break;
+            default:
+                break;
         }
     }
 
@@ -136,9 +141,13 @@ module.exports = class Game {
         return false;
     }
 
-    updateMonth() {
-        this.players.forEach(player => {
-            player.updateAll();
-        });
+    updateMonthWrapper() {
+        this.updateMonth(this);
     }
+
+    startChrono() {
+        this.chrono = new Chrono(this.updateMonthWrapper.bind(this));
+        this.chrono.incrementChrono();
+    }
+
 };

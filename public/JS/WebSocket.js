@@ -49,6 +49,9 @@ const events = {
     "confirmPurchase": (isBought, machineOrContractOrOccaz) => {
         let confirm = { bought: isBought, type: machineOrContractOrOccaz };
         Item.confirmation(confirm);
+    },
+    "infoActu" : (infoPlayer) => {
+        console.log(infoPlayer);
     }
 };
 
