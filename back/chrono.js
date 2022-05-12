@@ -24,7 +24,7 @@ module.exports = class Chrono {
         // Increment seconds
         this.seconds--;
 
-        if (this.seconds === 0)
+        if (this.seconds === 58)
             this.monthCallback();
         
             // Continue

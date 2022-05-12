@@ -77,11 +77,10 @@ const updateMonth = game => {
     // console.log(io);
     // console.log(game);
     const players = io.sockets.adapter.rooms.get(game.idRoom);
-    console.log(players);
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
         const pUsername = pSocket.handshake.session.username;
-        const infos = {chrono: game.chrono.getTime(), moula: game.playersName[pUsername]}
+        const infos = {chrono: game.chrono.getTime(), moula: game.playersName[pUsername], barres: game.players[game.playersName.indexOf(pUsername)].sd}
         pSocket.emit("infoActu", infos);
     }
 };
@@ -320,12 +319,6 @@ io.on('connection', socket => {
         console.log("buy employee", category);
         const confirmation = allRooms[idRoom].searchPlayer(username).recruteEmployee(category);
         socket.emit("confirmPurchase", confirmation, "employee");
-    });
-
-    // Socket actu
-    socket.on('actu', () => {
-        console.log("actualisation");
-        allRooms[idRoom].updateMonth();
     });
 
     // Socket shop
