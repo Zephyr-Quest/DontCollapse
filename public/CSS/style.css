@@ -225,7 +225,6 @@ header .btn:hover {
   justify-content: space-between;
   align-items: center;
   margin-left: 5%;
-  margin-top: 5%;
   width: 90%;
 }
 .rules-main h1 {
@@ -238,16 +237,18 @@ header .btn:hover {
   color: #f5dba6;
 }
 .rules-main .rules-content {
-  line-height: 3rem;
+  font-size: 1rem;
+  line-height: 2.3rem;
   width: 60%;
   text-align: left;
-  font-family: 'Koulen', sans-serif;
+  font-family: sans-serif;
   text-shadow: 1px 1px 2px black;
 }
 .rules-main .rules-content p,
 .rules-main .rules-content ul li {
   list-style: none;
-  font-size: 1.6rem;
+  font-weight: bold;
+  font-size: 1.3rem;
 }
 /* -------------------------------------------------------------------------- */
 /*                                   Footer                                   */
