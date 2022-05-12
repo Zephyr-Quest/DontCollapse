@@ -16,7 +16,7 @@ const update = () => {
     ProgressBar.updateEcologic(id);
     setTimeout(update, 400);
 }
-update();
+// update();
 
 /* --------------------------------- Modals --------------------------------- */
 

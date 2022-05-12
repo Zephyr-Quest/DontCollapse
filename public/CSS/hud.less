@@ -188,21 +188,23 @@ body {
     flex-direction: column;
     height: auto;
     width: 300px;
-    margin-left:10px;
-    margin-right:10px;
+    margin-left: 10px;
+    margin-right: 10px;
     background-color: rgba(255, 255, 255, 0.603);
     border-radius: 20px;
-    padding:10px;
+    padding: 10px;
     text-align: center;
     font-size: 50px;
     color: white;
-    p{
+
+    p {
         text-align: center;
-        width:100%;
+        width: 100%;
         font-size: 20px;
     }
-    ion-icon{
-        width:100%;
+
+    ion-icon {
+        width: 100%;
         text-align: center;
     }
 }
@@ -267,22 +269,46 @@ body {
     .containers {
         display: flex;
         flex-direction: column;
+        @colorProgress : rgb(255, 0, 0);
+
+        div {
+            display: flex;
+            flex-direction: row;
+
+        }
+
+        p {
+
+            position: relative;
+            top: 0;
+            /* margin-top: 50%; */
+            transform: translateY(20%);
+            margin-left: 10px;
+            font-weight: bolder;
+            /* text-transform: uppercase; */
+            font-size: 20px;
+        }
 
         .progress-container {
-            border: solid rgb(53, 53, 77);
+            border: solid @colorProgress 2px;
             height: 30px;
             width: 400px;
-            background: linear-gradient(90deg, rgba(255, 0, 0, 1) 54%, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 1) 100%);
+            border-radius: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.356) 0%, @colorProgress 55%, rgba(0, 0, 0, 0.356) 56%, rgba(0, 0, 0, 0.356) 100%);
             text-align: center;
             font-size: x-large;
-            font-style: italic;
+            font-style: bolder;
             color: @text-color;
 
             .progress {
-                height: 100%;
-                width: 200;
-                min-width: 0px;
-                max-width: 400px;
+                box-shadow: -3px 0px 15px 1px rgba(0, 0, 0, 0.49);
+                height: 30px;
+                width: 30px;
+                border-radius: 100%;
+                background-color: @colorProgress;
+                margin-left: calc(55% - 15px);
                 z-index: 1;
             }
 

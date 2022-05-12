@@ -222,21 +222,40 @@ body h1 {
   display: flex;
   flex-direction: column;
 }
+#top .containers div {
+  display: flex;
+  flex-direction: row;
+}
+#top .containers p {
+  position: relative;
+  top: 0;
+  /* margin-top: 50%; */
+  transform: translateY(20%);
+  margin-left: 10px;
+  font-weight: bolder;
+  /* text-transform: uppercase; */
+  font-size: 20px;
+}
 #top .containers .progress-container {
-  border: solid #35354d;
+  border: solid #ff0000 2px;
   height: 30px;
   width: 400px;
-  background: linear-gradient(90deg, #ff0000 54%, #000000 55%, #000000 100%);
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.356) 0%, #ff0000 55%, rgba(0, 0, 0, 0.356) 56%, rgba(0, 0, 0, 0.356) 100%);
   text-align: center;
   font-size: x-large;
-  font-style: italic;
+  font-style: bolder;
   color: #eee;
 }
 #top .containers .progress-container .progress {
-  height: 100%;
-  width: 200;
-  min-width: 0px;
-  max-width: 400px;
+  box-shadow: -3px 0px 15px 1px rgba(0, 0, 0, 0.49);
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  background-color: #ff0000;
+  margin-left: calc(55% - 15px);
   z-index: 1;
 }
 #top .containers .progress-container .text {
