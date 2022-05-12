@@ -64,38 +64,39 @@
 
 
     <div style="display: none;" id="game">
-        <h1>Let's play <%= username %>
-        </h1>
+        <br>
 
 
         <!-- Progress Bar -->
         <div id="top">
             <div class="containers">
-                <div>
+                <div class="containedBy">
                     <div class="progress-container">
                         <div class="progress"></div>
                     </div>
-                    <p>Social</p>   
+                    <p class="textPro">Social</p>   
                 </div>
-                <div>
+                <div class="containedBy">
                     <div class="progress-container">
                         <div class="progress"></div>
                     </div>
-                    <p>Economique</p>
+                    <p class="textPro">Economique</p>
                 </div>
-                <div>
+                <div class="containedBy">
                     <div class="progress-container">
                         <div class="progress"></div>
                     </div>
-                    <p>Ecologique</p>
+                    <p class="textPro">Ecologique</p>
                 </div>
             </div>
+            <div class="containers" style = "width:auto;margin-top:10px;justify-content:space-around;flex-direction:column-reverse;">
+                <div>
+                    <p style="margin:0;margin-top:5px;padding:0;"><span id="minutes"></span> : <span id="seconds"></span></p>
+                </div>
+                <div id="money-container">
+                    <p class="txtMoney" style="margin-top:10px;"><span id="money-amount">50000</span> €</p>
+                </div>
 
-            <div>
-                <p><span id="minutes"></span>:<span id="seconds"></span></p>
-            </div>
-            <div id="money-container">
-                <p><span id="money-amount">50000</span>€</p>
             </div>
 
         </div>

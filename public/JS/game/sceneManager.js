@@ -107,16 +107,15 @@ export class Scene {
         init() {
                 this.clock = new THREE.Clock();
                 this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-                this.camera.position.set(800, -800, 800);
+                this.camera.position.set(800, -800, 550);
                 // this.camera.position.set(0, 0, 0);
-                this.camera.lookAt(new THREE.Vector3(0, 0, 0));
                 this.camera.name = "pos1"
 
                 this.scene = new THREE.Scene();
                 // this.scene.background = new THREE.Color('white');
                 const near = 700;
                 const far = 1000;
-                const colorFog = 'lightblue';
+                const colorFog = 0x383331;
                 this.scene.fog = new THREE.Fog(colorFog, near, far);
                 this.scene.background = new THREE.Color(colorFog);
 
@@ -139,11 +138,11 @@ export class Scene {
 
                 /* --------------------- Setting up the camera controls --------------------- */
                 this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-                this.controls.listenToKeyEvents(window); // optional
+                // this.controls.listenToKeyEvents(window); // optional
                 this.controls.enableZoom = false;
-
-                this.controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-                this.controls.dampingFactor = 0.05;
+                this.controls.enableDamping=false
+                // this.controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+                // this.controls.dampingFactor = 0.05;
 
                 this.controls.screenSpacePanning = false;
 
@@ -151,7 +150,7 @@ export class Scene {
                 this.controls.maxDistance = 500;
 
                 this.controls.maxPolarAngle = Math.PI / 2;
-
+                this.controls.enabled=false
                 let color = 0xffffff;
                 let intensity = 0.85;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
@@ -178,8 +177,8 @@ export class Scene {
                         this.changeCamera(event)
                 }, false)
 
-                this.axesHelper = new THREE.AxesHelper(1000);
-                this.scene.add(this.axesHelper);
+                // this.axesHelper = new THREE.AxesHelper(1000);
+                // this.scene.add(this.axesHelper);
 
                 this.raycaster = new THREE.Raycaster();
                 this.renderer.domElement.addEventListener('mousedown', event => {
@@ -190,13 +189,13 @@ export class Scene {
                         this.mousePos.clientY = event.clientY
                 });
 
-
+                
                 // this.animate()
         }
-
+        
         animate() {
                 stats.begin();
-
+                
                 // Play animations
                 const delta = this.clock.getDelta();
                 this.mixers.forEach(mixer => mixer.update(delta));
@@ -209,7 +208,7 @@ export class Scene {
 
 
         render() {
-
+                this.camera.lookAt(new THREE.Vector3(0, 0, 60));
                 this.renderer.render(this.scene, this.camera);
                 this.onMouseOver(this.mousePos, this)
         }
@@ -463,14 +462,14 @@ export class Scene {
                         case 49:
                                 // 1 pressed
                                 if (this.camera.name != "pos1") {
-                                        this.camera.position.set(800, -800, 800);
+                                        this.camera.position.set(800, -800, 550);
                                         this.camera.name = "pos1"
                                 }
                                 break;
                         case 50:
                                 // 2 pressed
                                 if (this.camera.name != "pos2") {
-                                        this.camera.position.set(0, -800, 800);
+                                        this.camera.position.set(0, -800, 550);
                                         this.camera.name = "pos2"
                                 }
                                 break;
@@ -478,7 +477,7 @@ export class Scene {
                                 // 3 pressed
                                 if (this.camera.name != "pos3") {
                                         this.camera.name = "pos3"
-                                        this.camera.position.set(-800, -800, 800);
+                                        this.camera.position.set(-800, -800, 550);
                                 }
                                 break;
                 }

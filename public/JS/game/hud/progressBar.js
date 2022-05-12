@@ -20,9 +20,14 @@ function updateSocial(amount) {
         color = 'rgba(255,0,0,1)'
     }
 
-    let gradFondu = gradSocial + 6
-    bar.style.background = "linear-gradient(90deg," + color + " " + gradSocial + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
-    bar.innerText = "Social " + gradSocial + "%";
+    let gradFondu = gradSocial + 1
+    bar.style.borderColor=color;
+    bar.style.background = "linear-gradient(90deg, rgba(0, 0, 0, 0.356) 0%," + color + " " + gradSocial + "%, rgba(0,0,0,.356) " + gradFondu + "%, rgba(0,0,0,.326) 100%)";
+    let pro = document.getElementsByClassName("progress")[0]
+    pro.style.marginLeft = "calc(" + gradSocial + "% - 15px)"
+    pro.style.backgroundColor=color;
+    let txt=document.getElementsByClassName("textPro")[0]
+    txt.innerHTML="Social ("+gradSocial+"%)"
 }
 
 /**

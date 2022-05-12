@@ -4,19 +4,20 @@ import Parameter from './parameter.js'
 import Modal from './modalManager.js'
 
 /* ------------------------------ progress bar ------------------------------ */
-let id = 1;
+let id = 5;
 let stat = true;
 
 const update = () => {
     id += stat ? 5 : -5;
-    if (id > 100 || id < 0) stat = !stat;
+    let id2 = stat ? 5 : -5;
+    if (id > 100 - Math.abs(id2) || id < 0 + Math.abs(id2)) stat = !stat;
 
     ProgressBar.updateSocial(id);
-    ProgressBar.updateEconomic(id);
-    ProgressBar.updateEcologic(id);
+    // ProgressBar.updateEconomic(id);
+    // ProgressBar.updateEcologic(id);
     setTimeout(update, 400);
 }
-// update();
+update();
 
 /* --------------------------------- Modals --------------------------------- */
 
@@ -99,7 +100,7 @@ function setSellOccazCallback(callback) {
 
 // }
 
-function closeAllModals(){
+function closeAllModals() {
     shop.closeFunction();
     chat.closeFunction();
 }
@@ -114,11 +115,11 @@ export default {
     openShopModal,
     closeShopModal,
     closeAllModals,
-    
+
     updateEcologicBar,
     updateEconomicBar,
     updateSocialBar,
-    
+
     setContractCallback,
     setPersoCallback,
     setMachineCallback,
