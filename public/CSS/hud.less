@@ -279,7 +279,7 @@ body {
         justify-content: space-between;
         flex-direction: row;
         @colorProgress : rgb(255, 0, 0);
-        margin-left:50%;
+        margin-left: 50%;
         transform: translateX(-50%);
         text-align: center;
 
@@ -297,7 +297,7 @@ body {
         }
 
         .txtMoney {
-            margin:0;
+            margin: 0;
             text-shadow: 1px 2px 3px black;
             top: 0;
             /* margin-top: 50%; */
@@ -305,10 +305,9 @@ body {
             /* text-transform: uppercase; */
             font-size: 20px;
             padding: 10px 50px 10px 50px;
-            border:white 2px solid;
-            border-radius:10px;
-            background-color:rgba(0,0,0,0.356)
-
+            border: white 2px solid;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.356)
         }
 
         .progress-container {
@@ -733,6 +732,27 @@ body {
 /* -------------------------------------------------------------------------- */
 /*                                 Parameters                                 */
 /* -------------------------------------------------------------------------- */
+.cameraName {
+    margin: 0;
+    text-shadow: 1px 2px 3px black;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px 60px 10px 60px;
+    border: white 2px solid;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.356);
+    text-align: center;
+    position:fixed;
+    bottom:0;
+    margin-bottom:2em;
+    left:0;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display:none;
+    height:auto;
+    z-index: 20;
+}
+
 #parameters {
     position: fixed;
     bottom: 2em;
@@ -745,12 +765,15 @@ body {
     column-gap: 20px;
     row-gap: 20px;
     justify-items: center;
-
+    &:hover{
+        cursor: pointer;
+    }
     .param-content[open] {
         animation: slide-left-params 100ms forwards, fade-in 250ms forwards;
 
         &:hover {
             color: @primary-color;
+            cursor: pointer;
         }
     }
 

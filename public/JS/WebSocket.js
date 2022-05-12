@@ -109,6 +109,7 @@ function updatePlayersOnScreen() {
 }
 
 function beginingGame() {
+    document.getElementsByClassName("cameraName")[0].style.display="block";
     document.getElementById("myThreeJsCanvas").style.display = "block"
     const eltsToDelete = document.getElementById("room");
     eltsToDelete.remove();

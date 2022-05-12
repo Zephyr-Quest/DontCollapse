@@ -600,6 +600,26 @@ body h1 {
 /* -------------------------------------------------------------------------- */
 /*                                 Parameters                                 */
 /* -------------------------------------------------------------------------- */
+.cameraName {
+  margin: 0;
+  text-shadow: 1px 2px 3px black;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px 60px 10px 60px;
+  border: white 2px solid;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.356);
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 2em;
+  left: 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  height: auto;
+  z-index: 20;
+}
 #parameters {
   position: fixed;
   bottom: 2em;
@@ -613,11 +633,15 @@ body h1 {
   row-gap: 20px;
   justify-items: center;
 }
+#parameters:hover {
+  cursor: pointer;
+}
 #parameters .param-content[open] {
   animation: slide-left-params 100ms forwards, fade-in 250ms forwards;
 }
 #parameters .param-content[open]:hover {
   color: #f5dba6;
+  cursor: pointer;
 }
 #parameters .param-content[closing] {
   animation: slide-right-params 100ms forwards, fade-out 250ms forwards;
