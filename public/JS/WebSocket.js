@@ -1,4 +1,5 @@
 import Chrono from "./game/hud/chrono.js";
+import HUD from "./game/hud/hud.js";
 import Item from './game/hud/shop/manageItem.js'
 
 let socket;
@@ -113,7 +114,7 @@ function beginingGame() {
 }
 
 function getAllShop(infoPlayer) {
-    console.log(infoPlayer);
+    HUD.refreshShop(infoPlayer);
 }
 
 function getChrono() {

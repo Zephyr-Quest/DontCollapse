@@ -2,6 +2,7 @@ import ProgressBar from './progressBar.js';
 import Item from './shop/manageItem.js'
 import Parameter from './parameter.js'
 import Modal from './modalManager.js'
+import ShopItem from './shop/shopItem.js'
 
 /* ------------------------------ progress bar ------------------------------ */
 let id = 1;
@@ -95,6 +96,12 @@ function closeAllModals(){
     chat.closeFunction();
 }
 
+function refreshShop(infos){
+    ShopItem.refreshContract(infos.furnishers);
+    ShopItem.refreshMachine(infos.machines);
+    ShopItem.refreshOccaz(infos.shop);
+
+}
 // function setChatCallback(callback) {
 
 // }
@@ -113,6 +120,7 @@ export default {
     openOtherPLayer,
     openShopModal,
     closeShopModal,
+    refreshShop,
 
     updateEcologicBar,
     updateEconomicBar,
