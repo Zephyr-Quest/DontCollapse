@@ -180,7 +180,8 @@ body {
   cursor: pointer;
 }
 body {
-  background-color: #383331;
+  background: url("/img/wave-haikei.svg");
+  background-size: cover;
   font-family: 'KoHo', sans-serif;
   color: #eee;
   margin: 0;
@@ -430,10 +431,11 @@ body h1 {
 /*                                    Chat                                    */
 /* -------------------------------------------------------------------------- */
 #chat-modal {
-  height: 700px;
-  width: 300px;
+  height: calc(100vh - 60px);
+  width: 35vw;
   max-width: 700px;
-  margin-left: 20px;
+  margin-left: 0px;
+  padding: 20px;
   font-weight: bold;
   background-color: #383331;
   color: #f5dba6;
@@ -441,6 +443,7 @@ body h1 {
   overflow-y: auto;
 }
 #chat-modal #chatForm {
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -450,22 +453,34 @@ body h1 {
   font-family: 'KoHo', sans-serif;
   font-size: medium;
   font-weight: bold;
-  border: 3px solid #f5dba6;
+  border: 2px solid #f5dba6;
   outline: none;
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
   height: 20px;
-  width: 70%;
-  padding: 5px 5px 5px 5px;
+  width: 80%;
+  padding: 10px;
   border-radius: 8px;
 }
 #chat-modal #chatForm button {
   border-radius: 8px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  color: #383331;
+  font-family: 'KoHo', sans-serif;
+  font-size: medium;
+  font-weight: bold;
+  outline: none;
+  border: 2px solid #f5dba6;
+  width: calc(20% - 20px);
+  height: 100%;
+  margin-left: 20px;
 }
 #chat-modal #messages {
   padding-bottom: 10px;
   display: flex;
   flex-direction: column-reverse;
   color: #eee;
+  font-size: large;
 }
 #chat-modal #messages .sender {
   display: grid;
@@ -476,7 +491,7 @@ body h1 {
   justify-content: left;
 }
 #chat-modal #messages .username {
-  font-size: small;
+  font-size: medium;
 }
 #chat-modal #messages .host {
   color: #fa4b4b;
@@ -502,10 +517,12 @@ body h1 {
   margin-top: 10%;
 }
 #room button {
-  padding: 0;
   cursor: pointer;
   border: 3px solid #f5dba6;
   color: #383331;
+  font-size: 2rem;
+  font-family: 'KoHo';
+  font-weight: bold;
   background-color: #f5dba6;
 }
 #room button:hover {
@@ -514,20 +531,22 @@ body h1 {
   transition: background-color 0.3s;
 }
 #room #BtnGame {
+  padding: 0 20px 0 20px;
   width: 50%;
   height: 70px;
   margin: auto;
   border-radius: 10px;
-  font-size: 1em;
+  font-size: 1.2em;
   margin-top: 5em;
 }
 #room #chat-button {
-  width: 35%;
+  width: 50%;
   height: 50px;
+  padding: 0 40px 0 40px;
   display: block;
   margin: auto;
   border-radius: 8px;
-  font-size: 1em;
+  font-size: 1.2em;
   margin-top: 2em;
 }
 #room .removePlayerButton {
@@ -538,12 +557,11 @@ body h1 {
 }
 #room .card {
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
-  border: 3px solid #f5dba6;
+  border-left: 3px solid #f5dba6;
   margin-bottom: 2em;
   padding: 10px;
   padding-right: 30px;
   padding-left: 30px;
-  border-radius: 10px;
   align-items: center;
   font-family: 'KoHo', sans-serif;
   display: flex;

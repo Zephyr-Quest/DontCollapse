@@ -198,6 +198,17 @@ header .btn:hover {
   color: grey;
   margin: 0;
 }
+.home-main .home-content p {
+  font-size: 1.7rem;
+  line-height: 1.7rem;
+  text-shadow: 1px 1px 2px #696969;
+  font-family: 'Koulen', sans-serif;
+  padding: 0%;
+  margin-top: 0%;
+  margin-bottom: 2%;
+  letter-spacing: 0.2rem;
+  color: #f5dba6;
+}
 .home-main .home-content .btn_xl :hover {
   color: white;
 }
@@ -254,7 +265,7 @@ footer {
 }
 footer p {
   font-size: 0.7rem;
-  color: #eee;
+  color: whitesmoke;
   font-family: 'Koulen', sans-serif;
   padding-bottom: 0%;
 }

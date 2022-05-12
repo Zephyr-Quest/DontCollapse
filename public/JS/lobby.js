@@ -23,7 +23,7 @@ socket.on("display-rooms", (allRooms) => {
     let htmlScore = "";
     Object.keys(allRooms).forEach(key => {
         if (allRooms[key].playersName.length < 4 && !allRooms[key].gameStart) {
-            htmlScore += '<div class="card" title="Click to join ' + allRooms[key].playersName[0] + '\'s game" name="' + key + '"><ion-icon name="log-in"></ion-icon><ul><li class="name">Host : <strong class="green">' + allRooms[key].playersName[0] + '</strong></li><li class="score">Number of players : <strong>' + allRooms[key].playersName.length + '</strong></li></ul></div>'
+            htmlScore += '<div class="card" title="Cliquer pour rejoindre ' + allRooms[key].playersName[0] + '\'s game" name="' + key + '"><ion-icon name="log-in"></ion-icon><ul><li class="name">Hôte : <strong class="green">' + allRooms[key].playersName[0] + '</strong></li><li class="score">Nombre de joueurs connectés : <strong>' + allRooms[key].playersName.length + '</strong></li></ul></div>'
         }
     });
     document.getElementById("games-display").innerHTML = htmlScore;

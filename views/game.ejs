@@ -30,11 +30,11 @@
     <input type="hidden" value="<%= username %>" id="username" />
 
     <div id="room">
-        <h1>Welcome <%= username %>
+        <h1>Bienvenue <%= username %> !
         </h1>
         <div id="player_list"></div>
-        <button type="submit" id="BtnGame" style="display: none;">Start Game !</button>
-        <button id="chat-button">Open Chat</button>
+        <button type="submit" id="BtnGame" style="display: none;"><i class="fa-solid fa-display"></i> Commencer la partie !</button>
+        <button id="chat-button"><i class="fa-solid fa-comment-dots"></i> Ouvrir le Chat</button>
     </div>
 
 
@@ -472,28 +472,18 @@
                 <button class="non-button">Non</button>
             </dialog>
         </dialog>
-
-        <dialog class="modal" id="player-modal">
-            <div class="modal-content">
-                <div class="top-modal">
-                    <h2 class="title-modal">Qu'est ce que font les autres ?</h2>
-                    <span class="close-button" id="close-player">&times;</span>
-                </div>
-                <ul id="display-player"></ul>
-            </div>
-        </dialog>
     </div>
 
 
     <dialog class="modal" id="chat-modal">
         <div class="modal-content">
             <div class="top-modal">
-                <h2 class="title-modal">Ça dit quoi sa mère ?</h2>
+                <h2 class="title-modal">Conversation</h2>
                 <span class="close-button" id="close-chat">&times;</span>
             </div>
             <form id="chatForm" action="">
                 <input id="input-chat" autocomplete="off" placeholder="Message..." /><button
-                    class="button">Send</button>
+                    class="button">Envoyer</button>
             </form>
             <div id="messages"></div>
 
