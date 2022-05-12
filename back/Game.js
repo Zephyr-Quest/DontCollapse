@@ -6,7 +6,12 @@ module.exports = class Game {
     constructor(id, host) {
         this.players = [];
         this.playersName = [];
-        this.shop = [];
+        this.shop = [{
+            player: "David",
+            machine: 0,
+            level: 4,
+            price: 7
+        }];
         this.idRoom = id;
         this.host = host;
 

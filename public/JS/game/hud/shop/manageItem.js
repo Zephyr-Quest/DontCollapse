@@ -43,6 +43,9 @@ function buyItem(divOfItem, type) {
     itemId = divOfItem.classList[1]; // set the item id
     let itemName = divOfItem.children[0].textContent; // set the item name
 
+
+    console.log(itemDiv, "// type : ", itemType, "//level : ", itemLevel, "// id : ", itemId)
+
     document.getElementById('buying').textContent = "Achat de : " + itemName; // replace modal text
     modal.showModal(); // open confirm modal
     initListener();
@@ -70,13 +73,20 @@ function initListener() {
 /**
  * remove listeners and reset the items
  */
-function removeListeners() {
-    oui.removeEventListener('click', buyItem);
+function removeListeners(everything) {
+    oui.removeEventListener('click', buy);
     non.removeEventListener('click', notBuy);
+    oui.removeEventListener('click', sell);
+    non.removeEventListener('click', notSell);
+    if (everything) {
+        itemId = "";
+        itemLevel = undefined;
+        itemType = 0;
 
-    itemId = "";
-    itemLevel = undefined;
-    itemType = 0;
+        toSell = undefined;
+
+
+    }
 
 }
 
@@ -85,7 +95,7 @@ function removeListeners() {
  */
 function notBuy() {
     modal.close(); // close confirm modal
-    removeListeners();
+    removeListeners(true);
 }
 
 let buyContractCB;
@@ -116,13 +126,6 @@ function buy() {
             console.log(username)
             buyOccazCB(username); // nom du joueur qui vend
             break;
-        case 4:
-            let price = 0;
-            itemId = 2;
-            itemLevel = 1;
-            console.log(itemId, itemLevel, price)
-            sellOccazCB(itemId, itemLevel, price) // id machine / level / prix de vente
-            break;
         default:
             console.warn('ERROR');
             break;
@@ -149,6 +152,7 @@ function setSellOccazCB(cb) {
     sellOccazCB = cb;
 }
 
+//* Possiblement à retirer/modifier avec l'actualistation du back
 function confirmation(obj) {
     if (obj.bought === true) {
         let nb;
@@ -169,10 +173,9 @@ function confirmation(obj) {
                     for (const item of contract) {
                         if (item.hasAttribute('disable')) item.removeAttribute('disable')
                     }
-
-
                     break;
                 case 2:
+                    sellOwnMachine()
                     for (let i = 0; i < leftPage.length; i += 2) {
                         allElem.push(leftPage[i])
                         allElem.push(leftPage[i + 1])
@@ -190,19 +193,22 @@ function confirmation(obj) {
                             allElem[i].removeAttribute('disable')
                         }
                     }
+                    return
                     break;
-                case 3:
+                case 3: //own occaz to delete
+
                     break;
-                case 4:
-                    break;
+                case 4: // others occaz
+                    break
                 default:
                     console.warn('ERROR');
                     break;
             }
 
+
             itemDiv.setAttribute('disable', '')
             Modal.closeShopModal(); // close shop modal
-            removeListeners();
+            removeListeners(true);
         }
     } else {
         console.log("Item non acheté")
@@ -210,6 +216,65 @@ function confirmation(obj) {
     modal.close(); // close confirm modal
 
 }
+
+let toSell;
+
+function sellOwnMachine() {
+    removeListeners(false);
+    let sameID = Array.from(document.getElementsByClassName(itemId));
+    console.log(sameID)
+
+    for (let i = 8; i < sameID.length; i++) {
+        if(sameID[i].hasAttribute('disable')) toSell = sameID[i]
+    }
+    console.log(toSell)
+    document.getElementById('buying').innerText = "Voulez vous vendre votre " + toSell.children[0].innerText + " de " + toSell.children[1].innerText;
+    oui.addEventListener('click', sell);
+    non.addEventListener('click', notSell);
+}
+
+let price;
+
+const priceForm = document.getElementById('price-form')
+const inputPrice = document.getElementById('input-price');
+
+function sell() {
+    removeListeners(false)
+
+    document.getElementById('confirm-div').style.display = 'none';
+    document.getElementById('input-div').style.display = 'block';
+
+
+    priceForm.addEventListener('submit', event => {
+        event.preventDefault(); //remember
+        if (inputPrice.value.trim()) {
+            sellOccazCB(toSell.classList[1], level[toSell.classList[0]], inputPrice.value) // id machine / level / prix de vente
+            console.log(toSell.classList[1], level[toSell.classList[0]], inputPrice.value)
+            inputPrice.value = '';
+
+            document.getElementById('confirm-div').style.display = 'block';
+            document.getElementById('input-div').style.display = 'none';
+
+            Modal.closeShopModal(); // close shop modal
+            removeListeners(true);
+            modal.close(); // close confirm modal
+        }
+    }, {
+        once: true
+    });
+
+
+}
+
+function notSell() {
+    itemDiv.setAttribute('disable', '')
+    Modal.closeShopModal(); // close shop modal
+    removeListeners(true);
+    modal.close(); // close confirm modal
+}
+
+
+
 
 export default {
     buyItem,

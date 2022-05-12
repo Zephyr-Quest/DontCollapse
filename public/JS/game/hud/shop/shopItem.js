@@ -16,7 +16,7 @@ function initListener(id) {
     // if the occasion is not selected
     for (let i = id[0]; i <= id[1]; i++) {
         if (!leftPage[i].hasAttribute("disable")) {
-        leftPage[i].addEventListener('mouseenter', toggleDescri);
+            leftPage[i].addEventListener('mouseenter', toggleDescri);
             leftPage[i].addEventListener('mouseleave', toggleDescri);
         }
         if (!rightPage[i].hasAttribute("disable")) {
@@ -80,7 +80,7 @@ function buyMachine(e) {
 }
 
 function buyOccaz(e) {
-    if (e.target.parentElement.classList[0] !== "own")
+    if (e.target.parentElement.classList[1] !== "own")
         Buy.buyItem(e.target.parentElement, 3);
     else
         Buy.buyItem(e.target.parentElement, 4);
@@ -160,7 +160,72 @@ function changeItem(classOfRight) {
     initListener(toDisplay);
 }
 
+function refreshContract(infos) {
+    for (let i = 0; i < infos.length; i++) {
+        document.getElementsByClassName(infos[i])[i].setAttribute('disable', '');
+    }
+}
+
+function refreshMachine(infos) {
+    const lvl = {
+        1: "manix",
+        2: "droit",
+        3: "braz",
+        4: "tesla"
+    }
+
+    for (let i = 0; i < infos.length; i++) {
+        console.log(infos[i])
+        if (infos[i].secondHand === false) {
+            switch (infos[i].level) {
+                case 4:
+                    document.getElementsByClassName('tesla')[i+1].setAttribute('disable', '');
+                case 3:
+                    document.getElementsByClassName('braz')[i+1].setAttribute('disable', '');
+                case 2:
+                    document.getElementsByClassName('droit')[i+1].setAttribute('disable', '');
+                case 1:
+                    document.getElementsByClassName('manix')[i+1].setAttribute('disable', '');
+                default:
+                    break;
+            }
+        }
+
+        // if (infos[i].secondHand === false) {
+        //     document.getElementsByClassName(lvl[infos[i].level])[i].setAttribute('disable', '');
+        // }
+    }
+}
+
+function refreshOccaz(infos) {
+    let item = {
+        0: "Poste à souder",
+        1: "Assembleur de précision",
+        2: "Assembleur mécanique",
+        3: "Assembleur général"
+    }
+    let occaz = document.getElementsByClassName("occaz");
+    for (let i = 0; i < occaz.length - 1; i++) {
+        let elem = occaz[i + 1];
+        if (infos[i]) {
+            elem.removeAttribute('disable');
+            elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level + "<br>à vendre";
+            elem.children[1].innerText = "Vendue par " + infos[i].player + ", " + infos[i].price + "€";
+        } else {
+            elem.setAttribute('disable', '');
+            elem.children[0].innerHTML = "Rien n'est à vendre<br>pour le moment";
+            elem.children[1].innerText = " ";
+        }
+    }
+    // username, id, level, price
+
+}
+
 export default {
     changeItem,
-    closeAllListener
+    closeAllListener,
+
+    refreshContract,
+    refreshMachine,
+    refreshOccaz
 }
