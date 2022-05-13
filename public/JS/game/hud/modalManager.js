@@ -96,6 +96,10 @@ export default class modal {
         this.modal.showModal();
     }
 
+    isOpen(){
+        if(this.modal.hasAttribute("open")) return true;
+        else return false;
+    }
     /**
      * init the listener to open the modal
      */

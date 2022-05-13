@@ -15,6 +15,7 @@ const {
 } = require("express-validator");
 const { all } = require('express/lib/application');
 const { connected } = require('process');
+const { info } = require('console');
 
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
@@ -53,7 +54,7 @@ io.use(sharedsession(session, {
 
 /* -------------------------------- Variables ------------------------------- */
 
-let allRooms = [];
+let allRooms = {};
 let disconnectingUsers = [];
 
 /* -------------------------------- Functions ------------------------------- */
@@ -70,6 +71,25 @@ function getMaxKey(obj) {
         if (key > result) result = key;
     });
     return result;
+}
+
+const updateMonth = game => {
+    const players = io.sockets.adapter.rooms.get(game.idRoom);
+    for (const p of players) {
+        const pSocket = io.sockets.sockets.get(p);
+        const pUsername = pSocket.handshake.session.username;
+        const infos = {chrono: game.chrono.getTime(), moula: game.players[game.playersName.indexOf(pUsername)].money, barres: game.players[game.playersName.indexOf(pUsername)].sd}
+        pSocket.emit("infoActu", infos);
+    }
+};
+
+const endGame = game => {
+    const players = io.sockets.adapter.rooms.get(game.idRoom);
+    for (const p of players) {
+        const pSocket = io.sockets.sockets.get(p);
+        game.finishGame();
+        pSocket.emit("finishGame");
+    }
 }
 
 /* ----------------------------------- APP ---------------------------------- */
@@ -137,7 +157,7 @@ app.delete("/removeuser/:player", (req, res) => {
 });
 
 app.post("/host",
-    body("pseudo").trim().isLength({ min: 3 }).escape(),
+    body("pseudo").trim().isLength({ min: 3, max: 12 }).escape(),
     (req, res) => {
         const userName = req.body.pseudo;
 
@@ -164,13 +184,17 @@ app.post("/host",
         allRooms[idRoom] = new DCGame(idRoom, userName);
         allRooms[idRoom].addPlayer(userName);
 
+        allRooms[idRoom].updateMonth = updateMonth;
+        allRooms[idRoom].endGame = endGame;
+
+
         res.send({
             state: 'host'
         });
     })
 
 app.post("/join",
-    body("pseudo").trim().isLength({ min: 3 }).escape(),
+    body("pseudo").trim().isLength({ min: 3, max: 12 }).escape(),
     body("idRoom"),
     (req, res) => {
 
@@ -186,7 +210,7 @@ app.post("/join",
             return;
         }
 
-        if (allRooms.includes(userName)) {
+        if (allRooms[idRoom].playersName.includes(userName)) {
             res.status(400).json({
                 errors: "Pseudo already exists in this room",
             });
@@ -217,9 +241,6 @@ io.on('connection', socket => {
     let username = socket.handshake.session.username;
     let idRoom = socket.handshake.session.idRoom;
 
-    // Socket to display room on lobby
-    io.emit("display-rooms", allRooms);
-
     // User connected in a room
     if (username !== undefined && allRooms[idRoom]) {
         console.log(username, " connected in room ", idRoom);
@@ -238,7 +259,7 @@ io.on('connection', socket => {
             if (allRooms[idRoom].playersName.indexOf(username) === 0) {
                 // Delete the room
                 console.log("delete room", idRoom);
-                allRooms.splice(idRoom, 1);
+                delete allRooms[idRoom];
                 io.to(idRoom).emit("disconnection");
             }
             // Host remove an user from the room
@@ -249,7 +270,6 @@ io.on('connection', socket => {
                 socket.emit("disconnection");
             }
         }
-
         // Disconnect user 
         socket.leave(idRoom);
         console.log("disconnect", username, "from room", idRoom);
@@ -268,19 +288,24 @@ io.on('connection', socket => {
     socket.on('startGame', () => {
         const idRoom = socket.handshake.session.idRoom;
         if (allRooms[idRoom] && allRooms[idRoom].playersName.length >= 2 && allRooms[idRoom].playersName.length <= 4) {
-            allRooms[idRoom].chrono.incrementChrono();
+            allRooms[idRoom].startChrono();
             allRooms[idRoom].gameStart = true;
             io.emit("display-rooms", allRooms);
             io.to(idRoom).emit("startAuthorized");
+            updateMonth(allRooms[idRoom]);
         }
         else console.log("start unauthorized");
     });
+
+    // Socket to display room on lobby
+    io.emit("display-rooms", allRooms);
 
     // Socket to change engine
     socket.on('buyEngine', (idEngine, levelEngine) => {
         console.log("buy engine");
         let confirmation = allRooms[idRoom].searchPlayer(username).machineUpgrade(idEngine, levelEngine);
-        socket.emit("confirmPurchase", confirmation, true);
+        socket.emit("confirmPurchase", confirmation, "engine");
+        updateMonth(allRooms[idRoom]);
     });
 
     // Socket to sell second-hand engine
@@ -293,32 +318,30 @@ io.on('connection', socket => {
     socket.on('buySecondHandEngine', (seller) => {
         console.log("buy second hand");
         const confirmation = allRooms[idRoom].buySecondhandItem(username, seller);
-        socket.emit("confirmPurchase", confirmation, true);
+        socket.emit("confirmPurchase", confirmation, "occaz");
+        updateMonth(allRooms[idRoom]);
     })
 
     // Socket to change contract
     socket.on('buyContract', (idFournisseur, contractNumber) => {
         console.log("buy contract");
         const confirmation = allRooms[idRoom].searchPlayer(username).furnisherUpgrade(idFournisseur, contractNumber);
-        socket.emit("confirmPurchase", confirmation, true);
+        socket.emit("confirmPurchase", confirmation, "contract");
+        updateMonth(allRooms[idRoom]);
     });
 
     // Socket to change contract
     socket.on('buyEmployee', (category) => {
         console.log("buy employee", category);
         const confirmation = allRooms[idRoom].searchPlayer(username).recruteEmployee(category);
-        socket.emit("confirmPurchase", confirmation, false);
-    });
-
-    // Socket actu
-    socket.on('actu', () => {
-        allRooms[idRoom].updateMonth();
+        socket.emit("confirmPurchase", confirmation, "employee");
+        updateMonth(allRooms[idRoom]);
     });
 
     // Socket shop
     socket.on("openShop", () => {
         const infos = allRooms[idRoom].getInfo(username);
-        socket.emit("sendPlayerInfoShop", infos);
+        socket.emit("sendPlayerInfoShop", infos, username);
     });
 
     /* -------------------------------------------------------------------------- */

@@ -1,4 +1,5 @@
 import Chrono from "./game/hud/chrono.js";
+import HUD from "./game/hud/hud.js";
 import Item from './game/hud/shop/manageItem.js'
 
 let socket;
@@ -43,15 +44,21 @@ const events = {
         item3.innerHTML = "<p></p>";
         messages.appendChild(item3);
     },
-    "sendPlayerInfoShop": (infoPlayer) => {
-        getAllShop(infoPlayer);
+    "sendPlayerInfoShop": (infoPlayer, username) => {
+        getAllShop(infoPlayer, username);
     },
     "confirmPurchase": (isBought, machineOrContractOrOccaz) => {
         let confirm = {
             bought: isBought,
-            type: machineOrContractOrOccaz
+            type: machineOrContractOrOccaz //! useless
         };
         Item.confirmation(confirm);
+    },
+    "infoActu": (infoPlayer) => {
+        HUD.refreshHud(infoPlayer);
+    },
+    "finishGame": () => {
+        console.log("finish game front");
     }
 };
 
@@ -65,7 +72,6 @@ const username = document.getElementById("username").value;
 let deleteEvent;
 let startGame;
 let messages;
-let confirmation;
 
 /* -------------------------------- Function -------------------------------- */
 function updatePlayersOnScreen() {
@@ -118,8 +124,8 @@ function beginingGame() {
     Chrono.startChronoFrom(10, 0);
 }
 
-function getAllShop(infoPlayer) {
-    console.log(infoPlayer);
+function getAllShop(infoPlayer, username) {
+    HUD.refreshShop(infoPlayer, username);
 }
 
 function getChrono() {
@@ -128,13 +134,6 @@ function getChrono() {
 
 function getMoney() {
 
-}
-
-function purchaseConfirmation( /* isBought, machineOrContractOrOccaz */ ) {
-    let tmp = confirmation
-    confirmation = undefined;
-    console.log(tmp)
-    return tmp;
 }
 
 /* --------------------------------- Return --------------------------------- */
@@ -169,5 +168,4 @@ export default {
     getAllShop,
     getChrono,
     getMoney,
-    purchaseConfirmation
 }

@@ -4,20 +4,23 @@ import Parameter from './parameter.js'
 import Modal from './modalManager.js'
 
 /* ------------------------------ progress bar ------------------------------ */
-let id = 5;
-let stat = true;
+// let id = 5;
+// let stat = true;
 
-const update = () => {
-    id += stat ? 5 : -5;
-    let id2 = stat ? 5 : -5;
-    if (id > 100 - Math.abs(id2) || id < 0 + Math.abs(id2)) stat = !stat;
+// const update = () => {
+//     id += stat ? 5 : -5;
+//     let id2 = stat ? 5 : -5;
+//     if (id > 100 - Math.abs(id2) || id < 0 + Math.abs(id2)) stat = !stat;
 
-    ProgressBar.updateSocial(id);
-    // ProgressBar.updateEconomic(id);
-    // ProgressBar.updateEcologic(id);
-    setTimeout(update, 400);
-}
-update();
+//     ProgressBar.updateSocial(id);
+//     // ProgressBar.updateEconomic(id);
+//     // ProgressBar.updateEcologic(id);
+//     setTimeout(update, 400);
+// }
+// update();
+import ShopItem from './shop/shopItem.js'
+import Chrono from './chrono.js'
+import Money from './money.js'
 
 /* --------------------------------- Modals --------------------------------- */
 
@@ -91,7 +94,28 @@ function setSellOccazCallback(callback) {
     Item.setSellOccazCB(callback);
 }
 
+function closeAllModals(){
+    shop.closeFunction();
+    chat.closeFunction();
+}
 
+function refreshShop(infos, username){
+    console.log(infos.furnishers)
+    ShopItem.refreshContract(infos.furnishers);
+    ShopItem.refreshMachine(infos.machines);
+    ShopItem.refreshOccaz(infos.shop, username);
+
+}
+
+function refreshHud(infos){
+    console.log(infos)
+    ProgressBar.updateEcologic(Math.round(infos.barres.ecologic));
+    ProgressBar.updateEconomic(Math.round(infos.barres.economic));
+    ProgressBar.updateSocial(Math.round(infos.barres.social));
+
+    Chrono.startChronoFrom(infos.chrono.min,infos.chrono.sec);
+    Money.setMoney(infos.moula);
+}
 // function setChatCallback(callback) {
 
 // }
@@ -99,11 +123,6 @@ function setSellOccazCallback(callback) {
 // function addMessage() {
 
 // }
-
-function closeAllModals() {
-    shop.closeFunction();
-    chat.closeFunction();
-}
 
 export default {
     initShopButton,
@@ -115,6 +134,8 @@ export default {
     openShopModal,
     closeShopModal,
     closeAllModals,
+    refreshShop,
+    refreshHud,
 
     updateEcologicBar,
     updateEconomicBar,

@@ -234,13 +234,13 @@
                         </div>
 
                         <!-- -------------------------------- Neuf --------------------------------- -->
-                        <div disable class="manix 0 clickable" style="display: none;">
+                        <div class="manix 0 clickable" style="display: none;">
                             <p>Poste à souder</p>
                             <p>Niveau 1</p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
                         </div>
-                        <div disable class="manix 1 clickable" style="display: none;">
+                        <div class="manix 1 clickable" style="display: none;">
                             <p>Assembleur de précision</p>
                             <p>Niveau 1</p>
                             <p style="display: none;">Rapide description</p>
@@ -288,12 +288,12 @@
 
                         <!-- ------------------------------ Occasions ------------------------------ -->
 
-                        <div disable class="own clickable" style="display: none;">
-                            <p> Rien n'est à vendre<br>pour le moment</p>
+                        <div disable class="occaz j1 clickable" style="display: none;">
+                            <p>Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Supprimer</button>
+                            <button class="buy-button" style="display: none;">Acheter</button>
                         </div>
-                        <div disable class="j1 clickable" style="display: none;">
+                        <div disable class="occaz j2 clickable" style="display: none;">
                             <p>Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
@@ -452,12 +452,12 @@
 
                         <!-- ------------------------------ Occasions ------------------------------ -->
 
-                        <div disable class="j2 clickable" style="display: none;">
+                        <div disable class="occaz j1 clickable" style="display: none;">
                             <p>Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
                         </div>
-                        <div disable class="j3 void clickable" style="display: none;">
+                        <div disable class="occaz j4 void clickable" style="display: none;">
                             <p>Rien n'est à vendre<br>pour le moment</p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display: none;">Acheter</button>
@@ -467,10 +467,21 @@
                 </div>
             </div>
             <dialog id="confirm-buy">
-                <h2>Devis</h2>
-                <p id="buying"></p>
-                <button class="oui-button">Oui</button>
-                <button class="non-button">Non</button>
+                <div class="modal-content">
+                    <h2>Devis</h2>
+                    <div id="confirm-div" style="display: block;">
+                        <p id="buying"></p>
+                        <button class="oui-button">Oui</button>
+                        <button class="non-button">Non</button>
+                    </div>
+                    <div id="input-div" style="display: none;">
+                        <p>Pour quel prix ?</p>
+                        <form id="price-form" action="">
+                            <input type="number" id="input-price" autocomplete="off"
+                                placeholder="Prix de vente..." /><button class="button">Send</button>
+                        </form>
+                    </div>
+                </div>
             </dialog>
         </dialog>
     </div>
@@ -529,7 +540,7 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script type="module" src="./JS/game/app.js"></script>
     <script src="JS/game.js" type="module"></script>
-
+    <script src="JS/http.js"></script>
 </body>
 
 </html>

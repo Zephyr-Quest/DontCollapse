@@ -39,14 +39,12 @@ function initListener(id) {
             leftBtn[i].addEventListener('click', buyMachine);
             rightBtn[i].addEventListener('click', buyMachine);
         }
-    }
-    else if (id[0] < 26) {
+    } else if (id[0] < 26) {
         for (let i = id[0]; i <= id[1]; i++) {
             leftBtn[i].addEventListener('click', buyOccaz);
             rightBtn[i].addEventListener('click', buyOccaz);
         }
-    }
-    else console.warn('ERROR');
+    } else console.warn('ERROR');
 }
 
 
@@ -72,17 +70,17 @@ function toggleDescri(e) {
 function buyContract(e) {
     Buy.buyItem(e.target.parentElement, 0);
 }
+
 function buyPerso(e) {
     Buy.buyItem(e.target.parentElement, 1);
 }
+
 function buyMachine(e) {
     Buy.buyItem(e.target.parentElement, 2);
 }
+
 function buyOccaz(e) {
-    if (e.target.parentElement.classList[0] !== "own")
         Buy.buyItem(e.target.parentElement, 3);
-    else
-        Buy.buyItem(e.target.parentElement, 4);
 }
 
 
@@ -90,6 +88,13 @@ function buyOccaz(e) {
  * remove all listeners
  */
 function closeAllListener() {
+    for (let i = 0; i < 26; i++) {
+        leftPage[i].removeEventListener('mouseenter', toggleDescri);
+        leftPage[i].removeEventListener('mouseleave', toggleDescri);
+
+        rightPage[i].removeEventListener('mouseenter', toggleDescri);
+        rightPage[i].removeEventListener('mouseleave', toggleDescri);
+    }
     for (let i = 0; i < 8; i++) {
         leftBtn[i].addEventListener('click', buyContract);
         rightBtn[i].addEventListener('click', buyContract);
@@ -152,7 +157,76 @@ function changeItem(classOfRight) {
     initListener(toDisplay);
 }
 
+function refreshContract(infos) {
+    for (let i = 0; i < infos.length; i++) {
+        document.getElementsByClassName(infos[i])[i].setAttribute('disable', '');
+    }
+}
+
+function refreshMachine(infos) {
+    const lvl = {
+        1: "manix",
+        2: "droit",
+        3: "braz",
+        4: "tesla"
+    }
+
+    for (let i = 0; i < infos.length; i++) {
+        //console.log(infos[i])
+        switch (infos[i].level) {
+            case 4:
+                document.getElementsByClassName('tesla')[i + 1].setAttribute('disable', '');
+            case 3:
+                document.getElementsByClassName('braz')[i + 1].setAttribute('disable', '');
+            case 2:
+                document.getElementsByClassName('droit')[i + 1].setAttribute('disable', '');
+            case 1:
+                document.getElementsByClassName('manix')[i + 1].setAttribute('disable', '');
+            default:
+                break;
+
+        }
+
+        // if (infos[i].secondHand === false) {
+        //     document.getElementsByClassName(lvl[infos[i].level])[i].setAttribute('disable', '');
+        // }
+    }
+}
+
+function refreshOccaz(infos, username) {
+    let item = {
+        0: "Poste à souder",
+        1: "Assembleur de précision",
+        2: "Assembleur mécanique",
+        3: "Assembleur général"
+    }
+    console.log(infos, username)
+    let occaz = document.getElementsByClassName("occaz");
+    for (let i = 0; i < occaz.length - 1; i++) {
+        let elem = occaz[i + 1];
+        if (infos[i]) {
+            if (infos[i].player === username) {
+                elem.children[0].innerHTML = "Vous vendez un " + item[infos[i].machine] + "<br>de niveau " + infos[i].level+",<br>"+ infos[i].price + "€";
+            } else {
+                elem.removeAttribute('disable');
+                elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level + "<br>à vendre";
+                elem.children[1].innerHTML = "Vendue par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
+            }
+        } else {
+            elem.setAttribute('disable', '');
+            elem.children[0].innerHTML = "Rien n'est à vendre<br>pour le moment";
+            elem.children[1].innerText = " ";
+        }
+    }
+    // username, id, level, price
+
+}
+
 export default {
     changeItem,
-    closeAllListener
+    closeAllListener,
+
+    refreshContract,
+    refreshMachine,
+    refreshOccaz
 }
