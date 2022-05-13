@@ -134,12 +134,20 @@ module.exports = class Game {
         return true;
     }
 
-    buySecondhandItem(buyer, seller) {
+    /**
+     * Purchase of a second-hand machine
+     * @param {String} buyerName 
+     * @param {String} sellerName 
+     * @returns if the transaction was made
+     */
+    buySecondhandItem(buyerName, sellerName) {
         // console.log("--- Player ", buyer, " wants to buy", seller);
+        let buyer = this.searchPlayer(buyerName);
+        let seller = this.searchPlayer(sellerName);
         let machine = this.checkPlayerItem(seller);
-        if (machine != false && this.searchPlayer(buyer) != false) {
-            this.searchPlayer(buyer).machineUpgradeSecondhand(parseInt(machine.machine), machine.level, machine.price);
-            this.searchPlayer(seller).money += machine.price;
+        if (machine && buyer && seller) {
+            buyer.machineUpgradeSecondhand(machine.machine, machine.level, machine.price);
+            seller.money += machine.price;
             this.shop.forEach((element, i) => {
                 if (element == machine) delete this.shop[i];
             });
