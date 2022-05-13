@@ -80,10 +80,7 @@ function buyMachine(e) {
 }
 
 function buyOccaz(e) {
-    //if (e.target.parentElement.classList[1] !== "own")
         Buy.buyItem(e.target.parentElement, 3);
-   // else
-   //     Buy.buyItem(e.target.parentElement, 4);
 }
 
 
@@ -176,19 +173,18 @@ function refreshMachine(infos) {
 
     for (let i = 0; i < infos.length; i++) {
         //console.log(infos[i])
-        if (infos[i].secondHand === false) {
-            switch (infos[i].level) {
-                case 4:
-                    document.getElementsByClassName('tesla')[i+1].setAttribute('disable', '');
-                case 3:
-                    document.getElementsByClassName('braz')[i+1].setAttribute('disable', '');
-                case 2:
-                    document.getElementsByClassName('droit')[i+1].setAttribute('disable', '');
-                case 1:
-                    document.getElementsByClassName('manix')[i+1].setAttribute('disable', '');
-                default:
-                    break;
-            }
+        switch (infos[i].level) {
+            case 4:
+                document.getElementsByClassName('tesla')[i + 1].setAttribute('disable', '');
+            case 3:
+                document.getElementsByClassName('braz')[i + 1].setAttribute('disable', '');
+            case 2:
+                document.getElementsByClassName('droit')[i + 1].setAttribute('disable', '');
+            case 1:
+                document.getElementsByClassName('manix')[i + 1].setAttribute('disable', '');
+            default:
+                break;
+
         }
 
         // if (infos[i].secondHand === false) {
@@ -197,21 +193,25 @@ function refreshMachine(infos) {
     }
 }
 
-function refreshOccaz(infos) {
+function refreshOccaz(infos, username) {
     let item = {
         0: "Poste à souder",
         1: "Assembleur de précision",
         2: "Assembleur mécanique",
         3: "Assembleur général"
     }
-    console.log(infos)
+    console.log(infos, username)
     let occaz = document.getElementsByClassName("occaz");
     for (let i = 0; i < occaz.length - 1; i++) {
         let elem = occaz[i + 1];
         if (infos[i]) {
-            elem.removeAttribute('disable');
-            elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level + "<br>à vendre";
-            elem.children[1].innerHTML = "Vendue par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
+            if (infos[i].player === username) {
+                elem.children[0].innerHTML = "Vous vendez un " + item[infos[i].machine] + "<br>de niveau " + infos[i].level+",<br>"+ infos[i].price + "€";
+            } else {
+                elem.removeAttribute('disable');
+                elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level + "<br>à vendre";
+                elem.children[1].innerHTML = "Vendue par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
+            }
         } else {
             elem.setAttribute('disable', '');
             elem.children[0].innerHTML = "Rien n'est à vendre<br>pour le moment";

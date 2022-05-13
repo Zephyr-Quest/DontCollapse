@@ -44,14 +44,17 @@ const events = {
         item3.innerHTML = "<p></p>";
         messages.appendChild(item3);
     },
-    "sendPlayerInfoShop": (infoPlayer) => {
-        getAllShop(infoPlayer);
+    "sendPlayerInfoShop": (infoPlayer, username) => {
+        getAllShop(infoPlayer, username);
     },
     "confirmPurchase": (isBought, machineOrContractOrOccaz) => {
-        let confirm = { bought: isBought, type: machineOrContractOrOccaz };
+        let confirm = {
+            bought: isBought,
+            type: machineOrContractOrOccaz //! useless
+        };
         Item.confirmation(confirm);
     },
-    "infoActu" : (infoPlayer) => {
+    "infoActu": (infoPlayer) => {
         HUD.refreshHud(infoPlayer);
     }
 };
@@ -116,8 +119,8 @@ function beginingGame() {
     Chrono.startChronoFrom(10, 0);
 }
 
-function getAllShop(infoPlayer) {
-    HUD.refreshShop(infoPlayer);
+function getAllShop(infoPlayer, username) {
+    HUD.refreshShop(infoPlayer, username);
 }
 
 function getChrono() {

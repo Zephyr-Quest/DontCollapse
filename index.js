@@ -331,7 +331,7 @@ io.on('connection', socket => {
     // Socket shop
     socket.on("openShop", () => {
         const infos = allRooms[idRoom].getInfo(username);
-        socket.emit("sendPlayerInfoShop", infos);
+        socket.emit("sendPlayerInfoShop", infos, username);
     });
 
     /* -------------------------------------------------------------------------- */
