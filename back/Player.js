@@ -1,7 +1,7 @@
 const SustainableDevelopment = require("./SustainableDevelopment");
 const machines = require("./config.json");
-const Employee = require("./Employee")
-const employees = require("./employees.json")
+const Employee = require("./Employee");
+const employees = require("./employees.json");
 
 const furnishers = {
     0: {
@@ -52,6 +52,7 @@ module.exports = class Player {
         this.furnishers = [1, 1, 1, 1];
         this.expenses = 0;
         this.employees = {
+            fees : 0,
             number: 0,
             engineers: [],
             maintainers: [],
@@ -98,16 +99,16 @@ module.exports = class Player {
     }
 
     machineUpgrade(machine, level) {
-        console.log("--- Player ", this.name, " wants to buy a new machine", machine, level)
+        // console.log("--- Player ", this.name, " wants to buy a new machine", machine, level);
         if (machine && level && this.machines[machine].level < level && this.asEnoughMoney(machines[machine].price[level])) {
             this.money -= machines[machine].price[level];
             this.machines[machine].level = level;
             this.machines[machine].secondHand = false;
             this.sdUpdate();
-            console.log("--- Player ", this.name, " has bought machine", machine, level)
+            // console.log("--- Player ", this.name, " has bought machine", machine, level);
             return true;
         }
-        console.log("--- Player ", this.name, " doesn't have all the requirements for machine", machine, level)
+        console.log("--- Player ", this.name, " doesn't have all the requirements for machine", machine, level);
         return false;
     }
     machineUpgradeSecondhand(machine, level, price) {
@@ -123,6 +124,7 @@ module.exports = class Player {
 
     generateExpenses() {
         let expenses = 0;
+        expenses += this.employees.fees;
         this.furnishers.forEach((element, index) => {
             expenses += furnishers[index].price[element];
         });
@@ -131,7 +133,7 @@ module.exports = class Player {
     }
 
     furnisherUpgrade(furnisher, level) {
-        console.log("--- Player ", this.name, " wants to change Orange to SFR",furnisher, level);
+        // console.log("--- Player ", this.name, " wants to change Orange to SFR",furnisher, level);
         if (this.asEnoughMoney(furnishers[furnisher].price[level])) {
             this.furnishers[furnisher] = level;
             // this.sdUpdate();
@@ -142,12 +144,12 @@ module.exports = class Player {
     }
 
     recruteEmployee(categorie) {
-        console.log("--- Player ", this.name, " wants to recrute", categorie);
+        // console.log("--- Player ", this.name, " wants to recrute", categorie);
         let name = employees["name"][Math.floor(Math.random() * employees["name"].length)];
         let salary = employees["salaries"][categorie].min + employees["salaries"][categorie].max;
         this.employees[categorie].push(new Employee(name,salary));
         ++this.employees.number;
-        this.expenses += salary;
+        this.fees += salary;
 
         console.log(this.employees);
     }
