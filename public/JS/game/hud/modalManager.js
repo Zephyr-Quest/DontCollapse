@@ -16,8 +16,8 @@ export default class modal {
      */
     constructor(modal, open, close, isShop = false, isFactory = false) {
         this.modal = document.getElementById(modal);
-        this.open = document.getElementById(open);
-        this.close = document.getElementById(close);
+        if(open!==' ')this.open = document.getElementById(open);
+        if(close!==' ')this.close = document.getElementById(close);
         this.isShop = isShop;
         this.isFactory = isFactory;
         this.shopCB;
@@ -38,7 +38,7 @@ export default class modal {
         if (this.isFactory) OtherFactory.close();
 
 
-        this.close.removeEventListener('click', this.closeFunction.bind(this)); // cross
+        if(this.close)this.close.removeEventListener('click', this.closeFunction.bind(this)); // cross
         this.modal.removeEventListener('click', this.outsideClose.bind(this)); // outside
         window.removeEventListener('keydown', this.escapeClose.bind(this)); // Escape
     }
@@ -68,7 +68,7 @@ export default class modal {
      */
     initCloseListeners() {
         // When the user click on the cross, close the modal
-        this.close.addEventListener('click', this.closeFunction.bind(this));
+        if(this.close) this.close.addEventListener('click', this.closeFunction.bind(this));
 
         // When the user clicks anywhere outside of the modal, close it
         this.modal.addEventListener('click', this.outsideClose.bind(this));

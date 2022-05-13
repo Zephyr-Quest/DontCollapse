@@ -92,13 +92,12 @@ function refreshShop(infos, username){
 }
 
 function refreshHud(infos){
-    console.log(infos)
     ProgressBar.updateEcologic(Math.round(infos.barres.ecologic));
     ProgressBar.updateEconomic(Math.round(infos.barres.economic));
     ProgressBar.updateSocial(Math.round(infos.barres.social));
 
-    Chrono.startChronoFrom(infos.chrono.min,infos.chrono.sec);
     Money.setMoney(infos.moula);
+    if(infos.chrono) Chrono.startChronoFrom(infos.chrono.min,infos.chrono.sec);
 }
 // function setChatCallback(callback) {
 
@@ -107,6 +106,14 @@ function refreshHud(infos){
 // function addMessage() {
 
 // }
+
+function updateOnPurchase(data){
+    console.log(data)
+    if(data.confirmation === true){
+        Item.confirmation(data.confirmation,data.idEngine,data.levelEngine,data.type)
+        refreshHud(data)
+    }
+}
 
 
 export default {
@@ -120,6 +127,7 @@ export default {
     closeShopModal,
     refreshShop,
     refreshHud,
+    updateOnPurchase,
 
     updateEcologicBar,
     updateEconomicBar,

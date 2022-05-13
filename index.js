@@ -78,16 +78,21 @@ const updateMonth = game => {
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
         const pUsername = pSocket.handshake.session.username;
-        const infos = {chrono: game.chrono.getTime(), moula: game.players[game.playersName.indexOf(pUsername)].money, barres: game.players[game.playersName.indexOf(pUsername)].sd}
+        const infoPlayer = game.searchPlayer(pUsername).updateAll();
+        const infos = {
+            chrono: game.chrono.getTime(),
+            moula: infoPlayer.moula,
+            barres: infoPlayer.barres
+        };
         pSocket.emit("infoActu", infos);
     }
 };
 
 const endGame = game => {
     const players = io.sockets.adapter.rooms.get(game.idRoom);
+    game.finishGame();
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
-        game.finishGame();
         pSocket.emit("finishGame");
     }
 }
@@ -287,8 +292,12 @@ io.on('connection', socket => {
             allRooms[idRoom].startChrono();
             allRooms[idRoom].gameStart = true;
             io.emit("display-rooms", allRooms);
-            io.to(idRoom).emit("startAuthorized");
-            updateMonth(allRooms[idRoom]);
+            const data = {
+                chrono: allRooms[idRoom].chrono.getTime(),
+                moula: allRooms[idRoom].players[0].money,
+                barres: allRooms[idRoom].players[0].sd
+            };
+            io.to(idRoom).emit("startAuthorized", data);
         }
         else console.log("start unauthorized");
     });
@@ -299,9 +308,17 @@ io.on('connection', socket => {
     // Socket to change engine
     socket.on('buyEngine', (idEngine, levelEngine) => {
         console.log("buy engine");
-        let confirmation = allRooms[idRoom].searchPlayer(username).machineUpgrade(idEngine, levelEngine);
-        socket.emit("confirmPurchase", confirmation, "engine");
-        updateMonth(allRooms[idRoom]);
+        const dataPlayer = allRooms[idRoom].searchPlayer(username);
+        let confirmation = dataPlayer.machineUpgrade(idEngine, levelEngine);
+        const data = {
+            confirmation: confirmation,
+            type: "engine",
+            idEngine: idEngine,
+            levelEngine: levelEngine,
+            moula: dataPlayer.money,
+            barres: dataPlayer.sd
+        }
+        socket.emit("confirmPurchase", data);
     });
 
     // Socket to sell second-hand engine
@@ -311,27 +328,50 @@ io.on('connection', socket => {
     })
 
     // Socket to buy second-hand engine
-    socket.on('buySecondHandEngine', (seller) => {
+    socket.on('buySecondHandEngine', (seller, idEngine) => {
         console.log("buy second hand");
+        const dataPlayer = allRooms[idRoom].searchPlayer(username);
         const confirmation = allRooms[idRoom].buySecondhandItem(username, seller);
-        socket.emit("confirmPurchase", confirmation, "occaz");
-        updateMonth(allRooms[idRoom]);
+        const data = {
+            confirmation: confirmation,
+            type: "occaz",
+            seller: seller,
+            idEngine: idEngine,
+            moula: dataPlayer.money,
+            barres: dataPlayer.sd
+        };
+        socket.emit("confirmPurchase", data);
     })
 
     // Socket to change contract
     socket.on('buyContract', (idFournisseur, contractNumber) => {
         console.log("buy contract");
-        const confirmation = allRooms[idRoom].searchPlayer(username).furnisherUpgrade(idFournisseur, contractNumber);
-        socket.emit("confirmPurchase", confirmation, "contract");
-        updateMonth(allRooms[idRoom]);
+        const dataPlayer = allRooms[idRoom].searchPlayer(username);
+        const confirmation = dataPlayer.furnisherUpgrade(idFournisseur, contractNumber);
+        const data = {
+            confirmation: confirmation,
+            type: "contract",
+            idFournisseur: idFournisseur,
+            contractNumber: contractNumber,
+            moula: dataPlayer.money,
+            barres: dataPlayer.sd
+        }
+        socket.emit("confirmPurchase", data);
     });
 
     // Socket to change contract
     socket.on('buyEmployee', (category) => {
         console.log("buy employee", category);
+        const dataPlayer = allRooms[idRoom].searchPlayer(username);
         const confirmation = allRooms[idRoom].searchPlayer(username).recruteEmployee(category);
-        socket.emit("confirmPurchase", confirmation, "employee");
-        updateMonth(allRooms[idRoom]);
+        const data = {
+            confirmation: confirmation,
+            type: "employee",
+            category: category,
+            moula: dataPlayer.money,
+            barres: dataPlayer.sd
+        }
+        socket.emit("confirmPurchase", data);
     });
 
     // Socket shop

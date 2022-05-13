@@ -165,6 +165,7 @@ module.exports = class Player {
         // Expenses
         this.money -= this.expenses;
         this.generateExpenses();
+        return {moula : this.money, barres : this.sd };
     }
 };
 

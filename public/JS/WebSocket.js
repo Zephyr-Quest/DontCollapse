@@ -13,9 +13,9 @@ const events = {
         console.log("disconnecting");
         window.location.href = "/lobby";
     },
-    "startAuthorized": () => {
+    "startAuthorized": (data) => {
         console.log("start authorized");
-        beginingGame();
+        beginingGame(data);
     },
     'new-message': (user, msg) => {
         const index = connectedPlayers.indexOf(user);
@@ -47,12 +47,8 @@ const events = {
     "sendPlayerInfoShop": (infoPlayer, username) => {
         getAllShop(infoPlayer, username);
     },
-    "confirmPurchase": (isBought, machineOrContractOrOccaz) => {
-        let confirm = {
-            bought: isBought,
-            type: machineOrContractOrOccaz //! useless
-        };
-        Item.confirmation(confirm);
+    "confirmPurchase": (data) => {
+        HUD.updateOnPurchase(data);
     },
     "infoActu": (infoPlayer) => {
         HUD.refreshHud(infoPlayer);
@@ -114,12 +110,12 @@ function updatePlayersOnScreen() {
     });
 }
 
-function beginingGame() {
+function beginingGame(data) {
     const eltsToDelete = document.getElementById("room");
     eltsToDelete.remove();
     const eltsToShow = document.getElementById("game");
     eltsToShow.style.display = "block";
-    Chrono.startChronoFrom(10, 0);
+    HUD.refreshHud(data)
 }
 
 function getAllShop(infoPlayer, username) {

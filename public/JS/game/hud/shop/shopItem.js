@@ -80,7 +80,7 @@ function buyMachine(e) {
 }
 
 function buyOccaz(e) {
-        Buy.buyItem(e.target.parentElement, 3);
+    Buy.buyItem(e.target.parentElement, 3);
 }
 
 
@@ -158,21 +158,25 @@ function changeItem(classOfRight) {
 }
 
 function refreshContract(infos) {
+    let supp = {
+        0: "elec",
+        1: "eau",
+        2: "cartons",
+        3: "etain"
+    }
     for (let i = 0; i < infos.length; i++) {
+
+        let supplier = document.getElementsByClassName(supp[i])
+
+        for (let i = 0; i < supplier.length-1; i++) {
+            if (supplier[i+1].hasAttribute('disable')) supplier[i+1].removeAttribute('disable');
+        }
         document.getElementsByClassName(infos[i])[i].setAttribute('disable', '');
     }
 }
 
 function refreshMachine(infos) {
-    const lvl = {
-        1: "manix",
-        2: "droit",
-        3: "braz",
-        4: "tesla"
-    }
-
     for (let i = 0; i < infos.length; i++) {
-        //console.log(infos[i])
         switch (infos[i].level) {
             case 4:
                 document.getElementsByClassName('tesla')[i + 1].setAttribute('disable', '');
@@ -186,10 +190,6 @@ function refreshMachine(infos) {
                 break;
 
         }
-
-        // if (infos[i].secondHand === false) {
-        //     document.getElementsByClassName(lvl[infos[i].level])[i].setAttribute('disable', '');
-        // }
     }
 }
 
@@ -200,13 +200,12 @@ function refreshOccaz(infos, username) {
         2: "Assembleur mécanique",
         3: "Assembleur général"
     }
-    console.log(infos, username)
     let occaz = document.getElementsByClassName("occaz");
     for (let i = 0; i < occaz.length - 1; i++) {
         let elem = occaz[i + 1];
         if (infos[i]) {
             if (infos[i].player === username) {
-                elem.children[0].innerHTML = "Vous vendez un " + item[infos[i].machine] + "<br>de niveau " + infos[i].level+",<br>"+ infos[i].price + "€";
+                elem.children[0].innerHTML = "Vous vendez un " + item[infos[i].machine] + "<br>de niveau " + infos[i].level + ",<br>" + infos[i].price + "€";
             } else {
                 elem.removeAttribute('disable');
                 elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level + "<br>à vendre";
@@ -218,7 +217,6 @@ function refreshOccaz(infos, username) {
             elem.children[1].innerText = " ";
         }
     }
-    // username, id, level, price
 
 }
 

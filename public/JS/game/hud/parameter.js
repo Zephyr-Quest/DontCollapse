@@ -1,7 +1,9 @@
-const modal = document.getElementById('confirm-disconnect');
+import ModalManager from './modalManager.js'
+
+const modal = new ModalManager('confirm-disconnect',' ',' ');
 const oui = document.getElementsByClassName('oui-button')[1];
 const non = document.getElementsByClassName('non-button')[1];
-
+console.log(oui,non);
 const openParameter = document.querySelector('.fa-gears');
 const paramContent = document.querySelectorAll('.param-content');
 const divParam = document.querySelector('#parameters')
@@ -115,17 +117,17 @@ function initListener() {
  */
 function ilveutsedeco() {
     console.log('deconnexion');
-    modal.showModal();
+    modal.openModal();
 
     oui.addEventListener('click', () => {
-        modal.close();
+        modal.closeFunction();
         window.location.href = "/lobby";
     }, {
         once: true
     });
 
     non.addEventListener('click', () => {
-        modal.close();
+        modal.closeFunction();
     }, {
         once: true
     });
