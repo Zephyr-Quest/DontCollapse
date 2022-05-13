@@ -21,13 +21,13 @@ function updateSocial(amount) {
     }
 
     let gradFondu = gradSocial + 1
-    bar.style.borderColor=color;
+    bar.style.borderColor = color;
     bar.style.background = "linear-gradient(90deg, rgba(0, 0, 0, 0.356) 0%," + color + " " + gradSocial + "%, rgba(0,0,0,.356) " + gradFondu + "%, rgba(0,0,0,.326) 100%)";
     let pro = document.getElementsByClassName("progress")[0]
     pro.style.marginLeft = "calc(" + gradSocial + "% - 15px)"
-    pro.style.backgroundColor=color;
-    let txt=document.getElementsByClassName("textPro")[0]
-    txt.innerHTML="Social ("+gradSocial+"%)"
+    pro.style.backgroundColor = color;
+    let txt = document.getElementsByClassName("textPro")[0]
+    txt.innerHTML = "Social (" + gradSocial + "%)"
 }
 
 /**
@@ -46,9 +46,14 @@ function updateEconomic(amount) {
         color = 'rgba(255,0,0,1)'
     }
 
-    let gradFondu = gradEcono + 6
-    bar.style.background = "linear-gradient(90deg," + color + " " + gradEcono + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
-    bar.innerText = "Economic     " + gradEcono + "%";
+    let gradFondu = gradEcono + 1
+    bar.style.borderColor = color;
+    bar.style.background = "linear-gradient(90deg, rgba(0, 0, 0, 0.356) 0%," + color + " " + gradEcono + "%, rgba(0,0,0,.356) " + gradFondu + "%, rgba(0,0,0,.326) 100%)";
+    let pro = document.getElementsByClassName("progress")[1]
+    pro.style.marginLeft = "calc(" + gradEcono + "% - 15px)"
+    pro.style.backgroundColor = color;
+    let txt = document.getElementsByClassName("textPro")[1]
+    txt.innerHTML = "Economique (" + gradEcono + "%)"
 }
 
 /**
@@ -67,9 +72,14 @@ function updateEcologic(amount) {
         color = 'rgba(255,0,0,1)'
     }
 
-    let gradFondu = gradEcolo + 6
-    bar.style.background = "linear-gradient(90deg," + color + " " + gradEcolo + "%, rgba(0,0,0,1) " + gradFondu + "%, rgba(0,0,0,1) 100%)";
-    bar.innerText = "Ecologic     " + gradEcolo + "%";
+    let gradFondu = gradEcolo + 1
+    bar.style.borderColor = color;
+    bar.style.background = "linear-gradient(90deg, rgba(0, 0, 0, 0.356) 0%," + color + " " + gradEcolo + "%, rgba(0,0,0,.356) " + gradFondu + "%, rgba(0,0,0,.326) 100%)";
+    let pro = document.getElementsByClassName("progress")[2]
+    pro.style.marginLeft = "calc(" + gradEcolo + "% - 15px)"
+    pro.style.backgroundColor = color;
+    let txt = document.getElementsByClassName("textPro")[2]
+    txt.innerHTML = "Ecologique (" + gradEcolo + "%)"
 }
 
 export default {

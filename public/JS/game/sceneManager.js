@@ -243,6 +243,29 @@ export class Scene {
                 this.scene.add(this.selectionables);
         }
 
+        updateModel(itemToChange) {
+                let name;
+                console.log(itemToChange)
+                switch (itemToChange.obj) {
+                        case "0":
+                                name = "Mac_Poste a souder"
+                                break;
+                        case "1":
+                                name = "Mac_Assembleur de Precision"
+                                break;
+                        case "2":
+                                name = "Mac_Assembleur Mecanique"
+                                break;
+                        case "3":
+                                name = "Mac_Assembleur General"
+                                break;
+                }
+                console.log("Machine à changer :" + name)
+                this.selectionables.children.forEach(el=>{
+                        if (el.name==name) this.selectionables.remove(el)
+                })
+        }
+
         createTitles(ctx, sc, pos, name, title) {
                 this.makeTextSprite(ctx, sc, pos, name, title, {
                         "fontsize": 25,
@@ -321,12 +344,13 @@ export class Scene {
                                 this.closeMenu()
                                 this.animatedText = false
                                 this.staticText = false
+
                         } else if (tempname == "Boutique" || tempname == "Chat" || tempname == "Sortie") {
                                 this.closeMenu()
                         }
                 } else {
                         if (this.staticText) {
-                                HUD.closeAllModals()
+                                // HUD.closeAllModals()
                                 this.closeMenu()
                                 this.animatedText = false
                                 this.staticText = false

@@ -1,6 +1,7 @@
 import Modal from '../hud.js'
 import WebSocket from '../../../WebSocket.js';
-
+import {Scene} from '../../sceneManager.js'
+import { sc } from '../../app.js';
 const leftPage = document.querySelectorAll('#left-page div');
 const rightPage = document.querySelectorAll('#right-page div');
 
@@ -155,6 +156,20 @@ function setSellOccazCB(cb) {
 //* Possiblement à retirer/modifier avec l'actualistation du back
 function confirmation(obj) {
     if (obj.bought === true) {
+        let tempBought = {
+            obj:itemId,
+            level:itemLevel
+        }
+        // console.log(sc)
+        sc.updateModel(tempBought)
+        // Scene.updateModel(tempBought)
+
+        // Objets : Niveau 1, 2, 3 ou 4 selon l'évolution
+        // Type : 0 pour Poste à souder
+        // 1 : Assembleur de précision
+        // 2 : Assembleur mécanique
+        // 3 : Assembleur général
+
         let nb;
         console.log("Item  acheté")
         if (obj.type !== "employee") {

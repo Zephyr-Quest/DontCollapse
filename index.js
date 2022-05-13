@@ -13,9 +13,15 @@ const {
     body,
     validationResult
 } = require("express-validator");
-const { all } = require('express/lib/application');
-const { connected } = require('process');
-const { info } = require('console');
+const {
+    all
+} = require('express/lib/application');
+const {
+    connected
+} = require('process');
+const {
+    info
+} = require('console');
 
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
@@ -78,7 +84,12 @@ const updateMonth = game => {
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
         const pUsername = pSocket.handshake.session.username;
-        const infos = {chrono: game.chrono.getTime(), moula: game.players[game.playersName.indexOf(pUsername)].money, barres: game.players[game.playersName.indexOf(pUsername)].sd}
+        console.log(game.players[game.playersName.indexOf(pUsername)].money)
+        const infos = {
+            chrono: game.chrono.getTime(),
+            moula: game.players[game.playersName.indexOf(pUsername)].money,
+            barres: game.players[game.playersName.indexOf(pUsername)].sd
+        }
         pSocket.emit("infoActu", infos);
     }
 };
@@ -157,7 +168,10 @@ app.delete("/removeuser/:player", (req, res) => {
 });
 
 app.post("/host",
-    body("pseudo").trim().isLength({ min: 3, max: 12 }).escape(),
+    body("pseudo").trim().isLength({
+        min: 3,
+        max: 12
+    }).escape(),
     (req, res) => {
         const userName = req.body.pseudo;
 
@@ -194,7 +208,10 @@ app.post("/host",
     })
 
 app.post("/join",
-    body("pseudo").trim().isLength({ min: 3, max: 12 }).escape(),
+    body("pseudo").trim().isLength({
+        min: 3,
+        max: 12
+    }).escape(),
     body("idRoom"),
     (req, res) => {
 
@@ -293,8 +310,7 @@ io.on('connection', socket => {
             io.emit("display-rooms", allRooms);
             io.to(idRoom).emit("startAuthorized");
             updateMonth(allRooms[idRoom]);
-        }
-        else console.log("start unauthorized");
+        } else console.log("start unauthorized");
     });
 
     // Socket to display room on lobby

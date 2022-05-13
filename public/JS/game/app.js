@@ -13,3 +13,7 @@ function onLoad() {
         sc.createScene()
         sc.animate()
 }
+
+export {
+        sc
+}
