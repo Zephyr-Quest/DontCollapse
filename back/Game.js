@@ -16,6 +16,7 @@ module.exports = class Game {
         this.gameStart = false;
 
         this.updateMonth = null;
+        this.endGame = null;
     }
 
     /* -------------------------------------------------------------------------- */
@@ -102,6 +103,10 @@ module.exports = class Game {
         return false;
     }
 
+    finishGame(){
+        console.log("finish game back");
+    }
+
     /* -------------------------------------------------------------------------- */
     /*                               Shop functions                               */
     /* -------------------------------------------------------------------------- */
@@ -144,7 +149,7 @@ module.exports = class Game {
         let buyer = this.searchPlayer(buyerName);
         let seller = this.searchPlayer(sellerName);
         let machine = this.checkPlayerItem(seller.name);
-        console.log(machine);
+        console.log('blblblblblbbl',machine);
         if (machine && buyer && seller) {
             let good = buyer.machineUpgradeSecondhand(machine.machine, machine.level, machine.price);
             if (good) {
@@ -205,11 +210,13 @@ module.exports = class Game {
         this.updateMonth(this);
     }
 
-    startChrono(callback) {
-        this.chrono = new Chrono(this.updateMonthWrapper.bind(this));
+    endGameWrapper() {
+        this.endGame(this);
+    }
+
+    startChrono() {
+        this.chrono = new Chrono(this.updateMonthWrapper.bind(this), this.endGameWrapper.bind(this));
         this.chrono.incrementChrono();
-        console.log(callback)
-        callback;
     }
 
 };

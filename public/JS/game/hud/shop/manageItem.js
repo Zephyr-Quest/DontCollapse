@@ -252,7 +252,7 @@ function sell() {
     priceForm.addEventListener('submit', event => {
         event.preventDefault(); //remember
         if (inputPrice.value.trim()) {
-            sellOccazCB(toSell.classList[1], level[toSell.classList[0]], inputPrice.value) // id machine / level / prix de vente
+            sellOccazCB(toSell.classList[1], level[toSell.classList[0]], Number(inputPrice.value)) // id machine / level / prix de vente
             console.log(toSell.classList[1], level[toSell.classList[0]], inputPrice.value)
             inputPrice.value = '';
 

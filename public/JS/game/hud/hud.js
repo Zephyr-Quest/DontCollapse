@@ -84,6 +84,7 @@ function closeAllModals(){
 }
 
 function refreshShop(infos, username){
+    console.log(infos.furnishers)
     ShopItem.refreshContract(infos.furnishers);
     ShopItem.refreshMachine(infos.machines);
     ShopItem.refreshOccaz(infos.shop, username);

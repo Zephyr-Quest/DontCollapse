@@ -74,8 +74,6 @@ function getMaxKey(obj) {
 }
 
 const updateMonth = game => {
-    // console.log(io);
-    // console.log(game);
     const players = io.sockets.adapter.rooms.get(game.idRoom);
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
@@ -84,6 +82,15 @@ const updateMonth = game => {
         pSocket.emit("infoActu", infos);
     }
 };
+
+const endGame = game => {
+    const players = io.sockets.adapter.rooms.get(game.idRoom);
+    for (const p of players) {
+        const pSocket = io.sockets.sockets.get(p);
+        game.finishGame();
+        pSocket.emit("finishGame");
+    }
+}
 
 /* ----------------------------------- APP ---------------------------------- */
 
@@ -174,6 +181,7 @@ app.post("/host",
         allRooms[idRoom].addPlayer(userName);
 
         allRooms[idRoom].updateMonth = updateMonth;
+        allRooms[idRoom].endGame = endGame;
 
 
         res.send({
@@ -276,9 +284,7 @@ io.on('connection', socket => {
     socket.on('startGame', () => {
         const idRoom = socket.handshake.session.idRoom;
         if (allRooms[idRoom] && allRooms[idRoom].playersName.length >= 2 && allRooms[idRoom].playersName.length <= 4) {
-            allRooms[idRoom].startChrono(() => {
-                console.log("end GAAAAAAAAAAAAAAAAAME");
-            });
+            allRooms[idRoom].startChrono();
             allRooms[idRoom].gameStart = true;
             io.emit("display-rooms", allRooms);
             io.to(idRoom).emit("startAuthorized");

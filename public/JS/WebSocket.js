@@ -56,6 +56,9 @@ const events = {
     },
     "infoActu": (infoPlayer) => {
         HUD.refreshHud(infoPlayer);
+    },
+    "finishGame": () => {
+        console.log("finish game front");
     }
 };
 
