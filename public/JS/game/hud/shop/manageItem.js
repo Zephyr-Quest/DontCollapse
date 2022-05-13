@@ -122,7 +122,7 @@ function buy() {
             buyMachineCB(itemId, itemLevel); // id machine / level
             break;
         case 3:
-            let username = "michel";
+            let username = itemDiv.getElementsByClassName("sellUsername")[0].innerText;
             console.log(username)
             buyOccazCB(username); // nom du joueur qui vend
             break;
@@ -222,8 +222,7 @@ let toSell;
 function sellOwnMachine() {
     removeListeners(false);
     let sameID = Array.from(document.getElementsByClassName(itemId));
-    console.log(sameID)
-
+    
     for (let i = 8; i < sameID.length; i++) {
         if(sameID[i].hasAttribute('disable')) toSell = sameID[i]
     }

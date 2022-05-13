@@ -293,6 +293,7 @@ io.on('connection', socket => {
         console.log("buy engine");
         let confirmation = allRooms[idRoom].searchPlayer(username).machineUpgrade(idEngine, levelEngine);
         socket.emit("confirmPurchase", confirmation, "engine");
+        updateMonth(allRooms[idRoom]);
     });
 
     // Socket to sell second-hand engine

@@ -80,10 +80,10 @@ function buyMachine(e) {
 }
 
 function buyOccaz(e) {
-    if (e.target.parentElement.classList[1] !== "own")
+    //if (e.target.parentElement.classList[1] !== "own")
         Buy.buyItem(e.target.parentElement, 3);
-    else
-        Buy.buyItem(e.target.parentElement, 4);
+   // else
+   //     Buy.buyItem(e.target.parentElement, 4);
 }
 
 
@@ -175,7 +175,7 @@ function refreshMachine(infos) {
     }
 
     for (let i = 0; i < infos.length; i++) {
-        console.log(infos[i])
+        //console.log(infos[i])
         if (infos[i].secondHand === false) {
             switch (infos[i].level) {
                 case 4:
@@ -204,13 +204,14 @@ function refreshOccaz(infos) {
         2: "Assembleur mécanique",
         3: "Assembleur général"
     }
+    console.log(infos)
     let occaz = document.getElementsByClassName("occaz");
     for (let i = 0; i < occaz.length - 1; i++) {
         let elem = occaz[i + 1];
         if (infos[i]) {
             elem.removeAttribute('disable');
             elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level + "<br>à vendre";
-            elem.children[1].innerText = "Vendue par " + infos[i].player + ", " + infos[i].price + "€";
+            elem.children[1].innerHTML = "Vendue par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
         } else {
             elem.setAttribute('disable', '');
             elem.children[0].innerHTML = "Rien n'est à vendre<br>pour le moment";
