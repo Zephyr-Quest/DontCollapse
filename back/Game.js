@@ -205,9 +205,11 @@ module.exports = class Game {
         this.updateMonth(this);
     }
 
-    startChrono() {
+    startChrono(callback) {
         this.chrono = new Chrono(this.updateMonthWrapper.bind(this));
         this.chrono.incrementChrono();
+        console.log(callback)
+        callback;
     }
 
 };

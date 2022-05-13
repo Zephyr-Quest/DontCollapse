@@ -276,7 +276,9 @@ io.on('connection', socket => {
     socket.on('startGame', () => {
         const idRoom = socket.handshake.session.idRoom;
         if (allRooms[idRoom] && allRooms[idRoom].playersName.length >= 2 && allRooms[idRoom].playersName.length <= 4) {
-            allRooms[idRoom].startChrono();
+            allRooms[idRoom].startChrono(() => {
+                console.log("end GAAAAAAAAAAAAAAAAAME");
+            });
             allRooms[idRoom].gameStart = true;
             io.emit("display-rooms", allRooms);
             io.to(idRoom).emit("startAuthorized");
@@ -307,6 +309,7 @@ io.on('connection', socket => {
         console.log("buy second hand");
         const confirmation = allRooms[idRoom].buySecondhandItem(username, seller);
         socket.emit("confirmPurchase", confirmation, "occaz");
+        updateMonth(allRooms[idRoom]);
     })
 
     // Socket to change contract
@@ -314,6 +317,7 @@ io.on('connection', socket => {
         console.log("buy contract");
         const confirmation = allRooms[idRoom].searchPlayer(username).furnisherUpgrade(idFournisseur, contractNumber);
         socket.emit("confirmPurchase", confirmation, "contract");
+        updateMonth(allRooms[idRoom]);
     });
 
     // Socket to change contract
@@ -321,6 +325,7 @@ io.on('connection', socket => {
         console.log("buy employee", category);
         const confirmation = allRooms[idRoom].searchPlayer(username).recruteEmployee(category);
         socket.emit("confirmPurchase", confirmation, "employee");
+        updateMonth(allRooms[idRoom]);
     });
 
     // Socket shop

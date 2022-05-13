@@ -24,11 +24,16 @@ module.exports = class Chrono {
         // Increment seconds
         this.seconds--;
 
-        if (this.seconds === 40)
+        if (this.seconds === 0)
             this.monthCallback();
+        
+        if (this.minutes === 9 && this.seconds === 50){
+            this.stopChrono = true;
+        }
         
             // Continue
         if (!this.stopChrono) setTimeout(() => this.incrementChrono(), delay);
+        else console.log("stop chrono");
     }
 
     /**
