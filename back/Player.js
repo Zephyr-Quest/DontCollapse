@@ -112,6 +112,7 @@ module.exports = class Player {
         return false;
     }
     machineUpgradeSecondhand(machine, level, price) {
+        console.log("--- Player ", this.name, " wants to buy a new machine", machine, level, price);
         if (this.machines[machine].level < level && this.asEnoughMoney(price)) {
             this.money -= price;
             this.machines[machine].level = level;

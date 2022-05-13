@@ -6,12 +6,7 @@ module.exports = class Game {
     constructor(id, host) {
         this.players = [];
         this.playersName = [];
-        this.shop = [{
-            player: "",
-            machine: undefined,
-            level: undefined,
-            price: undefined
-        }];
+        this.shop = [];
         this.idRoom = id;
         this.host = host;
 
@@ -36,7 +31,6 @@ module.exports = class Game {
         if (this.players.length < 4 && player) {
             this.players.push(new Player(player));
             this.playersName.push(player);
-            console.log("jhiwsefdiusdkhfgsd");
         }
     }
 
@@ -144,8 +138,9 @@ module.exports = class Game {
         // console.log("--- Player ", buyer, " wants to buy", seller);
         let buyer = this.searchPlayer(buyerName);
         let seller = this.searchPlayer(sellerName);
-        let machine = this.checkPlayerItem(seller);
-        if (machine && buyer && seller) {
+        let machine = this.checkPlayerItem(seller.name);
+        console.log(machine);
+        if (machine&& buyer && seller) {
             buyer.machineUpgradeSecondhand(machine.machine, machine.level, machine.price);
             seller.money += machine.price;
             this.shop.forEach((element, i) => {
