@@ -44,6 +44,33 @@ export const Models = {
                 instance: null,
                 rotation: [90, 0, 0]
         },
+        welding2: {
+                name: "welding2",
+                model: "welding2.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        welding3: {
+                name: "welding3",
+                model: "welding3.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        welding4: {
+                name: "welding4",
+                model: "welding4.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
         pallet: {
                 name: "pallet",
                 model: "pallet1.glb",
@@ -110,6 +137,33 @@ export const Models = {
         precision: {
                 name: "precision",
                 model: "accuracy1.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        precision2: {
+                name: "precision2",
+                model: "accuracy2.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        precision3: {
+                name: "precision3",
+                model: "accuracy3.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        precision4: {
+                name: "precision4",
+                model: "accuracy4.glb",
                 scale: 20,
                 isModel: true,
                 isClonable: false,

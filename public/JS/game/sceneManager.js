@@ -224,6 +224,7 @@ export class Scene {
         createScene() {
                 let obj, mesh
                 this.selectionables = new THREE.Group();
+                this.otherLevels = new THREE.Group();
                 ObjectArray.forEach(el => {
                         obj = new Object3D(el)
                         mesh = obj.getMesh()
@@ -234,13 +235,20 @@ export class Scene {
                                         if (n.material.map) n.material.map.anisotropy = 16;
                                 }
                         });
-                        if (el.ray) {
-                                this.selectionables.add(mesh);
+                        console.log(el.level)
+                        if (el.level) {
+                                mesh.level=el.level
+                                this.otherLevels.add(mesh)
+
                         } else {
-                                this.scene.add(mesh)
-                        }
-                });
-                this.scene.add(this.selectionables);
+                                if (el.ray) {
+                                        this.selectionables.add(mesh);
+                                } else {
+                                        this.scene.add(mesh)
+                                }
+                        };
+                        this.scene.add(this.selectionables);
+                })
         }
 
         updateModel(itemToChange) {
@@ -261,8 +269,16 @@ export class Scene {
                                 break;
                 }
                 console.log("Machine à changer :" + name)
-                this.selectionables.children.forEach(el=>{
-                        if (el.name==name) this.selectionables.remove(el)
+                this.selectionables.children.forEach(el => {
+                        if (el.name == name) this.selectionables.remove(el)
+                })
+                console.log("Autres niveaux :")
+                console.log(this.otherLevels)
+                this.otherLevels.children.forEach(el => {
+                        if (el.name == name && el.level == itemToChange.level) {
+                                console.log(el)
+                                this.selectionables.add(el)
+                        }
                 })
         }
 

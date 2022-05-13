@@ -350,7 +350,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        
+
         {
                 type: "desk",
                 length: 100,
@@ -459,14 +459,14 @@ export const ObjectArray = [
                 heigth: 100,
                 x: 65,
                 y: 65,
-                z: 11* 1,
+                z: 11 * 1,
                 color: "red",
                 rotx: 0,
                 roty: 88,
                 rotz: 0,
                 ray: false,
         },
-         {
+        {
                 type: "pallet",
                 length: 100,
                 width: 100,
@@ -479,7 +479,7 @@ export const ObjectArray = [
                 roty: 93,
                 rotz: 0,
                 ray: false,
-        }, 
+        },
         {
                 type: "pallet",
                 length: 100,
@@ -493,7 +493,7 @@ export const ObjectArray = [
                 roty: 85,
                 rotz: 0,
                 ray: false,
-        }, 
+        },
         {
                 type: "pallet",
                 length: 100,
@@ -507,7 +507,7 @@ export const ObjectArray = [
                 roty: 95,
                 rotz: 0,
                 ray: false,
-        }, 
+        },
         {
                 type: "pallet",
                 length: 100,
@@ -515,13 +515,13 @@ export const ObjectArray = [
                 heigth: 100,
                 x: 210,
                 y: -210,
-                z: 11* 1,
+                z: 11 * 1,
                 color: "red",
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
                 ray: false,
-        }, 
+        },
         {
                 type: "pallet",
                 length: 100,
@@ -676,7 +676,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        
+
         {
                 type: "closed_box",
                 length: 100,
@@ -755,7 +755,7 @@ export const ObjectArray = [
                 heigth: 100,
                 x: 125,
                 y: -65,
-                z:0.3,
+                z: 0.3,
                 color: "red",
                 rotx: 0,
                 roty: -90,
@@ -1067,7 +1067,7 @@ export const ObjectArray = [
                 name: "Mac_Assembleur de Precision"
         },
 
-       
+
         /* ---------------------------------- SHELF --------------------------------- */
 
         {
@@ -1355,5 +1355,103 @@ export const ObjectArray = [
         /*                                  NIVEAU 2                                  */
         /* -------------------------------------------------------------------------- */
 
-        
+
+        {
+                type: "welding2",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -65,
+                y: 0,
+                z: 13,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: true,
+                level:2,
+                name: "Mac_Poste a souder"
+        },
+        {
+                type: "welding3",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -65,
+                y: 0,
+                z: 13,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: true,
+                level:3,
+                name: "Mac_Poste a souder"
+        },
+        {
+                type: "welding4",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -65,
+                y: 0,
+                z: 13,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: true,
+                level:4,
+                name: "Mac_Poste a souder"
+        },
+
+
+        {
+                type: "precision2",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -130,
+                y: -55,
+                z: 22,
+                color: "#AD3C25",
+                rotx: 0,
+                roty: -90,
+                rotz: 0,
+                ray: true,
+                level:2,
+                name: "Mac_Assembleur de Precision"
+        },
+        {
+                type: "precision3",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -130,
+                y: -55,
+                z: 22,
+                color: "#AD3C25",
+                rotx: 0,
+                roty: -90,
+                rotz: 0,
+                ray: true,
+                level:3,
+                name: "Mac_Assembleur de Precision"
+        },
+        {
+                type: "precision4",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -130,
+                y: -55,
+                z: 22,
+                color: "#AD3C25",
+                rotx: 0,
+                roty: -90,
+                rotz: 0,
+                ray: true,
+                level:4,
+                name: "Mac_Assembleur de Precision"
+        },
 ]
