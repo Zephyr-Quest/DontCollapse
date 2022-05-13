@@ -143,10 +143,12 @@ header a {
 }
 header .btn {
   font-size: 1.8rem;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 header .btn:hover {
-  background-color: #f5dba6;
-  color: white;
+  background-color: white;
+  color: #be2d32;
   cursor: pointer;
   border-color: white;
 }
