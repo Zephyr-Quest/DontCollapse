@@ -116,7 +116,12 @@ module.exports = class Game {
 
     addSecondhandItem(player, machine, level, price) {
         // console.log("--- Player ", player, " wants to sell", machine, level, price);
-        if (this.checkPlayerItem(player)) return false;
+        let slot = this.checkPlayerItem(player);
+        if (slot) {
+            slot.machine = machine;
+            slot.level = level;
+            slot.price = price;
+        }
         else {
             this.shop.push({
                 player: player,
@@ -140,13 +145,15 @@ module.exports = class Game {
         let seller = this.searchPlayer(sellerName);
         let machine = this.checkPlayerItem(seller.name);
         console.log(machine);
-        if (machine&& buyer && seller) {
-            buyer.machineUpgradeSecondhand(machine.machine, machine.level, machine.price);
-            seller.money += machine.price;
-            this.shop.forEach((element, i) => {
-                if (element == machine) delete this.shop[i];
-            });
-            return true;
+        if (machine && buyer && seller) {
+            let good = buyer.machineUpgradeSecondhand(machine.machine, machine.level, machine.price);
+            if (good) {
+                seller.money += machine.price;
+                this.shop.forEach((element, i) => {
+                    if (element == machine) delete this.shop[i];
+                });
+                return true;
+            }
         }
         return false;
     }
@@ -157,23 +164,23 @@ module.exports = class Game {
 
     applyFactor(eventId, factor) {
         switch (eventId) {
-        case 0:
-            this.players.forEach(player => {
-                player.money += factor;
-            });
-            break;
-        case 1:
-            this.players.forEach(player => {
-                player.sd.ecologic += player.sd.ecologic * (factor / 100);
-            });
-            break;
-        case 2:
-            this.players.forEach(player => {
-                player.sd.social += player.sd.social * (factor / 100);
-            });
-            break;
-        default:
-            break;
+            case 0:
+                this.players.forEach(player => {
+                    player.money += factor;
+                });
+                break;
+            case 1:
+                this.players.forEach(player => {
+                    player.sd.ecologic += player.sd.ecologic * (factor / 100);
+                });
+                break;
+            case 2:
+                this.players.forEach(player => {
+                    player.sd.social += player.sd.social * (factor / 100);
+                });
+                break;
+            default:
+                break;
         }
     }
 
