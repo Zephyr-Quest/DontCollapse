@@ -158,41 +158,41 @@ function confirmation(obj) {
         let nb;
         console.log("Item  acheté")
         if (obj.type !== "employee") {
-            let allElem = [];
+            //let allElem = [];
             switch (itemType) {
                 case 0:
-                    nb = {
-                        0: 0,
-                        1: 1,
-                        2: 2,
-                        3: 3,
-                    }
+                    // nb = {
+                    //     0: 0,
+                    //     1: 1,
+                    //     2: 2,
+                    //     3: 3,
+                    // }
 
-                    let contract = Array.from(document.getElementsByClassName(itemDiv.classList[0]));
-                    contract.shift();
-                    for (const item of contract) {
-                        if (item.hasAttribute('disable')) item.removeAttribute('disable')
-                    }
+                    // let contract = Array.from(document.getElementsByClassName(itemDiv.classList[0]));
+                    // contract.shift();
+                    // for (const item of contract) {
+                    //     if (item.hasAttribute('disable')) item.removeAttribute('disable')
+                    // }
                     break;
                 case 2:
                     sellOwnMachine()
-                    for (let i = 0; i < leftPage.length; i += 2) {
-                        allElem.push(leftPage[i])
-                        allElem.push(leftPage[i + 1])
-                        allElem.push(rightPage[i])
-                        allElem.push(rightPage[i + 1])
-                    }
-                    nb = {
-                        0: 16,
-                        1: 17,
-                        2: 18,
-                        3: 19,
-                    }
-                    for (let i = nb[itemDiv.classList[1]]; i < allElem.length; i += 4) {
-                        if (allElem[i].hasAttribute('disable')) {
-                            allElem[i].removeAttribute('disable')
-                        }
-                    }
+                    // for (let i = 0; i < leftPage.length; i += 2) {
+                    //     allElem.push(leftPage[i])
+                    //     allElem.push(leftPage[i + 1])
+                    //     allElem.push(rightPage[i])
+                    //     allElem.push(rightPage[i + 1])
+                    // }
+                    // nb = {
+                    //     0: 16,
+                    //     1: 17,
+                    //     2: 18,
+                    //     3: 19,
+                    // }
+                    // for (let i = nb[itemDiv.classList[1]]; i < allElem.length; i += 4) {
+                    //     if (allElem[i].hasAttribute('disable')) {
+                    //         allElem[i].removeAttribute('disable')
+                    //     }
+                    // }
                     return
                     break;
                 case 3: //own occaz to delete
@@ -212,6 +212,13 @@ function confirmation(obj) {
         }
     } else {
         console.log("Item non acheté")
+        oui.style.display = "none";
+        document.getElementById("buying").innerText = "L'achat n'a pas pu être réalisé"
+        
+        
+        oui.style.display = "flex";
+        return
+        // non.style.display = "none";
     }
     modal.close(); // close confirm modal
 
@@ -222,17 +229,15 @@ let toSell;
 function sellOwnMachine() {
     removeListeners(false);
     let sameID = Array.from(document.getElementsByClassName(itemId));
-    
-    for (let i = 8; i < sameID.length; i++) {
-        if(sameID[i].hasAttribute('disable')) toSell = sameID[i]
+    console.log(sameID)
+    for (let i = sameID.length - 4; i < sameID.length; i++) {
+        if (sameID[i].hasAttribute('disable')) toSell = sameID[i]
     }
     console.log(toSell)
     document.getElementById('buying').innerText = "Voulez vous vendre votre " + toSell.children[0].innerText + " de " + toSell.children[1].innerText;
     oui.addEventListener('click', sell);
     non.addEventListener('click', notSell);
 }
-
-let price;
 
 const priceForm = document.getElementById('price-form')
 const inputPrice = document.getElementById('input-price');

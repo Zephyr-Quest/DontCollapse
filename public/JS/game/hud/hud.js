@@ -83,10 +83,10 @@ function closeAllModals(){
     chat.closeFunction();
 }
 
-function refreshShop(infos){
+function refreshShop(infos, username){
     ShopItem.refreshContract(infos.furnishers);
     ShopItem.refreshMachine(infos.machines);
-    ShopItem.refreshOccaz(infos.shop);
+    ShopItem.refreshOccaz(infos.shop, username);
 
 }
 
