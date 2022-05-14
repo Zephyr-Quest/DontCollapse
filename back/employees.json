@@ -24,24 +24,27 @@
         "Eddie",
         "Cindy",
         "Florence",
-        "Marie"
+        "Marie",
+        "Baptise",
+        "Charles",
+        "Alexandre"
     ],
     "salaries": {
         "engineers": {
-            "min": 4,
-            "max": 5
+            "min": 3500,
+            "max": 5000
         },
         "maintainers": {
-            "min": 4,
-            "max": 5
+            "min": 1600,
+            "max": 2300
         },
         "cleaners": {
-            "min": 4,
-            "max": 5
+            "min": 800,
+            "max": 1600
         },
         "supervisors": {
-            "min": 4,
-            "max": 5
+            "min": 4000,
+            "max": 4500
         }
     }
 }
