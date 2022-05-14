@@ -1,3 +1,7 @@
+/* -------------------------------------------------------------------------- */
+/*                                   IMPORTS                                  */
+/* -------------------------------------------------------------------------- */
+
 import * as THREE from 'three';
 import {
         OrbitControls
@@ -28,7 +32,9 @@ import {
 import HUD from "../game/hud/hud.js"
 import WebSocket from '../WebSocket.js';
 
-
+/* -------------------------------------------------------------------------- */
+/*                              GLOBAL VARIABLES                              */
+/* -------------------------------------------------------------------------- */
 
 const stats = new Stats();
 stats.showPanel(0);
@@ -36,9 +42,17 @@ stats.showPanel(0);
 document.body.appendChild(stats.dom);
 
 THREE.Object3D.DefaultUp.set(0, 0, 1);
-
+/**
+ * Class Scene -> Objects 3D
+ */
 export class Scene {
 
+        /**
+         * Constructor of Scene
+         *
+         * @param   {function}  onLoad  
+         *
+         */
         constructor(onLoad) {
                 this.GroupSprite = new THREE.Group()
                 this.loadManager = new THREE.LoadingManager();
@@ -72,19 +86,15 @@ export class Scene {
         loadModels(callback) {
                 let loaded = true;
 
-                // Try to find an unloaded model in 'Model3D'
                 for (let modelName in Models) {
                         if (!Models.hasOwnProperty(modelName)) continue;
 
                         const currentModel = Models[modelName];
                         if (!currentModel.isModel || currentModel.instance !== null) continue;
 
-                        // The model is not loaded yet
                         loaded = false;
 
-                        // Add the model to the load manager
                         this.modelLoader.load(Config.modelsPath + currentModel.model, gltf => {
-                                // Manage animations
                                 if (gltf.animations && gltf.animations.length > 0) {
                                         const mixer = new THREE.AnimationMixer(gltf.scene);
                                         gltf.animations.forEach(anim => mixer.clipAction(anim).play());
@@ -93,34 +103,33 @@ export class Scene {
 
                                 currentModel.instance = gltf.scene;
 
-                                // Load the other models
                                 this.loadModels(callback);
                         });
 
                         break;
                 }
 
-                // Start ThreeJS when it's done
                 if (loaded) callback();
         }
 
+        /**
+         * Init the scene and elements
+         *
+         */
         init() {
                 this.clock = new THREE.Clock();
                 this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
                 this.camera.position.set(800, -800, 550);
-                // this.camera.position.set(0, 0, 0);
                 this.camera.name = "pos1"
                 document.getElementsByClassName("cameraName")[0].innerText = "Camera 1";
 
                 this.scene = new THREE.Scene();
-                // this.scene.background = new THREE.Color('white');
                 const near = 700;
                 const far = 1000;
                 const colorFog = 0x383331;
                 this.scene.fog = new THREE.Fog(colorFog, near, far);
                 this.scene.background = new THREE.Color(colorFog);
 
-                /* ---------------------------------- CANVA --------------------------------- */
                 this.renderer = new THREE.WebGLRenderer({
                         canvas: document.getElementById('myThreeJsCanvas'),
                         alpha: true,
@@ -137,21 +146,15 @@ export class Scene {
                 this.renderer.setClearColor(0x000000, 0);
                 document.body.appendChild(this.renderer.domElement);
 
-                /* --------------------- Setting up the camera controls --------------------- */
                 this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-                // this.controls.listenToKeyEvents(window); // optional
                 this.controls.enableZoom = false;
                 this.controls.enableDamping = false
-                // this.controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-                // this.controls.dampingFactor = 0.05;
-
                 this.controls.screenSpacePanning = false;
-
                 this.controls.minDistance = 100;
                 this.controls.maxDistance = 500;
-
                 this.controls.maxPolarAngle = Math.PI / 2;
                 this.controls.enabled = false
+
                 let color = 0xffffff;
                 let intensity = 0.85;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
@@ -162,26 +165,20 @@ export class Scene {
                 this.light.shadow.mapSize.height = 1024; // default
                 this.light.shadow.camera.near = 0.1;
                 this.light.shadow.camera.far = 500;
-                // this.light.shadow.radius = 10
                 this.light.decay = 2;
                 this.light.penumbra = 1;
                 this.scene.add(this.light);
-
 
                 this.ambiantlight = new THREE.AmbientLight(0x7b7065);
                 this.ambiantlight.position.set(0, 0, 130);
                 this.scene.add(this.ambiantlight);
 
-                //if window resizes
+                this.raycaster = new THREE.Raycaster();
+
                 window.addEventListener('resize', this.onWindowResize.bind(this), false);
                 window.addEventListener('keydown', (event) => {
                         this.changeCamera(event)
                 }, false)
-
-                // this.axesHelper = new THREE.AxesHelper(1000);
-                // this.scene.add(this.axesHelper);
-
-                this.raycaster = new THREE.Raycaster();
                 this.renderer.domElement.addEventListener('mousedown', event => {
                         this.onMouseClick(event, this);
                 });
@@ -189,42 +186,54 @@ export class Scene {
                         this.mousePos.clientX = event.clientX
                         this.mousePos.clientY = event.clientY
                 });
-
-
-                // this.animate()
         }
-
+        /**
+         * Three JS Animate
+         *
+         */
         animate() {
                 stats.begin();
 
                 // Play animations
                 const delta = this.clock.getDelta();
                 this.mixers.forEach(mixer => mixer.update(delta));
+
                 this.render();
                 requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();
-                // this.light.shadow.autoUpdate = false
+
                 stats.end();
         }
 
-
+        /**
+         * Render Three JS
+         *
+         */
         render() {
                 this.camera.lookAt(new THREE.Vector3(0, 0, 60));
                 this.renderer.render(this.scene, this.camera);
                 this.onMouseOver(this.mousePos, this)
         }
 
-
+        /**
+         * When window resizes, resize canva
+         *
+         */
         onWindowResize() {
                 this.camera.aspect = window.innerWidth / window.innerHeight;
                 this.camera.updateProjectionMatrix();
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
+        /**
+         * Create Scene on canva, add Objects to the scene and groups
+         *
+         */
         createScene() {
                 let obj, mesh
                 this.selectionables = new THREE.Group();
                 this.otherLevels = new THREE.Group();
+
                 ObjectArray.forEach(el => {
                         obj = new Object3D(el)
                         mesh = obj.getMesh()
@@ -235,9 +244,9 @@ export class Scene {
                                         if (n.material.map) n.material.map.anisotropy = 16;
                                 }
                         });
-                        console.log(el.level)
+                        // Don't add to scene if it's other level than 1
                         if (el.level) {
-                                mesh.level=el.level
+                                mesh.level = el.level
                                 this.otherLevels.add(mesh)
 
                         } else {
@@ -246,14 +255,19 @@ export class Scene {
                                 } else {
                                         this.scene.add(mesh)
                                 }
-                        };
+                        }
                         this.scene.add(this.selectionables);
                 })
         }
 
+        /**
+         * Upadte Model level
+         *
+         * @param   {Object}  itemToChange  Object of item to change : id and level
+         *
+         */
         updateModel(itemToChange) {
                 let name;
-                console.log(itemToChange)
                 switch (itemToChange.obj) {
                         case "0":
                                 name = "Mac_Poste a souder"
@@ -268,12 +282,9 @@ export class Scene {
                                 name = "Mac_Assembleur General"
                                 break;
                 }
-                console.log("Machine à changer :" + name)
                 this.selectionables.children.forEach(el => {
                         if (el.name == name) this.selectionables.remove(el)
                 })
-                console.log("Autres niveaux :")
-                console.log(this.otherLevels)
                 this.otherLevels.children.forEach(el => {
                         if (el.name == name && el.level == itemToChange.level) {
                                 console.log(el)
@@ -282,6 +293,16 @@ export class Scene {
                 })
         }
 
+        /**
+         * Create title above object
+         *
+         * @param   {Three.Scene}  ctx    Context (scene)
+         * @param   {Three.Scene}  sc     Scene
+         * @param   {Three.Vector3}  pos    Position of title
+         * @param   {String}  name   Name of title
+         * @param   {String}  title  Title to display
+         *
+         */
         createTitles(ctx, sc, pos, name, title) {
                 this.makeTextSprite(ctx, sc, pos, name, title, {
                         "fontsize": 25,
@@ -295,16 +316,89 @@ export class Scene {
                 })
         }
 
+        /**
+         * Create Sprite with text inside
+         *
+         * @param   {Three.Scene}  ctx         Context(Scene)
+         * @param   {Three.Scene}  sc          Scene
+         * @param   {Three.Vector3}  pos         Position to display
+         * @param   {String}  name        Name of Sprite
+         * @param   {String}  message     String to didplay
+         * @param   {Object}  parameters  Different parameters
+         *
+         */
+        makeTextSprite(ctx, sc, pos, name, message, parameters) {
+                if (parameters === undefined) parameters = {};
+                var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
+                var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 18;
+                var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
+                var borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : {
+                        r: 0,
+                        g: 0,
+                        b: 255,
+                        a: 1.0
+                };
+                var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : {
+                        r: 255,
+                        g: 255,
+                        b: 0,
+                        a: 1.0
+                };
+                var textColor = parameters.hasOwnProperty("textColor") ? parameters["textColor"] : {
+                        r: 0,
+                        g: 0,
+                        b: 255,
+                        a: 1.0
+                };
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+                context.font = "Bold " + fontsize + "px " + fontface;
+                var metrics = context.measureText(message);
+                var textWidth = metrics.width;
+                context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
+                context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
+                context.lineWidth = borderThickness;
+                context.fillStyle = "rgba(" + textColor.r + ", " + textColor.g + ", " + textColor.b + ", 1.0)";
+                context.fillText(message, borderThickness, fontsize + borderThickness);
+                context.imageSmoothingQuality = "high"
+                context.textAlign = "center"
+
+                var texture = new THREE.Texture(canvas)
+                texture.needsUpdate = true;
+                var spriteMaterial = new THREE.SpriteMaterial({
+                        map: texture,
+                        depthWrite: false,
+                        depthTest: true,
+                });
+                var sprite = new THREE.Sprite(spriteMaterial);
+                sprite.center.set(0.5 * textWidth * 0.003, 0.65)
+                let sca = 120
+                sprite.scale.set(0.5 * fontsize + sca + 40, sca + 0.25 * fontsize, sca - 10 + 0.75 * fontsize);
+                sprite.position.x = pos.x
+                sprite.position.y = pos.y
+                sprite.position.z = pos.z
+                let texteSprite = new THREE.Group()
+                texteSprite.add(sprite)
+                texteSprite.visible = true
+                texteSprite.name = name
+                ctx.GroupSprite.add(texteSprite)
+        }
+
+        /**
+         * Action when clicked on object
+         *
+         * @param   {Event}  event  
+         * @param   {Three.Scene}  ctx    Context
+         *
+         */
         onMouseClick(event, ctx) {
                 var position = new THREE.Vector2();
-                // On conserve la position de la souris dans l'espace de coordonnées
-                // NDC (Normalized device coordinates).
                 var domRect = document.getElementById("myThreeJsCanvas").getBoundingClientRect();
                 position.x = ((event.clientX - domRect.left) / domRect.width) * 2 - 1;
                 position.y = -((event.clientY - domRect.top) / domRect.height) * 2 + 1;
 
+                // Raytracing
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
-                console.log("S : ", s)
                 if (s) {
                         if (this.staticText) {
                                 this.scene.remove(this.copyGroupSprite)
@@ -312,6 +406,7 @@ export class Scene {
                         }
                         let tempos
                         let prefix = "Mac_"
+                        // Remove prefix
                         while (!s.name.includes(prefix)) {
                                 s = s.parent
                         }
@@ -337,11 +432,14 @@ export class Scene {
                         this.GroupSprite = new THREE.Group()
                         this.scene.add(this.copyGroupSprite)
                         this.staticText = true
+                        // If it's a lambda object
                         if (!this.openedMenu && (tempname != "Boutique" && tempname != "Chat" && tempname != "Sortie")) {
                                 this.openMenu(tempname)
                         } else if (tempname == "Sortie") {
+                                // If sortie
                                 this.openMenuSortie(s)
                         } else if (tempname == "Chat") {
+                                // If chat
                                 HUD.openChatModal()
                                 this.scene.remove(this.copyGroupSprite)
                                 this.scene.remove(this.GroupSprite)
@@ -352,6 +450,7 @@ export class Scene {
                                 this.staticText = false
 
                         } else if (tempname == "Boutique") {
+                                // If shop
                                 HUD.openShopModal()
                                 this.scene.remove(this.copyGroupSprite)
                                 this.scene.remove(this.GroupSprite)
@@ -361,9 +460,10 @@ export class Scene {
                                 this.animatedText = false
                                 this.staticText = false
 
-                        } else if (tempname == "Boutique" || tempname == "Chat" || tempname == "Sortie") {
-                                this.closeMenu()
                         }
+                        // if (tempname == "Boutique" || tempname == "Chat" || tempname == "Sortie") {
+                        //         this.closeMenu()
+                        // }
                 } else {
                         if (this.staticText) {
                                 // HUD.closeAllModals()
@@ -377,14 +477,41 @@ export class Scene {
                         }
                 }
         }
+
+        /**
+         * Change Camera display
+         *
+         */
+        closeCameraDisplay() {
+                document.getElementsByClassName("cameraName")[0].style.display = "none"
+        }
+        OpenCameraDisplay() {
+                document.getElementsByClassName("cameraName")[0].style.display = "block"
+        }
+
+        /**
+         * Open me menu of machine
+         *
+         * @param   {Three.mesh}  s  Mesh to open menu
+         *
+         */
         openMenu(s) {
+                this.closeCameraDisplay()
                 let menu = document.getElementById("myMenuShop")
                 document.getElementById("title_menuShop").innerText = "Menu : " + s
                 menu.style.display = "block"
                 menu = document.getElementById("myMenuSortie")
                 if (menu.style.display == "block") menu.style.display = "none"
         }
+
+        /**
+         * Open door menu to go see other players
+         *
+         * @param   {Three.mesh}  s  Door
+         *
+         */
         openMenuSortie(s) {
+                this.closeCameraDisplay()
                 let players = WebSocket.getConnectedPlayers()
                 let sortie = document.getElementById("SortiWrap");
                 sortie.innerHTML = ""
@@ -394,9 +521,7 @@ export class Scene {
                         let ion = "<ion-icon name='person-outline'></ion-icon>"
                         let pe = document.createElement("p")
                         pe.innerText = el
-
                         divWrap.innerHTML = ion
-
                         console.log(pe)
                         divWrap.appendChild(pe)
                         sortie.appendChild(divWrap)
@@ -414,7 +539,13 @@ export class Scene {
                 this.selectionables.remove(s)
                 this.scene.add(s)
         }
+
+        /**
+         * Close menu of objects
+         *
+         */
         closeMenu() {
+                this.OpenCameraDisplay()
                 let menu = document.getElementById("myMenuShop")
                 if (menu.style.display == "block") menu.style.display = "none"
                 menu = document.getElementById("myMenuSortie")
@@ -431,10 +562,16 @@ export class Scene {
 
 
         }
+
+        /**
+         * Mouse over event
+         *
+         * @param   {Event}  event  
+         * @param   {Three.Scene}  ctx    Context
+         *
+         */
         onMouseOver(event, ctx) {
                 var position = new THREE.Vector2();
-                // On conserve la position de la souris dans l'espace de coordonnées
-                // NDC (Normalized device coordinates).
                 var domRect = document.getElementById("myThreeJsCanvas").getBoundingClientRect();
                 position.x = ((event.clientX - domRect.left) / domRect.width) * 2 - 1;
                 position.y = -((event.clientY - domRect.top) / domRect.height) * 2 + 1;
@@ -489,6 +626,14 @@ export class Scene {
                 }
         }
 
+        /**
+         * Get selection near (raytracing)
+         *
+         * @param   {Three.Vector3}  position  
+         * @param   {Three.scene}  ctx       Context
+         *
+         * @return  {Three.mesh}            Object cut by ray
+         */
         getSelectionneLePlusProche(position, ctx) {
                 // Mise à jour de la position du rayon à lancer.
                 ctx.raycaster.setFromCamera(position, ctx.camera);
@@ -498,6 +643,13 @@ export class Scene {
                         return selectionnes[0].object;
                 }
         }
+
+        /**
+         * When press 1, 2 or 3 change camera
+         *
+         * @param   {Event}  event  
+         *
+         */
         changeCamera(event) {
                 switch (event.keyCode) {
                         case 49:
@@ -526,64 +678,4 @@ export class Scene {
                                 break;
                 }
         }
-
-        makeTextSprite(ctx, sc, pos, name, message, parameters) {
-                if (parameters === undefined) parameters = {};
-                var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"] : "Arial";
-                var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"] : 18;
-                var borderThickness = parameters.hasOwnProperty("borderThickness") ? parameters["borderThickness"] : 4;
-                var borderColor = parameters.hasOwnProperty("borderColor") ? parameters["borderColor"] : {
-                        r: 0,
-                        g: 0,
-                        b: 255,
-                        a: 1.0
-                };
-                var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"] : {
-                        r: 255,
-                        g: 255,
-                        b: 0,
-                        a: 1.0
-                };
-                var textColor = parameters.hasOwnProperty("textColor") ? parameters["textColor"] : {
-                        r: 0,
-                        g: 0,
-                        b: 255,
-                        a: 1.0
-                };
-                var canvas = document.createElement('canvas');
-                var context = canvas.getContext('2d');
-                context.font = "Bold " + fontsize + "px " + fontface;
-                var metrics = context.measureText(message);
-                var textWidth = metrics.width;
-                context.fillStyle = "rgba(" + backgroundColor.r + "," + backgroundColor.g + "," + backgroundColor.b + "," + backgroundColor.a + ")";
-                context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + "," + borderColor.b + "," + borderColor.a + ")";
-                context.lineWidth = borderThickness;
-                context.fillStyle = "rgba(" + textColor.r + ", " + textColor.g + ", " + textColor.b + ", 1.0)";
-                context.fillText(message, borderThickness, fontsize + borderThickness);
-                context.imageSmoothingQuality = "high"
-                context.textAlign = "center"
-
-                var texture = new THREE.Texture(canvas)
-                texture.needsUpdate = true;
-                var spriteMaterial = new THREE.SpriteMaterial({
-                        map: texture,
-                        // useScreenCoordinates: false,
-                        depthWrite: false,
-                        depthTest: true,
-                });
-                var sprite = new THREE.Sprite(spriteMaterial);
-                sprite.center.set(0.5 * textWidth * 0.003, 0.65)
-                let sca = 120
-                sprite.scale.set(0.5 * fontsize + sca + 40, sca + 0.25 * fontsize, sca - 10 + 0.75 * fontsize);
-                sprite.position.x = pos.x
-                sprite.position.y = pos.y
-                sprite.position.z = pos.z
-                let texteSprite = new THREE.Group()
-                texteSprite.add(sprite)
-                texteSprite.visible = true
-                texteSprite.name = name
-                ctx.GroupSprite.add(texteSprite)
-        }
-
-
 }

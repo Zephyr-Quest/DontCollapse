@@ -379,22 +379,7 @@ export const ObjectArray = [
                 rotz: 0,
                 ray: false,
         },
-        /* ----------------------------- POSTE À SOUDER ----------------------------- */
-        {
-                type: "welding",
-                length: 100,
-                width: 100,
-                heigth: 100,
-                x: -65,
-                y: 0,
-                z: 13,
-                color: "red",
-                rotx: 0,
-                roty: 0,
-                rotz: 0,
-                ray: true,
-                name: "Mac_Poste a souder"
-        },
+
         /* -------------------------------- PALETTES -------------------------------- */
         {
                 type: "pallet",
@@ -1050,22 +1035,7 @@ export const ObjectArray = [
                 ray: false,
         },
 
-        /* ------------------------- ASSEMBLEUR DE PRÉCISION ------------------------ */
-        {
-                type: "precision",
-                length: 100,
-                width: 100,
-                heigth: 100,
-                x: -130,
-                y: -55,
-                z: 22,
-                color: "#AD3C25",
-                rotx: 0,
-                roty: -90,
-                rotz: 0,
-                ray: true,
-                name: "Mac_Assembleur de Precision"
-        },
+
 
 
         /* ---------------------------------- SHELF --------------------------------- */
@@ -1334,7 +1304,14 @@ export const ObjectArray = [
                 name: "Mac_Sortie"
         },
 
-        /* --------------------------------- GENERAL -------------------------------- */
+
+        /* -------------------------------------------------------------------------- */
+        /*                                 //!MACHINES                                */
+        /* -------------------------------------------------------------------------- */
+
+        /* -------------------------------------------------------------------------- */
+        /*                             ASSEMBLEUR GÉNÉRAL                             */
+        /* -------------------------------------------------------------------------- */
         {
                 type: "general",
                 x: 70,
@@ -1350,11 +1327,25 @@ export const ObjectArray = [
                 name: "Mac_Assembleur General"
         },
 
-
         /* -------------------------------------------------------------------------- */
-        /*                                  NIVEAU 2                                  */
+        /*                               POSTE À SOUDER                               */
         /* -------------------------------------------------------------------------- */
 
+        {
+                type: "welding",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -65,
+                y: 0,
+                z: 13,
+                color: "red",
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: true,
+                name: "Mac_Poste a souder"
+        },
 
         {
                 type: "welding2",
@@ -1369,7 +1360,7 @@ export const ObjectArray = [
                 roty: 0,
                 rotz: 0,
                 ray: true,
-                level:2,
+                level: 2,
                 name: "Mac_Poste a souder"
         },
         {
@@ -1385,7 +1376,7 @@ export const ObjectArray = [
                 roty: 0,
                 rotz: 0,
                 ray: true,
-                level:3,
+                level: 3,
                 name: "Mac_Poste a souder"
         },
         {
@@ -1401,11 +1392,30 @@ export const ObjectArray = [
                 roty: 0,
                 rotz: 0,
                 ray: true,
-                level:4,
+                level: 4,
                 name: "Mac_Poste a souder"
         },
 
+        /* -------------------------------------------------------------------------- */
+        /*                           ASSEMBLEUR DE PRÉCISION                          */
+        /* -------------------------------------------------------------------------- */
 
+
+        {
+                type: "precision",
+                length: 100,
+                width: 100,
+                heigth: 100,
+                x: -130,
+                y: -55,
+                z: 22,
+                color: "#AD3C25",
+                rotx: 0,
+                roty: -90,
+                rotz: 0,
+                ray: true,
+                name: "Mac_Assembleur de Precision"
+        },
         {
                 type: "precision2",
                 length: 100,
@@ -1419,7 +1429,7 @@ export const ObjectArray = [
                 roty: -90,
                 rotz: 0,
                 ray: true,
-                level:2,
+                level: 2,
                 name: "Mac_Assembleur de Precision"
         },
         {
@@ -1435,7 +1445,7 @@ export const ObjectArray = [
                 roty: -90,
                 rotz: 0,
                 ray: true,
-                level:3,
+                level: 3,
                 name: "Mac_Assembleur de Precision"
         },
         {
@@ -1451,7 +1461,7 @@ export const ObjectArray = [
                 roty: -90,
                 rotz: 0,
                 ray: true,
-                level:4,
+                level: 4,
                 name: "Mac_Assembleur de Precision"
         },
 ]

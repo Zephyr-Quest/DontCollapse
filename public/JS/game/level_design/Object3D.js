@@ -129,18 +129,4 @@ export class Object3D extends Locatable {
                 this.mesh.position.z = this.getPositionArray()[2]
                 return this.mesh;
         }
-
-
-        log() {
-                console.log(this)
-        }
-
-        removeFromScene(sc) {
-                sc.remove(this.mesh);
-        }
-
-        updateMesh() {
-                let a = 1;
-                console.log(a);
-        }
 }

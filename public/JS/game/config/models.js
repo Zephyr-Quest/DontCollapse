@@ -199,8 +199,8 @@ export const Models = {
         },
         shelf: {
                 name: "shelf",
-                model: "shelf.glb",
-                scale: .6,
+                model: "shelf2.glb",
+                scale: 60,
                 isModel: true,
                 isClonable: true,
                 instance: null,
