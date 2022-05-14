@@ -514,17 +514,20 @@ export class Scene {
                 this.closeCameraDisplay()
                 let players = WebSocket.getConnectedPlayers()
                 let sortie = document.getElementById("SortiWrap");
+                let user = document.getElementById("username").value
                 sortie.innerHTML = ""
                 players.forEach(el => {
-                        let divWrap = document.createElement("div")
-                        divWrap.classList.add("Sicon1")
-                        let ion = "<ion-icon name='person-outline'></ion-icon>"
-                        let pe = document.createElement("p")
-                        pe.innerText = el
-                        divWrap.innerHTML = ion
-                        console.log(pe)
-                        divWrap.appendChild(pe)
-                        sortie.appendChild(divWrap)
+                        if(el!=user){
+                                let divWrap = document.createElement("div")
+                                divWrap.classList.add("Sicon1")
+                                let ion = "<ion-icon name='person-outline'></ion-icon>"
+                                let pe = document.createElement("p")
+                                pe.innerText = el
+                                divWrap.innerHTML = ion
+                                console.log(pe)
+                                divWrap.appendChild(pe)
+                                sortie.appendChild(divWrap)
+                        }
                 })
 
 
