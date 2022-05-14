@@ -3,14 +3,23 @@ import RightRubric from './rightRubric.js';
 import Modal from '../hud.js'
 const topRubric = document.querySelectorAll('#main-title div');
 
-function openSpecificMachine(name, level){
-    Modal.shop.openModal()
-    topRubric[0].classList.remove("selected");
-    topRubric[2].classList.add("selected");
+let specific = {
+    state: false,
+    level:0
+}
 
+function openSpecificMachine(level) {
+    specific.state = true;
+    specific.level = level
+    Modal.openShopModal()
+    // setTimeout(() => {
 
-    RightRubric.changeRubric('top3')
-    RightRubric.openSpecificMachine(name,level);
+    //     topRubric[0].classList.remove("selected");
+    //     topRubric[2].classList.add("selected");
+
+    //     RightRubric.changeRubric('top3')
+    //     RightRubric.openSpecificMachine(level);
+    // }, 200);
 }
 
 /**
@@ -29,6 +38,7 @@ function initShopListeners() {
  * @param {Bool} onOpen 
  */
 function changeTopRubric(e, onOpen = false) {
+
     topRubric.forEach(element => {
         if (element.classList.contains("selected")) element.classList.remove("selected");
     });
@@ -40,12 +50,22 @@ function changeTopRubric(e, onOpen = false) {
         e.target.classList.add("selected");
         RightRubric.changeRubric(e.target.classList[0]);
     }
+    if (specific.state) {
+        topRubric[0].classList.remove("selected");
+        topRubric[2].classList.add("selected");
+
+        RightRubric.changeRubric('top3')
+        RightRubric.openSpecificMachine(specific.level);
+        specific.state = false
+    }
 }
 
 /**
  * remove all event listeners
  */
 function closeShop() {
+    specific.state = false;
+
     for (const current of topRubric) {
         current.removeEventListener('click', changeTopRubric);
     }

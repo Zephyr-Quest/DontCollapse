@@ -1,5 +1,4 @@
 import Shop from './shop/topRubric.js';
-import OtherFactory from './otherFactory.js'
 
 import WebSocket from '../../WebSocket.js';
 
@@ -14,19 +13,21 @@ export default class modal {
      * @param {String} close 
      * @param {Boolean} isShop 
      */
-    constructor(modal, open, close, isShop = false, isFactory = false) {
+    constructor(modal, open, close, isShop = false) {
         this.modal = document.getElementById(modal);
-        if(open!==' ')this.open = document.getElementById(open);
-        if(close!==' ')this.close = document.getElementById(close);
+        if (open !== undefined) this.open = document.getElementById(open);
+        if (close !== undefined) this.close = document.getElementById(close);
         this.isShop = isShop;
-        this.isFactory = isFactory;
         this.shopCB;
+
+        console.log(this.modal)
     }
 
     /**
      * close the modal and remove all event listeners
      */
     closeFunction() {
+
         this.modal.setAttribute('closing', "");
         this.modal.addEventListener('animationend', () => {
             this.modal.removeAttribute('closing');
@@ -35,74 +36,76 @@ export default class modal {
             once: true
         });
         if (this.isShop) Shop.closeShop();
-        if (this.isFactory) OtherFactory.close();
 
 
-        if(this.close)this.close.removeEventListener('click', this.closeFunction.bind(this)); // cross
-        this.modal.removeEventListener('click', this.outsideClose.bind(this)); // outside
-        window.removeEventListener('keydown', this.escapeClose.bind(this)); // Escape
+        this.close.removeEventListener('click', () => {
+            this.closeFunction()
+        }); // cross
+        this.modal.removeEventListener('click', (e) => {
+            if (e.target.nodeName === "DIALOG") {
+                this.closeFunction();
+            }
+        }); // outside
+        window.removeEventListener('keydown', (e) => {
+            if ((e.key === "Escape" || e.key === "Esc") && this.modal.hasAttribute('open')) {
+                this.closeFunction();
+            }
+        }); // Escape
     }
 
-    /**
-     * close modal if player click outside the modal
-     * @param {EventTarget} e 
-     */
-    outsideClose(e) {
-        if (e.target.nodeName === "DIALOG") {
-            this.closeFunction();
-        }
-    }
-
-    /**
-     * close modal if player clik on escape button
-     * @param {EventTarget} e 
-     */
-    escapeClose(e) {
-        if ((e.key === "Escape" || e.key === "Esc") && this.modal.hasAttribute('open')) {
-            this.closeFunction();
-        }
-    }
-
+    
     /**
      * init the listeners to close the modals
      */
     initCloseListeners() {
         // When the user click on the cross, close the modal
-        if(this.close) this.close.addEventListener('click', this.closeFunction.bind(this));
+        this.close.addEventListener('click', () => {
+            this.closeFunction()
+        });
 
         // When the user clicks anywhere outside of the modal, close it
-        this.modal.addEventListener('click', this.outsideClose.bind(this));
+        this.modal.addEventListener('click', (e) => {
+            if (e.target.nodeName === "DIALOG") {
+                this.closeFunction();
+            }
+        });
 
         // When the user clicks on Escape, close the modal
-        window.addEventListener('keydown', this.escapeClose.bind(this));
+        window.addEventListener('keydown', (e) => {
+            if ((e.key === "Escape" || e.key === "Esc") && this.modal.hasAttribute('open')) {
+                this.closeFunction();
+            }
+        });
     }
-    
+
     /**
      * open the modal
      */
     openModal() {
+        console.log(this.modal)
         this.initCloseListeners();
-        if (this.isShop){
-            Shop.initShopListeners();
-            WebSocket.emit('openShop',"");
-
+        if (this.isShop) {
+            WebSocket.emit('openShop', "");
         }
-        if (this.isFactory) OtherFactory.refresh();
         this.modal.showModal();
     }
 
-    isOpen(){
-        if(this.modal.hasAttribute("open")) return true;
+    isOpen() {
+        if (this.modal.hasAttribute("open")) return true;
         else return false;
     }
     /**
      * init the listener to open the modal
      */
     initListener() {
-        this.open.addEventListener('click', this.openModal.bind(this));
+        this.open.addEventListener('click', ()=>{
+            this.openModal();
+        });
     }
 
-    destroyListener(){
-        this.open.removeEventListener('click',this.openModal.bind(this));
+    destroyListener() {
+        this.open.removeEventListener('click', ()=>{
+            this.openModal();
+        });
     }
 }

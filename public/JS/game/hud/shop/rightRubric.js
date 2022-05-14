@@ -17,7 +17,7 @@ function initListener(id) {
 /**
  * display background of the item selected and display his items
  *   
- * @param {EventTarget} e  if specific "e" became the html id
+ * @param {EventTarget} e  if specific==true "e" became the html id
  * @param {Boolean} specific if  the player wants to open a specific machine
  */
 function changeSelection(e, specific = false) {
@@ -58,8 +58,8 @@ function changeRubric(classOfTop) {
             break;
         case "top2":
             rightRubric[4].classList.add("selected");
-                rightRubric[4].style.display = "flex";
-            initListener(4);
+            rightRubric[4].style.display = "flex";
+            ShopItem.changeItem("perso");
 
             break;
         case "top3":
@@ -92,14 +92,14 @@ function closeAllListener() {
     }
 }
 
-function openSpecificMachine(name, level) {
-    const levels = {
-        1: 8,
-        2: 9,
-        3: 10,
-        4: 11
+function openSpecificMachine(level) {
+    const lvl = {
+        1: 5,
+        2: 6,
+        3: 7,
+        4: 8
     }
-    changeSelection(levels[level], true)
+    changeSelection(lvl[level], true)
 }
 
 export default {

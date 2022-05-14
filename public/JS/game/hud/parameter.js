@@ -1,12 +1,13 @@
-import ModalManager from './modalManager.js'
+import Modal from './modalManager.js'
 
-const modal = new ModalManager('confirm-disconnect',' ',' ');
-const oui = document.getElementsByClassName('oui-button')[1];
-const non = document.getElementsByClassName('non-button')[1];
-console.log(oui,non);
-const openParameter = document.querySelector('.fa-gears');
-const paramContent = document.querySelectorAll('.param-content');
+const oui = document.getElementById('oui-disconnect');
+const non = document.getElementById('non-disconnect');
+const modal = new Modal('confirm-disconnect', undefined, 'non-disconnect');
+
+
 const divParam = document.querySelector('#parameters')
+const paramContent = document.querySelectorAll('.param-content');
+const openParameter = document.querySelector('.fa-gears');
 
 const musicUp = document.querySelector('.fa-volume-high');
 const musicOff = document.querySelector('.fa-volume-off');
@@ -31,7 +32,7 @@ function showParameter() {
         elem.addEventListener('click', fctParam)
         elem.setAttribute('open', "");
     })
-    openParameter.style.color="#f5dba6"
+    openParameter.style.color = "#f5dba6"
 
     signOut.style.display = "block";
 
@@ -90,7 +91,7 @@ function fctParam(e) {
  * hide parameters
  */
 function closeParam() {
-    openParameter.style.color="white";
+    openParameter.style.color = "white";
     paramContent.forEach(element => {
         element.removeAttribute('open');
         if (element.style.display !== "none") {
@@ -100,7 +101,9 @@ function closeParam() {
             element.addEventListener('animationend', () => {
                 element.removeAttribute('closing');
                 element.style.display = "none";
-            }, { once: true });
+            }, {
+                once: true
+            });
         }
     });
 }
@@ -116,7 +119,6 @@ function initListener() {
  * disconnection button clicked
  */
 function ilveutsedeco() {
-    console.log('deconnexion');
     modal.openModal();
 
     oui.addEventListener('click', () => {

@@ -132,7 +132,7 @@ function changeItem(classOfRight) {
     const items = {
         "elec": [0, 1],
         "eau": [2, 3],
-        "carton": [4, 5],
+        "cartons": [4, 5],
         "etain": [6, 7],
 
         "perso": [8, 9],
@@ -162,14 +162,13 @@ function refreshContract(infos) {
         3: "etain"
     }
     for (let i = 0; i < infos.length; i++) {
-
         let supplier = document.getElementsByClassName(supp[i])
-
         for (let i = 0; i < supplier.length - 1; i++) {
             if (supplier[i + 1].hasAttribute('disable')) supplier[i + 1].removeAttribute('disable');
         }
         document.getElementsByClassName(infos[i])[i].setAttribute('disable', '');
     }
+
 }
 
 function refreshMachine(infos) {
@@ -205,13 +204,14 @@ function refreshOccaz(infos, username) {
                 elem.children[0].innerHTML = "Vous vendez un " + item[infos[i].machine] + "<br>de niveau " + infos[i].level + ",<br>" + infos[i].price + "€";
             } else {
                 elem.removeAttribute('disable');
-                elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level + "<br>à vendre";
-                elem.children[1].innerHTML = "Vendue par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
+                elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level;
+                elem.children[1].innerHTML = "à vendre";
+                elem.children[2].innerHTML = "Vendue par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
             }
         } else {
             elem.setAttribute('disable', '');
-            elem.children[0].innerHTML = "Rien n'est à vendre<br>pour le moment";
-            elem.children[1].innerText = " ";
+            elem.children[0].innerHTML = "Rien n'est à vendre";
+            elem.children[1].innerText = "pour le moment";
         }
     }
 

@@ -5,9 +5,9 @@ import ModalManager from '../modalManager.js';
 //const leftPage = document.querySelectorAll('#left-page div');
 //const rightPage = document.querySelectorAll('#right-page div');
 
-const confirmModal = new ModalManager('confirm-buy', '', 'close-confirm')
-const oui = document.getElementsByClassName('oui-button')[0];
-const non = document.getElementsByClassName('non-button')[0];
+const confirmModal = new ModalManager('confirm-buy', '', 'non-buy')
+const oui = document.getElementById('oui-buy');
+const non = document.getElementById('non-buy');
 
 let itemId;
 let itemLevel = undefined;
@@ -118,7 +118,7 @@ function buy() {
         case 3:
             let username = itemDiv.getElementsByClassName("sellUsername")[0].innerText;
             console.log(username)
-            buyOccazCB(username,itemId); // nom du joueur qui vend
+            buyOccazCB(username, itemId); // nom du joueur qui vend
             break;
         default:
             console.warn('ERROR');
@@ -147,36 +147,38 @@ function setSellOccazCB(cb) {
 }
 
 //* Possiblement à retirer/modifier avec l'actualistation du back
-function confirmation(bought,id,level,type) {
+function confirmation(bought, id, level, type) {
     if (bought === true) {
         console.log("Item  acheté")
         if (type !== "employee") {
-            if(itemType===2) {
-                sellOwnMachine(id,level);
+            if (itemType === 2) {
+                sellOwnMachine(id, level);
                 return
             }
-
-            itemDiv.setAttribute('disable', '')
+            confirmModal.closeFunction();
             Modal.closeShopModal(); // close shop modal
             removeListeners(true);
         }
     } else {
         console.log("Item non acheté")
         oui.style.display = "none";
+        non.style.display = "none";
         document.getElementById("buying").innerText = "L'achat n'a pas pu être réalisé"
-        
-        
-        oui.style.display = "flex";
-        return
-        // non.style.display = "none";
+
+        setTimeout(()=>{
+            confirmModal.closeFunction()
+            setTimeout(()=>{
+                oui.style.display = "inline-block";
+                non.style.display = "inline-block";
+            },250);
+        },1000);
     }
-confirmModal.closeFunction();
 }
 
 let toSell;
 
-function sellOwnMachine(id,level) {
-    let itemId=id
+function sellOwnMachine(id, level) {
+    let itemId = id
     removeListeners(false);
     let sameID = Array.from(document.getElementsByClassName(itemId));
     console.log(sameID)

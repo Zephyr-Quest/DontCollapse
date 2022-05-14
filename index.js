@@ -260,7 +260,7 @@ io.on('connection', socket => {
             if (allRooms[idRoom].playersName.indexOf(username) === 0) {
                 // Delete the room
                 console.log("delete room", idRoom);
-                allRooms[idRoom].chrono.stopChrono = true;
+                if(allRooms[idRoom].chrono) allRooms[idRoom].chrono.stopChrono = true;
                 delete allRooms[idRoom];
                 io.to(idRoom).emit("disconnection");
             }
