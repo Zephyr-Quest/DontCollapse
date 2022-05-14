@@ -271,15 +271,19 @@ export class Scene {
                 switch (itemToChange.obj) {
                         case "0":
                                 name = "Mac_Poste a souder"
+                                this.levels.welding=itemToChange.level
                                 break;
                         case "1":
                                 name = "Mac_Assembleur de Precision"
+                                this.levels.precision=itemToChange.level
                                 break;
                         case "2":
                                 name = "Mac_Assembleur Mecanique"
+                                this.levels.mechanic=itemToChange.level
                                 break;
                         case "3":
                                 name = "Mac_Assembleur General"
+                                this.levels.general=itemToChange.level
                                 break;
                 }
                 this.selectionables.children.forEach(el => {
@@ -287,7 +291,6 @@ export class Scene {
                 })
                 this.otherLevels.children.forEach(el => {
                         if (el.name == name && el.level == itemToChange.level) {
-                                console.log(el)
                                 this.selectionables.add(el)
                         }
                 })
@@ -655,8 +658,6 @@ export class Scene {
          */
         changeCamera(event) {
                 let cam = 1
-                let input = document.getElementsByTagName("input")
-                console.log(document.activeElement.tagName)
                 if(document.activeElement.tagName=="INPUT") cam=0
                 if (cam==1) {
                         switch (event.keyCode) {
