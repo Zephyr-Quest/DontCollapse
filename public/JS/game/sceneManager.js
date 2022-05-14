@@ -517,14 +517,14 @@ export class Scene {
                 let user = document.getElementById("username").value
                 sortie.innerHTML = ""
                 players.forEach(el => {
-                        if(el!=user){
+                        if (el != user) {
                                 let divWrap = document.createElement("div")
+                                divWrap.style.cursor = 'pointer'
                                 divWrap.classList.add("Sicon1")
                                 let ion = "<ion-icon name='person-outline'></ion-icon>"
                                 let pe = document.createElement("p")
                                 pe.innerText = el
                                 divWrap.innerHTML = ion
-                                console.log(pe)
                                 divWrap.appendChild(pe)
                                 sortie.appendChild(divWrap)
                         }
@@ -654,31 +654,37 @@ export class Scene {
          *
          */
         changeCamera(event) {
-                switch (event.keyCode) {
-                        case 49:
-                                // 1 pressed
-                                if (this.camera.name != "pos1") {
-                                        this.camera.position.set(800, -800, 550);
-                                        document.getElementsByClassName("cameraName")[0].innerText = "Camera 1";
-                                        this.camera.name = "pos1"
-                                }
-                                break;
-                        case 50:
-                                // 2 pressed
-                                if (this.camera.name != "pos2") {
-                                        this.camera.position.set(0, -800, 550);
-                                        document.getElementsByClassName("cameraName")[0].innerText = "Camera 2";
-                                        this.camera.name = "pos2"
-                                }
-                                break;
-                        case 51:
-                                // 3 pressed
-                                if (this.camera.name != "pos3") {
-                                        this.camera.name = "pos3"
-                                        document.getElementsByClassName("cameraName")[0].innerText = "Camera 3";
-                                        this.camera.position.set(-800, -800, 550);
-                                }
-                                break;
+                let cam = 1
+                let input = document.getElementsByTagName("input")
+                console.log(document.activeElement.tagName)
+                if(document.activeElement.tagName=="INPUT") cam=0
+                if (cam==1) {
+                        switch (event.keyCode) {
+                                case 49:
+                                        // 1 pressed
+                                        if (this.camera.name != "pos1") {
+                                                this.camera.position.set(800, -800, 550);
+                                                document.getElementsByClassName("cameraName")[0].innerText = "Camera 1";
+                                                this.camera.name = "pos1"
+                                        }
+                                        break;
+                                case 50:
+                                        // 2 pressed
+                                        if (this.camera.name != "pos2") {
+                                                this.camera.position.set(0, -800, 550);
+                                                document.getElementsByClassName("cameraName")[0].innerText = "Camera 2";
+                                                this.camera.name = "pos2"
+                                        }
+                                        break;
+                                case 51:
+                                        // 3 pressed
+                                        if (this.camera.name != "pos3") {
+                                                this.camera.name = "pos3"
+                                                document.getElementsByClassName("cameraName")[0].innerText = "Camera 3";
+                                                this.camera.position.set(-800, -800, 550);
+                                        }
+                                        break;
+                        }
                 }
         }
 }

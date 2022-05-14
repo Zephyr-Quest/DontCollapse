@@ -365,6 +365,103 @@ body h1 {
   background-color: #f5dba6;
   color: #383331;
 }
+.selected::before {
+  content: "> ";
+}
+#confirm-buy {
+  padding: 40px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #383331;
+  border: 2px solid #383331;
+  color: #f5dba6;
+  cursor: default;
+  font-family: 'KoHo';
+  font-weight: bold;
+}
+#confirm-buy::backdrop {
+  background-color: rgba(0, 0, 0, 0.466);
+}
+#confirm-buy #input-div {
+  width: 100%;
+}
+#confirm-buy #price-form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+#confirm-buy #price-form input {
+  height: 40px;
+  border-bottom: 3px solid #f5dba6;
+  color: #f5dba6;
+  background-color: transparent;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  outline: none;
+}
+#confirm-buy #price-form input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+#confirm-buy #price-form button {
+  width: 100%;
+  padding: 10px 20px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 3px solid #f5dba6;
+  color: #383331;
+  background-color: #f5dba6;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-left: 15px;
+}
+#confirm-buy #price-form button:hover {
+  background-color: transparent;
+  color: #f5dba6;
+  transition: background-color 0.3s;
+}
+#confirm-buy .modal-content h2 {
+  text-transform: uppercase;
+  font-family: "Koulen";
+  font-size: 2rem;
+}
+#confirm-buy p {
+  font-size: 1.2rem;
+}
+#confirm-buy #confirm-div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#confirm-buy #confirm-div div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#confirm-buy #confirm-div div button {
+  width: 45%;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 3px solid #f5dba6;
+  color: #383331;
+  background-color: #f5dba6;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+#confirm-buy #confirm-div div button:hover {
+  background-color: transparent;
+  color: #f5dba6;
+  transition: background-color 0.3s;
+}
 #shop-modal {
   padding: 20px;
   width: 1200px;
@@ -556,6 +653,9 @@ body h1 {
   width: calc(20% - 20px);
   height: 100%;
   margin-left: 20px;
+}
+#chat-modal #chatForm button:hover {
+  color: #f5dba6;
 }
 #chat-modal #messages {
   padding-bottom: 10px;

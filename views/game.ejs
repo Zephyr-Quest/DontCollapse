@@ -32,7 +32,8 @@
     <div id="room">
         <h1>Bienvenue <%= username %> !</h1>
         <div id="player_list"></div>
-        <button type="submit" id="BtnGame" style="display: none;"><i class="fa-solid fa-display"></i> Commencer la partie !</button>
+        <button type="submit" id="BtnGame" style="display: none;"><i class="fa-solid fa-display"></i> Commencer la
+            partie !</button>
         <button id="chat-button"><i class="fa-solid fa-comment-dots"></i> Ouvrir le Chat</button>
     </div>
 
@@ -73,7 +74,7 @@
                     <div class="progress-container">
                         <div class="progress"></div>
                     </div>
-                    <p class="textPro">Social</p>   
+                    <p class="textPro">Social</p>
                 </div>
                 <div class="containedBy">
                     <div class="progress-container">
@@ -88,12 +89,14 @@
                     <p class="textPro">Ecologique</p>
                 </div>
             </div>
-            <div class="containers" style = "width:auto;margin-top:10px;justify-content:space-around;flex-direction:column-reverse;">
+            <div class="containers"
+                style="width:auto;margin-top:10px;justify-content:space-around;flex-direction:column-reverse;">
                 <div>
-                    <p style="margin:0;margin-top:5px;padding:0;"><span id="minutes"></span> : <span id="seconds"></span></p>
+                    <p style="margin:0;margin-top:10px;padding:0;"><span id="minutes"></span> : <span
+                            id="seconds"></span></p>
                 </div>
                 <div id="money-container">
-                    <p class="txtMoney" style="margin-top:10px;"><span id="money-amount">50000</span> €</p>
+                    <p class="txtMoney" style="margin-top:0px;"><span id="money-amount">50000</span> €</p>
                 </div>
 
             </div>
@@ -106,7 +109,7 @@
         <dialog class="modal" id="shop-modal">
             <div class="modal-content">
                 <div class="top-modal">
-                    <h2 class="title-modal">Bienvenue dans le shop !</h2>
+                    <h2 class="title-modal">Bienvenue dans la boutique !</h2>
                     <span class="close-button" id="close-shop">&times;</span>
                 </div>
                 <div id="shop">
@@ -467,17 +470,20 @@
             </div>
             <dialog id="confirm-buy">
                 <div class="modal-content">
-                    <h2>Devis</h2>
+                    <h2>Devis</h2><br>
                     <div id="confirm-div" style="display: block;">
-                        <p id="buying"></p>
-                        <button class="oui-button">Oui</button>
-                        <button class="non-button">Non</button>
+                        <p id="buying"></p><br>
+                        <div>
+                            <button class="oui-button">Oui</button>
+                            <button class="non-button">Non</button>
+                        </div>
                     </div>
                     <div id="input-div" style="display: none;">
                         <p>Pour quel prix ?</p>
                         <form id="price-form" action="">
                             <input type="number" id="input-price" autocomplete="off"
-                                placeholder="Prix de vente..." /><button class="button">Send</button>
+                                placeholder="Prix de vente" />
+                                <button class="button">Vendre</button>
                         </form>
                     </div>
                 </div>
@@ -493,7 +499,7 @@
                 <span class="close-button" id="close-chat">&times;</span>
             </div>
             <form id="chatForm" action="">
-                <input id="input-chat" autocomplete="off" placeholder="Message..." /><button
+                <input id="input-chat" autocomplete="off" placeholder="Message" /><button
                     class="button">Envoyer</button>
             </form>
             <div id="messages"></div>
