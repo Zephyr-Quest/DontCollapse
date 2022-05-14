@@ -361,6 +361,9 @@ body h1 {
 .modal[closing]::backdrop {
   animation: fade-out 250ms forwards;
 }
+.clickable {
+  cursor: pointer;
+}
 .selected {
   background-color: #f5dba6;
   color: #383331;
