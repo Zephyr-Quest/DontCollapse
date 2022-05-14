@@ -11,7 +11,6 @@ function initListener(id) {
     ShopItem.changeItem(rightRubric[id].classList[0]);
     for (let i = id; i < id + 4; i++) {
         rightRubric[i].addEventListener('click', changeSelection);
-
     }
 }
 
@@ -59,23 +58,21 @@ function changeRubric(classOfTop) {
             break;
         case "top2":
             rightRubric[4].classList.add("selected");
-            for (let i = 4; i < 8; i++) {
-                rightRubric[i].style.display = "flex";
-            }
+                rightRubric[4].style.display = "flex";
             initListener(4);
 
             break;
         case "top3":
-            rightRubric[8].classList.add("selected");
-            for (let i = 8; i < 12; i++) {
+            rightRubric[5].classList.add("selected");
+            for (let i = 5; i < 9; i++) {
                 rightRubric[i].style.display = "flex";
             }
-            initListener(8);
+            initListener(5);
 
             break;
         case "top4":
-            rightRubric[12].classList.add("selected");
-            rightRubric[12].style.display = "flex";
+            rightRubric[9].classList.add("selected");
+            rightRubric[9].style.display = "flex";
             ShopItem.changeItem("occaz");
 
             break;

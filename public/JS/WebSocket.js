@@ -55,6 +55,7 @@ const events = {
     },
     "finishGame": () => {
         console.log("finish game front");
+        HUD.openResultsModal();
     }
 };
 

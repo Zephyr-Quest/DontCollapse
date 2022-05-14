@@ -29,17 +29,17 @@ function initListener(id) {
             leftBtn[i].addEventListener('click', buyContract);
             rightBtn[i].addEventListener('click', buyContract);
         }
-    } else if (id[0] < 16) {
+    } else if (id[0] < 10) {
         for (let i = id[0]; i <= id[1]; i++) {
             leftBtn[i].addEventListener('click', buyPerso);
             rightBtn[i].addEventListener('click', buyPerso);
         }
-    } else if (id[0] < 24) {
+    } else if (id[0] < 18) {
         for (let i = id[0]; i <= id[1]; i++) {
             leftBtn[i].addEventListener('click', buyMachine);
             rightBtn[i].addEventListener('click', buyMachine);
         }
-    } else if (id[0] < 26) {
+    } else if (id[0] < 20) {
         for (let i = id[0]; i <= id[1]; i++) {
             leftBtn[i].addEventListener('click', buyOccaz);
             rightBtn[i].addEventListener('click', buyOccaz);
@@ -88,7 +88,7 @@ function buyOccaz(e) {
  * remove all listeners
  */
 function closeAllListener() {
-    for (let i = 0; i < 26; i++) {
+    for (let i = 0; i < leftPage.length; i++) {
         leftPage[i].removeEventListener('mouseenter', toggleDescri);
         leftPage[i].removeEventListener('mouseleave', toggleDescri);
 
@@ -99,15 +99,15 @@ function closeAllListener() {
         leftBtn[i].addEventListener('click', buyContract);
         rightBtn[i].addEventListener('click', buyContract);
     }
-    for (let i = 8; i < 16; i++) {
+    for (let i = 8; i < 9; i++) {
         leftBtn[i].addEventListener('click', buyPerso);
         rightBtn[i].addEventListener('click', buyPerso);
     }
-    for (let i = 16; i < 24; i++) {
+    for (let i = 10; i < 18; i++) {
         leftBtn[i].addEventListener('click', buyMachine);
         rightBtn[i].addEventListener('click', buyMachine);
     }
-    for (let i = 24; i < 26; i++) {
+    for (let i = 18; i < 20; i++) {
         leftBtn[i].addEventListener('click', buyOccaz);
         rightBtn[i].addEventListener('click', buyOccaz);
     }
@@ -135,17 +135,14 @@ function changeItem(classOfRight) {
         "carton": [4, 5],
         "etain": [6, 7],
 
-        "inge": [8, 9],
-        "super": [10, 11],
-        "maint": [12, 13],
-        "menage": [14, 15],
+        "perso": [8, 9],
 
-        "manix": [16, 17],
-        "droit": [18, 19],
-        "braz": [20, 21],
-        "tesla": [22, 23],
+        "manix": [10, 11],
+        "droit": [12, 13],
+        "braz": [14, 15],
+        "tesla": [16, 17],
 
-        "occaz": [24, 25],
+        "occaz": [18, 19],
     };
 
     let toDisplay = items[classOfRight];
@@ -168,8 +165,8 @@ function refreshContract(infos) {
 
         let supplier = document.getElementsByClassName(supp[i])
 
-        for (let i = 0; i < supplier.length-1; i++) {
-            if (supplier[i+1].hasAttribute('disable')) supplier[i+1].removeAttribute('disable');
+        for (let i = 0; i < supplier.length - 1; i++) {
+            if (supplier[i + 1].hasAttribute('disable')) supplier[i + 1].removeAttribute('disable');
         }
         document.getElementsByClassName(infos[i])[i].setAttribute('disable', '');
     }

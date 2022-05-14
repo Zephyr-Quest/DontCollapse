@@ -29,8 +29,6 @@ const level = {
     "super": "supervisors",
     "maint": "maintainers",
     "menage": "cleaners"
-
-
 };
 
 /**
@@ -43,7 +41,6 @@ function buyItem(divOfItem, type) {
     itemLevel = level[divOfItem.classList[0]]; // set the item level
     itemId = Number(divOfItem.classList[1]); // set the item id
     let itemName = divOfItem.children[0].textContent; // set the item name
-
 
     console.log(itemDiv, "// type : ", itemType, "//level : ", itemLevel, "// id : ", itemId)
 
@@ -112,7 +109,7 @@ function buy() {
             break;
         case 1:
             console.log(itemId, itemLevel)
-            buyPersoCB(itemLevel /* , itemLevel */ ); // string métier / salaire
+            buyPersoCB(itemLevel); // string métier / salaire
             break;
         case 2:
             console.log(itemId, itemLevel)

@@ -13,6 +13,7 @@ Parameter.initListener();
 let shop = new Modal('shop-modal', 'shop-button', 'close-shop', true);
 let chat = new Modal('chat-modal', 'chat-button', 'close-chat');
 let player = new Modal('player-modal', 'player-button', 'close-player', false, true);
+let results = new Modal('results-modal', 'results-button', 'close-results');
 
 function initChatButton() {
     chat.initListener();
@@ -44,6 +45,10 @@ function closeShopModal() {
 
 function openOtherPLayer() {
     player.openModal();
+}
+
+function openResultsModal(){
+    results.openModal();
 }
 
 function updateEcologicBar(value) {
@@ -125,6 +130,7 @@ export default {
     openOtherPLayer,
     openShopModal,
     closeShopModal,
+    openResultsModal,
     refreshShop,
     refreshHud,
     updateOnPurchase,
