@@ -9,12 +9,16 @@ const Employee = require("./Employee");
 
 module.exports = class Player {
     constructor(name) {
+        // generals
         this.name = name;
         this.money = 50000;
-        this.sd = new SustainableDevelopment();
+
+        // machines
         this.machines = [{ level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }]; // machines level
+        this.machinesBack = [undefined, undefined, undefined, undefined];
+
+        // furnishers and employees
         this.furnishers = [1, 1, 1, 1];
-        this.expenses = 0;
         this.employees = {
             fees: 0,
             number: 0,
@@ -23,12 +27,18 @@ module.exports = class Player {
             cleaners: [],
             supervisors: []
         };
-        this.machinesBack = [undefined, undefined, undefined, undefined];
+
+        // details
+        this.sd = new SustainableDevelopment();
+        this.manufacturingQuality = Infinity;
+        this.expenses = 0;
+        this.income = 0;
         this.consumption = 0;
         this.productionRate = Infinity;
         this.maintainersNeeded = 0;
         this.engineersNeeded = 0;
 
+        // init
         this.machineInitialisation();
         this.productivityUpdate();
         this.generateExpenses();
@@ -44,7 +54,7 @@ module.exports = class Player {
      * @returns if the player has enough money
      */
     asEnoughMoney(amount) {
-        return this.money >= parseInt(amount);
+        return this.money >= amount;
     }
 
     /**
@@ -83,6 +93,30 @@ module.exports = class Player {
         return true;
     }
 
+    /* -------------------------------------------------------------------------- */
+    /*                              Display functions                             */
+    /* -------------------------------------------------------------------------- */
+
+    /**
+     * Display in a nice way, all machines owned by player
+     */
+    machineDisplay() {
+        console.log(this.name + "'s machines");
+        this.machinesBack.forEach(machine => {
+            machine.display();
+            console.log("");
+        });
+    }
+
+    // ! financesDisplay
+    financesDisplay() {
+        console.log(this.name + "'s financial report");
+        console.log("✨ Production quality :", this.manufacturingQuality);
+        console.log("⏰ Production speed :", this.productionRate);
+        console.log("⚡ Consumption :", this.consumption);
+        console.log("💰 Expenses : ", this.expenses);
+        console.log("📈 Income :", this.income);
+    }
 
     /* -------------------------------------------------------------------------- */
     /*                         Machines related functions                         */
@@ -99,17 +133,6 @@ module.exports = class Player {
     }
 
     /**
-     * Display in a nice way, all machines owned by player
-     */
-    machineDisplay() {
-        console.log(this.name + "'s machines");
-        this.machinesBack.forEach(machine => {
-            machine.display();
-            console.log("");
-        });
-    }
-
-    /**
      * 
      * @param {Number} machineType 
      * @param {Number} machineLevel
@@ -122,6 +145,7 @@ module.exports = class Player {
             this.machinesBack[machineType] = new Machine(machineType, machineLevel); // Creating the new machine
             this.money -= this.machinesBack[machineType].price;
             this.sdUpdate();
+            this.productivityUpdate();
 
             // ! À supprimer une fois les contrôles effectués
             this.machines[machineType].level = machineLevel;
@@ -174,7 +198,7 @@ module.exports = class Player {
         let salary = employees["salaries"][categorie].min + employees["salaries"][categorie].max;
         this.employees[categorie].push(new Employee(name, salary));
         ++this.employees.number;
-        this.fees += salary;
+        this.employees.fees += salary;
 
         console.log(this.employees);
     }
@@ -185,24 +209,47 @@ module.exports = class Player {
 
     productivityUpdate() {
         this.consumption = 0;
+        this.productionRate = Infinity;
+        this.manufacturingQuality = Infinity;
         this.machinesBack.forEach(machine => {
             this.productionRate = Math.min(machine.productionRate, this.productionRate);
+            this.manufacturingQuality = Math.min(machine.manufacturingQuality, this.manufacturingQuality);
             this.consumption += machine.consumption;
         });
     }
 
+    electricityExpenses() {
+        return this.consumption * furnishers[0].price[this.furnishers[0]];
+    }
+
+    waterExpenses() {
+        return (this.productionRate * this.manufacturingQuality) * furnishers[1].price[this.furnishers[1]];
+    }
+
+    generateIncome() {
+        return 800 * this.manufacturingQuality * this.productionRate;
+    }
+
     generateExpenses() {
         let expenses = 0;
+        expenses += this.electricityExpenses();
+        expenses += this.waterExpenses();
         expenses += this.employees.fees;
-        this.furnishers.forEach((element, index) => {
-            expenses += furnishers[index].price[element];
-        });
+        // this.furnishers.forEach((element, index) => {
+        //     expenses += furnishers[index].price[element];
+        // });
         this.expenses = expenses;
         return expenses;
     }
 
     isFinished() {
-        return this.machines === [4, 4, 4, 4] && this.sd.isFinished();
+        // return this.machines === [4, 4, 4, 4] && this.sd.isFinished();
+        let machineFinished = Infinity;
+        this.machinesBack.forEach(machine => {
+            machineFinished = Math.min(machine.level, machineFinished);
+        });
+
+        return machineFinished === 4 && this.sd.isFinished();
     }
 
     updateAll() {
@@ -210,6 +257,7 @@ module.exports = class Player {
         // Expenses
         this.money -= this.expenses;
         this.generateExpenses();
+        this.income = this.generateIncome();
         return { moula: this.money, barres: this.sd };
     }
 };
