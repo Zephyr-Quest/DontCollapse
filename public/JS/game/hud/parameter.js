@@ -190,11 +190,11 @@ function putEffect() {
  */
 function changeEffect() {
     if (effect) {
-        effectUp.style.display = "block";
+        effectUp.style.display = "flex";
         effectOff.style.display = "none";
     } else {
         effectUp.style.display = "none";
-        effectOff.style.display = "block";
+        effectOff.style.display = "flex";
     }
 }
 

@@ -17,7 +17,7 @@ function connect(path, idRoom = null) {
             document.getElementsByClassName("error_msg_pseudo")[0].style.display = "none";
             window.location.href = "/game";
         },
-        err => {
+        (_err) => {
             if (pseudo == "") {
                 document.getElementsByClassName("error_msg_pseudo")[0].innerHTML = "Le pseudo ne peut être vide";
             } else if (pseudo.length < 3 || pseudo.length > 12) {
