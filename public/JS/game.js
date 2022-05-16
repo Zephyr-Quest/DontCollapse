@@ -32,7 +32,8 @@ function deleteEvent(e) {
 }
 
 function seeOtherPlayerEvent(e) {
-    const player = e.target.getElementsByTagName("p")[0].innerText;
+    console.log(e.target)
+    const player = e.target.parentElement.getElementsByTagName("P")[0].innerText;
     console.log("let's see", player);
 
     // Delete the current player

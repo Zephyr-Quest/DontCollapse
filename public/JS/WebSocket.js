@@ -153,8 +153,8 @@ function emit(eventName, ...params) {
 const getConnectedPlayers = () => connectedPlayers;
 
 // See other players EVENT on click
-document.getElementById("SortiWrap").addEventListener("mousedown", () => {
-    seeOtherEvent();
+document.getElementById("SortiWrap").addEventListener("mousedown", (event) => {
+    seeOtherEvent(event);
     sc.goSeeOtherPlayer()
 })
 
