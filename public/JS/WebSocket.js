@@ -111,7 +111,7 @@ function updatePlayersOnScreen() {
     });
 }
 
-function beginingGame() {
+function beginingGame(data) {
     document.getElementsByClassName("cameraName")[0].style.display="block";
     document.getElementById("myThreeJsCanvas").style.display = "block"
     const eltsToDelete = document.getElementById("room");
@@ -123,14 +123,6 @@ function beginingGame() {
 
 function getAllShop(infoPlayer, username) {
     HUD.refreshShop(infoPlayer, username);
-}
-
-function getChrono() {
-
-}
-
-function getMoney() {
-
 }
 
 /* --------------------------------- Return --------------------------------- */
@@ -163,6 +155,4 @@ export default {
     getConnectedPlayers,
 
     getAllShop,
-    getChrono,
-    getMoney,
 }
