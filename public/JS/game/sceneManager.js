@@ -79,7 +79,7 @@ export class Scene {
                         mechanic: 1
                 }
                 this.firstLevels = new THREE.Group()
-                
+
         }
 
         /**
@@ -258,7 +258,7 @@ export class Scene {
 
                         } else {
                                 if (el.ray) {
-                                        mesh.level=1
+                                        mesh.level = 1
                                         this.firstLevels.add(mesh.clone())
                                         this.selectionables.add(mesh);
                                 } else {
@@ -502,25 +502,17 @@ export class Scene {
                 document.getElementsByClassName("cameraName")[0].style.display = "block"
         }
 
-        goSeeOtherPlayer(obj) {
-                let machines = [{
-                        level: 4,
-                        secondHand: false
-                }, {
-                        level: 4,
-                        secondHand: false
-                }, {
-                        level: 1,
-                        secondHand: false
-                }, {
-                        level: 1,
-                        secondHand: false
-                }]
-                for (let index = 0; index < this.selectionables.children.length; index++) {
-                        let el = this.selectionables.children[index]
+        goSeeOtherPlayer(obj,pseudo) {
+                this.groupToDisplay = new THREE.Group()
+                this.groupToDisplay = this.selectionables.clone()
+                this.scene.remove(this.selectionables)
+                this.selectionables.visible = false
+                let machines = obj
+                for (let index = 0; index < this.groupToDisplay.children.length; index++) {
+                        let el = this.groupToDisplay.children[index]
                         if (el.name == "Mac_Poste a souder" || el.name == "Mac_Assembleur de Precision" || el.name == "Mac_Assembleur General" || el.name == "Mac_Assembleur Mecanique") {
-                                this.selectionables.remove(el)
-                                index =index- 1;
+                                this.groupToDisplay.remove(el)
+                                index = index - 1;
                         }
                 }
                 for (let index = 0; index < machines.length; index++) {
@@ -544,16 +536,43 @@ export class Scene {
                                         lvl = machines[index].level
                                         break;
                         }
-                        if(lvl==1){
-                                this.firstLevels.children.forEach(el=>{
-                                        if(el.name==name) this.selectionables.add(el)
+                        if (lvl == 1) {
+                                this.firstLevels.children.forEach(el => {
+                                        if (el.name == name) this.groupToDisplay.add(el.clone())
                                 })
-                        } else{
-                                this.otherLevels.children.forEach(el=>{
-                                        if(el.name==name && el.level==lvl) this.selectionables.add(el)
+                        } else {
+                                this.otherLevels.children.forEach(el => {
+                                        if (el.name == name && el.level == lvl) this.groupToDisplay.add(el.clone())
                                 })
                         }
                 }
+                this.scene.add(this.groupToDisplay)
+                this.closeCameraDisplay()
+                let menu = document.getElementsByClassName("usineDiv")[0]
+                menu.style.display = "flex"
+                menu.innerHTML="Usine de "+pseudo+"<br>> Retourner à mon usine <";
+
+
+                let menu2 = document.getElementById("myMenuSortie")
+                if (menu2.style.display == "block") menu2.style.display = "none"
+                document.getElementById("myThreeJsCanvas").style.pointerEvents = "none"
+                this.scene.remove(this.copyGroupSprite)
+                this.scene.remove(this.GroupSprite)
+                this.copyGroupSprite = new THREE.Group()
+                this.GroupSprite = new THREE.Group()
+                menu.addEventListener("mousedown", () => {
+                        menu.style.display = "none"
+                        this.comeBackHome()
+                })
+        }
+
+        comeBackHome() {
+                this.scene.remove(this.groupToDisplay)
+                document.getElementById("myThreeJsCanvas").style.pointerEvents = "auto"
+                this.selectionables.visible = true
+
+                this.scene.add(this.selectionables)
+                this.closeMenu()
         }
 
         /**
@@ -651,8 +670,6 @@ export class Scene {
                                 el.position.y = 250.5
                         }
                 })
-
-
         }
 
         /**
