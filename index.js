@@ -91,10 +91,12 @@ const updateMonth = game => {
         // Actualisation
         if (user.gameContinue) {
             const infoPlayer = user.updateAll();
+            const event = game.applyEvent();
             const infos = {
                 chrono: game.chrono.getTime(),
                 moula: infoPlayer.moula,
-                barres: infoPlayer.barres
+                barres: infoPlayer.barres,
+                event: event
             };
             pSocket.emit("infoActu", infos);
 
@@ -147,6 +149,23 @@ app.get('/game', (req, res) => {
 
 app.get('/three', (req, res) => {
     res.render('index');
+})
+
+app.get('/game/:player', (req, res) => {
+    const idRoom = req.session.idRoom;
+    const username = req.session.username;
+    const player = req.params.player;
+
+    if (!req.session.username) {
+        res.redirect('/lobby');
+        return;
+    }
+
+    console.log(username, "go to see", player, "in room", idRoom)
+
+    res.render('game', {
+        data: allRooms[idRoom].searchPlayer(player).machines
+    })
 })
 
 app.delete("/removeuser/:player", (req, res) => {
@@ -248,7 +267,7 @@ app.post("/join",
             res.status(400).json({
                 errors: "Pseudo already exists in this room",
             });
-            res.sText="azerty"
+            res.sText = "azerty"
             return;
         }
 
@@ -310,8 +329,7 @@ io.on('connection', socket => {
                     // Host disconnect
                     if (pUsername !== username && allRooms[idRoom].gameStart) {
                         pSocket.emit("finishGame", msg, false);
-                    }
-                    else
+                    } else
                         pSocket.emit("disconnection");
                 }
 

@@ -1,3 +1,4 @@
+import { sc } from "./game/app.js";
 import Chrono from "./game/hud/chrono.js";
 import HUD from "./game/hud/hud.js";
 import Item from './game/hud/shop/manageItem.js'
@@ -68,6 +69,7 @@ let connectedPlayers = [];
 const username = document.getElementById("username").value;
 /* -------------------- Variables for functions listeners ------------------- */
 let deleteEvent;
+let seeOtherEvent;
 let startGame;
 let messages;
 
@@ -113,7 +115,7 @@ function updatePlayersOnScreen() {
 }
 
 function beginingGame(data) {
-    document.getElementsByClassName("cameraName")[0].style.display="block";
+    document.getElementsByClassName("cameraName")[0].style.display = "block";
     document.getElementById("myThreeJsCanvas").style.display = "block"
     const eltsToDelete = document.getElementById("room");
     eltsToDelete.remove();
@@ -129,10 +131,11 @@ function getAllShop(infoPlayer, username) {
 /* --------------------------------- Return --------------------------------- */
 
 // return {
-function init(DE, SG, chatMessages) {
+function init(DE, SG, chatMessages, seeOther) {
     deleteEvent = DE;
     startGame = SG;
     messages = chatMessages;
+    seeOtherEvent = seeOther;
 }
 
 function connect() {
@@ -148,6 +151,12 @@ function emit(eventName, ...params) {
 }
 
 const getConnectedPlayers = () => connectedPlayers;
+
+// See other players EVENT on click
+document.getElementById("SortiWrap").addEventListener("mousedown", (event) => {
+    seeOtherEvent(event);
+    sc.goSeeOtherPlayer()
+})
 
 export default {
     init,

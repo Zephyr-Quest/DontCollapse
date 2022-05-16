@@ -15,7 +15,19 @@ module.exports = class Player {
         this.gameContinue = true;
 
         // machines
-        this.machines = [{ level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }]; // machines level
+        this.machines = [{
+            level: 1,
+            secondHand: false
+        }, {
+            level: 1,
+            secondHand: false
+        }, {
+            level: 1,
+            secondHand: false
+        }, {
+            level: 1,
+            secondHand: false
+        }]; // machines level
         this.machinesBack = [undefined, undefined, undefined, undefined];
 
         // furnishers and employees
@@ -309,6 +321,9 @@ module.exports = class Player {
         this.money *= 100;
         this.money = Math.floor(this.money);
         this.money /= 100;
-        return { moula: this.money, barres: this.sd };
+        return {
+            moula: this.money,
+            barres: this.sd
+        };
     }
 };
