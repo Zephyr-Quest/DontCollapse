@@ -11,7 +11,7 @@ module.exports = class Player {
     constructor(name) {
         // generals
         this.name = name;
-        this.money = 50000;
+        this.money = 5000;
 
         // machines
         this.machines = [{ level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }]; // machines level
@@ -42,7 +42,9 @@ module.exports = class Player {
         this.machineInitialisation();
         this.productivityUpdate();
         this.generateExpenses();
-    }
+        this.employeeInit();
+        this.sdUpdate();
+    }   
 
     /* -------------------------------------------------------------------------- */
     /*                               Utils functions                              */
@@ -111,6 +113,7 @@ module.exports = class Player {
     // ! financesDisplay
     financesDisplay() {
         console.log(this.name + "'s financial report");
+        console.log("Money :", this.money);
         console.log("✨ Production quality :", this.manufacturingQuality);
         console.log("⏰ Production speed :", this.productionRate);
         console.log("⚡ Consumption :", this.consumption);
@@ -146,6 +149,7 @@ module.exports = class Player {
             this.money -= this.machinesBack[machineType].price;
             this.sdUpdate();
             this.productivityUpdate();
+            this.machineSync();
 
             // ! À supprimer une fois les contrôles effectués
             this.machines[machineType].level = machineLevel;
@@ -155,6 +159,15 @@ module.exports = class Player {
 
         }
         return false;
+    }
+
+    machineSync() {
+        this.engineersNeeded = 0;
+        this.maintainersNeeded = 0;
+        this.machinesBack.forEach(machine => {
+            this.maintainersNeeded += machine.maintainersRequested;
+            this.engineersNeeded += machine.engineersRequested;
+        });
     }
 
     machineUpgradeSecondhand(machineType, machineLevel, price) {
@@ -181,6 +194,14 @@ module.exports = class Player {
     /*                     Furnishers and employees functions                     */
     /* -------------------------------------------------------------------------- */
 
+    employeeInit() {
+        employees.categories.forEach(employee => {
+            this.recruteEmployee(employee);
+        });
+        this.recruteEmployee("engineers");
+        this.recruteEmployee("maintainers");
+    }
+
     furnisherUpgrade(furnisher, level) {
         // console.log("--- Player ", this.name, " wants to change Orange to SFR",furnisher, level);
         if (this.asEnoughMoney(furnishers[furnisher].price[level])) {
@@ -195,12 +216,12 @@ module.exports = class Player {
     recruteEmployee(categorie) {
         // console.log("--- Player ", this.name, " wants to recrute", categorie);
         let name = employees["name"][Math.floor(Math.random() * employees["name"].length)];
-        let salary = employees["salaries"][categorie].min + employees["salaries"][categorie].max;
+        let salary = Math.floor(Math.random() * (employees["salaries"][categorie].max - employees["salaries"][categorie].min + 1) + employees["salaries"][categorie].min);
+        Math.floor(Math.random() * (employees["salaries"][categorie].max - employees["salaries"][categorie].min + 1) + employees["salaries"][categorie].min);
         this.employees[categorie].push(new Employee(name, salary));
         ++this.employees.number;
         this.employees.fees += salary;
-
-        console.log(this.employees);
+        return true;
     }
 
     /* -------------------------------------------------------------------------- */
@@ -210,12 +231,14 @@ module.exports = class Player {
     productivityUpdate() {
         this.consumption = 0;
         this.productionRate = Infinity;
-        this.manufacturingQuality = Infinity;
+        this.manufacturingQuality = 0;
         this.machinesBack.forEach(machine => {
             this.productionRate = Math.min(machine.productionRate, this.productionRate);
-            this.manufacturingQuality = Math.min(machine.manufacturingQuality, this.manufacturingQuality);
+            this.manufacturingQuality += machine.manufacturingQuality;
             this.consumption += machine.consumption;
         });
+
+        this.manufacturingQuality /= 4;
     }
 
     electricityExpenses() {
@@ -227,7 +250,8 @@ module.exports = class Player {
     }
 
     generateIncome() {
-        return 800 * this.manufacturingQuality * this.productionRate;
+        let salariesPourcentage = Math.min(1, (this.employees.engineers.length + this.employees.maintainers.length)/(this.maintainersNeeded + this.engineersNeeded))
+        return salariesPourcentage * 800 * this.manufacturingQuality * this.productionRate;
     }
 
     generateExpenses() {
@@ -253,11 +277,13 @@ module.exports = class Player {
     }
 
     updateAll() {
+        this.machineSync();
         this.sdUpdate();
         // Expenses
         this.money -= this.expenses;
         this.generateExpenses();
         this.income = this.generateIncome();
+        this.money += this.income;
         return { moula: this.money, barres: this.sd };
     }
 };
