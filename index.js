@@ -165,7 +165,7 @@ app.get('/otherplayer/:player', (req, res) => {
 
     console.log(username, "go to see", player, "in room", idRoom)
 
-    res.json(allRooms[idRoom].searchPlayer(player).machines)
+    return res.json(allRooms[idRoom].searchPlayer(player).machines)
 })
 
 app.delete("/removeuser/:player", (req, res) => {
