@@ -2,7 +2,7 @@ const delay = 1000;
 
 module.exports = class Chrono {
     constructor(monthCallback, endGameCallBack) {
-        this.minutes = 10;
+        this.minutes = 12;
         this.seconds = 0;
         this.stopChrono = false;
 
@@ -23,7 +23,7 @@ module.exports = class Chrono {
         // Increment seconds
         this.seconds--;
         
-        if (this.seconds === 0)
+        if (this.seconds === 0 || this.seconds === 30)
             this.monthCallback();
         
         if (this.minutes === 0 && this.seconds === 0){

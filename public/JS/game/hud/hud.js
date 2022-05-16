@@ -27,8 +27,6 @@ function deleteChatbutton() {
     chat.destroyListener();
 }
 
-
-
 function openChatModal() {
     chat.openModal();
 }
@@ -41,9 +39,7 @@ function closeShopModal() {
     shop.closeFunction()
 }
 
-
-
-function openResultsModal() {
+function openResultsModal(msg) {
     results.openModal();
 }
 

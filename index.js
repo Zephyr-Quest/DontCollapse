@@ -78,13 +78,20 @@ const updateMonth = game => {
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
         const pUsername = pSocket.handshake.session.username;
-        const infoPlayer = game.searchPlayer(pUsername).updateAll();
+
+        const user = game.searchPlayer(pUsername);
+        if (!user) continue;
+
+        const infoPlayer = user.updateAll();
         const infos = {
             chrono: game.chrono.getTime(),
             moula: infoPlayer.moula,
             barres: infoPlayer.barres
         };
         pSocket.emit("infoActu", infos);
+        const end = game.isFinished();
+        if (end !== false)
+            endGame(game);
     }
 };
 
@@ -257,12 +264,30 @@ io.on('connection', socket => {
         // Delete room
         if (allRooms[idRoom]) {
             // Check the exiting room
-            if (allRooms[idRoom].playersName.indexOf(username) === 0) {
+            const isHost = allRooms[idRoom].playersName.indexOf(username) === 0;
+            const nbrPlayers = allRooms[idRoom].players.length <= 2;
+            if (isHost || (nbrPlayers && allRooms[idRoom].gameStart)) {
                 // Delete the room
                 console.log("delete room", idRoom);
-                if(allRooms[idRoom].chrono) allRooms[idRoom].chrono.stopChrono = true;
+                if (allRooms[idRoom].chrono) allRooms[idRoom].chrono.stopChrono = true;
+
+                const players = io.sockets.adapter.rooms.get(idRoom);
+                for (const p of players) {
+                    const pSocket = io.sockets.sockets.get(p);
+                    const pUsername = pSocket.handshake.session.username;
+
+                    let msg;
+                    if (isHost && !nbrPlayers) msg = "host disconnected";
+                    if (nbrPlayers) msg = "You're alone in your room";
+
+                    if (pUsername !== username && allRooms[idRoom].gameStart) {
+                        pSocket.emit("finishGame", msg);
+                    }
+                    else
+                        pSocket.emit("disconnection");
+                }
+
                 delete allRooms[idRoom];
-                io.to(idRoom).emit("disconnection");
             }
             // Host remove an user from the room
             else {
@@ -273,6 +298,8 @@ io.on('connection', socket => {
             }
         }
         // Disconnect user 
+        const msg = username + "leave the game";
+        io.to(idRoom).emit("new-message", "Server", msg)
         socket.leave(idRoom);
         console.log("disconnect", username, "from room", idRoom);
         disconnectingUsers.splice(disconnectingUsers.indexOf(username), 1);
