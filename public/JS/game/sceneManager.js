@@ -268,20 +268,21 @@ export class Scene {
          */
         updateModel(itemToChange) {
                 let name;
+                console.log(itemToChange)
                 switch (itemToChange.obj) {
-                        case "0":
+                        case 0:
                                 name = "Mac_Poste a souder"
                                 this.levels.welding=itemToChange.level
                                 break;
-                        case "1":
+                        case 1:
                                 name = "Mac_Assembleur de Precision"
                                 this.levels.precision=itemToChange.level
                                 break;
-                        case "2":
+                        case 2:
                                 name = "Mac_Assembleur Mecanique"
                                 this.levels.mechanic=itemToChange.level
                                 break;
-                        case "3":
+                        case 3:
                                 name = "Mac_Assembleur General"
                                 this.levels.general=itemToChange.level
                                 break;
@@ -292,6 +293,7 @@ export class Scene {
                 this.otherLevels.children.forEach(el => {
                         if (el.name == name && el.level == itemToChange.level) {
                                 this.selectionables.add(el)
+                                console.log(el)
                         }
                 })
         }
