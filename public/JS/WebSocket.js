@@ -113,7 +113,7 @@ function updatePlayersOnScreen() {
 }
 
 function beginingGame(data) {
-    document.getElementsByClassName("cameraName")[0].style.display="block";
+    document.getElementsByClassName("cameraName")[0].style.display = "block";
     document.getElementById("myThreeJsCanvas").style.display = "block"
     const eltsToDelete = document.getElementById("room");
     eltsToDelete.remove();
@@ -148,6 +148,11 @@ function emit(eventName, ...params) {
 }
 
 const getConnectedPlayers = () => connectedPlayers;
+
+// See other players EVENT on click
+document.getElementById("myMenuShop").addEventListener("mousedown", () => {
+    seeOtherEvent();
+})
 
 export default {
     init,

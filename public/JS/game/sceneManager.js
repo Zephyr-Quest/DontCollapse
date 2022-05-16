@@ -54,7 +54,7 @@ export class Scene {
          *
          */
         constructor(onLoad) {
-                this.sh=true
+                this.sh = true
                 this.GroupSprite = new THREE.Group()
                 this.loadManager = new THREE.LoadingManager();
                 this.textureLoader = new THREE.TextureLoader(this.loadManager);
@@ -113,9 +113,9 @@ export class Scene {
                 if (loaded) callback();
         }
 
-        ChangeSh(s){
-                this.sh= s
-                this.light.castShadow=this.sh
+        ChangeSh(s) {
+                this.sh = s
+                this.light.castShadow = this.sh
         }
 
         /**
@@ -524,6 +524,7 @@ export class Scene {
                                 break;
 
                 }
+                document.getElementById("icon1").title = s
                 document.getElementById("icon1").addEventListener("click", () => {
                         HUD.openSpecificMachine(lvl)
                 }, {
