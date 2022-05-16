@@ -23,6 +23,13 @@ import Chrono from './chrono.js'
 import Money from './money.js'
 import Shop from './shop/topRubric.js'
 
+import {
+    Scene
+} from '../sceneManager.js'
+import {
+    sc
+} from '../app.js';
+
 /* --------------------------------- Modals --------------------------------- */
 
 Parameter.initListener();
@@ -50,7 +57,14 @@ function openChatModal() {
 }
 
 function openShopModal() {
+    sc.closeMenu();
     shop.openModal();
+    sc.animatedText = false
+    sc.staticText = false
+    sc.scene.remove(sc.copyGroupSprite)
+    sc.scene.remove(sc.GroupSprite)
+    sc.copyGroupSprite = new THREE.Group()
+    sc.GroupSprite = new THREE.Group()
 }
 
 function closeShopModal() {
@@ -132,7 +146,7 @@ function updateOnPurchase(data) {
     }
 }
 
-function openSpecificMachine(level){
+function openSpecificMachine(level) {
     Shop.openSpecificMachine(level);
 }
 

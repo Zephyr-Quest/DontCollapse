@@ -518,7 +518,12 @@ export class Scene {
                                 break;
 
                 }
-                document.getElementById("title_menuShop").innerText = "Menu : " + s + " Niveau "+lvl;
+                document.getElementById("icon1").addEventListener("click", () => {
+                        HUD.openSpecificMachine(lvl)
+                }, {
+                        once: true
+                })
+                document.getElementById("title_menuShop").innerText = "Menu : " + s + " Niveau " + lvl;
                 menu.style.display = "block"
                 menu = document.getElementById("myMenuSortie")
                 if (menu.style.display == "block") menu.style.display = "none"
