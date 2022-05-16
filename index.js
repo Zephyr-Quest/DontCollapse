@@ -85,10 +85,12 @@ const updateMonth = game => {
         // Actualisation
         if (user.gameContinue) {
             const infoPlayer = user.updateAll();
+            const event = game.applyEvent();
             const infos = {
                 chrono: game.chrono.getTime(),
                 moula: infoPlayer.moula,
-                barres: infoPlayer.barres
+                barres: infoPlayer.barres,
+                event: event
             };
             pSocket.emit("infoActu", infos);
 
