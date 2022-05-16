@@ -38,7 +38,7 @@ function seeOtherPlayerEvent(e) {
 
     // Delete the current player
     HTTP.get(
-        `/game/${player}`,
+        `/otherplayer/${player}`,
         () => {
             console.log("success");
         },

@@ -151,21 +151,21 @@ app.get('/three', (req, res) => {
     res.render('index');
 })
 
-app.get('/game/:player', (req, res) => {
+app.get('/otherplayer/:player', (req, res) => {
     const idRoom = req.session.idRoom;
     const username = req.session.username;
     const player = req.params.player;
 
-    if (!req.session.username) {
-        res.redirect('/lobby');
+    if (!req.session.username || !allRooms[idRoom] || !allRooms[idRoom].searchPlayer(player)) {
+        res.status(401).json({
+            message: "You don't have permission."
+        });
         return;
     }
 
     console.log(username, "go to see", player, "in room", idRoom)
 
-    res.render('game', {
-        data: allRooms[idRoom].searchPlayer(player).machines
-    })
+    res.json(allRooms[idRoom].searchPlayer(player).machines)
 })
 
 app.delete("/removeuser/:player", (req, res) => {
