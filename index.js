@@ -82,26 +82,37 @@ const updateMonth = game => {
         const user = game.searchPlayer(pUsername);
         if (!user) continue;
 
-        const infoPlayer = user.updateAll();
-        const infos = {
-            chrono: game.chrono.getTime(),
-            moula: infoPlayer.moula,
-            barres: infoPlayer.barres
-        };
-        pSocket.emit("infoActu", infos);
-        const end = game.isFinished();
-        if (end !== false)
-            endGame(game);
+        // Actualisation
+        if (user.gameContinue) {
+            const infoPlayer = user.updateAll();
+            const infos = {
+                chrono: game.chrono.getTime(),
+                moula: infoPlayer.moula,
+                barres: infoPlayer.barres
+            };
+            pSocket.emit("infoActu", infos);
+
+            // Game finished
+            const end = game.isFinished();
+            if (end !== false) {
+                game.finishGame();
+                const msg = pUsername + "has finished the game";
+                io.to(game.idRoom).emit("finishGame", msg, false);
+            }
+
+            // User lose
+            const endPlayer = user.isFinished();
+            if (endPlayer) {
+                user.gameContinue = false;
+                pSocket.emit("finishGame", "you lose", true);
+            }
+        }
     }
 };
 
 const endGame = game => {
-    const players = io.sockets.adapter.rooms.get(game.idRoom);
     game.finishGame();
-    for (const p of players) {
-        const pSocket = io.sockets.sockets.get(p);
-        pSocket.emit("finishGame");
-    }
+    io.to(game.idRoom).emit("finishGame", "no time anymore", false);
 }
 
 /* ----------------------------------- APP ---------------------------------- */
@@ -280,8 +291,9 @@ io.on('connection', socket => {
                     if (isHost && !nbrPlayers) msg = "host disconnected";
                     if (nbrPlayers) msg = "You're alone in your room";
 
+                    // Host disconnect
                     if (pUsername !== username && allRooms[idRoom].gameStart) {
-                        pSocket.emit("finishGame", msg);
+                        pSocket.emit("finishGame", msg, false);
                     }
                     else
                         pSocket.emit("disconnection");

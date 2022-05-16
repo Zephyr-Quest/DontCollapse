@@ -39,7 +39,7 @@ function closeShopModal() {
     shop.closeFunction()
 }
 
-function openResultsModal(msg) {
+function openResultsModal(msg, displayOtherPlayers) {
     results.openModal();
 }
 

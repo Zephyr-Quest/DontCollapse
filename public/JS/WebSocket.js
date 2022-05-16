@@ -54,9 +54,9 @@ const events = {
     "infoActu": (infoPlayer) => {
         HUD.refreshHud(infoPlayer);
     },
-    "finishGame": (msg) => {
-        console.log("finish game front", msg);
-        HUD.openResultsModal(msg);
+    "finishGame": (msg, displayOtherPlayers) => {
+        console.log("finish game front", msg, displayOtherPlayers);
+        HUD.openResultsModal(msg, displayOtherPlayers);
     }
 };
 
