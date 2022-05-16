@@ -17,6 +17,11 @@ const signOut = document.querySelector('.fa-right-from-bracket');
 const cloud = document.querySelector('.fa-cloud');
 const sun = document.querySelector('.fa-sun');
 
+
+import {
+    sc
+} from '../app.js';
+
 let sound = true;
 let effect = true;
 let shadow = true;
@@ -204,6 +209,7 @@ function changeEffect() {
 function removeShadow() {
     console.log('enleve ombre');
     shadow = false;
+    sc.ChangeSh(shadow)
     changeShadow();
 }
 
@@ -213,6 +219,7 @@ function removeShadow() {
 function putShadow() {
     console.log('met ombre');
     shadow = true;
+    sc.ChangeSh(shadow)
     changeShadow();
 }
 
