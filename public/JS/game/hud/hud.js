@@ -21,14 +21,15 @@ import Modal from './modalManager.js'
 import ShopItem from './shop/shopItem.js'
 import Chrono from './chrono.js'
 import Money from './money.js'
+import Shop from './shop/topRubric.js'
 
 /* --------------------------------- Modals --------------------------------- */
 
 Parameter.initListener();
 
-let shop = new Modal('shop-modal', 'shop-button', 'close-shop', true);
-let chat = new Modal('chat-modal', 'chat-button', 'close-chat');
-let player = new Modal('player-modal', 'player-button', 'close-player', false, true);
+const shop = new Modal('shop-modal', 'shop-button', 'close-shop', true);
+const chat = new Modal('chat-modal', 'chat-button', 'close-chat');
+const results = new Modal('results-modal', 'results-button', 'close-results');
 
 function initChatButton() {
     chat.initListener();
@@ -38,13 +39,11 @@ function initShopButton() {
     shop.initListener();
 }
 
-function initFacButton() {
-    player.initListener();
-}
-
 function deleteChatbutton() {
     chat.destroyListener();
 }
+
+
 
 function openChatModal() {
     chat.openModal();
@@ -58,8 +57,10 @@ function closeShopModal() {
     shop.closeFunction()
 }
 
-function openOtherPLayer() {
-    player.openModal();
+
+
+function openResultsModal() {
+    results.openModal();
 }
 
 function updateEcologicBar(value) {
@@ -94,27 +95,26 @@ function setSellOccazCallback(callback) {
     Item.setSellOccazCB(callback);
 }
 
-function closeAllModals(){
+function closeAllModals() {
     shop.closeFunction();
     chat.closeFunction();
 }
 
-function refreshShop(infos, username){
+function refreshShop(infos, username) {
     console.log(infos.furnishers)
     ShopItem.refreshContract(infos.furnishers);
     ShopItem.refreshMachine(infos.machines);
     ShopItem.refreshOccaz(infos.shop, username);
-
+    Shop.initShopListeners();
 }
 
-function refreshHud(infos){
-    console.log(infos)
+function refreshHud(infos) {
     ProgressBar.updateEcologic(Math.round(infos.barres.ecologic));
     ProgressBar.updateEconomic(Math.round(infos.barres.economic));
     ProgressBar.updateSocial(Math.round(infos.barres.social));
 
-    Chrono.startChronoFrom(infos.chrono.min,infos.chrono.sec);
     Money.setMoney(infos.moula);
+    if (infos.chrono) Chrono.startChronoFrom(infos.chrono.min, infos.chrono.sec);
 }
 // function setChatCallback(callback) {
 
@@ -124,18 +124,33 @@ function refreshHud(infos){
 
 // }
 
+function updateOnPurchase(data) {
+    console.log(data)
+    Item.confirmation(data.confirmation, data.idEngine, data.levelEngine, data.type)
+    if (data.confirmation === true) {
+        refreshHud(data)
+    }
+}
+
+function openSpecificMachine(level){
+    Shop.openSpecificMachine(level);
+}
+
 export default {
     initShopButton,
-    initFacButton,
     initChatButton,
     deleteChatbutton,
+
     openChatModal,
-    openOtherPLayer,
     openShopModal,
     closeShopModal,
     closeAllModals,
+
+    openResultsModal,
     refreshShop,
     refreshHud,
+    updateOnPurchase,
+    openSpecificMachine,
 
     updateEcologicBar,
     updateEconomicBar,

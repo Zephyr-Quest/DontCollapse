@@ -11,14 +11,13 @@ function initListener(id) {
     ShopItem.changeItem(rightRubric[id].classList[0]);
     for (let i = id; i < id + 4; i++) {
         rightRubric[i].addEventListener('click', changeSelection);
-
     }
 }
 
 /**
  * display background of the item selected and display his items
  *   
- * @param {EventTarget} e  if specific "e" became the html id
+ * @param {EventTarget} e  if specific==true "e" became the html id
  * @param {Boolean} specific if  the player wants to open a specific machine
  */
 function changeSelection(e, specific = false) {
@@ -59,23 +58,21 @@ function changeRubric(classOfTop) {
             break;
         case "top2":
             rightRubric[4].classList.add("selected");
-            for (let i = 4; i < 8; i++) {
-                rightRubric[i].style.display = "flex";
-            }
-            initListener(4);
+            rightRubric[4].style.display = "flex";
+            ShopItem.changeItem("perso");
 
             break;
         case "top3":
-            rightRubric[8].classList.add("selected");
-            for (let i = 8; i < 12; i++) {
+            rightRubric[5].classList.add("selected");
+            for (let i = 5; i < 9; i++) {
                 rightRubric[i].style.display = "flex";
             }
-            initListener(8);
+            initListener(5);
 
             break;
         case "top4":
-            rightRubric[12].classList.add("selected");
-            rightRubric[12].style.display = "flex";
+            rightRubric[9].classList.add("selected");
+            rightRubric[9].style.display = "flex";
             ShopItem.changeItem("occaz");
 
             break;
@@ -95,14 +92,14 @@ function closeAllListener() {
     }
 }
 
-function openSpecificMachine(name, level) {
-    const levels = {
-        1: 8,
-        2: 9,
-        3: 10,
-        4: 11
+function openSpecificMachine(level) {
+    const lvl = {
+        1: 5,
+        2: 6,
+        3: 7,
+        4: 8
     }
-    changeSelection(levels[level], true)
+    changeSelection(lvl[level], true)
 }
 
 export default {

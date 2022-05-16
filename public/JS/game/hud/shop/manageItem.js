@@ -1,18 +1,27 @@
 import Modal from '../hud.js'
 import WebSocket from '../../../WebSocket.js';
-import {Scene} from '../../sceneManager.js'
-import { sc } from '../../app.js';
+import {
+    Scene
+} from '../../sceneManager.js'
+import {
+    sc
+} from '../../app.js';
 const leftPage = document.querySelectorAll('#left-page div');
 const rightPage = document.querySelectorAll('#right-page div');
+//import WebSocket from '../../../WebSocket.js';
+import ModalManager from '../modalManager.js';
 
-const modal = document.getElementById('confirm-buy');
-const oui = document.getElementsByClassName('oui-button')[0];
-const non = document.getElementsByClassName('non-button')[0];
+//const leftPage = document.querySelectorAll('#left-page div');
+//const rightPage = document.querySelectorAll('#right-page div');
 
-let itemId = "";
+const confirmModal = new ModalManager('confirm-buy', '', 'non-buy')
+const oui = document.getElementById('oui-buy');
+const non = document.getElementById('non-buy');
+
+let itemId;
 let itemLevel = undefined;
 let itemType = 0;
-let itemDiv = "";
+let itemDiv;
 
 const level = {
     "manix": 1,
@@ -29,8 +38,6 @@ const level = {
     "super": "supervisors",
     "maint": "maintainers",
     "menage": "cleaners"
-
-
 };
 
 /**
@@ -41,14 +48,13 @@ function buyItem(divOfItem, type) {
     itemDiv = divOfItem;
     itemType = type;
     itemLevel = level[divOfItem.classList[0]]; // set the item level
-    itemId = divOfItem.classList[1]; // set the item id
+    itemId = Number(divOfItem.classList[1]); // set the item id
     let itemName = divOfItem.children[0].textContent; // set the item name
-
 
     console.log(itemDiv, "// type : ", itemType, "//level : ", itemLevel, "// id : ", itemId)
 
     document.getElementById('buying').textContent = "Achat de : " + itemName; // replace modal text
-    modal.showModal(); // open confirm modal
+    confirmModal.openModal(); // open confirm modal
     initListener();
 }
 
@@ -60,7 +66,7 @@ function deleteItem(divOfItem) {
     itemLevel = level[divOfItem.classList[0]]; // same as buy
     itemToDelete = divOfItem.children[0].textContent;
     document.getElementById('buying').textContent = "Voulez vous vraiment vous débarasser de votre " + itemToDelete + " ?";
-    modal.showModal();
+    confirmModal.openModal()
     initListener();
 }
 
@@ -80,13 +86,9 @@ function removeListeners(everything) {
     oui.removeEventListener('click', sell);
     non.removeEventListener('click', notSell);
     if (everything) {
-        itemId = "";
         itemLevel = undefined;
         itemType = 0;
-
         toSell = undefined;
-
-
     }
 
 }
@@ -95,7 +97,7 @@ function removeListeners(everything) {
  * not buy the item : close modal and remove oui/non listeners
  */
 function notBuy() {
-    modal.close(); // close confirm modal
+    confirmModal.closeFunction(); // close confirm modal
     removeListeners(true);
 }
 
@@ -116,7 +118,7 @@ function buy() {
             break;
         case 1:
             console.log(itemId, itemLevel)
-            buyPersoCB(itemLevel /* , itemLevel */ ); // string métier / salaire
+            buyPersoCB(itemLevel); // string métier / salaire
             break;
         case 2:
             console.log(itemId, itemLevel)
@@ -125,7 +127,7 @@ function buy() {
         case 3:
             let username = itemDiv.getElementsByClassName("sellUsername")[0].innerText;
             console.log(username)
-            buyOccazCB(username); // nom du joueur qui vend
+            buyOccazCB(username, itemId); // nom du joueur qui vend
             break;
         default:
             console.warn('ERROR');
@@ -154,11 +156,11 @@ function setSellOccazCB(cb) {
 }
 
 //* Possiblement à retirer/modifier avec l'actualistation du back
-function confirmation(obj) {
-    if (obj.bought === true) {
+function confirmation(bought, id, level, type) {
+    if (bought === true) {
         let tempBought = {
-            obj:itemId,
-            level:itemLevel
+            obj: id,
+            level: level
         }
         // console.log(sc)
         sc.updateModel(tempBought)
@@ -169,79 +171,36 @@ function confirmation(obj) {
         // 1 : Assembleur de précision
         // 2 : Assembleur mécanique
         // 3 : Assembleur général
-
-        let nb;
         console.log("Item  acheté")
-        if (obj.type !== "employee") {
-            //let allElem = [];
-            switch (itemType) {
-                case 0:
-                    // nb = {
-                    //     0: 0,
-                    //     1: 1,
-                    //     2: 2,
-                    //     3: 3,
-                    // }
-
-                    // let contract = Array.from(document.getElementsByClassName(itemDiv.classList[0]));
-                    // contract.shift();
-                    // for (const item of contract) {
-                    //     if (item.hasAttribute('disable')) item.removeAttribute('disable')
-                    // }
-                    break;
-                case 2:
-                    sellOwnMachine()
-                    // for (let i = 0; i < leftPage.length; i += 2) {
-                    //     allElem.push(leftPage[i])
-                    //     allElem.push(leftPage[i + 1])
-                    //     allElem.push(rightPage[i])
-                    //     allElem.push(rightPage[i + 1])
-                    // }
-                    // nb = {
-                    //     0: 16,
-                    //     1: 17,
-                    //     2: 18,
-                    //     3: 19,
-                    // }
-                    // for (let i = nb[itemDiv.classList[1]]; i < allElem.length; i += 4) {
-                    //     if (allElem[i].hasAttribute('disable')) {
-                    //         allElem[i].removeAttribute('disable')
-                    //     }
-                    // }
-                    return
-                    break;
-                case 3: //own occaz to delete
-
-                    break;
-                case 4: // others occaz
-                    break
-                default:
-                    console.warn('ERROR');
-                    break;
+        if (type !== "employee") {
+            if (itemType === 2) {
+                sellOwnMachine(id, level);
+                return
             }
-
-
-            itemDiv.setAttribute('disable', '')
+            confirmModal.closeFunction();
             Modal.closeShopModal(); // close shop modal
             removeListeners(true);
         }
     } else {
         console.log("Item non acheté")
         oui.style.display = "none";
+        non.style.display = "none";
         document.getElementById("buying").innerText = "L'achat n'a pas pu être réalisé"
-        
-        
-        oui.style.display = "flex";
-        return
-        // non.style.display = "none";
-    }
-    modal.close(); // close confirm modal
 
+        setTimeout(() => {
+            confirmModal.closeFunction()
+            setTimeout(() => {
+                oui.style.display = "inline-block";
+                non.style.display = "inline-block";
+            }, 250);
+        }, 1000);
+    }
 }
 
 let toSell;
 
-function sellOwnMachine() {
+function sellOwnMachine(id, level) {
+    let itemId = id
     removeListeners(false);
     let sameID = Array.from(document.getElementsByClassName(itemId));
     console.log(sameID)
@@ -276,7 +235,7 @@ function sell() {
 
             Modal.closeShopModal(); // close shop modal
             removeListeners(true);
-            modal.close(); // close confirm modal
+            confirmModal.closeFunction()
         }
     }, {
         once: true
@@ -289,7 +248,7 @@ function notSell() {
     itemDiv.setAttribute('disable', '')
     Modal.closeShopModal(); // close shop modal
     removeListeners(true);
-    modal.close(); // close confirm modal
+    confirmModal.closeFunction();
 }
 
 

@@ -1,7 +1,6 @@
 import HUD from "./game/hud/hud.js"
 import WebSocket from "./WebSocket.js";
 
-// La définition du désespoir
 
 const messages = document.getElementById("messages")
 const chatForm = document.getElementById('chatForm');
@@ -34,6 +33,8 @@ function startGame() {
     WebSocket.emit("startGame");
 }
 
+
+
 WebSocket.init(deleteEvent, startGame, messages);
 WebSocket.connect();
 
@@ -52,8 +53,8 @@ HUD.setMachineCallback((id, level) => {
     WebSocket.emit("buyEngine", id, level);
 });
 
-HUD.setBuyOccazCallback((username) => {
-    WebSocket.emit("buySecondHandEngine", username);
+HUD.setBuyOccazCallback((username,itemId) => {
+    WebSocket.emit("buySecondHandEngine", username, itemId);
 });
 
 HUD.setSellOccazCallback((id, level, price) => {

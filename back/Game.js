@@ -41,7 +41,7 @@ module.exports = class Game {
      * @returns player if it's in the game
      */
     searchPlayer(player) {
-        let result = false;
+        let result = undefined;
         this.players.forEach(p => {
             if (p && p.name === player) result = p;
         });
@@ -103,7 +103,7 @@ module.exports = class Game {
         return false;
     }
 
-    finishGame(){
+    finishGame() {
         console.log("finish game back");
     }
 
@@ -112,7 +112,7 @@ module.exports = class Game {
     /* -------------------------------------------------------------------------- */
 
     checkPlayerItem(player) {
-        let result = false;
+        let result = undefined;
         this.shop.forEach(item => {
             if (item && item.player == player) result = item;
         });
@@ -149,7 +149,7 @@ module.exports = class Game {
         let buyer = this.searchPlayer(buyerName);
         let seller = this.searchPlayer(sellerName);
         let machine = this.checkPlayerItem(seller.name);
-        console.log('blblblblblbbl',machine);
+        console.log('blblblblblbbl', machine);
         if (machine && buyer && seller) {
             let good = buyer.machineUpgradeSecondhand(machine.machine, machine.level, machine.price);
             if (good) {
@@ -218,5 +218,4 @@ module.exports = class Game {
         this.chrono = new Chrono(this.updateMonthWrapper.bind(this), this.endGameWrapper.bind(this));
         this.chrono.incrementChrono();
     }
-
 };
