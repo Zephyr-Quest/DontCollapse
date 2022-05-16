@@ -199,7 +199,7 @@ module.exports = class Game {
                 return this.runningEvent;
             }
         }
-        return false;
+        return undefined;
     }
 
     /* -------------------------------------------------------------------------- */
