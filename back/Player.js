@@ -256,6 +256,14 @@ module.exports = class Player {
         return (this.productionRate * this.manufacturingQuality) * furnishers[1].price[this.furnishers[1]];
     }
 
+    boxExpenses() {
+        return (this.productionRate * this.manufacturingQuality) * furnishers[2].price[this.furnishers[1]];
+    }
+
+    etainExpenses() {
+        return (this.productionRate * this.manufacturingQuality) * furnishers[3].price[this.furnishers[3]];
+    }
+
     generateIncome() {
         let salariesPourcentage = Math.min(1, (this.employees.engineers.length + this.employees.maintainers.length) / (this.maintainersNeeded + this.engineersNeeded))
         return salariesPourcentage * 800 * this.manufacturingQuality * this.productionRate;
@@ -265,6 +273,7 @@ module.exports = class Player {
         let expenses = 0;
         expenses += this.electricityExpenses();
         expenses += this.waterExpenses();
+        expenses += this.boxExpenses() + this.etainExpenses();
         expenses += this.employees.fees;
         // this.furnishers.forEach((element, index) => {
         //     expenses += furnishers[index].price[element];
