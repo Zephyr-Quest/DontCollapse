@@ -54,11 +54,18 @@ function deleteChatbutton() {
 
 function openChatModal() {
     chat.openModal();
+    sc.closeMenu();
+    sc.animatedText = false
+    sc.staticText = false
+    sc.scene.remove(sc.copyGroupSprite)
+    sc.scene.remove(sc.GroupSprite)
+    sc.copyGroupSprite = new THREE.Group()
+    sc.GroupSprite = new THREE.Group()
 }
 
 function openShopModal() {
-    sc.closeMenu();
     shop.openModal();
+    sc.closeMenu();
     sc.animatedText = false
     sc.staticText = false
     sc.scene.remove(sc.copyGroupSprite)
