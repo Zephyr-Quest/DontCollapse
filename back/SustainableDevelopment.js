@@ -8,9 +8,9 @@ module.exports = class SustainableDevelopment {
     }
 
     display() {
-    console.log("🌿 Ecologic :", this.ecologic);
-    console.log("💸 Economic :", this.economic);
-    console.log("🫂 Social", this.social);
+        console.log("🌿 Ecologic :", this.ecologic);
+        console.log("💸 Economic :", this.economic);
+        console.log("🫂 Social", this.social);
     }
     /**
      * update the sustainable development
@@ -19,9 +19,9 @@ module.exports = class SustainableDevelopment {
      * @param {Number} social factor
      */
     updateOverall(economic, ecologic, social) {
-        this.economic = Math.min(Math.abs(economic), 100);
-        this.ecologic = Math.min(Math.abs(ecologic), 100);
-        this.social = Math.min(Math.abs(social), 100);
+        this.economic = Math.floor(Math.min(Math.abs(economic), 100));
+        this.ecologic = Math.floor(Math.min(Math.abs(ecologic), 100));
+        this.social = Math.floor(Math.min(Math.abs(social), 100));
 
         this.global = (this.ecologic + this.economic + this.social) / 3;
         return this.global;
@@ -51,5 +51,8 @@ module.exports = class SustainableDevelopment {
 
     isFinished() {
         return this.global === 100;
+    }
+    isLost() {
+        return this.global <= 10;
     }
 };

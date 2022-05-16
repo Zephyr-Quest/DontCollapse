@@ -280,6 +280,10 @@ module.exports = class Player {
         return machineFinished === 4 && this.sd.isFinished();
     }
 
+    isLost() {
+        return this.money < -10000 && this.sd.isLost();
+    }
+
     updateAll() {
         this.money *= 100;
         this.money = Math.floor(this.money);
