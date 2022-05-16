@@ -3,6 +3,9 @@ import Item from './shop/manageItem.js'
 import Parameter from './parameter.js'
 import Modal from './modalManager.js'
 
+import * as THREE from 'three';
+
+
 /* ------------------------------ progress bar ------------------------------ */
 // let id = 5;
 // let stat = true;

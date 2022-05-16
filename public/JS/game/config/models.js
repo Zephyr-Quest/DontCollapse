@@ -134,6 +134,25 @@ export const Models = {
                 instance: null,
                 rotation: [90, 0, 0]
         },
+        mechanic2: {
+                name: "mechanic2",
+                model: "mechanic2.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        mechanic3: {
+                name: "mechanic3",
+                model: "mechanic3.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        
         precision: {
                 name: "precision",
                 model: "accuracy1.glb",
@@ -173,6 +192,24 @@ export const Models = {
         general: {
                 name: "general",
                 model: "general1.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        general2: {
+                name: "general2",
+                model: "general2.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
+        general3: {
+                name: "general3",
+                model: "general3.glb",
                 scale: 20,
                 isModel: true,
                 isClonable: false,
