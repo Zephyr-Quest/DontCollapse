@@ -152,7 +152,7 @@ const getConnectedPlayers = () => connectedPlayers;
 
 // See other players EVENT on click
 document.getElementById("SortiWrap").addEventListener("mousedown", () => {
-    // seeOtherEvent();
+    seeOtherEvent();
     sc.goSeeOtherPlayer()
 })
 
