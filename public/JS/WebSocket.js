@@ -1,3 +1,4 @@
+import { sc } from "./game/app.js";
 import Chrono from "./game/hud/chrono.js";
 import HUD from "./game/hud/hud.js";
 import Item from './game/hud/shop/manageItem.js'
@@ -150,8 +151,9 @@ function emit(eventName, ...params) {
 const getConnectedPlayers = () => connectedPlayers;
 
 // See other players EVENT on click
-document.getElementById("myMenuShop").addEventListener("mousedown", () => {
-    seeOtherEvent();
+document.getElementById("SortiWrap").addEventListener("mousedown", () => {
+    // seeOtherEvent();
+    sc.goSeeOtherPlayer()
 })
 
 export default {

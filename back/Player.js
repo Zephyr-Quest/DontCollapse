@@ -15,7 +15,19 @@ module.exports = class Player {
         this.gameContinue = true;
 
         // machines
-        this.machines = [{ level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }]; // machines level
+        this.machines = [{
+            level: 1,
+            secondHand: false
+        }, {
+            level: 1,
+            secondHand: false
+        }, {
+            level: 1,
+            secondHand: false
+        }, {
+            level: 1,
+            secondHand: false
+        }]; // machines level
         this.machinesBack = [undefined, undefined, undefined, undefined];
 
         // furnishers and employees
@@ -45,7 +57,7 @@ module.exports = class Player {
         this.generateExpenses();
         this.employeeInit();
         this.sdUpdate();
-    }   
+    }
 
     /* -------------------------------------------------------------------------- */
     /*                               Utils functions                              */
@@ -256,7 +268,7 @@ module.exports = class Player {
     }
 
     generateIncome() {
-        let salariesPourcentage = Math.min(1, (this.employees.engineers.length + this.employees.maintainers.length)/(this.maintainersNeeded + this.engineersNeeded))
+        let salariesPourcentage = Math.min(1, (this.employees.engineers.length + this.employees.maintainers.length) / (this.maintainersNeeded + this.engineersNeeded))
         return salariesPourcentage * 800 * this.manufacturingQuality * this.productionRate;
     }
 
@@ -296,6 +308,9 @@ module.exports = class Player {
         this.money *= 100;
         this.money = Math.floor(this.money);
         this.money /= 100;
-        return { moula: this.money, barres: this.sd };
+        return {
+            moula: this.money,
+            barres: this.sd
+        };
     }
 };

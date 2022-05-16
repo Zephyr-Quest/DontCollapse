@@ -258,6 +258,7 @@ export class Scene {
                         } else {
                                 if (el.ray) {
                                         this.selectionables.add(mesh);
+                                        console.log(this.selectionables.children)
                                 } else {
                                         this.scene.add(mesh)
                                 }
@@ -497,6 +498,34 @@ export class Scene {
         }
         OpenCameraDisplay() {
                 document.getElementsByClassName("cameraName")[0].style.display = "block"
+        }
+
+        goSeeOtherPlayer(obj) {
+                // this.machines = [{
+                //         level: 1,
+                //         secondHand: false
+                //     }, {
+                //         level: 1,
+                //         secondHand: false
+                //     }, {
+                //         level: 1,
+                //         secondHand: false
+                //     }, {
+                //         level: 1,
+                //         secondHand: false
+                //     }
+                console.log("Avant Remove : " + this.selectionables)
+                for (let index = 0; index < this.selectionables.children.length; index++) {
+                        let el=this.selectionables.children[index]
+                        if (el.name == "Mac_Poste a souder" || el.name == "Mac_Assembleur de Precision" || el.name == "Mac_Assembleur General" || el.name == "Mac_Assembleur Mecanique") {
+                                this.selectionables.remove(el)
+                                index-=1;
+                        }
+                        
+                }
+                
+                console.log("Après remove :" + this.selectionables)
+
         }
 
         /**
