@@ -12,6 +12,7 @@ module.exports = class Player {
         // generals
         this.name = name;
         this.money = 5000;
+        this.gameContinue = true;
 
         // machines
         this.machines = [{ level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }]; // machines level
@@ -226,6 +227,7 @@ module.exports = class Player {
         this.employees[categorie].push(new Employee(name, salary));
         ++this.employees.number;
         this.employees.fees += salary;
+        return true;
     }
 
     /* -------------------------------------------------------------------------- */
@@ -271,7 +273,6 @@ module.exports = class Player {
     }
 
     isFinished() {
-        // return this.machines === [4, 4, 4, 4] && this.sd.isFinished();
         let machineFinished = Infinity;
         this.machinesBack.forEach(machine => {
             machineFinished = Math.min(machine.level, machineFinished);
