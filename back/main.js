@@ -13,7 +13,12 @@ let Damien = party.searchPlayer("Damien");
 // Damien.machineUpgrade(1,4);
 // Damien.machineUpgrade(2,4);
 // Damien.machineUpgrade(3,4);
-
+for (let index = 0; index < 3; index++) {
+    Damien.updateAll();
+    Damien.sdDisplay();
+    console.log("");   
+}
+Damien.updateAll();
 Damien.updateAll();
 Damien.updateAll();
 Damien.financesDisplay();

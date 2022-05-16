@@ -77,7 +77,7 @@ module.exports = class Player {
         });
 
         // economic
-        let economic = Math.max(((this.money - this.expenses) / this.money) * 100, 0);
+        let economic = Math.max(((this.income - this.expenses) / this.income) * 100, 0);
 
         // social
         let social = this.sd.socialCalculation(this.employees.number, this.employees.maintainers.length,
@@ -98,6 +98,11 @@ module.exports = class Player {
     /* -------------------------------------------------------------------------- */
     /*                              Display functions                             */
     /* -------------------------------------------------------------------------- */
+
+    sdDisplay() {
+        console.log(this.name + "'s sustainable development indicator");
+        this.sd.display();
+    }
 
     /**
      * Display in a nice way, all machines owned by player
@@ -276,6 +281,9 @@ module.exports = class Player {
     }
 
     updateAll() {
+        this.money *= 100;
+        this.money = Math.floor(this.money);
+        this.money /= 100;
         this.machineSync();
         this.sdUpdate();
         // Expenses

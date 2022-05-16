@@ -7,6 +7,11 @@ module.exports = class SustainableDevelopment {
         this.social = 0;
     }
 
+    display() {
+    console.log("🌿 Ecologic :", this.ecologic);
+    console.log("💸 Economic :", this.economic);
+    console.log("🫂 Social", this.social);
+    }
     /**
      * update the sustainable development
      * @param {Number} economic factor
@@ -39,8 +44,8 @@ module.exports = class SustainableDevelopment {
         let humanRessources = [maintainers, cleaners, supervisors, engineers];
         let result = 0;
         humanRessources.forEach(categories => {
-            result += categories/employees < 0.35 && categories/employees > 0.15 ? 25 : 0;
-        }); 
+            result += categories / employees < 0.35 && categories / employees > 0.15 ? 25 : 0;
+        });
         return result;
     }
 
