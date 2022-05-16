@@ -32,7 +32,10 @@
                 <label for="pseudo_input">
                     <h2>Pseudo :</h2>
                 </label>
-                <input type="text" name="pseudo" placeholder="Pseudo" id="pseudo_input" autofocus />
+                <div style="display:flex;flex-direction:column;">
+                    <input maxlength="12" minlength="3" type="text" name="pseudo" placeholder="Pseudo" id="pseudo_input" autofocus />
+                    <span class="error_msg_pseudo">Le pseudo doit être de longueur supérieur à 3 et inférieure à 12</span>
+                </div>
             </div>
         </section>
 

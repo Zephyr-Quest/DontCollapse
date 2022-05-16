@@ -155,8 +155,20 @@ main {
     #pseudo {
         display: flex;
         justify-content: left;
-        align-items: center;
-
+        align-items:baseline;
+        div{
+            align-items: left;
+        }
+        span{
+            color: red;
+            display:none;
+            font-family: @primary-font, @secondary-font;
+            font-size: medium;
+            font-weight: bold;
+            margin-left: 3em;
+            // text-shadow: 1px 1px 3px black;
+            margin-top: 5px;
+        }
         input {
             background-color: @bg-color;
             color: @text-color;

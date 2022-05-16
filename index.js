@@ -226,11 +226,11 @@ app.post("/join",
             });
             return;
         }
-
         if (allRooms[idRoom].playersName.includes(userName)) {
             res.status(400).json({
                 errors: "Pseudo already exists in this room",
             });
+            res.sText="azerty"
             return;
         }
 
@@ -276,7 +276,7 @@ io.on('connection', socket => {
             if (allRooms[idRoom].playersName.indexOf(username) === 0) {
                 // Delete the room
                 console.log("delete room", idRoom);
-                if(allRooms[idRoom].chrono) allRooms[idRoom].chrono.stopChrono = true;
+                if (allRooms[idRoom].chrono) allRooms[idRoom].chrono.stopChrono = true;
                 delete allRooms[idRoom];
                 io.to(idRoom).emit("disconnection");
             }
@@ -315,8 +315,7 @@ io.on('connection', socket => {
                 barres: allRooms[idRoom].players[0].sd
             };
             io.to(idRoom).emit("startAuthorized", data);
-        }
-        else console.log("start unauthorized");
+        } else console.log("start unauthorized");
     });
 
     // Socket to display room on lobby
