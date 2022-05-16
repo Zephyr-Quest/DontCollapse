@@ -272,19 +272,19 @@ export class Scene {
                 switch (itemToChange.obj) {
                         case 0:
                                 name = "Mac_Poste a souder"
-                                this.levels.welding=itemToChange.level
+                                this.levels.welding = itemToChange.level
                                 break;
                         case 1:
                                 name = "Mac_Assembleur de Precision"
-                                this.levels.precision=itemToChange.level
+                                this.levels.precision = itemToChange.level
                                 break;
                         case 2:
                                 name = "Mac_Assembleur Mecanique"
-                                this.levels.mechanic=itemToChange.level
+                                this.levels.mechanic = itemToChange.level
                                 break;
                         case 3:
                                 name = "Mac_Assembleur General"
-                                this.levels.general=itemToChange.level
+                                this.levels.general = itemToChange.level
                                 break;
                 }
                 this.selectionables.children.forEach(el => {
@@ -293,7 +293,6 @@ export class Scene {
                 this.otherLevels.children.forEach(el => {
                         if (el.name == name && el.level == itemToChange.level) {
                                 this.selectionables.add(el)
-                                console.log(el)
                         }
                 })
         }
@@ -503,7 +502,23 @@ export class Scene {
         openMenu(s) {
                 this.closeCameraDisplay()
                 let menu = document.getElementById("myMenuShop")
-                document.getElementById("title_menuShop").innerText = "Menu : " + s
+                let lvl
+                switch (s) {
+                        case "Poste a souder":
+                                lvl = this.levels.welding
+                                break;
+                        case "Assembleur de Precision":
+                                lvl = this.levels.precision
+                                break;
+                        case "Assembleur Mecanique":
+                                lvl = this.levels.mechanic
+                                break;
+                        case "Assembleur General":
+                                lvl = this.levels.general
+                                break;
+
+                }
+                document.getElementById("title_menuShop").innerText = "Menu : " + s + " Niveau "+lvl;
                 menu.style.display = "block"
                 menu = document.getElementById("myMenuSortie")
                 if (menu.style.display == "block") menu.style.display = "none"
@@ -660,8 +675,8 @@ export class Scene {
          */
         changeCamera(event) {
                 let cam = 1
-                if(document.activeElement.tagName=="INPUT") cam=0
-                if (cam==1) {
+                if (document.activeElement.tagName == "INPUT") cam = 0
+                if (cam == 1) {
                         switch (event.keyCode) {
                                 case 49:
                                         // 1 pressed
