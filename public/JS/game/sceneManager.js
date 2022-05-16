@@ -54,6 +54,7 @@ export class Scene {
          *
          */
         constructor(onLoad) {
+                this.sh=true
                 this.GroupSprite = new THREE.Group()
                 this.loadManager = new THREE.LoadingManager();
                 this.textureLoader = new THREE.TextureLoader(this.loadManager);
@@ -112,6 +113,11 @@ export class Scene {
                 if (loaded) callback();
         }
 
+        ChangeSh(s){
+                this.sh= s
+                this.light.castShadow=this.sh
+        }
+
         /**
          * Init the scene and elements
          *
@@ -140,9 +146,9 @@ export class Scene {
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setPixelRatio(window.devicePixelRatio);
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
-                this.renderer.shadowMap.enabled = false;
+                this.renderer.shadowMap.enabled = true;
                 this.renderer.shadowMap.type = THREE.BasicShadowMap;
-                this.renderer.shadowMapSoft = false;
+                this.renderer.shadowMapSoft = true;
                 this.renderer.setClearColor(0x000000, 0);
                 document.body.appendChild(this.renderer.domElement);
 
@@ -159,7 +165,7 @@ export class Scene {
                 let intensity = 0.85;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
                 this.light.position.set(0, 0, 130);
-                this.light.castShadow = false;
+                this.light.castShadow = this.sh;
                 this.light.shadow.bias = -0.0001
                 this.light.shadow.mapSize.width = 1024; // default
                 this.light.shadow.mapSize.height = 1024; // default
