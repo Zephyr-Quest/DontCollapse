@@ -286,9 +286,6 @@ module.exports = class Player {
     }
 
     updateAll() {
-        this.money *= 100;
-        this.money = Math.floor(this.money);
-        this.money /= 100;
         this.machineSync();
         this.sdUpdate();
         // Expenses
@@ -296,6 +293,9 @@ module.exports = class Player {
         this.generateExpenses();
         this.income = this.generateIncome();
         this.money += this.income;
+        this.money *= 100;
+        this.money = Math.floor(this.money);
+        this.money /= 100;
         return { moula: this.money, barres: this.sd };
     }
 };
