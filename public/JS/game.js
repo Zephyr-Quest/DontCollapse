@@ -29,13 +29,27 @@ function deleteEvent(e) {
     );
 }
 
+function seeOtherPlayerEvent(e) {
+    const player = e.target.getElementsByTagName("p")[0].innerText;
+    console.log("let's see", player);
+
+    // Delete the current player
+    http.get(
+        `/game/${player}`,
+        () => {
+            console.log("success");
+        },
+        err => console.error(err)
+    );
+}
+
 function startGame() {
     WebSocket.emit("startGame");
 }
 
 
 
-WebSocket.init(deleteEvent, startGame, messages);
+WebSocket.init(deleteEvent, startGame, messages, seeOtherPlayerEvent);
 WebSocket.connect();
 
 HUD.initChatButton();

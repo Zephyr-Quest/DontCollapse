@@ -68,6 +68,7 @@ let connectedPlayers = [];
 const username = document.getElementById("username").value;
 /* -------------------- Variables for functions listeners ------------------- */
 let deleteEvent;
+let seeOtherEvent;
 let startGame;
 let messages;
 
@@ -135,10 +136,11 @@ function getMoney() {
 /* --------------------------------- Return --------------------------------- */
 
 // return {
-function init(DE, SG, chatMessages) {
+function init(DE, SG, chatMessages, seeOther) {
     deleteEvent = DE;
     startGame = SG;
     messages = chatMessages;
+    seeOtherEvent = seeOther;
 }
 
 function connect() {

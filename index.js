@@ -139,6 +139,23 @@ app.get('/game', (req, res) => {
     });
 });
 
+app.get('/game/:player', (req, res) => {
+    const idRoom = req.session.idRoom;
+    const username = req.session.username;
+    const player = req.params.player;
+
+    if (!req.session.username) {
+        res.redirect('/lobby');
+        return;
+    }
+
+    console.log(username, "go to see", player, "in room", idRoom)
+
+    res.render('game', {
+        data: allRooms[idRoom].searchPlayer(player).machines
+    })
+})
+
 app.delete("/removeuser/:player", (req, res) => {
     const idRoom = req.session.idRoom;
     const username = req.session.username;
