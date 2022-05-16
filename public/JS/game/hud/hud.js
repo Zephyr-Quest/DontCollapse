@@ -53,8 +53,6 @@ function deleteChatbutton() {
     chat.destroyListener();
 }
 
-
-
 function openChatModal() {
     chat.openModal();
     sc.closeMenu();
@@ -81,9 +79,7 @@ function closeShopModal() {
     shop.closeFunction()
 }
 
-
-
-function openResultsModal() {
+function openResultsModal(msg, displayOtherPlayers) {
     results.openModal();
 }
 

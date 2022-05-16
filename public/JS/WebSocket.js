@@ -18,12 +18,13 @@ const events = {
         beginingGame(data);
     },
     'new-message': (user, msg) => {
-        const index = connectedPlayers.indexOf(user);
+        let index;
+        if (user != "Server") index = connectedPlayers.indexOf(user);
         const names = {
             0: "host",
             1: "J1",
             2: "J2",
-            3: "J3"
+            3: "J3",
         }
 
         let item2 = document.createElement('div');
@@ -35,7 +36,7 @@ const events = {
         let item = document.createElement('div');
         item.classList.add(user === username ? "sender" : "receiver");
         item.classList.add("username");
-        item.classList.add(names[index]);
+        item.classList.add(user === "Server" ? "server" : names[index]);
         item.innerText = user;
         messages.appendChild(item);
 
@@ -53,9 +54,9 @@ const events = {
     "infoActu": (infoPlayer) => {
         HUD.refreshHud(infoPlayer);
     },
-    "finishGame": () => {
-        console.log("finish game front");
-        HUD.openResultsModal();
+    "finishGame": (msg, displayOtherPlayers) => {
+        console.log("finish game front", msg, displayOtherPlayers);
+        HUD.openResultsModal(msg, displayOtherPlayers);
     }
 };
 
