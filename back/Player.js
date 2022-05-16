@@ -44,7 +44,7 @@ module.exports = class Player {
         this.generateExpenses();
         this.employeeInit();
         this.sdUpdate();
-    }   
+    }
 
     /* -------------------------------------------------------------------------- */
     /*                               Utils functions                              */
@@ -205,6 +205,7 @@ module.exports = class Player {
         });
         this.recruteEmployee("engineers");
         this.recruteEmployee("maintainers");
+        this.recruteEmployee("maintainers");
     }
 
     furnisherUpgrade(furnisher, level) {
@@ -254,7 +255,7 @@ module.exports = class Player {
     }
 
     generateIncome() {
-        let salariesPourcentage = Math.min(1, (this.employees.engineers.length + this.employees.maintainers.length)/(this.maintainersNeeded + this.engineersNeeded))
+        let salariesPourcentage = Math.min(1, (this.employees.engineers.length + this.employees.maintainers.length) / (this.maintainersNeeded + this.engineersNeeded))
         return salariesPourcentage * 800 * this.manufacturingQuality * this.productionRate;
     }
 
@@ -292,6 +293,9 @@ module.exports = class Player {
         this.generateExpenses();
         this.income = this.generateIncome();
         this.money += this.income;
+        this.income *= 100;
+        this.income = Math.floor(this.income);
+        this.income /= 100;
         this.money *= 100;
         this.money = Math.floor(this.money);
         this.money /= 100;

@@ -16,9 +16,6 @@ let Damien = party.searchPlayer("Damien");
 for (let index = 0; index < 3; index++) {
     Damien.updateAll();
     Damien.sdDisplay();
+    Damien.financesDisplay();
     console.log("");   
 }
-Damien.updateAll();
-Damien.updateAll();
-Damien.updateAll();
-Damien.financesDisplay();
