@@ -11,7 +11,7 @@ module.exports = class Player {
     constructor(name) {
         // generals
         this.name = name;
-        this.money = 50000;
+        this.money = 5000;
 
         // machines
         this.machines = [{ level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }]; // machines level
@@ -43,8 +43,8 @@ module.exports = class Player {
         this.productivityUpdate();
         this.generateExpenses();
         this.employeeInit();
-        this.updateAll();
-    }
+        this.sdUpdate();
+    }   
 
     /* -------------------------------------------------------------------------- */
     /*                               Utils functions                              */
