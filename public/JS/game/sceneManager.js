@@ -78,6 +78,8 @@ export class Scene {
                         welding: 1,
                         mechanic: 1
                 }
+                this.firstLevels = new THREE.Group()
+                
         }
 
         /**
@@ -239,7 +241,6 @@ export class Scene {
                 let obj, mesh
                 this.selectionables = new THREE.Group();
                 this.otherLevels = new THREE.Group();
-
                 ObjectArray.forEach(el => {
                         obj = new Object3D(el)
                         mesh = obj.getMesh()
@@ -257,8 +258,9 @@ export class Scene {
 
                         } else {
                                 if (el.ray) {
+                                        mesh.level=1
+                                        this.firstLevels.add(mesh.clone())
                                         this.selectionables.add(mesh);
-                                        console.log(this.selectionables.children)
                                 } else {
                                         this.scene.add(mesh)
                                 }
@@ -501,31 +503,57 @@ export class Scene {
         }
 
         goSeeOtherPlayer(obj) {
-                // this.machines = [{
-                //         level: 1,
-                //         secondHand: false
-                //     }, {
-                //         level: 1,
-                //         secondHand: false
-                //     }, {
-                //         level: 1,
-                //         secondHand: false
-                //     }, {
-                //         level: 1,
-                //         secondHand: false
-                //     }
-                console.log("Avant Remove : " + this.selectionables)
+                let machines = [{
+                        level: 4,
+                        secondHand: false
+                }, {
+                        level: 4,
+                        secondHand: false
+                }, {
+                        level: 1,
+                        secondHand: false
+                }, {
+                        level: 1,
+                        secondHand: false
+                }]
                 for (let index = 0; index < this.selectionables.children.length; index++) {
-                        let el=this.selectionables.children[index]
+                        let el = this.selectionables.children[index]
                         if (el.name == "Mac_Poste a souder" || el.name == "Mac_Assembleur de Precision" || el.name == "Mac_Assembleur General" || el.name == "Mac_Assembleur Mecanique") {
                                 this.selectionables.remove(el)
-                                index-=1;
+                                index =index- 1;
                         }
-                        
                 }
-                
-                console.log("Après remove :" + this.selectionables)
-
+                for (let index = 0; index < machines.length; index++) {
+                        let name
+                        let lvl
+                        switch (index) {
+                                case 0:
+                                        name = "Mac_Poste a souder"
+                                        lvl = machines[index].level
+                                        break;
+                                case 1:
+                                        name = "Mac_Assembleur de Precision"
+                                        lvl = machines[index].level
+                                        break;
+                                case 2:
+                                        name = "Mac_Assembleur Mecanique"
+                                        lvl = machines[index].level
+                                        break;
+                                case 3:
+                                        name = "Mac_Assembleur General"
+                                        lvl = machines[index].level
+                                        break;
+                        }
+                        if(lvl==1){
+                                this.firstLevels.children.forEach(el=>{
+                                        if(el.name==name) this.selectionables.add(el)
+                                })
+                        } else{
+                                this.otherLevels.children.forEach(el=>{
+                                        if(el.name==name && el.level==lvl) this.selectionables.add(el)
+                                })
+                        }
+                }
         }
 
         /**
