@@ -7,7 +7,7 @@
             "productionRate": 80,
             "consumption": 2,
             "manufacturingQuality": 1,
-            "maintainersRequested": 2,
+            "maintainersRequested": 1,
             "engineersRequested": 1
         },
         "2": {
