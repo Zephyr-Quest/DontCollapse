@@ -221,6 +221,7 @@ module.exports = class Player {
         this.employees[categorie].push(new Employee(name, salary));
         ++this.employees.number;
         this.employees.fees += salary;
+        return true;
     }
 
     /* -------------------------------------------------------------------------- */
