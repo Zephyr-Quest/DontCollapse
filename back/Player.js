@@ -11,7 +11,7 @@ module.exports = class Player {
     constructor(name) {
         // generals
         this.name = name;
-        this.money = 50000;
+        this.money = 5000;
 
         // machines
         this.machines = [{ level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }, { level: 1, secondHand: false }]; // machines level
@@ -43,8 +43,8 @@ module.exports = class Player {
         this.productivityUpdate();
         this.generateExpenses();
         this.employeeInit();
-        this.updateAll();
-    }
+        this.sdUpdate();
+    }   
 
     /* -------------------------------------------------------------------------- */
     /*                               Utils functions                              */
@@ -113,6 +113,7 @@ module.exports = class Player {
     // ! financesDisplay
     financesDisplay() {
         console.log(this.name + "'s financial report");
+        console.log("Money :", this.money);
         console.log("✨ Production quality :", this.manufacturingQuality);
         console.log("⏰ Production speed :", this.productionRate);
         console.log("⚡ Consumption :", this.consumption);
@@ -220,8 +221,6 @@ module.exports = class Player {
         this.employees[categorie].push(new Employee(name, salary));
         ++this.employees.number;
         this.employees.fees += salary;
-
-        console.log(this.employees);
     }
 
     /* -------------------------------------------------------------------------- */
@@ -231,12 +230,14 @@ module.exports = class Player {
     productivityUpdate() {
         this.consumption = 0;
         this.productionRate = Infinity;
-        this.manufacturingQuality = Infinity;
+        this.manufacturingQuality = 0;
         this.machinesBack.forEach(machine => {
             this.productionRate = Math.min(machine.productionRate, this.productionRate);
-            this.manufacturingQuality = Math.min(machine.manufacturingQuality, this.manufacturingQuality);
+            this.manufacturingQuality += machine.manufacturingQuality;
             this.consumption += machine.consumption;
         });
+
+        this.manufacturingQuality /= 4;
     }
 
     electricityExpenses() {
@@ -281,6 +282,7 @@ module.exports = class Player {
         this.money -= this.expenses;
         this.generateExpenses();
         this.income = this.generateIncome();
+        this.money += this.income;
         return { moula: this.money, barres: this.sd };
     }
 };
