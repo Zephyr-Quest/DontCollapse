@@ -201,7 +201,7 @@ module.exports = class Game {
         if (this.runningEvent) this.runningEvent = undefined;
         else {
             let random = Math.floor(Math.random() * 100);
-            if (random < 20) {
+            if (random /* < 20 */) {
                 this.runningEvent = events[random % events.length];
                 this.applyFactor(this.runningEvent.type, this.runningEvent.factor);
                 return this.runningEvent;
