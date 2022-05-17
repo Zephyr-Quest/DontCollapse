@@ -471,7 +471,7 @@ io.on('connection', socket => {
 
     socket.on("moumou_la_reine_des_mouettes_comeback", playerName => {
         const player = allRooms[idRoom].searchPlayer(playerName);
-        if (player.gameContinue)
+        if (!player.gameContinue)
             socket.emit("finishGame", "you lose", true, allRooms[idRoom].playersName);
     });
 
