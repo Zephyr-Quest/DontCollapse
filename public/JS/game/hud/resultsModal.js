@@ -11,7 +11,7 @@ function openResultsModal(msg, displayOtherPlayers, connectedPlayers) {
         modal.openModal();
 
     text.innerText = msg;
-    
+
     if (displayOtherPlayers) {
         playerListDiv.style.display = "block";
         connectedPlayers.forEach(player => {
@@ -25,7 +25,10 @@ function openResultsModal(msg, displayOtherPlayers, connectedPlayers) {
         WebSocket.initListenersOtherFactoryEndGameModal();
     }
     else playerListDiv.style.display = "none";
+}
 
+function closeModal() {
+    modal.closeFunction();
 }
 
 disconnection.forEach(button => {
@@ -48,5 +51,6 @@ window.addEventListener('keydown', (e) => {
 
 
 export default {
-    openResultsModal
+    openResultsModal,
+    closeModal
 }

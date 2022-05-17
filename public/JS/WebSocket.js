@@ -156,16 +156,17 @@ const getConnectedPlayers = () => connectedPlayers;
 
 // See other players EVENT on click
 document.getElementById("SortiWrap").addEventListener("click", (event) => {
-    seeOtherEvent(event, (data,player) => {
-        sc.goSeeOtherPlayer(data,player);
+    seeOtherEvent(event, (data, player) => {
+        sc.goSeeOtherPlayer(data, player);
     });
 })
 
 const initListenersOtherFactoryEndGameModal = () => {
     document.getElementById("playerListDiv").childNodes.forEach(liPlayer => {
         liPlayer.addEventListener("click", (event) => {
-            seeOtherEvent(event, (data) => {
-                console.log(data)
+            seeOtherEvent(event, (data, player) => {
+                // resultsModal.closeModal();
+                sc.goSeeOtherPlayer(data, player);
             })
         })
     })

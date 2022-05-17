@@ -95,6 +95,7 @@ export default class modal {
         if (this.isShop) {
             WebSocket.emit('openShop', "");
         }
+        console.log(this)
         this.modal.showModal();
     }
 
