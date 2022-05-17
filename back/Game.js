@@ -1,6 +1,9 @@
 const Player = require("./Player");
 const Chrono = require("./chrono");
 const events = require("./events.json");
+const machines = require("./newMachines.json");
+const furnishers = require("./furnishers.json");
+const employees = require ("./employees.json");
 
 module.exports = class Game {
     constructor(id, host) {
@@ -17,11 +20,17 @@ module.exports = class Game {
 
         this.updateMonth = null;
         this.endGame = null;
+        this.event = undefined;
     }
 
     /* -------------------------------------------------------------------------- */
     /*                               Utils functions                              */
     /* -------------------------------------------------------------------------- */
+
+
+    shopInfo() {
+        return {machines, furnishers, employees};
+    }
 
     /**
      * add a player to the game

@@ -27,7 +27,7 @@
 
 <body>
 
-    <input type="hidden" value="<%= username %>" id="username"/>
+    <input type="hidden" value="<%= username %>" id="username" />
 
     <div id="room">
         <h1>Bienvenue <%= username %> !</h1>
@@ -143,112 +143,178 @@
                     <div id="left-page" class="rubric">
                         <!-- ----------------------------- Ressources ------------------------------ -->
                         <div class="elec 1 clickable" style="display:block;">
-                            <p>Coup de Foudre</p>
-                            <p style="display: none;">Rapide description de coup de foudre</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Coup de Foudre</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="elec 2 clickable" style="display:block;">
-                            <p>Electricite d'Euler</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Electricite d'Euler</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="eau 1 clickable" style="display: none;">
-                            <p>Hache 2 Eaux</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Hache 2 Eaux</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="eau 2 clickable" style="display: none;">
-                            <p>Electricite d'Euler</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Electricite d'Euler</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="cartons 1 clickable" style="display: none;">
-                            <p>Jean Balle</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Jean Balle</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="cartons 2 clickable" style="display: none;">
-                            <p>Toutankharton</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Toutankharton</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="etain 1 clickable" style="display: none;">
-                            <p>Casto la bas</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Casto la bas</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="etain 2 clickable" style="display: none;">
-                            <p>Quincaillepleure</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Quincaillepleure</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <!-- ------------------------------ Personnel ------------------------------ -->
                         <div class="maint clickable" style="display: none;">
-                            <p>Maintenance</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Recruter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Maintenance</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <p></p>
+                                <button class="buy-button">Recruter</button>
+                            </div>
                         </div>
                         <div class="menage clickable" style="display: none;">
-                            <p>Menage</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Recruter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Menage</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <p></p>
+                                <button class="buy-button">Recruter</button>
+                            </div>
                         </div>
 
                         <!-- -------------------------------- Neuf --------------------------------- -->
                         <div class="manix 0 clickable" style="display: none;">
-                            <p>Poste a souder</p>
-                            <p>Niveau 1</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Poste a souder</p>
+                                <p>Niveau 1</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="manix 1 clickable" style="display: none;">
-                            <p>Assembleur de precision</p>
-                            <p>Niveau 1</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur de precision</p>
+                                <p>Niveau 1</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="droit 0 clickable" style="display: none;">
-                            <p>Poste a souder </p>
-                            <p>Niveau 2</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Poste a souder </p>
+                                <p>Niveau 2</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="droit 1 clickable" style="display: none;">
-                            <p>Assembleur de precision </p>
-                            <p> Niveau 2</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur de precision </p>
+                                <p> Niveau 2</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="braz 0 clickable" style="display: none;">
-                            <p>Poste a souder</p>
-                            <p>Niveau 3</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Poste a souder</p>
+                                <p>Niveau 3</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="braz 1 clickable" style="display: none;">
-                            <p>Assembleur de precision</p>
-                            <p>Niveau 3</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur de precision</p>
+                                <p>Niveau 3</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="tesla 0 clickable" style="display: none;">
-                            <p>Poste a souder</p>
-                            <p>Niveau 4</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Poste a souder</p>
+                                <p>Niveau 4</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="tesla 1 clickable" style="display: none;">
-                            <p>Assembleur de precision </p>
-                            <p>Niveau 4</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur de precision </p>
+                                <p>Niveau 4</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <!-- ------------------------------ Occasions ------------------------------ -->
@@ -257,13 +323,13 @@
                             <p></p>
                             <p></p>
                             <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <button class="buy-button" style="display:none;">Acheter</button>
                         </div>
                         <div disable class="occaz j2 clickable" style="display: none;">
                             <p></p>
                             <p></p>
                             <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <button class="buy-button" style="display:none;">Acheter</button>
                         </div>
                     </div>
 
@@ -274,114 +340,180 @@
                         <!-- ----------------------------- Ressources ------------------------------ -->
 
                         <div class="elec 3 clickable" style="display:block;">
-                            <p>Petit Tonnerre</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Petit Tonnerre</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="elec 4 clickable" style="display:block;">
-                            <p>Durexcel</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Durexcel</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="eau 3 clickable" style="display: none;">
-                            <p>Rheaum</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class=" buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Rheaum</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class=" buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="eau 4 clickable" style="display: none;">
-                            <p>Cri'Staline</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Cri'Staline</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="cartons 3 clickable" style="display: none;">
-                            <p>Mine Carton</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Mine Carton</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="cartons 4 clickable" style="display: none;">
-                            <p>Scotch Willski</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Scotch Willski</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="etain 3 clickable" style="display: none;">
-                            <p>P'etain clou</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>P'etain clou</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="etain 4 clickable" style="display: none;">
-                            <p>Le Roi Merlin</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Le Roi Merlin</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <!-- ------------------------------ Personnel ------------------------------ -->
 
                         <div class="inge clickable" style="display: none;">
-                            <p>Ingenieur</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Recruter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Ingenieur</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <p></p>
+                                <button class="buy-button">Recruter</button>
+                            </div>
                         </div>
                         <div class="super clickable" style="display: none;">
-                            <p>Superviseur</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Recruter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Superviseur</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <p>Rapide description</p>
+                                <p></p>
+                                <button class="buy-button">Recruter</button>
+                            </div>
                         </div>
 
                         <!-- -------------------------------- Neuf --------------------------------- -->
 
                         <div class="manix 2 clickable" style="display: none;">
-                            <p>Assembleur mecanique</p>
-                            <p> Niveau 1</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur mecanique</p>
+                                <p> Niveau 1</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="manix 3 clickable" style="display: none;">
-                            <p>Assembleur general</p>
-                            <p> Niveau 1</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur general</p>
+                                <p> Niveau 1</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="droit 2 clickable" style="display: none;">
-                            <p>Assembleur mecanique </p>
-                            <p>Niveau 2</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur mecanique </p>
+                                <p>Niveau 2</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="droit 3 clickable" style="display: none;">
-                            <p>Assembleur general </p>
-                            <p>Niveau 2</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur general </p>
+                                <p>Niveau 2</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="braz 2 clickable" style="display: none;">
-                            <p>Assembleur mecanique </p>
-                            <p>Niveau 3</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur mecanique </p>
+                                <p>Niveau 3</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="braz 3 clickable" style="display: none;">
-                            <p>Assembleur general </p>
-                            <p>Niveau 3</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur general </p>
+                                <p>Niveau 3</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <div class="tesla 2 clickable" style="display: none;">
-                            <p>Assembleur mecanique </p>
-                            <p>Niveau 4</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur mecanique </p>
+                                <p>Niveau 4</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
                         <div class="tesla 3 clickable" style="display: none;">
-                            <p>Assembleur general </p>
-                            <p>Niveau 4</p>
-                            <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <div class="item-title" style="display: block;">
+                                <p>Assembleur general </p>
+                                <p>Niveau 4</p>
+                            </div>
+                            <div class="item-description" style="display:none;">
+                                <button class="buy-button">Acheter</button>
+                            </div>
                         </div>
 
                         <!-- ------------------------------ Occasions ------------------------------ -->
@@ -390,13 +522,13 @@
                             <p></p>
                             <p></p>
                             <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <button class="buy-button" style="display:none;">Acheter</button>
                         </div>
                         <div disable class="occaz j4 void clickable" style="display: none;">
                             <p></p>
                             <p></p>
                             <p style="display: none;">Rapide description</p>
-                            <button class="buy-button" style="display: none;">Acheter</button>
+                            <button class="buy-button" style="display:none;">Acheter</button>
                         </div>
 
                     </div>
@@ -406,7 +538,7 @@
                 <div class="modal-content">
                     <h2>Devis</h2><br>
                     <div id="confirm-div" style="display: block;">
-                        <p id="buying"></p><br>:
+                        <p id="buying"></p><br>
                         <div>
                             <button id="oui-buy">Oui</button>
                             <button id="non-buy">Non</button>
@@ -415,9 +547,8 @@
                     <div id="input-div" style="display: none;">
                         <p>Pour quel prix ?</p>
                         <form id="price-form" action="">
-                            <input type="number" id="input-price" autocomplete="off"
-                                placeholder="Prix de vente" />
-                                <button class="button">Vendre</button>
+                            <input type="number" id="input-price" autocomplete="off" placeholder="Prix de vente" />
+                            <button class="button">Vendre</button>
                         </form>
                     </div>
                 </div>
@@ -443,19 +574,30 @@
     <dialog class="modal" id="results-modal">
         <div class="modal-content">
             <div class="top-modal">
+                <h2 class="title-modal">Resultats</h2>
+            </div>
+            <p id="context"></p>
+            <div id="playerListDiv" style="display:none;"></div>
+            <i class="fa-solid fa-right-from-bracket" id="disconnectionResults"></i>
+        </div>
+    </dialog>
+
+    <dialog class="modal" id="events-modal">
+        <div class="param-content">
+            <div class="top-modal">
                 <h2 class="title-modal">Résultats</h2>
-                <span class="close-button" id="close-results">&times;</span>
+                <span class="close-button" id="close-events">&times;</span>
             </div>
         </div>
     </dialog>
 
-    <i class="fa-sofa-sign-outlid fa-volume-xmark"></i>
     <div id="parameters">
         <i class="param-content fa-solid fa-bell" style="display:none;"></i>
         <i class="param-content fa-solid fa-bell-slash" style="display:none;"></i>
         <i class="param-content fa-solid fa-volume-high" style="display:none;"></i>
         <i class="param-content fa-solid fa-volume-off" style="display:none;"></i>
         <i class="param-content fa-solid fa-right-from-bracket" style="display:none;"></i>
+        <i class="param-content fa-solid fa-right-from-bracket" style="display: none;"></i>
         <i class="param-content fa-solid fa-cloud" style="display:none;"></i>
         <i class="param-content fa-solid fa-sun" style="display:none;"></i>
         <i class="fa-solid fa-gears"></i>

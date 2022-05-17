@@ -105,7 +105,6 @@ export class Scene {
                                 }
 
                                 currentModel.instance = gltf.scene;
-
                                 this.loadModels(callback);
                         });
 
@@ -502,19 +501,32 @@ export class Scene {
                 document.getElementsByClassName("cameraName")[0].style.display = "block"
         }
 
-        goSeeOtherPlayer(obj,pseudo) {
+        goSeeOtherPlayer(obj, pseudo) {
                 this.groupToDisplay = new THREE.Group()
+                this.selectionables2 = new THREE.Group();
                 this.groupToDisplay = this.selectionables.clone()
+                this.selectionables2=this.selectionables.clone()
                 this.scene.remove(this.selectionables)
-                this.selectionables.visible = false
+                this.scene.remove(this.groupToDisplay)
+
                 let machines = obj
-                for (let index = 0; index < this.groupToDisplay.children.length; index++) {
-                        let el = this.groupToDisplay.children[index]
-                        if (el.name == "Mac_Poste a souder" || el.name == "Mac_Assembleur de Precision" || el.name == "Mac_Assembleur General" || el.name == "Mac_Assembleur Mecanique") {
-                                this.groupToDisplay.remove(el)
-                                index = index - 1;
-                        }
-                }
+                console.log(obj)
+                console.log(pseudo)
+                var selectedObject
+                selectedObject = this.groupToDisplay.getObjectByName("Mac_Poste a souder");
+                this.groupToDisplay.remove(selectedObject)
+                selectedObject = this.groupToDisplay.getObjectByName("Mac_Assembleur General");
+                this.groupToDisplay.remove(selectedObject)
+                selectedObject = this.groupToDisplay.getObjectByName("Mac_Assembleur Mecanique");
+                this.groupToDisplay.remove(selectedObject)
+                selectedObject = this.groupToDisplay.getObjectByName("Mac_Assembleur de Precision");
+                this.groupToDisplay.remove(selectedObject)
+
+                this.selectionables = new THREE.Group();
+                this.groupToDisplay.children.forEach(el => {
+                        if (el.name == "Mac_Chat") this.selectionables.add(el.clone())
+                })
+                this.scene.add(this.selectionables)
                 for (let index = 0; index < machines.length; index++) {
                         let name
                         let lvl
@@ -547,15 +559,18 @@ export class Scene {
                         }
                 }
                 this.scene.add(this.groupToDisplay)
-                this.closeCameraDisplay()
+                this.OpenCameraDisplay()
                 let menu = document.getElementsByClassName("usineDiv")[0]
                 menu.style.display = "flex"
-                menu.innerHTML="Usine de "+pseudo+"<br>> Retourner à mon usine <";
+                menu.style.left = "0"
+                menu.style.marginLeft = "20px";
+                menu.style.transform = "translateX(0%)"
+                menu.innerHTML = "Usine de " + pseudo + "<br>> Retourner à mon usine <";
 
 
                 let menu2 = document.getElementById("myMenuSortie")
                 if (menu2.style.display == "block") menu2.style.display = "none"
-                document.getElementById("myThreeJsCanvas").style.pointerEvents = "none"
+                // document.getElementById("myThreeJsCanvas").style.pointerEvents = "none"
                 this.scene.remove(this.copyGroupSprite)
                 this.scene.remove(this.GroupSprite)
                 this.copyGroupSprite = new THREE.Group()
@@ -569,10 +584,12 @@ export class Scene {
         comeBackHome() {
                 this.scene.remove(this.groupToDisplay)
                 document.getElementById("myThreeJsCanvas").style.pointerEvents = "auto"
-                this.selectionables.visible = true
-
+                this.selectionables = this.selectionables2.clone()
                 this.scene.add(this.selectionables)
-                this.closeMenu()
+                this.groupToDisplay = new THREE.Group()
+                this.selectionables2 = new THREE.Group();
+                this.closeMenu();
+                WebSocket.emit("moumou_la_reine_des_mouettes_comeback", document.getElementById("username").value)
         }
 
         /**

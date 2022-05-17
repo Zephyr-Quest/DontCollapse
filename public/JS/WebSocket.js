@@ -1,6 +1,7 @@
 import { sc } from "./game/app.js";
 import Chrono from "./game/hud/chrono.js";
 import HUD from "./game/hud/hud.js";
+import resultsModal from "./game/hud/resultsModal.js";
 import Item from './game/hud/shop/manageItem.js'
 
 let socket;
@@ -53,11 +54,12 @@ const events = {
         HUD.updateOnPurchase(data);
     },
     "infoActu": (infoPlayer) => {
+        console.log("jlqksfbqlsdjdfb", infoPlayer)
         HUD.refreshHud(infoPlayer);
     },
-    "finishGame": (msg, displayOtherPlayers) => {
+    "finishGame": (msg, displayOtherPlayers, players = undefined) => {
         console.log("finish game front", msg, displayOtherPlayers);
-        HUD.openResultsModal(msg, displayOtherPlayers);
+        resultsModal.openResultsModal(msg, displayOtherPlayers, players);
     }
 };
 
@@ -95,7 +97,7 @@ function updatePlayersOnScreen() {
         const user = document.getElementById("username").value;
         const posBtnGame = document.getElementById("BtnGame");
 
-        if (user === connectedPlayers[0] && connectedPlayers.length >= 2) {
+        if (user === connectedPlayers[0] && connectedPlayers.length >= 2 && posBtnGame) {
             if (posBtnGame.style.display !== "block") {
                 posBtnGame.style.display = "block";
                 posBtnGame.addEventListener("click", startGame);
@@ -122,6 +124,7 @@ function beginingGame(data) {
     const eltsToShow = document.getElementById("game");
     eltsToShow.style.display = "block";
     HUD.refreshHud(data)
+    HUD.initShop()
 }
 
 function getAllShop(infoPlayer, username) {
@@ -154,16 +157,29 @@ const getConnectedPlayers = () => connectedPlayers;
 
 // See other players EVENT on click
 document.getElementById("SortiWrap").addEventListener("click", (event) => {
-    seeOtherEvent(event, (data,player) => {
-        sc.goSeeOtherPlayer(data,player);
+    seeOtherEvent(event, (data, player) => {
+        sc.goSeeOtherPlayer(data, player);
     });
 })
+
+const initListenersOtherFactoryEndGameModal = () => {
+    document.getElementById("playerListDiv").childNodes.forEach(liPlayer => {
+        liPlayer.addEventListener("click", (event) => {
+            seeOtherEvent(event, (data, player) => {
+                document.getElementById("myThreeJsCanvas").style.pointerEvents="none"
+                sc.goSeeOtherPlayer(data, player);
+                resultsModal.closeModal();
+            })
+        })
+    })
+}
 
 export default {
     init,
     connect,
     emit,
     getConnectedPlayers,
+    initListenersOtherFactoryEndGameModal,
 
     getAllShop,
 }
