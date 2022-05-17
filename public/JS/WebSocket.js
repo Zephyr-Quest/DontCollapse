@@ -165,10 +165,9 @@ const initListenersOtherFactoryEndGameModal = () => {
     document.getElementById("playerListDiv").childNodes.forEach(liPlayer => {
         liPlayer.addEventListener("click", (event) => {
             seeOtherEvent(event, (data, player) => {
-                // resultsModal.closeModal();
                 document.getElementById("myThreeJsCanvas").style.pointerEvents="none"
                 sc.goSeeOtherPlayer(data, player);
-                // resultsModal.closeModal();
+                resultsModal.closeModal();
             })
         })
     })

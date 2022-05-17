@@ -42,9 +42,11 @@ export default class modal {
         if (this.isShop) Shop.closeShop();
 
 
-        this.close.removeEventListener('click', () => {
-            this.closeFunction()
-        }); // cross
+        if (this.close !== undefined) {
+            this.close.removeEventListener('click', () => {
+                this.closeFunction()
+            });
+        }// cross
         this.modal.removeEventListener('click', (e) => {
             if (e.target.nodeName === "DIALOG") {
                 this.closeFunction();
@@ -65,7 +67,7 @@ export default class modal {
     initCloseListeners() {
         console.log(this)
         // When the user click on the cross, close the modal
-        if (this.close) {
+        if (this.close !== undefined) {
             this.close.addEventListener('click', () => {
                 this.closeFunction()
             });
