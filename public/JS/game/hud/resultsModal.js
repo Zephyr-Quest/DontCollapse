@@ -38,25 +38,6 @@ function closeModal() {
     modal.closeFunction();
 }
 
-disconnection.forEach(button => {
-    button.addEventListener('click', () => {
-        modal.closeFunction();
-        window.location.href = "/lobby";
-    }, {
-        once: true
-    });
-})
-
-window.addEventListener('keydown', (e) => {
-    if ((e.key === "Escape" || e.key === "Esc") && modal.modal.hasAttribute('open')) {
-        modal.closeFunction();
-        window.location.href = "/lobby";
-    }
-}, {
-    once: true
-});
-
-
 export default {
     openResultsModal,
     closeModal
