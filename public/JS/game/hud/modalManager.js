@@ -24,7 +24,7 @@ export default class modal {
     }
 
 
-    isOpen(){
+    isOpen() {
         return this.modal.hasAttribute("open")
     }
 
@@ -37,6 +37,7 @@ export default class modal {
         this.modal.addEventListener('animationend', () => {
             this.modal.removeAttribute('closing');
             this.modal.close();
+            console.log("closing", this.modal)
         }, {
             once: true
         });
@@ -56,13 +57,15 @@ export default class modal {
                 this.closeFunction();
             }
         }); // Escape
+        return "zoirhrsbvo"
     }
 
-    
+
     /**
      * init the listeners to close the modals
      */
     initCloseListeners() {
+        console.log(this)
         // When the user click on the cross, close the modal
         this.close.addEventListener('click', () => {
             this.closeFunction()
@@ -87,7 +90,7 @@ export default class modal {
      * open the modal
      */
     openModal() {
-        console.log(this.modal)
+        console.log("Modal Manager", this.modal)
         this.initCloseListeners();
         if (this.isShop) {
             WebSocket.emit('openShop', "");
@@ -103,13 +106,13 @@ export default class modal {
      * init the listener to open the modal
      */
     initListener() {
-        this.open.addEventListener('click', ()=>{
+        this.open.addEventListener('click', () => {
             this.openModal();
         });
     }
 
     destroyListener() {
-        this.open.removeEventListener('click', ()=>{
+        this.open.removeEventListener('click', () => {
             this.openModal();
         });
     }

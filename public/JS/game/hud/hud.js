@@ -6,21 +6,6 @@ import Modal from './modalManager.js'
 import * as THREE from 'three';
 
 
-/* ------------------------------ progress bar ------------------------------ */
-// let id = 5;
-// let stat = true;
-
-// const update = () => {
-//     id += stat ? 5 : -5;
-//     let id2 = stat ? 5 : -5;
-//     if (id > 100 - Math.abs(id2) || id < 0 + Math.abs(id2)) stat = !stat;
-
-//     ProgressBar.updateSocial(id);
-//     // ProgressBar.updateEconomic(id);
-//     // ProgressBar.updateEcologic(id);
-//     setTimeout(update, 400);
-// }
-// update();
 import ShopItem from './shop/shopItem.js'
 import Chrono from './chrono.js'
 import Money from './money.js'
@@ -39,7 +24,7 @@ Parameter.initListener();
 
 const shop = new Modal('shop-modal', 'shop-button', 'close-shop', true);
 const chat = new Modal('chat-modal', 'chat-button', 'close-chat');
-const results = new Modal('results-modal', 'results-button', 'close-results');
+// const results = new Modal('results-modal', 'results-button', 'close-results');
 
 function initChatButton() {
     chat.initListener();
@@ -79,9 +64,9 @@ function closeShopModal() {
     shop.closeFunction()
 }
 
-function openResultsModal(msg, displayOtherPlayers) {
-    results.openModal();
-}
+// function openResultsModal(msg, displayOtherPlayers) {
+//     results.openModal();
+// }
 
 function updateEcologicBar(value) {
     ProgressBar.updateEcologic(value);
@@ -136,13 +121,6 @@ function refreshHud(infos) {
     Money.setMoney(infos.moula);
     if (infos.chrono) Chrono.startChronoFrom(infos.chrono.min, infos.chrono.sec);
 }
-// function setChatCallback(callback) {
-
-// }
-
-// function addMessage() {
-
-// }
 
 function updateOnPurchase(data) {
     console.log(data)
@@ -166,7 +144,7 @@ export default {
     closeShopModal,
     closeAllModals,
 
-    openResultsModal,
+    // openResultsModal,
     refreshShop,
     refreshHud,
     updateOnPurchase,

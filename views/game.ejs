@@ -27,7 +27,7 @@
 
 <body>
 
-    <input type="hidden" value="<%= username %>" id="username"/>
+    <input type="hidden" value="<%= username %>" id="username" />
 
     <div id="room">
         <h1>Bienvenue <%= username %> !</h1>
@@ -415,9 +415,8 @@
                     <div id="input-div" style="display: none;">
                         <p>Pour quel prix ?</p>
                         <form id="price-form" action="">
-                            <input type="number" id="input-price" autocomplete="off"
-                                placeholder="Prix de vente" />
-                                <button class="button">Vendre</button>
+                            <input type="number" id="input-price" autocomplete="off" placeholder="Prix de vente" />
+                            <button class="button">Vendre</button>
                         </form>
                     </div>
                 </div>
@@ -446,10 +445,12 @@
                 <h2 class="title-modal">Résultats</h2>
                 <span class="close-button" id="close-results">&times;</span>
             </div>
+            <p id="context"></p>
+            <div id="playerListDiv" style="display:none;"></div>
+            <i class="fa-solid fa-right-from-bracket" id="disconnectionResults"></i>
         </div>
     </dialog>
 
-    <i class="fa-sofa-sign-outlid fa-volume-xmark"></i>
     <div id="parameters">
         <i class="param-content fa-solid fa-bell" style="display:none;"></i>
         <i class="param-content fa-solid fa-bell-slash" style="display:none;"></i>

@@ -112,7 +112,7 @@ const updateMonth = game => {
             const endPlayer = user.isFinished();
             if (endPlayer) {
                 user.gameContinue = false;
-                pSocket.emit("finishGame", "you lose", true);
+                pSocket.emit("finishGame", "you lose", true, game.playersName);
             }
         }
     }
