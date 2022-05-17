@@ -1,4 +1,5 @@
 import Modal from './modalManager.js'
+import { sc } from '../app.js';
 
 const oui = document.getElementById('oui-disconnect');
 const non = document.getElementById('non-disconnect');
@@ -18,9 +19,6 @@ const cloud = document.querySelector('.fa-cloud');
 const sun = document.querySelector('.fa-sun');
 
 
-import {
-    sc
-} from '../app.js';
 
 let sound = true;
 let effect = true;

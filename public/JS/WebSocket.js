@@ -1,6 +1,7 @@
 import { sc } from "./game/app.js";
 import Chrono from "./game/hud/chrono.js";
 import HUD from "./game/hud/hud.js";
+import resultsModal from "./game/hud/resultsModal.js";
 import Item from './game/hud/shop/manageItem.js'
 
 let socket;
@@ -55,9 +56,9 @@ const events = {
     "infoActu": (infoPlayer) => {
         HUD.refreshHud(infoPlayer);
     },
-    "finishGame": (msg, displayOtherPlayers) => {
+    "finishGame": (msg, displayOtherPlayers, players = undefined) => {
         console.log("finish game front", msg, displayOtherPlayers);
-        HUD.openResultsModal(msg, displayOtherPlayers);
+        resultsModal.openResultsModal(msg, displayOtherPlayers, players);
     }
 };
 
@@ -95,7 +96,7 @@ function updatePlayersOnScreen() {
         const user = document.getElementById("username").value;
         const posBtnGame = document.getElementById("BtnGame");
 
-        if (user === connectedPlayers[0] && connectedPlayers.length >= 2) {
+        if (user === connectedPlayers[0] && connectedPlayers.length >= 2 && posBtnGame) {
             if (posBtnGame.style.display !== "block") {
                 posBtnGame.style.display = "block";
                 posBtnGame.addEventListener("click", startGame);
@@ -122,6 +123,7 @@ function beginingGame(data) {
     const eltsToShow = document.getElementById("game");
     eltsToShow.style.display = "block";
     HUD.refreshHud(data)
+    HUD.initShop()
 }
 
 function getAllShop(infoPlayer, username) {
@@ -159,11 +161,22 @@ document.getElementById("SortiWrap").addEventListener("click", (event) => {
     });
 })
 
+const initListenersOtherFactoryEndGameModal = () => {
+    document.getElementById("playersList").childNodes.forEach(liPlayer => {
+        liPlayer.addEventListener("click", (event) => {
+            seeOtherEvent(event, (data) => {
+                console.log(data)
+            })
+        })
+    })
+}
+
 export default {
     init,
     connect,
     emit,
     getConnectedPlayers,
+    initListenersOtherFactoryEndGameModal,
 
     getAllShop,
 }
