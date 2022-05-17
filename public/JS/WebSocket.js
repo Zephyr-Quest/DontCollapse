@@ -54,6 +54,7 @@ const events = {
         HUD.updateOnPurchase(data);
     },
     "infoActu": (infoPlayer) => {
+        console.log("jlqksfbqlsdjdfb", infoPlayer)
         HUD.refreshHud(infoPlayer);
     },
     "finishGame": (msg, displayOtherPlayers, players = undefined) => {
@@ -165,9 +166,9 @@ const initListenersOtherFactoryEndGameModal = () => {
     document.getElementById("playerListDiv").childNodes.forEach(liPlayer => {
         liPlayer.addEventListener("click", (event) => {
             seeOtherEvent(event, (data, player) => {
-                // resultsModal.closeModal();
                 document.getElementById("myThreeJsCanvas").style.pointerEvents="none"
                 sc.goSeeOtherPlayer(data, player);
+                resultsModal.closeModal();
             })
         })
     })
