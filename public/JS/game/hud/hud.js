@@ -122,13 +122,12 @@ function refreshHud(infos) {
     Money.setMoney(infos.moula);
     if (infos.chrono) Chrono.startChronoFrom(infos.chrono.min, infos.chrono.sec);
     if (infos.event) {
-        if(!events.isOpen) events.openModal();
+        if(!events.isOpen()) events.openModal();
         Event.displayEvent(infos.event)
     }
 }
 
 function updateOnPurchase(data) {
-    console.log(data)
     Item.confirmation(data.confirmation, data.idEngine, data.levelEngine, data.type);
     if (data.confirmation === true) {
         refreshHud(data);

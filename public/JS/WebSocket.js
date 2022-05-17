@@ -54,11 +54,11 @@ const events = {
         HUD.updateOnPurchase(data);
     },
     "infoActu": (infoPlayer) => {
-        console.log("jlqksfbqlsdjdfb", infoPlayer)
         HUD.refreshHud(infoPlayer);
     },
     "finishGame": (msg, displayOtherPlayers, players = undefined) => {
         console.log("finish game front", msg, displayOtherPlayers);
+        Chrono.stopChronoo()
         resultsModal.openResultsModal(msg, displayOtherPlayers, players);
     }
 };
