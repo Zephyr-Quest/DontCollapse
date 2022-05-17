@@ -166,6 +166,8 @@ const initListenersOtherFactoryEndGameModal = () => {
         liPlayer.addEventListener("click", (event) => {
             seeOtherEvent(event, (data, player) => {
                 // resultsModal.closeModal();
+                console.log("DATA :")
+                console.log(data)
                 sc.goSeeOtherPlayer(data, player);
             })
         })
