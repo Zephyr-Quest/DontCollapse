@@ -31,16 +31,16 @@ function deleteEvent(e) {
     );
 }
 
-function seeOtherPlayerEvent(e) {
-    console.log(e.target)
+function seeOtherPlayerEvent(e, callback) {
     const player = e.target.parentElement.getElementsByTagName("P")[0].innerText;
     console.log("let's see", player);
 
     // Delete the current player
     HTTP.get(
-        `/game/${player}`,
-        () => {
-            console.log("success");
+        `/otherplayer/${player}`,
+        (data) => {
+            console.log("success", data);
+            callback(data, player);
         },
         err => console.error(err)
     );

@@ -81,6 +81,8 @@ function getMaxKey(obj) {
 
 const updateMonth = game => {
     const players = io.sockets.adapter.rooms.get(game.idRoom);
+    const event = game.applyEvent();
+
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
         const pUsername = pSocket.handshake.session.username;
@@ -91,7 +93,6 @@ const updateMonth = game => {
         // Actualisation
         if (user.gameContinue) {
             const infoPlayer = user.updateAll();
-            const event = game.applyEvent();
             const infos = {
                 chrono: game.chrono.getTime(),
                 moula: infoPlayer.moula,
@@ -100,27 +101,27 @@ const updateMonth = game => {
             };
             pSocket.emit("infoActu", infos);
 
-            // Game finished
-            const end = game.isFinished();
-            if (end !== false) {
-                game.finishGame();
-                const msg = pUsername + "has finished the game";
-                io.to(game.idRoom).emit("finishGame", msg, false);
-            }
-
             // User lose
-            const endPlayer = user.isFinished();
+            const endPlayer = user.isLost();
             if (endPlayer) {
                 user.gameContinue = false;
-                pSocket.emit("finishGame", "you lose", true);
+                pSocket.emit("finishGame", "you lose", true, game.playersName);
             }
         }
+    }
+
+    // Game finished
+    const end = game.isFinished();
+    if (end !== false) {
+        game.finishGame();
+        const msg = end + "has finished the game";
+        io.to(game.idRoom).emit("finishGame", msg, false);
     }
 };
 
 const endGame = game => {
     game.finishGame();
-    io.to(game.idRoom).emit("finishGame", "no time anymore", false);
+    io.to(game.idRoom).emit("finishGame", "Temps ecoule", false);
 }
 
 /* ----------------------------------- APP ---------------------------------- */
@@ -151,22 +152,35 @@ app.get('/three', (req, res) => {
     res.render('index');
 })
 
-app.get('/game/:player', (req, res) => {
+app.get('/shopinfo', (req, res) => {
+    const idRoom = req.session.idRoom;
+
+    if (idRoom === undefined) {
+        res.status(401).json({
+            message: "You don't have permission."
+        });
+        return;
+    }
+
+    res.json(allRooms[idRoom].shopInfo());
+});
+
+app.get('/otherplayer/:player', (req, res) => {
     const idRoom = req.session.idRoom;
     const username = req.session.username;
     const player = req.params.player;
 
-    if (!req.session.username) {
-        res.redirect('/lobby');
+    if (!req.session.username || !allRooms[idRoom] || !allRooms[idRoom].searchPlayer(player)) {
+        res.status(401).json({
+            message: "You don't have permission."
+        });
         return;
     }
 
     console.log(username, "go to see", player, "in room", idRoom)
-
-    res.render('game', {
-        data: allRooms[idRoom].searchPlayer(player).machines
-    })
-})
+    console.log(allRooms[idRoom].searchPlayer(player).machines)
+    return res.json(allRooms[idRoom].searchPlayer(player).machines)
+});
 
 app.delete("/removeuser/:player", (req, res) => {
     const idRoom = req.session.idRoom;
@@ -323,8 +337,8 @@ io.on('connection', socket => {
                     const pUsername = pSocket.handshake.session.username;
 
                     let msg;
-                    if (isHost && !nbrPlayers) msg = "host disconnected";
-                    if (nbrPlayers) msg = "You're alone in your room";
+                    if (isHost && !nbrPlayers) msg = "Le host s'est deconnecte";
+                    if (nbrPlayers) msg = "Vous etes seul dans votre partie";
 
                     // Host disconnect
                     if (pUsername !== username && allRooms[idRoom].gameStart) {
@@ -451,6 +465,12 @@ io.on('connection', socket => {
     socket.on("openShop", () => {
         const infos = allRooms[idRoom].getInfo(username);
         socket.emit("sendPlayerInfoShop", infos, username);
+    });
+
+    socket.on("moumou_la_reine_des_mouettes_comeback", playerName => {
+        const player = allRooms[idRoom].searchPlayer(playerName);
+        if (player.gameContinue)
+            socket.emit("finishGame", "you lose", true, allRooms[idRoom].playersName);
     });
 
     /* -------------------------------------------------------------------------- */

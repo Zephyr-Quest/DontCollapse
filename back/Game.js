@@ -1,6 +1,9 @@
 const Player = require("./Player");
 const Chrono = require("./chrono");
 const events = require("./events.json");
+const machines = require("./newMachines.json");
+const furnishers = require("./furnishers.json");
+const employees = require ("./employees.json");
 
 module.exports = class Game {
     constructor(id, host) {
@@ -22,6 +25,11 @@ module.exports = class Game {
     /* -------------------------------------------------------------------------- */
     /*                               Utils functions                              */
     /* -------------------------------------------------------------------------- */
+
+
+    shopInfo() {
+        return {machines, furnishers, employees};
+    }
 
     /**
      * add a player to the game
@@ -149,7 +157,6 @@ module.exports = class Game {
         let buyer = this.searchPlayer(buyerName);
         let seller = this.searchPlayer(sellerName);
         let machine = this.checkPlayerItem(seller.name);
-        console.log('blblblblblbbl', machine);
         if (machine && buyer && seller) {
             let good = buyer.machineUpgradeSecondhand(machine.machine, machine.level, machine.price);
             if (good) {
@@ -193,7 +200,7 @@ module.exports = class Game {
         if (this.runningEvent) this.runningEvent = undefined;
         else {
             let random = Math.floor(Math.random() * 100);
-            if (random < 20) {
+            if (random/*  < 20 */) {
                 this.runningEvent = events[random % events.length];
                 this.applyFactor(this.runningEvent.type, this.runningEvent.factor);
                 return this.runningEvent;

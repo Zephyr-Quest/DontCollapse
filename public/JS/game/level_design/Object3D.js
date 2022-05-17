@@ -51,6 +51,7 @@ export class Object3D extends Locatable {
                                         color: this.color,
                                         side: THREE.DoubleSide,
                                         opacity: this.transp,
+                                        transparent:true,
                                         metalness: 0.3,
                                         roughness: .6
 
