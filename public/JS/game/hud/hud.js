@@ -11,6 +11,7 @@ import ShopItem from './shop/shopItem.js'
 import Chrono from './chrono.js'
 import Money from './money.js'
 import Shop from './shop/topRubric.js'
+import Event from './eventModal.js'
 
 import {
     Scene
@@ -25,6 +26,7 @@ Parameter.initListener();
 
 const shop = new Modal('shop-modal', 'shop-button', 'close-shop', true);
 const chat = new Modal('chat-modal', 'chat-button', 'close-chat');
+const events = new Modal('events-modal', undefined, 'close-events')
 
 function initChatButton() {
     chat.initListener();
@@ -119,13 +121,17 @@ function refreshHud(infos) {
 
     Money.setMoney(infos.moula);
     if (infos.chrono) Chrono.startChronoFrom(infos.chrono.min, infos.chrono.sec);
+    if (infos.event) {
+        if(!events.isOpen) events.openModal();
+        Event.displayEvent(infos.event)
+    }
 }
 
 function updateOnPurchase(data) {
     console.log(data)
-    Item.confirmation(data.confirmation, data.idEngine, data.levelEngine, data.type)
+    Item.confirmation(data.confirmation, data.idEngine, data.levelEngine, data.type);
     if (data.confirmation === true) {
-        refreshHud(data)
+        refreshHud(data);
     }
 }
 
