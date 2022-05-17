@@ -302,7 +302,7 @@ module.exports = class Player {
     }
 
     isLost() {
-        return this.money < -10000 && this.sd.isLost();
+        return this.money < -10000 || this.sd.isLost();
     }
 
     updateAll() {

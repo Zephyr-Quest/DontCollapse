@@ -82,7 +82,6 @@ function getMaxKey(obj) {
 const updateMonth = game => {
     const players = io.sockets.adapter.rooms.get(game.idRoom);
     const event = game.applyEvent();
-    game.event = event;
 
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
@@ -111,14 +110,13 @@ const updateMonth = game => {
             }
 
             // User lose
-            const endPlayer = user.isFinished();
+            const endPlayer = user.isLost();
             if (endPlayer) {
                 user.gameContinue = false;
                 pSocket.emit("finishGame", "you lose", true, game.playersName);
             }
         }
     }
-    game.event = undefined;
 };
 
 const endGame = game => {

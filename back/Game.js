@@ -20,7 +20,6 @@ module.exports = class Game {
 
         this.updateMonth = null;
         this.endGame = null;
-        this.event = undefined;
     }
 
     /* -------------------------------------------------------------------------- */
@@ -158,7 +157,6 @@ module.exports = class Game {
         let buyer = this.searchPlayer(buyerName);
         let seller = this.searchPlayer(sellerName);
         let machine = this.checkPlayerItem(seller.name);
-        console.log('blblblblblbbl', machine);
         if (machine && buyer && seller) {
             let good = buyer.machineUpgradeSecondhand(machine.machine, machine.level, machine.price);
             if (good) {
