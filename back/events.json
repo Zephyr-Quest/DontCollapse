@@ -23,15 +23,5 @@
         "event": "Pic de pollution",
         "type":1,
         "factor": -40
-    },
-    {
-        "event": "Mois ",
-        "type":0,
-        "factor": 20
-    },
-    {
-        "event": "13ème mois",
-        "type":0,
-        "factor": 20
     }
 ]
