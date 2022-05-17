@@ -54,6 +54,7 @@ const events = {
         HUD.updateOnPurchase(data);
     },
     "infoActu": (infoPlayer) => {
+        console.log("jlqksfbqlsdjdfb", infoPlayer)
         HUD.refreshHud(infoPlayer);
     },
     "finishGame": (msg, displayOtherPlayers, players = undefined) => {
