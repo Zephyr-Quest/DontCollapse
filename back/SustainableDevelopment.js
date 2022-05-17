@@ -1,3 +1,5 @@
+const employees = require("./employees.json");
+
 module.exports = class SustainableDevelopment {
     // Initializes data to zero
     constructor() {
@@ -7,6 +9,12 @@ module.exports = class SustainableDevelopment {
         this.social = 0;
     }
 
+    display() {
+        console.log("🌿 Ecologic :", this.ecologic);
+        console.log("💸 Economic :", this.economic);
+        console.log("🫂 Social", this.social);
+    }
+
     /**
      * update the sustainable development
      * @param {Number} economic factor
@@ -14,9 +22,9 @@ module.exports = class SustainableDevelopment {
      * @param {Number} social factor
      */
     updateOverall(economic, ecologic, social) {
-        this.economic = Math.min(Math.abs(economic), 100);
-        this.ecologic = Math.min(Math.abs(ecologic), 100);
-        this.social = Math.min(Math.abs(social), 100);
+        this.economic = Math.floor(Math.min(Math.abs(economic), 100));
+        this.ecologic = Math.floor(Math.min(Math.abs(ecologic), 100));
+        this.social = Math.floor(Math.min(Math.abs(social), 100));
 
         this.global = (this.ecologic + this.economic + this.social) / 3;
         return this.global;
@@ -28,23 +36,26 @@ module.exports = class SustainableDevelopment {
 
     /**
      * score calculation
-     * @param {Number} employees number
+     * @param {Number} employeesNumber number
      * @param {Number} maintainers nuber
      * @param {Number} cleaners number
      * @param {Number} supervisors number
      * @param {Number} engineers Number
      * @returns ratio
      */
-    socialCalculation(employees, maintainers, cleaners, supervisors, engineers) {
-        let humanRessources = [maintainers, cleaners, supervisors, engineers];
+    socialCalculation(employeesNumber, maintainers, cleaners, supervisors, engineers) {
+        let humanRessources = [[maintainers, employees.salaries.maintainers.pourcentage], [cleaners, employees.salaries.cleaners.pourcentage], [supervisors, employees.salaries.supervisors.pourcentage], [engineers, employees.salaries.engineers.pourcentage]];
         let result = 0;
         humanRessources.forEach(categories => {
-            result += categories/employees < 0.35 && categories/employees > 0.15 ? 25 : 0;
-        }); 
+            result += categories[0] / employeesNumber < categories[1] + 0.10 && categories[0] / employeesNumber > categories[1] - 0.10 ? 25 : 0;
+        });
         return result;
     }
 
     isFinished() {
         return this.global === 100;
+    }
+    isLost() {
+        return this.global <= 10;
     }
 };

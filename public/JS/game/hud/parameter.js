@@ -17,6 +17,11 @@ const signOut = document.querySelector('.fa-right-from-bracket');
 const cloud = document.querySelector('.fa-cloud');
 const sun = document.querySelector('.fa-sun');
 
+
+import {
+    sc
+} from '../app.js';
+
 let sound = true;
 let effect = true;
 let shadow = true;
@@ -190,11 +195,11 @@ function putEffect() {
  */
 function changeEffect() {
     if (effect) {
-        effectUp.style.display = "block";
+        effectUp.style.display = "flex";
         effectOff.style.display = "none";
     } else {
         effectUp.style.display = "none";
-        effectOff.style.display = "block";
+        effectOff.style.display = "flex";
     }
 }
 
@@ -204,6 +209,7 @@ function changeEffect() {
 function removeShadow() {
     console.log('enleve ombre');
     shadow = false;
+    sc.ChangeSh(shadow)
     changeShadow();
 }
 
@@ -213,6 +219,7 @@ function removeShadow() {
 function putShadow() {
     console.log('met ombre');
     shadow = true;
+    sc.ChangeSh(shadow)
     changeShadow();
 }
 

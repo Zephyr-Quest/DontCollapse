@@ -569,6 +569,50 @@ body {
     }
 }
 
+
+#confirm-disconnect {
+    flex-direction: row;
+    justify-content: space-around;
+    margin: auto;
+    position:absolute;
+    background-color: @bg-color;
+    padding:1rem;
+    border-radius: 10px;
+    color:white;
+    border:none;
+    font-weight: bold;
+    .modal-content{
+        display: flex;
+        flex-direction: column;
+        div {
+            margin-top:20px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            button {
+                width: 45%;
+                height: 40px;
+                border-radius: 8px;
+                cursor: pointer;
+                border: 3px solid @primary-color;
+                color: @bg-color;
+                background-color: @primary-color;
+                font-size: .9rem;
+                font-weight: bold;
+                outline:none;
+                &:hover {
+                    background-color: transparent;
+                    color: @primary-color;
+                    transition: background-color 0.3s;
+                }
+        
+            }
+        }
+    }
+
+}
+
 #shop-modal {
     padding: 20px;
     width: 1200px;
@@ -838,6 +882,10 @@ body {
 
         .J3 {
             color: rgb(88, 168, 235);
+        }
+
+        .server {
+            color: rgb(141, 141, 141);
         }
     }
 }

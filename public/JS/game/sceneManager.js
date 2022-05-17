@@ -54,6 +54,7 @@ export class Scene {
          *
          */
         constructor(onLoad) {
+                this.sh = true
                 this.GroupSprite = new THREE.Group()
                 this.loadManager = new THREE.LoadingManager();
                 this.textureLoader = new THREE.TextureLoader(this.loadManager);
@@ -77,6 +78,8 @@ export class Scene {
                         welding: 1,
                         mechanic: 1
                 }
+                this.firstLevels = new THREE.Group()
+
         }
 
         /**
@@ -112,6 +115,11 @@ export class Scene {
                 if (loaded) callback();
         }
 
+        ChangeSh(s) {
+                this.sh = s
+                this.light.castShadow = this.sh
+        }
+
         /**
          * Init the scene and elements
          *
@@ -140,9 +148,9 @@ export class Scene {
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setPixelRatio(window.devicePixelRatio);
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
-                this.renderer.shadowMap.enabled = false;
+                this.renderer.shadowMap.enabled = true;
                 this.renderer.shadowMap.type = THREE.BasicShadowMap;
-                this.renderer.shadowMapSoft = false;
+                this.renderer.shadowMapSoft = true;
                 this.renderer.setClearColor(0x000000, 0);
                 document.body.appendChild(this.renderer.domElement);
 
@@ -159,7 +167,7 @@ export class Scene {
                 let intensity = 0.85;
                 this.light = new THREE.PointLight(color, intensity, 5000, 2);
                 this.light.position.set(0, 0, 130);
-                this.light.castShadow = false;
+                this.light.castShadow = this.sh;
                 this.light.shadow.bias = -0.0001
                 this.light.shadow.mapSize.width = 1024; // default
                 this.light.shadow.mapSize.height = 1024; // default
@@ -233,7 +241,6 @@ export class Scene {
                 let obj, mesh
                 this.selectionables = new THREE.Group();
                 this.otherLevels = new THREE.Group();
-
                 ObjectArray.forEach(el => {
                         obj = new Object3D(el)
                         mesh = obj.getMesh()
@@ -251,6 +258,8 @@ export class Scene {
 
                         } else {
                                 if (el.ray) {
+                                        mesh.level = 1
+                                        this.firstLevels.add(mesh.clone())
                                         this.selectionables.add(mesh);
                                 } else {
                                         this.scene.add(mesh)
@@ -268,22 +277,23 @@ export class Scene {
          */
         updateModel(itemToChange) {
                 let name;
+                console.log(itemToChange)
                 switch (itemToChange.obj) {
-                        case "0":
+                        case 0:
                                 name = "Mac_Poste a souder"
-                                this.levels.welding=itemToChange.level
+                                this.levels.welding = itemToChange.level
                                 break;
-                        case "1":
+                        case 1:
                                 name = "Mac_Assembleur de Precision"
-                                this.levels.precision=itemToChange.level
+                                this.levels.precision = itemToChange.level
                                 break;
-                        case "2":
+                        case 2:
                                 name = "Mac_Assembleur Mecanique"
-                                this.levels.mechanic=itemToChange.level
+                                this.levels.mechanic = itemToChange.level
                                 break;
-                        case "3":
+                        case 3:
                                 name = "Mac_Assembleur General"
-                                this.levels.general=itemToChange.level
+                                this.levels.general = itemToChange.level
                                 break;
                 }
                 this.selectionables.children.forEach(el => {
@@ -492,6 +502,79 @@ export class Scene {
                 document.getElementsByClassName("cameraName")[0].style.display = "block"
         }
 
+        goSeeOtherPlayer(obj,pseudo) {
+                this.groupToDisplay = new THREE.Group()
+                this.groupToDisplay = this.selectionables.clone()
+                this.scene.remove(this.selectionables)
+                this.selectionables.visible = false
+                let machines = obj
+                for (let index = 0; index < this.groupToDisplay.children.length; index++) {
+                        let el = this.groupToDisplay.children[index]
+                        if (el.name == "Mac_Poste a souder" || el.name == "Mac_Assembleur de Precision" || el.name == "Mac_Assembleur General" || el.name == "Mac_Assembleur Mecanique") {
+                                this.groupToDisplay.remove(el)
+                                index = index - 1;
+                        }
+                }
+                for (let index = 0; index < machines.length; index++) {
+                        let name
+                        let lvl
+                        switch (index) {
+                                case 0:
+                                        name = "Mac_Poste a souder"
+                                        lvl = machines[index].level
+                                        break;
+                                case 1:
+                                        name = "Mac_Assembleur de Precision"
+                                        lvl = machines[index].level
+                                        break;
+                                case 2:
+                                        name = "Mac_Assembleur Mecanique"
+                                        lvl = machines[index].level
+                                        break;
+                                case 3:
+                                        name = "Mac_Assembleur General"
+                                        lvl = machines[index].level
+                                        break;
+                        }
+                        if (lvl == 1) {
+                                this.firstLevels.children.forEach(el => {
+                                        if (el.name == name) this.groupToDisplay.add(el.clone())
+                                })
+                        } else {
+                                this.otherLevels.children.forEach(el => {
+                                        if (el.name == name && el.level == lvl) this.groupToDisplay.add(el.clone())
+                                })
+                        }
+                }
+                this.scene.add(this.groupToDisplay)
+                this.closeCameraDisplay()
+                let menu = document.getElementsByClassName("usineDiv")[0]
+                menu.style.display = "flex"
+                menu.innerHTML="Usine de "+pseudo+"<br>> Retourner à mon usine <";
+
+
+                let menu2 = document.getElementById("myMenuSortie")
+                if (menu2.style.display == "block") menu2.style.display = "none"
+                document.getElementById("myThreeJsCanvas").style.pointerEvents = "none"
+                this.scene.remove(this.copyGroupSprite)
+                this.scene.remove(this.GroupSprite)
+                this.copyGroupSprite = new THREE.Group()
+                this.GroupSprite = new THREE.Group()
+                menu.addEventListener("mousedown", () => {
+                        menu.style.display = "none"
+                        this.comeBackHome()
+                })
+        }
+
+        comeBackHome() {
+                this.scene.remove(this.groupToDisplay)
+                document.getElementById("myThreeJsCanvas").style.pointerEvents = "auto"
+                this.selectionables.visible = true
+
+                this.scene.add(this.selectionables)
+                this.closeMenu()
+        }
+
         /**
          * Open me menu of machine
          *
@@ -501,7 +584,29 @@ export class Scene {
         openMenu(s) {
                 this.closeCameraDisplay()
                 let menu = document.getElementById("myMenuShop")
-                document.getElementById("title_menuShop").innerText = "Menu : " + s
+                let lvl
+                switch (s) {
+                        case "Poste a souder":
+                                lvl = this.levels.welding
+                                break;
+                        case "Assembleur de Precision":
+                                lvl = this.levels.precision
+                                break;
+                        case "Assembleur Mecanique":
+                                lvl = this.levels.mechanic
+                                break;
+                        case "Assembleur General":
+                                lvl = this.levels.general
+                                break;
+
+                }
+                document.getElementById("icon1").title = s
+                document.getElementById("icon1").addEventListener("click", () => {
+                        HUD.openSpecificMachine(lvl)
+                }, {
+                        once: true
+                })
+                document.getElementById("title_menuShop").innerText = "Menu : " + s + " Niveau " + lvl;
                 menu.style.display = "block"
                 menu = document.getElementById("myMenuSortie")
                 if (menu.style.display == "block") menu.style.display = "none"
@@ -565,8 +670,6 @@ export class Scene {
                                 el.position.y = 250.5
                         }
                 })
-
-
         }
 
         /**
@@ -658,8 +761,8 @@ export class Scene {
          */
         changeCamera(event) {
                 let cam = 1
-                if(document.activeElement.tagName=="INPUT") cam=0
-                if (cam==1) {
+                if (document.activeElement.tagName == "INPUT") cam = 0
+                if (cam == 1) {
                         switch (event.keyCode) {
                                 case 49:
                                         // 1 pressed

@@ -6,17 +6,33 @@ let socket = io();
 
 function connect(path, idRoom = null) {
     const pseudo = pseudoInput.value;
-    const data = { pseudo };
+    const data = {
+        pseudo
+    };
     if (idRoom) data.idRoom = Number(idRoom);
     http.post(
         path,
         data,
-        () => window.location.href = "/game",
-        err => console.error(err)
+        () => {
+            document.getElementsByClassName("error_msg_pseudo")[0].style.display = "none";
+            window.location.href = "/game";
+        },
+        (_err) => {
+            if (pseudo == "") {
+                document.getElementsByClassName("error_msg_pseudo")[0].innerHTML = "Le pseudo ne peut être vide";
+            } else if (pseudo.length < 3 || pseudo.length > 12) {
+                document.getElementsByClassName("error_msg_pseudo")[0].innerHTML = "La longueur du pseudo doit être supérieure à 3 et inférieure à 12";
+            } else {
+                document.getElementsByClassName("error_msg_pseudo")[0].innerHTML = "Le pseudo est invalide";
+            }
+            document.getElementsByClassName("error_msg_pseudo")[0].style.display = "block";
+        }
     );
 }
 
-hostCard.addEventListener("click", () => connect('/host'));
+hostCard.addEventListener("click", () => {
+    connect('/host')
+});
 
 /* ---------------------- Display the differents rooms ---------------------- */
 socket.on("display-rooms", (allRooms) => {

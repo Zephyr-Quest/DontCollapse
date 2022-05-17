@@ -1,3 +1,4 @@
+import { sc } from "./game/app.js";
 import Chrono from "./game/hud/chrono.js";
 import HUD from "./game/hud/hud.js";
 import Item from './game/hud/shop/manageItem.js'
@@ -18,12 +19,13 @@ const events = {
         beginingGame(data);
     },
     'new-message': (user, msg) => {
-        const index = connectedPlayers.indexOf(user);
+        let index;
+        if (user != "Server") index = connectedPlayers.indexOf(user);
         const names = {
             0: "host",
             1: "J1",
             2: "J2",
-            3: "J3"
+            3: "J3",
         }
 
         let item2 = document.createElement('div');
@@ -35,7 +37,7 @@ const events = {
         let item = document.createElement('div');
         item.classList.add(user === username ? "sender" : "receiver");
         item.classList.add("username");
-        item.classList.add(names[index]);
+        item.classList.add(user === "Server" ? "server" : names[index]);
         item.innerText = user;
         messages.appendChild(item);
 
@@ -53,9 +55,9 @@ const events = {
     "infoActu": (infoPlayer) => {
         HUD.refreshHud(infoPlayer);
     },
-    "finishGame": () => {
-        console.log("finish game front");
-        HUD.openResultsModal();
+    "finishGame": (msg, displayOtherPlayers) => {
+        console.log("finish game front", msg, displayOtherPlayers);
+        HUD.openResultsModal(msg, displayOtherPlayers);
     }
 };
 
@@ -67,6 +69,7 @@ let connectedPlayers = [];
 const username = document.getElementById("username").value;
 /* -------------------- Variables for functions listeners ------------------- */
 let deleteEvent;
+let seeOtherEvent;
 let startGame;
 let messages;
 
@@ -112,7 +115,7 @@ function updatePlayersOnScreen() {
 }
 
 function beginingGame(data) {
-    document.getElementsByClassName("cameraName")[0].style.display="block";
+    document.getElementsByClassName("cameraName")[0].style.display = "block";
     document.getElementById("myThreeJsCanvas").style.display = "block"
     const eltsToDelete = document.getElementById("room");
     eltsToDelete.remove();
@@ -129,10 +132,11 @@ function getAllShop(infoPlayer, username) {
 /* --------------------------------- Return --------------------------------- */
 
 // return {
-function init(DE, SG, chatMessages) {
+function init(DE, SG, chatMessages, seeOther) {
     deleteEvent = DE;
     startGame = SG;
     messages = chatMessages;
+    seeOtherEvent = seeOther;
 }
 
 function connect() {
@@ -148,6 +152,13 @@ function emit(eventName, ...params) {
 }
 
 const getConnectedPlayers = () => connectedPlayers;
+
+// See other players EVENT on click
+document.getElementById("SortiWrap").addEventListener("click", (event) => {
+    seeOtherEvent(event, (data,player) => {
+        sc.goSeeOtherPlayer(data,player);
+    });
+})
 
 export default {
     init,

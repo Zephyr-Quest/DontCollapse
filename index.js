@@ -84,23 +84,43 @@ const updateMonth = game => {
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
         const pUsername = pSocket.handshake.session.username;
-        const infoPlayer = game.searchPlayer(pUsername).updateAll();
-        const infos = {
-            chrono: game.chrono.getTime(),
-            moula: infoPlayer.moula,
-            barres: infoPlayer.barres
-        };
-        pSocket.emit("infoActu", infos);
+
+        const user = game.searchPlayer(pUsername);
+        if (!user) continue;
+
+        // Actualisation
+        if (user.gameContinue) {
+            const infoPlayer = user.updateAll();
+            const event = game.applyEvent();
+            const infos = {
+                chrono: game.chrono.getTime(),
+                moula: infoPlayer.moula,
+                barres: infoPlayer.barres,
+                event: event
+            };
+            pSocket.emit("infoActu", infos);
+
+            // Game finished
+            const end = game.isFinished();
+            if (end !== false) {
+                game.finishGame();
+                const msg = pUsername + "has finished the game";
+                io.to(game.idRoom).emit("finishGame", msg, false);
+            }
+
+            // User lose
+            const endPlayer = user.isFinished();
+            if (endPlayer) {
+                user.gameContinue = false;
+                pSocket.emit("finishGame", "you lose", true);
+            }
+        }
     }
 };
 
 const endGame = game => {
-    const players = io.sockets.adapter.rooms.get(game.idRoom);
     game.finishGame();
-    for (const p of players) {
-        const pSocket = io.sockets.sockets.get(p);
-        pSocket.emit("finishGame");
-    }
+    io.to(game.idRoom).emit("finishGame", "no time anymore", false);
 }
 
 /* ----------------------------------- APP ---------------------------------- */
@@ -142,6 +162,23 @@ app.get('/shopinfo', (req, res) => {
     }
 
     res.json(allRooms[idRoom].shopInfo());
+});
+
+app.get('/otherplayer/:player', (req, res) => {
+    const idRoom = req.session.idRoom;
+    const username = req.session.username;
+    const player = req.params.player;
+
+    if (!req.session.username || !allRooms[idRoom] || !allRooms[idRoom].searchPlayer(player)) {
+        res.status(401).json({
+            message: "You don't have permission."
+        });
+        return;
+    }
+
+    console.log(username, "go to see", player, "in room", idRoom)
+
+    return res.json(allRooms[idRoom].searchPlayer(player).machines)
 });
 
 app.delete("/removeuser/:player", (req, res) => {
@@ -239,11 +276,11 @@ app.post("/join",
             });
             return;
         }
-
         if (allRooms[idRoom].playersName.includes(userName)) {
             res.status(400).json({
                 errors: "Pseudo already exists in this room",
             });
+            res.sText = "azerty"
             return;
         }
 
@@ -286,12 +323,30 @@ io.on('connection', socket => {
         // Delete room
         if (allRooms[idRoom]) {
             // Check the exiting room
-            if (allRooms[idRoom].playersName.indexOf(username) === 0) {
+            const isHost = allRooms[idRoom].playersName.indexOf(username) === 0;
+            const nbrPlayers = allRooms[idRoom].players.length <= 2;
+            if (isHost || (nbrPlayers && allRooms[idRoom].gameStart)) {
                 // Delete the room
                 console.log("delete room", idRoom);
-                if(allRooms[idRoom].chrono) allRooms[idRoom].chrono.stopChrono = true;
+                if (allRooms[idRoom].chrono) allRooms[idRoom].chrono.stopChrono = true;
+
+                const players = io.sockets.adapter.rooms.get(idRoom);
+                for (const p of players) {
+                    const pSocket = io.sockets.sockets.get(p);
+                    const pUsername = pSocket.handshake.session.username;
+
+                    let msg;
+                    if (isHost && !nbrPlayers) msg = "host disconnected";
+                    if (nbrPlayers) msg = "You're alone in your room";
+
+                    // Host disconnect
+                    if (pUsername !== username && allRooms[idRoom].gameStart) {
+                        pSocket.emit("finishGame", msg, false);
+                    } else
+                        pSocket.emit("disconnection");
+                }
+
                 delete allRooms[idRoom];
-                io.to(idRoom).emit("disconnection");
             }
             // Host remove an user from the room
             else {
@@ -302,6 +357,8 @@ io.on('connection', socket => {
             }
         }
         // Disconnect user 
+        const msg = username + "leave the game";
+        io.to(idRoom).emit("new-message", "Server", msg)
         socket.leave(idRoom);
         console.log("disconnect", username, "from room", idRoom);
         disconnectingUsers.splice(disconnectingUsers.indexOf(username), 1);
@@ -328,8 +385,7 @@ io.on('connection', socket => {
                 barres: allRooms[idRoom].players[0].sd
             };
             io.to(idRoom).emit("startAuthorized", data);
-        }
-        else console.log("start unauthorized");
+        } else console.log("start unauthorized");
     });
 
     // Socket to display room on lobby

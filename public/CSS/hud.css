@@ -470,6 +470,46 @@ body h1 {
   color: #f5dba6;
   transition: background-color 0.3s;
 }
+#confirm-disconnect {
+  flex-direction: row;
+  justify-content: space-around;
+  margin: auto;
+  position: absolute;
+  background-color: #383331;
+  padding: 1rem;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+#confirm-disconnect .modal-content {
+  display: flex;
+  flex-direction: column;
+}
+#confirm-disconnect .modal-content div {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#confirm-disconnect .modal-content div button {
+  width: 45%;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 3px solid #f5dba6;
+  color: #383331;
+  background-color: #f5dba6;
+  font-size: 0.9rem;
+  font-weight: bold;
+  outline: none;
+}
+#confirm-disconnect .modal-content div button:hover {
+  background-color: transparent;
+  color: #f5dba6;
+  transition: background-color 0.3s;
+}
 #shop-modal {
   padding: 20px;
   width: 1200px;
@@ -693,6 +733,9 @@ body h1 {
 }
 #chat-modal #messages .J3 {
   color: #58a8eb;
+}
+#chat-modal #messages .server {
+  color: #8d8d8d;
 }
 /* -------------------------------------------------------------------------- */
 /*                                Waiting room                                */

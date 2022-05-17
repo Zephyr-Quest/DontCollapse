@@ -4,6 +4,9 @@ import Parameter from './parameter.js'
 import Modal from './modalManager.js'
 import HTTP from '../../http_module.js';
 
+import * as THREE from 'three';
+
+
 /* ------------------------------ progress bar ------------------------------ */
 // let id = 5;
 // let stat = true;
@@ -23,6 +26,13 @@ import ShopItem from './shop/shopItem.js'
 import Chrono from './chrono.js'
 import Money from './money.js'
 import Shop from './shop/topRubric.js'
+
+import {
+    Scene
+} from '../sceneManager.js'
+import {
+    sc
+} from '../app.js';
 
 /* --------------------------------- Modals --------------------------------- */
 
@@ -44,23 +54,33 @@ function deleteChatbutton() {
     chat.destroyListener();
 }
 
-
-
 function openChatModal() {
     chat.openModal();
+    sc.closeMenu();
+    sc.animatedText = false
+    sc.staticText = false
+    sc.scene.remove(sc.copyGroupSprite)
+    sc.scene.remove(sc.GroupSprite)
+    sc.copyGroupSprite = new THREE.Group()
+    sc.GroupSprite = new THREE.Group()
 }
 
 function openShopModal() {
     shop.openModal();
+    sc.closeMenu();
+    sc.animatedText = false
+    sc.staticText = false
+    sc.scene.remove(sc.copyGroupSprite)
+    sc.scene.remove(sc.GroupSprite)
+    sc.copyGroupSprite = new THREE.Group()
+    sc.GroupSprite = new THREE.Group()
 }
 
 function closeShopModal() {
     shop.closeFunction()
 }
 
-
-
-function openResultsModal() {
+function openResultsModal(msg, displayOtherPlayers) {
     results.openModal();
 }
 

@@ -115,7 +115,19 @@ main .games #new_game ion-icon {
 main #pseudo {
   display: flex;
   justify-content: left;
-  align-items: center;
+  align-items: baseline;
+}
+main #pseudo div {
+  align-items: left;
+}
+main #pseudo span {
+  color: red;
+  display: none;
+  font-family: 'KoHo', sans-serif;
+  font-size: medium;
+  font-weight: bold;
+  margin-left: 3em;
+  margin-top: 5px;
 }
 main #pseudo input {
   background-color: #383331;

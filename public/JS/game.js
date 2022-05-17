@@ -1,5 +1,6 @@
 import HUD from "./game/hud/hud.js"
 import WebSocket from "./WebSocket.js";
+import HTTP from "./http_module.js";
 
 
 const messages = document.getElementById("messages")
@@ -16,14 +17,30 @@ chatForm.addEventListener('submit', event => {
 });
 
 function deleteEvent(e) {
+    console.log(e.target)
     const player = e.target.parentElement.getElementsByTagName("h2")[0].innerText;
     console.log("removing", player);
 
     // Delete the current player
-    http.delete(
+    HTTP.del(
         `/removeuser/${player}`,
         () => {
             console.log("success");
+        },
+        err => console.error(err)
+    );
+}
+
+function seeOtherPlayerEvent(e, callback) {
+    const player = e.target.parentElement.getElementsByTagName("P")[0].innerText;
+    console.log("let's see", player);
+
+    // Delete the current player
+    HTTP.get(
+        `/otherplayer/${player}`,
+        (data) => {
+            console.log("success");
+            callback(data, player);
         },
         err => console.error(err)
     );
@@ -35,7 +52,7 @@ function startGame() {
 
 
 
-WebSocket.init(deleteEvent, startGame, messages);
+WebSocket.init(deleteEvent, startGame, messages, seeOtherPlayerEvent);
 WebSocket.connect();
 
 HUD.initChatButton();

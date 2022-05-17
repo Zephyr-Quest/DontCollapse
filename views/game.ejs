@@ -27,7 +27,7 @@
 
 <body>
 
-    <input type="hidden" value="<%= username %>" id="username" />
+    <input type="hidden" value="<%= username %>" id="username"/>
 
     <div id="room">
         <h1>Bienvenue <%= username %> !</h1>
@@ -50,7 +50,7 @@
         <h1 id="title_menuShop">Titre</h1>
         <div>
             <div id="icon1">
-                <ion-icon name="pricetag-outline"></ion-icon>
+                <ion-icon id="icon1_img" name="pricetag-outline"></ion-icon>
             </div>
 
         </div>
@@ -226,7 +226,7 @@
                             <div class="item-description" style="display:none;">
                                 <p>Rapide description</p>
                                 <p></p>
-                                <button class="buy-button">Acheter</button>
+                                <button class="buy-button">Recruter</button>
                             </div>
                         </div>
                         <div class="menage clickable" style="display: none;">
@@ -236,7 +236,7 @@
                             <div class="item-description" style="display:none;">
                                 <p>Rapide description</p>
                                 <p></p>
-                                <button class="buy-button">Acheter</button>
+                                <button class="buy-button">Recruter</button>
                             </div>
                         </div>
 
@@ -320,14 +320,14 @@
                         <!-- ------------------------------ Occasions ------------------------------ -->
 
                         <div disable class="occaz j1 clickable" style="display: none;">
-                            <p>Rien n'est a vendre</p>
-                            <p>pour le moment</p>
+                            <p></p>
+                            <p></p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display:none;">Acheter</button>
                         </div>
                         <div disable class="occaz j2 clickable" style="display: none;">
-                            <p>Rien n'est a vendre</p>
-                            <p>pour le moment</p>
+                            <p></p>
+                            <p></p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display:none;">Acheter</button>
                         </div>
@@ -424,7 +424,7 @@
                             <div class="item-description" style="display:none;">
                                 <p>Rapide description</p>
                                 <p></p>
-                                <button class="buy-button">Acheter</button>
+                                <button class="buy-button">Recruter</button>
                             </div>
                         </div>
                         <div class="super clickable" style="display: none;">
@@ -434,7 +434,7 @@
                             <div class="item-description" style="display:none;">
                                 <p>Rapide description</p>
                                 <p></p>
-                                <button class="buy-button">Acheter</button>
+                                <button class="buy-button">Recruter</button>
                             </div>
                         </div>
 
@@ -519,14 +519,14 @@
                         <!-- ------------------------------ Occasions ------------------------------ -->
 
                         <div disable class="occaz j1 clickable" style="display: none;">
-                            <p>Rien n'est a vendre</p>
-                            <p>pour le moment</p>
+                            <p></p>
+                            <p></p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display:none;">Acheter</button>
                         </div>
                         <div disable class="occaz j4 void clickable" style="display: none;">
-                            <p>Rien n'est a vendre</p>
-                            <p>pour le moment</p>
+                            <p></p>
+                            <p></p>
                             <p style="display: none;">Rapide description</p>
                             <button class="buy-button" style="display:none;">Acheter</button>
                         </div>
@@ -593,15 +593,19 @@
     </div>
     <dialog id="confirm-disconnect" class="modal">
         <div class="modal-content">
-            <p>Voulez vous vraiment vous deconnecter ?</p>
-
-            <button id="oui-disconnect" class="button">Oui</button>
-            <button id="non-disconnect" class="button">Non</button>
+            <p>Voulez vous vraiment vous déconnecter ?</p>
+            <div>
+                <button id="oui-disconnect" class="button">Oui</button>
+                <button id="non-disconnect" class="button">Non</button>
+            </div>
         </div>
     </dialog>
 
     <div class="cameraName">
         Camera 1
+    </div>
+    <div class="cameraName usineDiv" style="cursor:pointer">
+        Retourner à mon usine
     </div>
     <!-- Debug -->
     <script type="text/javascript" src="JS/game/stats.min.js"></script>
@@ -619,6 +623,7 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script type="module" src="./JS/game/app.js"></script>
     <script src="JS/game.js" type="module"></script>
+    <script src="JS/http_module.js" type="module"></script>
 </body>
 
 </html>

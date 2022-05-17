@@ -206,12 +206,12 @@ function refreshOccaz(infos, username) {
             } else {
                 elem.removeAttribute('disable');
                 elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level;
-                elem.children[1].innerHTML = "à vendre";
+                elem.children[1].innerHTML = "a vendre";
                 elem.children[2].innerHTML = "Vendue par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
             }
         } else {
             elem.setAttribute('disable', '');
-            elem.children[0].innerHTML = "Rien n'est à vendre";
+            elem.children[0].innerHTML = "Rien n'est a vendre";
             elem.children[1].innerText = "pour le moment";
         }
     }

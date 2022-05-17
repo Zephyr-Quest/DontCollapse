@@ -1256,21 +1256,7 @@ export const ObjectArray = [
                 name: "Chat"
         },
 
-        /* -------------------------------- MECHANIC -------------------------------- */
-        {
-                type: "mechanic",
-                x: -65,
-                y: -155,
-                z: 22,
-                length: 70,
-                width: 15,
-                color: wallColor,
-                rotx: 0,
-                roty: 0,
-                rotz: 0,
-                ray: true,
-                name: "Mac_Assembleur Mecanique"
-        },
+
 
         /* ---------------------------------- BELT ---------------------------------- */
         {
@@ -1323,6 +1309,36 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
+                ray: true,
+                name: "Mac_Assembleur General"
+        },
+        {
+                type: "general2",
+                x: 70,
+                y: -65,
+                z: 22,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                level: 2,
+                ray: true,
+                name: "Mac_Assembleur General"
+        },
+        {
+                type: "general3",
+                x: 70,
+                y: -65,
+                z: 22,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                level: 3,
                 ray: true,
                 name: "Mac_Assembleur General"
         },
@@ -1463,5 +1479,53 @@ export const ObjectArray = [
                 ray: true,
                 level: 4,
                 name: "Mac_Assembleur de Precision"
+        },
+
+        /* -------------------------------------------------------------------------- */
+        /*                            ASSEMBLEUR MECANIQUE                            */
+        /* -------------------------------------------------------------------------- */
+        {
+                type: "mechanic",
+                x: -65,
+                y: -155,
+                z: 22,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                ray: true,
+                name: "Mac_Assembleur Mecanique"
+        },
+        {
+                type: "mechanic2",
+                x: -65,
+                y: -155,
+                z: 22,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                level:2,
+                ray: true,
+                name: "Mac_Assembleur Mecanique"
+        },
+        {
+                type: "mechanic3",
+                x: -65,
+                y: -155,
+                z: 22,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                level:3,
+                ray: true,
+                name: "Mac_Assembleur Mecanique"
         },
 ]
