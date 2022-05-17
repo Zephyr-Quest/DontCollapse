@@ -13,12 +13,12 @@ export default class modal {
      * @param {String} close 
      * @param {Boolean} isShop 
      */
-    constructor(modal, open, close, isShop = false) {
+    constructor(modal, open, close, isShop = false, isByeBye = false) {
         this.modal = document.getElementById(modal);
         if (open !== undefined) this.open = document.getElementById(open);
         if (close !== undefined) this.close = document.getElementById(close);
         this.isShop = isShop;
-        this.shopCB;
+        this.isByeBye = isByeBye;
     }
 
 
@@ -76,12 +76,14 @@ export default class modal {
             }
         });
 
-        // When the user clicks on Escape, close the modal
-        window.addEventListener('keydown', (e) => {
-            if ((e.key === "Escape" || e.key === "Esc") && this.modal.hasAttribute('open')) {
-                this.closeFunction();
-            }
-        });
+        if (!this.isByeBye) {
+            // When the user clicks on Escape, close the modal
+            window.addEventListener('keydown', (e) => {
+                if ((e.key === "Escape" || e.key === "Esc") && this.modal.hasAttribute('open')) {
+                    this.closeFunction();
+                }
+            });
+        }
     }
 
     /**

@@ -1,7 +1,7 @@
 import Modal from './modalManager.js'
 import WebSocket from '../../WebSocket.js';
 
-const modal = new Modal('results-modal', undefined, 'close-results');
+const modal = new Modal('results-modal', undefined, 'close-results', false, true);
 const playerListDiv = document.getElementById("playerListDiv");
 const disconnection = [modal.close, document.getElementById("disconnectionResults")]
 const text = document.getElementById("context");
@@ -30,7 +30,6 @@ function openResultsModal(msg, displayOtherPlayers, connectedPlayers) {
 
 disconnection.forEach(button => {
     button.addEventListener('click', () => {
-        console.log("disco button")
         modal.closeFunction();
         window.location.href = "/lobby";
     }, {
@@ -40,7 +39,6 @@ disconnection.forEach(button => {
 
 window.addEventListener('keydown', (e) => {
     if ((e.key === "Escape" || e.key === "Esc") && modal.modal.hasAttribute('open')) {
-        console.log("esc button")
         modal.closeFunction();
         window.location.href = "/lobby";
     }
