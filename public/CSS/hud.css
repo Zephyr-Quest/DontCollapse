@@ -533,6 +533,42 @@ body h1 {
   color: #f5dba6;
   transition: background-color 0.3s;
 }
+#events-modal {
+  padding: 40px;
+  width: 400px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #383331;
+  border: 2px solid #383331;
+  color: #f5dba6;
+  cursor: default;
+  font-family: 'KoHo';
+  font-weight: bold;
+}
+#events-modal .modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#events-modal .modal-content h2 {
+  text-align: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-family: "Koulen";
+  font-size: 2rem;
+}
+#events-modal .modal-content #events-content p {
+  font-family: "Koulen";
+  font-size: 1.2rem;
+  letter-spacing: 7px;
+  margin-top: -10px;
+}
+#events-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.623);
+}
 #confirm-disconnect {
   flex-direction: row;
   justify-content: space-around;

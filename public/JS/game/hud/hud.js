@@ -7,7 +7,6 @@ import ShopItem from './shop/shopItem.js'
 import Chrono from './chrono.js'
 import Money from './money.js'
 import Shop from './shop/topRubric.js'
-import Event from './eventModal.js'
 
 import * as THREE from 'three';
 import { sc } from '../app.js';
@@ -18,7 +17,20 @@ Parameter.initListener();
 
 const shop = new Modal('shop-modal', 'shop-button', 'close-shop', true);
 const chat = new Modal('chat-modal', 'chat-button', 'close-chat');
-const events = new Modal('events-modal', undefined, 'close-events')
+const events = new Modal('events-modal', undefined, undefined);
+const results = new Modal('results-modal', undefined, undefined, false, true);
+
+function openResultsModal(){
+    results.openModal();
+}
+
+function closeResultModal(){
+    results.closeFunction();
+}
+
+function isResultOpen(){
+    return results.isOpen()
+}
 
 function initChatButton() {
     chat.initListener();
@@ -107,11 +119,17 @@ function refreshHud(infos) {
     ProgressBar.updateEconomic(Math.round(infos.barres.economic));
     ProgressBar.updateSocial(Math.round(infos.barres.social));
 
-    Money.setMoney(infos.moula);
+    Money.setMoney(Math.round(infos.moula));
+
     if (infos.chrono) Chrono.startChronoFrom(infos.chrono.min, infos.chrono.sec);
+   
     if (infos.event) {
-        if(!events.isOpen()) events.openModal();
-        Event.displayEvent(infos.event)
+        if (!events.isOpen()) events.openModal();
+        let div = document.querySelector('#events-content');
+        div.removeChild(div.firstChild);
+        let elem = document.createElement('p');
+        elem.innerText = infos.event.event;
+        div.append(elem);
     }
 }
 
@@ -227,6 +245,10 @@ export default {
     closeShopModal,
     closeAllModals,
     initShop,
+
+    openResultsModal,
+    closeResultModal,
+    isResultOpen,
 
     refreshShop,
     refreshHud,
