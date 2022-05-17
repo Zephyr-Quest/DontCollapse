@@ -1,14 +1,12 @@
-import Modal from './modalManager.js'
+import Modal from './hud.js'
 import WebSocket from '../../WebSocket.js';
 
-const modal = new Modal('results-modal', undefined, undefined, false, true);
 const playerListDiv = document.getElementById("playerListDiv");
-const disconnection = [document.getElementById("disconnectionResults")]
 const text = document.getElementById("context");
 
 function openResultsModal(msg, displayOtherPlayers, connectedPlayers) {
-    if (!modal.isOpen())
-        modal.openModal();
+    if (!Modal.isResultOpen())
+        Modal.openResultsModal();
 
     text.innerText = msg;
 
@@ -35,7 +33,7 @@ function openResultsModal(msg, displayOtherPlayers, connectedPlayers) {
 }
 
 function closeModal() {
-    modal.closeFunction();
+    Modal.closeResultModal();
 }
 
 export default {

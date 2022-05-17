@@ -1,5 +1,4 @@
 import Shop from './shop/topRubric.js';
-
 import WebSocket from '../../WebSocket.js';
 
 /**
