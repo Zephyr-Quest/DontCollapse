@@ -505,7 +505,7 @@ export class Scene {
                 this.groupToDisplay = new THREE.Group()
                 this.selectionables2 = new THREE.Group();
                 this.groupToDisplay = this.selectionables.clone()
-
+                this.selectionables2=this.selectionables.clone()
                 this.scene.remove(this.selectionables)
                 this.scene.remove(this.groupToDisplay)
 
@@ -583,8 +583,9 @@ export class Scene {
         comeBackHome() {
                 this.scene.remove(this.groupToDisplay)
                 document.getElementById("myThreeJsCanvas").style.pointerEvents = "auto"
-                this.groupToDisplay = new THREE.Group()
                 this.selectionables = this.selectionables2.clone()
+                this.scene.add(this.selectionables)
+                this.groupToDisplay = new THREE.Group()
                 this.selectionables2 = new THREE.Group();
                 this.closeMenu()
         }
