@@ -275,7 +275,6 @@ module.exports = class Player {
 
     generateIncome() {
         let salariesPourcentage = Math.min(1, (this.employees.engineers.length + this.employees.maintainers.length) / (this.maintainersNeeded + this.engineersNeeded))
-        console.log(salariesPourcentage);
         return Math.max(0.25,salariesPourcentage) * 800 * this.manufacturingQuality * this.productionRate;
     }
 
