@@ -19,8 +19,6 @@ export default class modal {
         if (close !== undefined) this.close = document.getElementById(close);
         this.isShop = isShop;
         this.shopCB;
-
-        console.log(this.modal)
     }
 
 
@@ -90,7 +88,6 @@ export default class modal {
      * open the modal
      */
     openModal() {
-        console.log("Modal Manager", this.modal)
         this.initCloseListeners();
         if (this.isShop) {
             WebSocket.emit('openShop', "");

@@ -40,7 +40,7 @@ function seeOtherPlayerEvent(e, callback) {
         `/otherplayer/${player}`,
         (data) => {
             console.log("success");
-            callback(data);
+            callback(data, player);
         },
         err => console.error(err)
     );

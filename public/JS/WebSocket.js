@@ -123,6 +123,7 @@ function beginingGame(data) {
     const eltsToShow = document.getElementById("game");
     eltsToShow.style.display = "block";
     HUD.refreshHud(data)
+    HUD.initShop()
 }
 
 function getAllShop(infoPlayer, username) {
@@ -155,8 +156,8 @@ const getConnectedPlayers = () => connectedPlayers;
 
 // See other players EVENT on click
 document.getElementById("SortiWrap").addEventListener("click", (event) => {
-    seeOtherEvent(event, (data) => {
-        console.log(data);
+    seeOtherEvent(event, (data,player) => {
+        sc.goSeeOtherPlayer(data,player);
     });
 })
 

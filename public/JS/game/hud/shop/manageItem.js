@@ -49,9 +49,7 @@ function buyItem(divOfItem, type) {
     itemType = type;
     itemLevel = level[divOfItem.classList[0]]; // set the item level
     itemId = Number(divOfItem.classList[1]); // set the item id
-    let itemName = divOfItem.children[0].textContent; // set the item name
-
-    console.log(itemDiv, "// type : ", itemType, "//level : ", itemLevel, "// id : ", itemId)
+    let itemName = divOfItem.children[0].children[0].innerText; // set the item name
 
     document.getElementById('buying').textContent = "Achat de : " + itemName; // replace modal text
     confirmModal.openModal(); // open confirm modal
@@ -64,7 +62,7 @@ function buyItem(divOfItem, type) {
  */
 function deleteItem(divOfItem) {
     itemLevel = level[divOfItem.classList[0]]; // same as buy
-    itemToDelete = divOfItem.children[0].textContent;
+    itemToDelete = divOfItem.children[0].children[0].innerText;
     document.getElementById('buying').textContent = "Voulez vous vraiment vous débarasser de votre " + itemToDelete + " ?";
     confirmModal.openModal()
     initListener();
@@ -117,16 +115,13 @@ function buy() {
             buyContractCB(itemLevel, itemId); // id fournisseur / num contrat
             break;
         case 1:
-            console.log(itemId, itemLevel)
             buyPersoCB(itemLevel); // string métier / salaire
             break;
         case 2:
-            console.log(itemId, itemLevel)
             buyMachineCB(itemId, itemLevel); // id machine / level
             break;
         case 3:
             let username = itemDiv.getElementsByClassName("sellUsername")[0].innerText;
-            console.log(username)
             buyOccazCB(username, itemId); // nom du joueur qui vend
             break;
         default:
@@ -155,7 +150,6 @@ function setSellOccazCB(cb) {
     sellOccazCB = cb;
 }
 
-//* Possiblement à retirer/modifier avec l'actualistation du back
 function confirmation(bought, id, level, type) {
     if (bought === true) {
         let tempBought = {
@@ -177,16 +171,15 @@ function confirmation(bought, id, level, type) {
                 sellOwnMachine(id, level);
                 return
             }
-            confirmModal.closeFunction();
-            Modal.closeShopModal(); // close shop modal
-            removeListeners(true);
         }
+        confirmModal.closeFunction();
+        Modal.closeShopModal(); // close shop modal
+        removeListeners(true);
     } else {
         console.log("Item non acheté")
         oui.style.display = "none";
         non.style.display = "none";
         document.getElementById("buying").innerText = "L'achat n'a pas pu être réalisé"
-
         setTimeout(() => {
             confirmModal.closeFunction()
             setTimeout(() => {
@@ -203,12 +196,10 @@ function sellOwnMachine(id, level) {
     let itemId = id
     removeListeners(false);
     let sameID = Array.from(document.getElementsByClassName(itemId));
-    console.log(sameID)
     for (let i = sameID.length - 4; i < sameID.length; i++) {
         if (sameID[i].hasAttribute('disable')) toSell = sameID[i]
     }
-    console.log(toSell)
-    document.getElementById('buying').innerText = "Voulez vous vendre votre " + toSell.children[0].innerText + " de " + toSell.children[1].innerText;
+    document.getElementById('buying').innerText = "Voulez vous vendre votre " + toSell.children[0].children[0].innerText + " de " + toSell.children[0].children[1].innerText;
     oui.addEventListener('click', sell);
     non.addEventListener('click', notSell);
 }
@@ -227,7 +218,6 @@ function sell() {
         event.preventDefault(); //remember
         if (inputPrice.value.trim()) {
             sellOccazCB(toSell.classList[1], level[toSell.classList[0]], Number(inputPrice.value)) // id machine / level / prix de vente
-            console.log(toSell.classList[1], level[toSell.classList[0]], inputPrice.value)
             inputPrice.value = '';
 
             document.getElementById('confirm-div').style.display = 'block';

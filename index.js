@@ -151,6 +151,19 @@ app.get('/three', (req, res) => {
     res.render('index');
 })
 
+app.get('/shopinfo', (req, res) => {
+    const idRoom = req.session.idRoom;
+
+    if (idRoom === undefined) {
+        res.status(401).json({
+            message: "You don't have permission."
+        });
+        return;
+    }
+
+    res.json(allRooms[idRoom].shopInfo());
+});
+
 app.get('/otherplayer/:player', (req, res) => {
     const idRoom = req.session.idRoom;
     const username = req.session.username;
@@ -166,7 +179,7 @@ app.get('/otherplayer/:player', (req, res) => {
     console.log(username, "go to see", player, "in room", idRoom)
 
     return res.json(allRooms[idRoom].searchPlayer(player).machines)
-})
+});
 
 app.delete("/removeuser/:player", (req, res) => {
     const idRoom = req.session.idRoom;
