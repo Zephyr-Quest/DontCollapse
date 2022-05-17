@@ -25,7 +25,6 @@ Parameter.initListener();
 
 const shop = new Modal('shop-modal', 'shop-button', 'close-shop', true);
 const chat = new Modal('chat-modal', 'chat-button', 'close-chat');
-// const results = new Modal('results-modal', 'results-button', 'close-results');
 
 function initChatButton() {
     chat.initListener();
