@@ -39,7 +39,7 @@ function seeOtherPlayerEvent(e, callback) {
     HTTP.get(
         `/otherplayer/${player}`,
         (data) => {
-            console.log("success");
+            console.log("success", data);
             callback(data, player);
         },
         err => console.error(err)

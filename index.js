@@ -120,7 +120,7 @@ const updateMonth = game => {
 
 const endGame = game => {
     game.finishGame();
-    io.to(game.idRoom).emit("finishGame", "no time anymore", false);
+    io.to(game.idRoom).emit("finishGame", "Temps ecoule", true, game.playersName);
 }
 
 /* ----------------------------------- APP ---------------------------------- */
@@ -177,7 +177,7 @@ app.get('/otherplayer/:player', (req, res) => {
     }
 
     console.log(username, "go to see", player, "in room", idRoom)
-
+    console.log(allRooms[idRoom].searchPlayer(player).machines)
     return res.json(allRooms[idRoom].searchPlayer(player).machines)
 });
 
@@ -336,8 +336,8 @@ io.on('connection', socket => {
                     const pUsername = pSocket.handshake.session.username;
 
                     let msg;
-                    if (isHost && !nbrPlayers) msg = "host disconnected";
-                    if (nbrPlayers) msg = "You're alone in your room";
+                    if (isHost && !nbrPlayers) msg = "Le host s'est deconnecte";
+                    if (nbrPlayers) msg = "Vous êtes seul dans votre partie";
 
                     // Host disconnect
                     if (pUsername !== username && allRooms[idRoom].gameStart) {

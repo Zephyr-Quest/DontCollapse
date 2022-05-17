@@ -1,9 +1,9 @@
 import Modal from './modalManager.js'
 import WebSocket from '../../WebSocket.js';
 
-const modal = new Modal('results-modal', undefined, 'close-results', false, true);
+const modal = new Modal('results-modal', undefined, undefined, false, true);
 const playerListDiv = document.getElementById("playerListDiv");
-const disconnection = [modal.close, document.getElementById("disconnectionResults")]
+const disconnection = [document.getElementById("disconnectionResults")]
 const text = document.getElementById("context");
 
 function openResultsModal(msg, displayOtherPlayers, connectedPlayers) {
@@ -11,21 +11,24 @@ function openResultsModal(msg, displayOtherPlayers, connectedPlayers) {
         modal.openModal();
 
     text.innerText = msg;
-    
+
     if (displayOtherPlayers) {
         playerListDiv.style.display = "block";
         connectedPlayers.forEach(player => {
             if (document.getElementById("username").value !== player) {
                 let pPlayer = document.createElement("p");
                 pPlayer.innerText = player;
-                playerListDiv.appendChild(player);
+                playerListDiv.appendChild(pPlayer);
             }
         });
 
         WebSocket.initListenersOtherFactoryEndGameModal();
     }
     else playerListDiv.style.display = "none";
+}
 
+function closeModal() {
+    modal.closeFunction();
 }
 
 disconnection.forEach(button => {
@@ -48,5 +51,6 @@ window.addEventListener('keydown', (e) => {
 
 
 export default {
-    openResultsModal
+    openResultsModal,
+    closeModal
 }

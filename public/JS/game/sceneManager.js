@@ -510,7 +510,8 @@ export class Scene {
                 this.scene.remove(this.groupToDisplay)
 
                 let machines = obj
-
+                console.log(obj)
+                console.log(pseudo)
                 var selectedObject
                 selectedObject = this.groupToDisplay.getObjectByName("Mac_Poste a souder");
                 this.groupToDisplay.remove(selectedObject)
@@ -702,7 +703,6 @@ export class Scene {
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
                 if (s) {
-                        console.log(s)
                         let prefix = "Mac_"
                         while (!s.name.includes(prefix)) {
                                 s = s.parent

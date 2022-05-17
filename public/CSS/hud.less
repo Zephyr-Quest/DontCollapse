@@ -459,7 +459,72 @@ body {
     content: " <";
     white-space: pre;
 }
+#results-modal{
+    .modal-content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .top-modal{
+            text-align: center;
+            align-items: center;
+            margin:0;
+            padding:0;
+            h2{
+                font-family: "Koulen";
+                font-size:2rem;
+            }
+        }
+        p{
+            font-family: "Koulen";
+            font-size:1.2rem;
+            letter-spacing: 7px;
+            margin-top:-10px;
+        }
+        #playerListDiv{
+            p{
+                margin-top: 10px;
+                color:white;
+                font-family: @primary-font;
+                font-size:1.2rem;
+                letter-spacing: normal;
+                cursor: pointer;
+            }
+            p:hover::before{
+                content:"> ";
+                white-space: pre;
+            }
+            p:hover::after{
+                content:" <";
+                white-space: pre;
+            }
+        }
+        i{
+            color:white;
+            margin-top:20px;
+            font-size:2.6rem;
+            &:hover{
+                color:@primary-color;
+                cursor: pointer;
+            }
+        }
+    }
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.623);
+    }
 
+    padding: 40px;
+    width:400px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: @bg-color;
+    border: 2px solid @bg-color;
+    color: @primary-color;
+    cursor: default;
+    font-family: @primary-font;
+    font-weight: bold;  
+}
 #confirm-buy {
     &::backdrop {
         background-color: rgba(0, 0, 0, 0.466);
