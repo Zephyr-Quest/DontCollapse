@@ -588,7 +588,8 @@ export class Scene {
                 this.scene.add(this.selectionables)
                 this.groupToDisplay = new THREE.Group()
                 this.selectionables2 = new THREE.Group();
-                this.closeMenu()
+                this.closeMenu();
+                WebSocket.emit("moumou_la_reine_des_mouettes_comeback", document.getElementById("username").value)
         }
 
         /**

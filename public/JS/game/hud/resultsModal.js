@@ -14,6 +14,13 @@ function openResultsModal(msg, displayOtherPlayers, connectedPlayers) {
 
     if (displayOtherPlayers) {
         playerListDiv.style.display = "block";
+
+        if (playerListDiv.hasChildNodes()) {
+            playerListDiv.forEach(child => {
+                playerListDiv.removeChild("p");
+            })
+        }
+
         connectedPlayers.forEach(player => {
             if (document.getElementById("username").value !== player) {
                 let pPlayer = document.createElement("p");
