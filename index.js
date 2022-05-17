@@ -101,14 +101,6 @@ const updateMonth = game => {
             };
             pSocket.emit("infoActu", infos);
 
-            // Game finished
-            const end = game.isFinished();
-            if (end !== false) {
-                game.finishGame();
-                const msg = pUsername + "has finished the game";
-                io.to(game.idRoom).emit("finishGame", msg, false);
-            }
-
             // User lose
             const endPlayer = user.isLost();
             if (endPlayer) {
@@ -116,6 +108,14 @@ const updateMonth = game => {
                 pSocket.emit("finishGame", "you lose", true, game.playersName);
             }
         }
+    }
+
+    // Game finished
+    const end = game.isFinished();
+    if (end !== false) {
+        game.finishGame();
+        const msg = end + "has finished the game";
+        io.to(game.idRoom).emit("finishGame", msg, false);
     }
 };
 
