@@ -1,6 +1,6 @@
 import RightRubric from './rightRubric.js';
-
 import Modal from '../hud.js'
+
 const topRubric = document.querySelectorAll('#main-title div');
 
 let specific = {
@@ -12,14 +12,6 @@ function openSpecificMachine(level) {
     specific.state = true;
     specific.level = level
     Modal.openShopModal()
-    // setTimeout(() => {
-
-    //     topRubric[0].classList.remove("selected");
-    //     topRubric[2].classList.add("selected");
-
-    //     RightRubric.changeRubric('top3')
-    //     RightRubric.openSpecificMachine(level);
-    // }, 200);
 }
 
 /**
