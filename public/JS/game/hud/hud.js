@@ -3,22 +3,14 @@ import Item from './shop/manageItem.js'
 import Parameter from './parameter.js'
 import Modal from './modalManager.js'
 import HTTP from '../../http_module.js';
-
-import * as THREE from 'three';
-
-
 import ShopItem from './shop/shopItem.js'
 import Chrono from './chrono.js'
 import Money from './money.js'
 import Shop from './shop/topRubric.js'
 import Event from './eventModal.js'
 
-import {
-    Scene
-} from '../sceneManager.js'
-import {
-    sc
-} from '../app.js';
+import * as THREE from 'three';
+import { sc } from '../app.js';
 
 /* --------------------------------- Modals --------------------------------- */
 
@@ -65,10 +57,6 @@ function openShopModal() {
 function closeShopModal() {
     shop.closeFunction()
 }
-
-// function openResultsModal(msg, displayOtherPlayers) {
-//     results.openModal();
-// }
 
 function updateEcologicBar(value) {
     ProgressBar.updateEcologic(value);
@@ -241,7 +229,6 @@ export default {
     closeAllModals,
     initShop,
 
-    // openResultsModal,
     refreshShop,
     refreshHud,
     updateOnPurchase,

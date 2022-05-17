@@ -1,9 +1,3 @@
-/* const sizeSocial = 100;
-const sizeEcono = 200;
-const sizeEcolo = 200; */
-
-//import config from "./config.js";
-
 /**
  * set the value of the social bar
  * @param {Number} amount value/100 

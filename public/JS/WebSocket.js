@@ -2,7 +2,6 @@ import { sc } from "./game/app.js";
 import Chrono from "./game/hud/chrono.js";
 import HUD from "./game/hud/hud.js";
 import resultsModal from "./game/hud/resultsModal.js";
-import Item from './game/hud/shop/manageItem.js'
 
 let socket;
 const events = {
