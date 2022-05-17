@@ -1,7 +1,7 @@
 import Buy from './manageItem.js'
 
-const leftPage = document.querySelectorAll('#left-page div');
-const rightPage = document.querySelectorAll('#right-page div');
+const leftPage = document.querySelectorAll('#left-page > div');
+const rightPage = document.querySelectorAll('#right-page > div');
 
 let leftBtn = document.querySelectorAll('#left-page button')
 let rightBtn = document.querySelectorAll('#right-page button')
@@ -68,19 +68,19 @@ function toggleDescri(e) {
  * @param {EventTarget} e 
  */
 function buyContract(e) {
-    Buy.buyItem(e.target.parentElement, 0);
+    Buy.buyItem(e.target.parentElement.parentElement, 0);
 }
 
 function buyPerso(e) {
-    Buy.buyItem(e.target.parentElement, 1);
+    Buy.buyItem(e.target.parentElement.parentElement, 1);
 }
 
 function buyMachine(e) {
-    Buy.buyItem(e.target.parentElement, 2);
+    Buy.buyItem(e.target.parentElement.parentElement, 2);
 }
 
 function buyOccaz(e) {
-    Buy.buyItem(e.target.parentElement, 3);
+    Buy.buyItem(e.target.parentElement.parentElement, 3);
 }
 
 
@@ -201,7 +201,8 @@ function refreshOccaz(infos, username) {
         let elem = occaz[i + 1];
         if (infos[i]) {
             if (infos[i].player === username) {
-                elem.children[0].innerHTML = "Vous vendez un " + item[infos[i].machine] + "<br>de niveau " + infos[i].level + ",<br>" + infos[i].price + "€";
+                elem.children[0].innerHTML = "Vous vendez un " + item[infos[i].machine];
+                elem.children[1].innerHTML = "de niveau " + infos[i].level + ",<br>" + infos[i].price + "€";
             } else {
                 elem.removeAttribute('disable');
                 elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level;

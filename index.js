@@ -131,6 +131,19 @@ app.get('/three', (req, res) => {
     res.render('index');
 })
 
+app.get('/shopinfo', (req, res) => {
+    const idRoom = req.session.idRoom;
+
+    if (idRoom === undefined) {
+        res.status(401).json({
+            message: "You don't have permission."
+        });
+        return;
+    }
+
+    res.json(allRooms[idRoom].shopInfo());
+});
+
 app.delete("/removeuser/:player", (req, res) => {
     const idRoom = req.session.idRoom;
     const username = req.session.username;

@@ -612,7 +612,7 @@ body {
             display: grid;
             align-content: center;
             grid-template-columns: 2fr 2fr 1fr;
-            grid-auto-rows: minmax(0px, auto);
+           // grid-auto-rows: minmax(0px, auto);
             text-transform: uppercase;
 
             .title_ressources {
@@ -696,28 +696,28 @@ body {
             #left-page,
             #right-page {
                 background-color: @primary-color;
-            }
 
-            #left-page div,
-            #right-page div {
-                margin: 1rem;
-                border: solid 1px @primary-color;
-                height: 100px;
-                display: flex;
-                flex-direction: column;
-                align-content: center;
-                justify-content: space-evenly;
-                cursor: pointer;
-                background-color: rgba(255, 255, 255, 0.603);
-                color: @bg-color;
-                font-size: 1rem;
-            }
+                &>div{
 
-            #left-page div p,
-            #right-page div p {
-                height: auto;
-                font-weight: normal;
-                font-size: 1.2rem;
+                    margin: 1rem;
+                    border: solid 1px @primary-color;
+                    height: 150px;
+                    display: flex;
+                    flex-direction: column;
+                    align-content: center;
+                    justify-content: space-evenly;
+                    cursor: pointer;
+                    background-color: rgba(255, 255, 255, 0.603);
+                    color: @bg-color;
+                    font-size: 1rem;
+        
+                    p{
+        
+                        height: auto;
+                        font-weight: normal;
+                        font-size: 1rem;
+                    }
+                }
             }
 
             .buy-button {

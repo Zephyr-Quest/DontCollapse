@@ -119,6 +119,7 @@ function beginingGame(data) {
     const eltsToShow = document.getElementById("game");
     eltsToShow.style.display = "block";
     HUD.refreshHud(data)
+    HUD.initShop()
 }
 
 function getAllShop(infoPlayer, username) {
