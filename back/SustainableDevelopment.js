@@ -1,3 +1,5 @@
+const employees = require("./employees.json");
+
 module.exports = class SustainableDevelopment {
     // Initializes data to zero
     constructor() {
@@ -12,6 +14,7 @@ module.exports = class SustainableDevelopment {
         console.log("💸 Economic :", this.economic);
         console.log("🫂 Social", this.social);
     }
+
     /**
      * update the sustainable development
      * @param {Number} economic factor
@@ -33,18 +36,18 @@ module.exports = class SustainableDevelopment {
 
     /**
      * score calculation
-     * @param {Number} employees number
+     * @param {Number} employeesNumber number
      * @param {Number} maintainers nuber
      * @param {Number} cleaners number
      * @param {Number} supervisors number
      * @param {Number} engineers Number
      * @returns ratio
      */
-    socialCalculation(employees, maintainers, cleaners, supervisors, engineers) {
-        let humanRessources = [maintainers, cleaners, supervisors, engineers];
+    socialCalculation(employeesNumber, maintainers, cleaners, supervisors, engineers) {
+        let humanRessources = [[maintainers, employees.salaries.maintainers.pourcentage], [cleaners, employees.salaries.cleaners.pourcentage], [supervisors, employees.salaries.supervisors.pourcentage], [engineers, employees.salaries.engineers.pourcentage]];
         let result = 0;
         humanRessources.forEach(categories => {
-            result += categories / employees < 0.35 && categories / employees > 0.15 ? 25 : 0;
+            result += categories[0] / employeesNumber < categories[1] + 0.10 && categories[0] / employeesNumber > categories[1] - 0.10 ? 25 : 0;
         });
         return result;
     }

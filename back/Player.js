@@ -216,9 +216,6 @@ module.exports = class Player {
         employees.categories.forEach(employee => {
             this.recruteEmployee(employee);
         });
-        this.recruteEmployee("engineers");
-        this.recruteEmployee("maintainers");
-        this.recruteEmployee("maintainers");
     }
 
     furnisherUpgrade(furnisher, level) {
@@ -278,7 +275,8 @@ module.exports = class Player {
 
     generateIncome() {
         let salariesPourcentage = Math.min(1, (this.employees.engineers.length + this.employees.maintainers.length) / (this.maintainersNeeded + this.engineersNeeded))
-        return salariesPourcentage * 800 * this.manufacturingQuality * this.productionRate;
+        console.log(salariesPourcentage);
+        return Math.max(0.25,salariesPourcentage) * 800 * this.manufacturingQuality * this.productionRate;
     }
 
     generateExpenses() {
@@ -311,9 +309,10 @@ module.exports = class Player {
         this.machineSync();
         this.sdUpdate();
         // Expenses
+        this.income = this.generateIncome();
+        this.expenses += this.income*0.3;
         this.money -= this.expenses;
         this.generateExpenses();
-        this.income = this.generateIncome();
         this.money += this.income;
         this.income *= 100;
         this.income = Math.floor(this.income);

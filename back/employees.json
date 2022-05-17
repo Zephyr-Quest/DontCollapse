@@ -50,18 +50,22 @@
     ],
     "salaries": {
         "engineers": {
+            "pourcentage": 0.20,
             "min": 3500,
             "max": 5000
         },
         "maintainers": {
+            "pourcentage": 0.40,
             "min": 1600,
             "max": 2300
         },
         "cleaners": {
+            "pourcentage": 0.10,
             "min": 800,
             "max": 1600
         },
         "supervisors": {
+            "pourcentage": 0.30,
             "min": 4000,
             "max": 4500
         }
