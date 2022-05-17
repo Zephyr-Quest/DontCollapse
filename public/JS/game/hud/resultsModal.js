@@ -1,9 +1,9 @@
 import Modal from './modalManager.js'
 import WebSocket from '../../WebSocket.js';
 
-const modal = new Modal('results-modal', undefined, 'close-results', false, true);
+const modal = new Modal('results-modal', undefined, undefined, false, true);
 const playerListDiv = document.getElementById("playerListDiv");
-const disconnection = [modal.close, document.getElementById("disconnectionResults")]
+const disconnection = [document.getElementById("disconnectionResults")]
 const text = document.getElementById("context");
 
 function openResultsModal(msg, displayOtherPlayers, connectedPlayers) {
@@ -18,7 +18,7 @@ function openResultsModal(msg, displayOtherPlayers, connectedPlayers) {
             if (document.getElementById("username").value !== player) {
                 let pPlayer = document.createElement("p");
                 pPlayer.innerText = player;
-                playerListDiv.appendChild(player);
+                playerListDiv.appendChild(pPlayer);
             }
         });
 

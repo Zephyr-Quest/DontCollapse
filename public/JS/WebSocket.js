@@ -162,7 +162,7 @@ document.getElementById("SortiWrap").addEventListener("click", (event) => {
 })
 
 const initListenersOtherFactoryEndGameModal = () => {
-    document.getElementById("playersList").childNodes.forEach(liPlayer => {
+    document.getElementById("playerListDiv").childNodes.forEach(liPlayer => {
         liPlayer.addEventListener("click", (event) => {
             seeOtherEvent(event, (data) => {
                 console.log(data)

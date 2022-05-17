@@ -702,7 +702,6 @@ export class Scene {
 
                 var s = ctx.getSelectionneLePlusProche(position, ctx);
                 if (s) {
-                        console.log(s)
                         let prefix = "Mac_"
                         while (!s.name.includes(prefix)) {
                                 s = s.parent

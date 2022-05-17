@@ -120,7 +120,7 @@ const updateMonth = game => {
 
 const endGame = game => {
     game.finishGame();
-    io.to(game.idRoom).emit("finishGame", "no time anymore", false);
+    io.to(game.idRoom).emit("finishGame", "no time anymore", true, game.playersName);
 }
 
 /* ----------------------------------- APP ---------------------------------- */
