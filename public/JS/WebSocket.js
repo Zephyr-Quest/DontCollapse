@@ -165,8 +165,8 @@ const initListenersOtherFactoryEndGameModal = () => {
     document.getElementById("playerListDiv").childNodes.forEach(liPlayer => {
         liPlayer.addEventListener("click", (event) => {
             seeOtherEvent(event, (data, player) => {
-                // resultsModal.closeModal();
                 sc.goSeeOtherPlayer(data, player);
+                // resultsModal.closeModal();
             })
         })
     })
