@@ -20,6 +20,7 @@ module.exports = class Game {
 
         this.updateMonth = null;
         this.endGame = null;
+        this.event = undefined;
     }
 
     /* -------------------------------------------------------------------------- */
