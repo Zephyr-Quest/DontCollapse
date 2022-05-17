@@ -466,9 +466,10 @@ body {
         justify-content: center;
         align-items: center;
         .top-modal{
-            width:100%;
             text-align: center;
             align-items: center;
+            margin:0;
+            padding:0;
             h2{
                 font-family: "Koulen";
                 font-size:2rem;
@@ -476,19 +477,40 @@ body {
         }
         p{
             text-transform: uppercase;font-family: "Koulen";
-            font-size:1.5rem;
-            letter-spacing: 5px;
+            font-size:1.2rem;
+            letter-spacing: 7px;
+            margin-top:-10px;
+        }
+        #playerListDiv{
+            p{
+                margin-top: 10px;
+                color:white;
+                font-family: @primary-font;
+                font-size:1.2rem;
+                letter-spacing: normal;
+                cursor: pointer;
+            }
+            p:hover::before{
+                content:"> ";
+                white-space: pre;
+            }
+            p:hover::after{
+                content:" <";
+                white-space: pre;
+            }
         }
         i{
             color:white;
-            font-size:3rem;
+            margin-top:20px;
+            font-size:2.6rem;
             &:hover{
                 color:@primary-color;
+                cursor: pointer;
             }
         }
     }
     &::backdrop {
-        background-color: rgba(0, 0, 0, 0.466);
+        background-color: rgba(0, 0, 0, 0.623);
     }
 
     padding: 40px;

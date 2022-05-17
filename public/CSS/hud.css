@@ -396,9 +396,10 @@ body h1 {
   align-items: center;
 }
 #results-modal .modal-content .top-modal {
-  width: 100%;
   text-align: center;
   align-items: center;
+  margin: 0;
+  padding: 0;
 }
 #results-modal .modal-content .top-modal h2 {
   font-family: "Koulen";
@@ -407,18 +408,37 @@ body h1 {
 #results-modal .modal-content p {
   text-transform: uppercase;
   font-family: "Koulen";
-  font-size: 1.5rem;
-  letter-spacing: 5px;
+  font-size: 1.2rem;
+  letter-spacing: 7px;
+  margin-top: -10px;
+}
+#results-modal .modal-content #playerListDiv p {
+  margin-top: 10px;
+  color: white;
+  font-family: 'KoHo';
+  font-size: 1.2rem;
+  letter-spacing: normal;
+  cursor: pointer;
+}
+#results-modal .modal-content #playerListDiv p:hover::before {
+  content: "> ";
+  white-space: pre;
+}
+#results-modal .modal-content #playerListDiv p:hover::after {
+  content: " <";
+  white-space: pre;
 }
 #results-modal .modal-content i {
   color: white;
-  font-size: 3rem;
+  margin-top: 20px;
+  font-size: 2.6rem;
 }
 #results-modal .modal-content i:hover {
   color: #f5dba6;
+  cursor: pointer;
 }
 #results-modal::backdrop {
-  background-color: rgba(0, 0, 0, 0.466);
+  background-color: rgba(0, 0, 0, 0.623);
 }
 #confirm-buy {
   padding: 40px;
