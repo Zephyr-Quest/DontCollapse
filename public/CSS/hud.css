@@ -376,6 +376,50 @@ body h1 {
   content: " <";
   white-space: pre;
 }
+#results-modal {
+  padding: 40px;
+  width: 400px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #383331;
+  border: 2px solid #383331;
+  color: #f5dba6;
+  cursor: default;
+  font-family: 'KoHo';
+  font-weight: bold;
+}
+#results-modal .modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#results-modal .modal-content .top-modal {
+  width: 100%;
+  text-align: center;
+  align-items: center;
+}
+#results-modal .modal-content .top-modal h2 {
+  font-family: "Koulen";
+  font-size: 2rem;
+}
+#results-modal .modal-content p {
+  text-transform: uppercase;
+  font-family: "Koulen";
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+}
+#results-modal .modal-content i {
+  color: white;
+  font-size: 3rem;
+}
+#results-modal .modal-content i:hover {
+  color: #f5dba6;
+}
+#results-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.466);
+}
 #confirm-buy {
   padding: 40px;
   margin: auto;
