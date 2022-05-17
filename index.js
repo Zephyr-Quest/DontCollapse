@@ -82,6 +82,7 @@ function getMaxKey(obj) {
 const updateMonth = game => {
     const players = io.sockets.adapter.rooms.get(game.idRoom);
     const event = game.applyEvent();
+    game.event = event;
 
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
@@ -117,6 +118,7 @@ const updateMonth = game => {
             }
         }
     }
+    game.event = undefined;
 };
 
 const endGame = game => {
@@ -338,7 +340,7 @@ io.on('connection', socket => {
 
                     let msg;
                     if (isHost && !nbrPlayers) msg = "Le host s'est deconnecte";
-                    if (nbrPlayers) msg = "Vous êtes seul dans votre partie";
+                    if (nbrPlayers) msg = "Vous etes seul dans votre partie";
 
                     // Host disconnect
                     if (pUsername !== username && allRooms[idRoom].gameStart) {
@@ -465,6 +467,12 @@ io.on('connection', socket => {
     socket.on("openShop", () => {
         const infos = allRooms[idRoom].getInfo(username);
         socket.emit("sendPlayerInfoShop", infos, username);
+    });
+
+    socket.on("moumou_la_reine_des_mouettes_comeback", playerName => {
+        const player = allRooms[idRoom].searchPlayer(playerName);
+        if (player.gameContinue)
+            socket.emit("finishGame", "you lose", true, allRooms[idRoom].playersName);
     });
 
     /* -------------------------------------------------------------------------- */
