@@ -65,10 +65,11 @@ export default class modal {
     initCloseListeners() {
         console.log(this)
         // When the user click on the cross, close the modal
-        this.close.addEventListener('click', () => {
-            this.closeFunction()
-        });
-
+        if (this.close) {
+            this.close.addEventListener('click', () => {
+                this.closeFunction()
+            });
+        }
         // When the user clicks anywhere outside of the modal, close it
         this.modal.addEventListener('click', (e) => {
             if (e.target.nodeName === "DIALOG") {
