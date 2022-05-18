@@ -7,6 +7,7 @@ import ShopItem from './shop/shopItem.js'
 import Chrono from './chrono.js'
 import Money from './money.js'
 import Shop from './shop/topRubric.js'
+import Sound from '../sound.js';
 
 import * as THREE from 'three';
 import { sc } from '../app.js';
@@ -18,7 +19,7 @@ Parameter.initListener();
 const shop = new Modal('shop-modal', 'shop-button', 'close-shop', true);
 const chat = new Modal('chat-modal', 'chat-button', 'close-chat');
 const events = new Modal('events-modal', undefined, undefined);
-const results = new Modal('results-modal', undefined, undefined, false, true);
+const results = new Modal('results-modal', undefined, 'disconnectionResults', false, true);
 
 function openResultsModal(){
     results.openModal();
@@ -136,6 +137,7 @@ function refreshHud(infos) {
 function updateOnPurchase(data) {
     Item.confirmation(data.confirmation, data.idEngine, data.levelEngine, data.type);
     if (data.confirmation === true) {
+        Sound.startMoula();
         refreshHud(data);
     }
 }
