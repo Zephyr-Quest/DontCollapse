@@ -92,7 +92,7 @@ const updateMonth = game => {
 
         // Actualisation
         if (user.gameContinue) {
-            const infoPlayer = user.updateAll();
+            const infoPlayer = user.updateAll(event);
             const infos = {
                 chrono: game.chrono.getTime(),
                 moula: infoPlayer.moula,
