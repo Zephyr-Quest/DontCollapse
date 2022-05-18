@@ -266,7 +266,7 @@ module.exports = class Player {
     }
 
     boxExpenses() {
-        return (this.productionRate * this.manufacturingQuality) * furnishers[2].price[this.furnishers[1]];
+        return (this.productionRate) * furnishers[2].price[this.furnishers[1]];
     }
 
     etainExpenses() {
