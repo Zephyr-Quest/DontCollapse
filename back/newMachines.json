@@ -8,7 +8,7 @@
             "consumption": 2,
             "manufacturingQuality": 1,
             "maintainersRequested": 1,
-            "engineersRequested": 2
+            "engineersRequested": 1
         },
         "2": {
             "constructor": "Droit Ô But",
@@ -86,7 +86,7 @@
             "consumption": 2,
             "manufacturingQuality": 1,
             "maintainersRequested": 2,
-            "engineersRequested": 2
+            "engineersRequested": 1
         },
         "2": {
             "constructor": "Droit Ô But",
@@ -125,7 +125,7 @@
             "consumption": 2,
             "manufacturingQuality": 1,
             "maintainersRequested": 2,
-            "engineersRequested": 2
+            "engineersRequested": 1
         },
         "2": {
             "constructor": "Droit Ô But",

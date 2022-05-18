@@ -1,27 +1,108 @@
 [
     {
-        "event": "Guerre Russie-Ukraine<br>Une guerre a éclaté dans l'Est de l'Europe",
-        "type": 0,
-        "factor": -200
+        "event": "Démonstration écologique",
+        "type": [
+            "ecologic"
+        ],
+        "factor": 1,
+        "durationMin": 1,
+        "durationMax": 1,
+        "duration": 0
     },
     {
-        "event": "Grêve générale",
-        "type": 2,
-        "factor": -20
+        "event": "Démonstration économique",
+        "type": [
+            "economic"
+        ],
+        "factor": 1,
+        "durationMin": 1,
+        "durationMax": 1,
+        "duration": 0
+    },
+    {
+        "event": "Démonstration sociale",
+        "type": [
+            "social"
+        ],
+        "factor": 1,
+        "durationMin": 1,
+        "durationMax": 1,
+        "duration": 0
+    },
+    {
+        "event": "Démonstration production",
+        "type": [
+            "productivity"
+        ],
+        "factor": 1,
+        "durationMin": 1,
+        "durationMax": 1,
+        "duration": 0
+    },
+    {
+        "event": "Guerre",
+        "type": [
+            "economic",
+            "social",
+            "productivity"
+        ],
+        "factor": -20,
+        "durationMin": 2,
+        "durationMax": 5,
+        "duration": 0
     },
     {
         "event": "13ème mois",
-        "type": 2,
-        "factor": 20
+        "type": [
+            "economic",
+            "social",
+            "productivity"
+        ],
+        "factor": 20,
+        "durationMin": 1,
+        "durationMax": 1,
+        "duration": 0
     },
     {
-        "event": "Maladies hivernales",
-        "type":2,
-        "factor": -200
+        "event": "Grève",
+        "type": [
+            "social",
+            "productivity"
+        ],
+        "factor": -30,
+        "durationMin": 1,
+        "durationMax": 3,
+        "duration": 0
     },
     {
-        "event": "Pic de pollution",
-        "type":1,
-        "factor": -40
+        "event": "Pic épidémiologique (maladie)",
+        "type": [
+            "social",
+            "productivity"
+        ],
+        "factor": -20,
+        "durationMin": 1,
+        "durationMax": 2,
+        "duration": 0
+    },
+    {
+        "event": "Pollution",
+        "type": [
+            "ecologic"
+        ],
+        "factor": -20,
+        "durationMin": 1,
+        "durationMax": 1,
+        "duration": 0
+    },
+    {
+        "event": "Panne",
+        "type": [
+            "production"
+        ],
+        "factor": -1,
+        "durationMin": 1,
+        "durationMax": 1,
+        "duration": 0
     }
 ]
