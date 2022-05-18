@@ -14,9 +14,9 @@ const musicUp = document.querySelector('.fa-volume-high');
 const musicOff = document.querySelector('.fa-volume-off');
 const effectUp = document.querySelector('.fa-bell');
 const effectOff = document.querySelector('.fa-bell-slash');
-const signOut = document.querySelector('.fa-right-from-bracket');
 const cloud = document.querySelector('.fa-cloud');
 const sun = document.querySelector('.fa-sun');
+const signOut = document.querySelector('.param-content.fa-right-from-bracket');
 
 
 
@@ -36,7 +36,7 @@ function showParameter() {
         elem.setAttribute('open', "");
     })
     openParameter.style.color = "#f5dba6"
-
+console.log(signOut)
     signOut.style.display = "block";
 
     if (sound) {

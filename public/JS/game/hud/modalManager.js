@@ -1,5 +1,4 @@
 import Shop from './shop/topRubric.js';
-
 import WebSocket from '../../WebSocket.js';
 
 /**
@@ -46,7 +45,7 @@ export default class modal {
             this.close.removeEventListener('click', () => {
                 this.closeFunction()
             });
-        }// cross
+        } // cross
         this.modal.removeEventListener('click', (e) => {
             if (e.target.nodeName === "DIALOG") {
                 this.closeFunction();
@@ -57,7 +56,6 @@ export default class modal {
                 this.closeFunction();
             }
         }); // Escape
-        return "zoirhrsbvo"
     }
 
 
@@ -70,23 +68,29 @@ export default class modal {
         if (this.close !== undefined) {
             this.close.addEventListener('click', () => {
                 this.closeFunction()
+                if (this.isByeBye) window.location.href = "/lobby";
+
             });
         }
         // When the user clicks anywhere outside of the modal, close it
         this.modal.addEventListener('click', (e) => {
             if (e.target.nodeName === "DIALOG") {
                 this.closeFunction();
+                if (this.isByeBye) window.location.href = "/lobby";
+
             }
         });
 
-        if (!this.isByeBye) {
+//if (!this.isByeBye) {
             // When the user clicks on Escape, close the modal
             window.addEventListener('keydown', (e) => {
                 if ((e.key === "Escape" || e.key === "Esc") && this.modal.hasAttribute('open')) {
                     this.closeFunction();
+                    if (this.isByeBye) window.location.href = "/lobby";
+
                 }
             });
-        }
+    //    }
     }
 
     /**

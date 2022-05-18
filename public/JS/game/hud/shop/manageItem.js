@@ -1,18 +1,6 @@
 import Modal from '../hud.js'
-import WebSocket from '../../../WebSocket.js';
-import {
-    Scene
-} from '../../sceneManager.js'
-import {
-    sc
-} from '../../app.js';
-const leftPage = document.querySelectorAll('#left-page div');
-const rightPage = document.querySelectorAll('#right-page div');
-//import WebSocket from '../../../WebSocket.js';
+import { sc } from '../../app.js';
 import ModalManager from '../modalManager.js';
-
-//const leftPage = document.querySelectorAll('#left-page div');
-//const rightPage = document.querySelectorAll('#right-page div');
 
 const confirmModal = new ModalManager('confirm-buy', '', 'non-buy')
 const oui = document.getElementById('oui-buy');

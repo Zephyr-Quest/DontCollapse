@@ -2,7 +2,6 @@ import { sc } from "./game/app.js";
 import Chrono from "./game/hud/chrono.js";
 import HUD from "./game/hud/hud.js";
 import resultsModal from "./game/hud/resultsModal.js";
-import Item from './game/hud/shop/manageItem.js'
 
 let socket;
 const events = {
@@ -54,11 +53,11 @@ const events = {
         HUD.updateOnPurchase(data);
     },
     "infoActu": (infoPlayer) => {
-        console.log("jlqksfbqlsdjdfb", infoPlayer)
         HUD.refreshHud(infoPlayer);
     },
     "finishGame": (msg, displayOtherPlayers, players = undefined) => {
         console.log("finish game front", msg, displayOtherPlayers);
+        Chrono.stopChronoo()
         resultsModal.openResultsModal(msg, displayOtherPlayers, players);
     }
 };
@@ -106,6 +105,7 @@ function updatePlayersOnScreen() {
             if (player != connectedPlayers[0]) {
                 const playerDelete = document.createElement('button');
                 playerDelete.classList.add('removePlayerButton');
+                playerDelete.setAttribute("title", "tA gUEULE cONNARD");
                 playerDelete.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                 playerDelete.addEventListener("click", deleteEvent);
                 divPlayerName.appendChild(playerDelete);
