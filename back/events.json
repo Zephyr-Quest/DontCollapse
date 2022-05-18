@@ -6,7 +6,8 @@
         ],
         "factor": 1,
         "durationMin": 1,
-        "durationMax": 1
+        "durationMax": 1,
+        "duration": 0
     },
     {
         "event": "Démonstration économique",
@@ -15,7 +16,8 @@
         ],
         "factor": 1,
         "durationMin": 1,
-        "durationMax": 1
+        "durationMax": 1,
+        "duration": 0
     },
     {
         "event": "Démonstration sociale",
@@ -24,7 +26,8 @@
         ],
         "factor": 1,
         "durationMin": 1,
-        "durationMax": 1
+        "durationMax": 1,
+        "duration": 0
     },
     {
         "event": "Démonstration production",
@@ -33,7 +36,8 @@
         ],
         "factor": 1,
         "durationMin": 1,
-        "durationMax": 1
+        "durationMax": 1,
+        "duration": 0
     },
     {
         "event": "Guerre",
@@ -44,7 +48,8 @@
         ],
         "factor": -20,
         "durationMin": 2,
-        "durationMax": 5
+        "durationMax": 5,
+        "duration": 0
     },
     {
         "event": "13ème mois",
@@ -55,7 +60,8 @@
         ],
         "factor": 20,
         "durationMin": 1,
-        "durationMax": 1
+        "durationMax": 1,
+        "duration": 0
     },
     {
         "event": "Grève",
@@ -65,7 +71,8 @@
         ],
         "factor": -30,
         "durationMin": 1,
-        "durationMax": 3
+        "durationMax": 3,
+        "duration": 0
     },
     {
         "event": "Pic épidémiologique (maladie)",
@@ -75,7 +82,8 @@
         ],
         "factor": -20,
         "durationMin": 1,
-        "durationMax": 2
+        "durationMax": 2,
+        "duration": 0
     },
     {
         "event": "Pollution",
@@ -84,7 +92,8 @@
         ],
         "factor": -20,
         "durationMin": 1,
-        "durationMax": 1
+        "durationMax": 1,
+        "duration": 0
     },
     {
         "event": "Panne",
@@ -93,6 +102,7 @@
         ],
         "factor": -1,
         "durationMin": 1,
-        "durationMax": 1
+        "durationMax": 1,
+        "duration": 0
     }
 ]
