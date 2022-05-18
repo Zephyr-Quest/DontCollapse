@@ -17,7 +17,7 @@
     {
         "event": "Maladies hivernales",
         "type":2,
-        "factor": -200
+        "factor": -20
     },
     {
         "event": "Pic de pollution",
