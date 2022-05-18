@@ -649,7 +649,7 @@ body {
 }
 
 #events-modal {
-    .modal-content {
+    .param-content {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -667,10 +667,8 @@ body {
 
         #events-content {
             p {
-                font-family: "Koulen";
+                color:white;
                 font-size: 1.2rem;
-                letter-spacing: 7px;
-                margin-top: -10px;
             }
         }
     }
@@ -1175,5 +1173,51 @@ body {
 
     i {
         font-size: 3em;
+    }
+}
+
+#main_board {
+    background-color: rgba(0, 0, 0, 0.466);
+    border: white 2px solid;
+    border-radius: 10px;
+    width: 356px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 0 20px;
+    margin-top: 90px;
+
+    &:hover {
+        cursor: pointer;
+
+        .main_content {
+            display: flex;
+        }
+    }
+
+    h1 {
+        font-family: "Koulen";
+        font-size: 1.5rem;
+        color: @primary-color;
+    }
+
+    .main_content {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+
+
+        div {
+            h2 {
+                color: white;
+                font-family: "Koulen";
+                font-size: 1.5rem;
+
+            }
+
+            p {
+                color: white;
+            }
+        }
     }
 }

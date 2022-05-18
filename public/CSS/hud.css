@@ -546,13 +546,13 @@ body h1 {
   font-family: 'KoHo';
   font-weight: bold;
 }
-#events-modal .modal-content {
+#events-modal .param-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-#events-modal .modal-content h2 {
+#events-modal .param-content h2 {
   text-align: center;
   align-items: center;
   margin: 0;
@@ -560,11 +560,9 @@ body h1 {
   font-family: "Koulen";
   font-size: 2rem;
 }
-#events-modal .modal-content #events-content p {
-  font-family: "Koulen";
+#events-modal .param-content #events-content p {
+  color: white;
   font-size: 1.2rem;
-  letter-spacing: 7px;
-  margin-top: -10px;
 }
 #events-modal::backdrop {
   background-color: rgba(0, 0, 0, 0.623);
@@ -972,4 +970,39 @@ body h1 {
 }
 #parameters i {
   font-size: 3em;
+}
+#main_board {
+  background-color: rgba(0, 0, 0, 0.466);
+  border: white 2px solid;
+  border-radius: 10px;
+  width: 356px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  padding: 0 20px;
+  margin-top: 90px;
+}
+#main_board:hover {
+  cursor: pointer;
+}
+#main_board:hover .main_content {
+  display: flex;
+}
+#main_board h1 {
+  font-family: "Koulen";
+  font-size: 1.5rem;
+  color: #f5dba6;
+}
+#main_board .main_content {
+  width: 100%;
+  display: none;
+  flex-direction: column;
+}
+#main_board .main_content div h2 {
+  color: white;
+  font-family: "Koulen";
+  font-size: 1.5rem;
+}
+#main_board .main_content div p {
+  color: white;
 }

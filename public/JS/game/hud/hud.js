@@ -128,7 +128,7 @@ function refreshHud(infos) {
         let div = document.querySelector('#events-content');
         div.removeChild(div.firstChild);
         let elem = document.createElement('p');
-        elem.innerText = infos.event.event;
+        elem.innerHTML = infos.event.event;
         div.append(elem);
     }
 }
