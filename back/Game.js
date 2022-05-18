@@ -3,7 +3,7 @@ const Chrono = require("./chrono");
 const events = require("./events.json");
 const machines = require("./newMachines.json");
 const furnishers = require("./furnishers.json");
-const employees = require ("./employees.json");
+const employees = require("./employees.json");
 
 module.exports = class Game {
     constructor(id, host) {
@@ -28,7 +28,7 @@ module.exports = class Game {
 
 
     shopInfo() {
-        return {machines, furnishers, employees};
+        return { machines, furnishers, employees };
     }
 
     /**
@@ -174,27 +174,27 @@ module.exports = class Game {
     /*                              Events functions                              */
     /* -------------------------------------------------------------------------- */
 
-    applyFactor(eventId, factor) {
-        switch (eventId) {
-            case 0:
-                this.players.forEach(player => {
-                    player.money += factor;
-                });
-                break;
-            case 1:
-                this.players.forEach(player => {
-                    player.sd.ecologic += player.sd.ecologic * (factor / 100);
-                });
-                break;
-            case 2:
-                this.players.forEach(player => {
-                    player.sd.social += player.sd.social * (factor / 100);
-                });
-                break;
-            default:
-                break;
-        }
-    }
+    // applyFactor(eventId, factor) {
+    //     switch (eventId) {
+    //         case 0:
+    //             this.players.forEach(player => {
+    //                 player.money += factor;
+    //             });
+    //             break;
+    //         case 1:
+    //             this.players.forEach(player => {
+    //                 player.sd.ecologic += player.sd.ecologic * (factor / 100);
+    //             });
+    //             break;
+    //         case 2:
+    //             this.players.forEach(player => {
+    //                 player.sd.social += player.sd.social * (factor / 100);
+    //             });
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 
     applyEvent() {
         if (this.runningEvent) this.runningEvent = undefined;
@@ -202,7 +202,7 @@ module.exports = class Game {
             let random = Math.floor(Math.random() * 100);
             if (random < 20) {
                 this.runningEvent = events[random % events.length];
-                this.applyFactor(this.runningEvent.type, this.runningEvent.factor);
+                // this.applyFactor(this.runningEvent.type, this.runningEvent.factor);
                 return this.runningEvent;
             }
         }

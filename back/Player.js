@@ -1,17 +1,18 @@
-const furnishers = require("./furnishers.json");
-// const machines = require("./machines.json");
-const newMachines = require("./newMachines.json");
 const employees = require("./employees.json");
+// const events = require("./events.json");
+const furnishers = require("./furnishers.json");
+const newMachines = require("./newMachines.json");
+// const machines = require("./machines.json");
 
-const SustainableDevelopment = require("./SustainableDevelopment");
-const Machine = require("./Machine");
 const Employee = require("./Employee");
+const Machine = require("./Machine");
+const SustainableDevelopment = require("./SustainableDevelopment");
 
 module.exports = class Player {
     constructor(name) {
         // generals
         this.name = name;
-        this.money = 5000;
+        this.money = 50000;
         this.gameContinue = true;
 
         // machines
@@ -98,6 +99,10 @@ module.exports = class Player {
             this.employees.engineers.length);
         this.sd.updateOverall(economic, ecologic, social);
 
+    }
+
+    aroundNumber(number) {
+        return Math.floor(number * 100) / 100;
     }
 
     /**
@@ -206,6 +211,34 @@ module.exports = class Player {
         return false;
     }
 
+    /* -------------------------------------------------------------------------- */
+    /*                              Events functions                              */
+    /* -------------------------------------------------------------------------- */
+
+    applyEvent(event) {
+        if (!event) return undefined;
+        event.type.forEach(eventType => {
+            switch (eventType) {
+                case "ecologic":
+                    this.sd.ecologic *= event.factor;
+                    break;
+                case "economic":
+                    this.sd.economic *= event.factor;
+                    break;
+                case "social":
+                    this.sd.social *= event.factor;
+                    break;
+                case "productivity":
+                    this.productionRate += this.productionRate * (event.factor) / 100;
+                    break;
+
+                default:
+                    break;
+            }
+        });
+        return event;
+    }
+
 
 
     /* -------------------------------------------------------------------------- */
@@ -216,6 +249,7 @@ module.exports = class Player {
         employees.categories.forEach(employee => {
             this.recruteEmployee(employee);
         });
+        this.recruteEmployee("maintainers");
     }
 
     furnisherUpgrade(furnisher, level) {
@@ -274,8 +308,9 @@ module.exports = class Player {
     }
 
     generateIncome() {
-        let salariesPourcentage = Math.min(1, (this.employees.engineers.length + this.employees.maintainers.length) / (this.maintainersNeeded + this.engineersNeeded))
-        return Math.max(0.25,salariesPourcentage) * 800 * this.manufacturingQuality * this.productionRate;
+        let salariesPourcentage = Math.min(1, (this.employees.engineers.length + this.employees.maintainers.length) / (this.maintainersNeeded + this.engineersNeeded));
+        let income = Math.max(0.25, salariesPourcentage) * 800 * this.manufacturingQuality * this.productionRate;
+        return this.aroundNumber(income);
     }
 
     generateExpenses() {
@@ -287,8 +322,7 @@ module.exports = class Player {
         // this.furnishers.forEach((element, index) => {
         //     expenses += furnishers[index].price[element];
         // });
-        this.expenses = expenses;
-        return expenses;
+        return this.aroundNumber(expenses + this.income * 0.3);
     }
 
     isFinished() {
@@ -304,21 +338,16 @@ module.exports = class Player {
         return this.money < -10000 || this.sd.isLost();
     }
 
-    updateAll() {
+    updateAll(event) {
         this.machineSync();
+        this.income = this.generateIncome();
+        this.expenses = this.generateExpenses();
         this.sdUpdate();
         // Expenses
-        this.income = this.generateIncome();
-        this.expenses += this.income*0.3;
+        this.applyEvent(event);
         this.money -= this.expenses;
-        this.generateExpenses();
         this.money += this.income;
-        this.income *= 100;
-        this.income = Math.floor(this.income);
-        this.income /= 100;
-        this.money *= 100;
-        this.money = Math.floor(this.money);
-        this.money /= 100;
+        this.money = this.aroundNumber(this.money);
         return {
             moula: this.money,
             barres: this.sd
