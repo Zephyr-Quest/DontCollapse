@@ -60,8 +60,8 @@ module.exports = class Player {
         // init
         this.machineInitialisation();
         this.productivityUpdate();
-        this.generateExpenses();
-        this.generateIncome();
+        this.expenses = this.generateExpenses();
+        this.income = this.generateIncome();
         this.employeeInit();
         this.machineSync();
         this.sdUpdate();
@@ -113,7 +113,6 @@ module.exports = class Player {
         // economic
 
         let economic = 0;
-        console.log(this.money)
         if (this.money >= -10000) {
             let first_criteria = (this.money / 200) + 50;
             if (first_criteria > 100) first_criteria = 100
@@ -356,11 +355,12 @@ module.exports = class Player {
         expenses += this.electricityExpenses();
         expenses += this.waterExpenses();
         expenses += this.boxExpenses() + this.etainExpenses();
+        console.log(this.employees.fees);
         expenses += this.employees.fees;
         // this.furnishers.forEach((element, index) => {
         //     expenses += furnishers[index].price[element];
         // });
-        return this.aroundNumber(expenses + this.income);
+        return this.aroundNumber(expenses);
     }
 
     isFinished() {
@@ -384,6 +384,7 @@ module.exports = class Player {
         this.machineSync();
         this.income = this.generateIncome();
         this.expenses = this.generateExpenses();
+        console.log(this.expenses);
         // Expenses
         this.applyEvent(event);
         this.money -= this.expenses;
