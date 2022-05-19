@@ -232,7 +232,7 @@ module.exports = class Game {
             if (this.runningEvent.duration <= 0) this.runningEvent = undefined;
         } else {
             let random = Math.floor(Math.random() * 100);
-            if (random /*< 20*/) {
+            if (random < 20) {
                 this.runningEvent = events[random % events.length];
                 this.runningEvent.duration = (random % this.runningEvent.durationMax) + this.runningEvent.durationMin;
                 return this.runningEvent;

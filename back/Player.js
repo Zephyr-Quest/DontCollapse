@@ -61,7 +61,9 @@ module.exports = class Player {
         this.machineInitialisation();
         this.productivityUpdate();
         this.generateExpenses();
+        this.generateIncome();
         this.employeeInit();
+        this.machineSync();
         this.sdUpdate();
     }
 
@@ -285,6 +287,8 @@ module.exports = class Player {
         employees.categories.forEach(employee => {
             this.recruteEmployee(employee);
         });
+        this.recruteEmployee("maintainers");
+        this.recruteEmployee("maintainers");
     }
 
     furnisherUpgrade(furnisher, level) {
@@ -363,7 +367,7 @@ module.exports = class Player {
         // this.furnishers.forEach((element, index) => {
         //     expenses += furnishers[index].price[element];
         // });
-        return this.aroundNumber(expenses + this.income * 0.3);
+        return this.aroundNumber(expenses + this.income);
     }
 
     isFinished() {

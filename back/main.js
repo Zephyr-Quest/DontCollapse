@@ -21,15 +21,15 @@ let Damien = party.searchPlayer("Damien");
 // Damien.recruteEmployee("engineers");
 // Damien.machineDisplay();
 // console.log(Damien.waterExpenses())
+// Damien.updateAll();
+// Damien.updateAll();
+// Damien.updateAll();
+// Damien.income = 20000;
+// Damien.expenses = 16000;
+// Damien.sdUpdate();
 Damien.updateAll();
-Damien.updateAll();
-Damien.updateAll();
-Damien.updateAll();
-Damien.income = 20000;
-Damien.expenses = 16000;
-Damien.sdUpdate();
 Damien.financesDisplay();
-console.log(Damien.sd)
+// console.log(Damien.sd-)
 // Damien.financesDisplay();
 // Damien.machineDisplay();
 
