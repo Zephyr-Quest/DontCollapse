@@ -86,10 +86,10 @@ const updateMonth = game => {
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
         const pUsername = pSocket.handshake.session.username;
-        
+
         const user = game.searchPlayer(pUsername);
         if (!user) continue;
-        
+
         // Actualisation
         if (user.gameContinue) {
             const infoPlayer = user.updateAll(event);
@@ -100,7 +100,7 @@ const updateMonth = game => {
                 event: event
             };
             pSocket.emit("infoActu", infos);
-            
+
             const dataTabBord = user.getInfo();
             pSocket.emit("actuTabBord", dataTabBord);
 
@@ -362,7 +362,7 @@ io.on('connection', socket => {
         }
         // Disconnect user 
         const msg = username + " leave the game";
-        io.to(idRoom).emit("new-message", "Server", msg)
+        io.to(idRoom).emit("new-message", "Server", msg);
         socket.leave(idRoom);
         console.log("disconnect", username, "from room", idRoom);
         disconnectingUsers.splice(disconnectingUsers.indexOf(username), 1);
@@ -378,7 +378,7 @@ io.on('connection', socket => {
 
     // Socket to start game
     socket.on('startGame', () => {
-        const idRoom = socket.handshake.session.idRoom;
+        // const idRoom = socket.handshake.session.idRoom;
         if (allRooms[idRoom] && allRooms[idRoom].playersName.length >= 2 && allRooms[idRoom].playersName.length <= 4) {
             allRooms[idRoom].startChrono();
             allRooms[idRoom].gameStart = true;
@@ -389,6 +389,17 @@ io.on('connection', socket => {
                 barres: allRooms[idRoom].players[0].sd
             };
             io.to(idRoom).emit("startAuthorized", data);
+
+            const players = io.sockets.adapter.rooms.get(idRoom);
+            for (const p of players) {
+                const pSocket = io.sockets.sockets.get(p);
+                const pUsername = pSocket.handshake.session.username;
+                const user = allRooms[idRoom].searchPlayer(pUsername);
+
+                const dataTabBord = user.getInfo();
+                pSocket.emit("actuTabBord", dataTabBord);
+            }
+
         } else console.log("start unauthorized");
     });
 
@@ -409,7 +420,7 @@ io.on('connection', socket => {
             barres: dataPlayer.sd
         }
         socket.emit("confirmPurchase", data);
-        
+
         const infoPlayer = dataPlayer.getInfo();
         socket.emit("actuTabBord", infoPlayer);
     });
@@ -434,7 +445,7 @@ io.on('connection', socket => {
             barres: dataPlayer.sd
         };
         socket.emit("confirmPurchase", data);
-        
+
         const infoPlayer = dataPlayer.getInfo();
         socket.emit("actuTabBord", infoPlayer);
     })
