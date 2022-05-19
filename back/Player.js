@@ -13,7 +13,7 @@ module.exports = class Player {
         // generals
         this.name = name;
         this.inGame = true;
-        this.money = 50000;
+        this.money = 10000;
         this.gameContinue = true;
 
         // machines
@@ -110,7 +110,10 @@ module.exports = class Player {
         });
 
         // economic
-        let economic = Math.max(((this.income - this.expenses) / this.income) * 100, 0);
+        let economic = 0;
+        let moneyFactor = Math.min(0.005 * this.money + 50, 100);
+        let croissance = (this.income / this.expenses);
+        economic = Math.max(Math.min(moneyFactor * croissance ^ 3, 100));
 
         // social
         let social = this.sd.socialCalculation(this.employees.number, this.employees.maintainers.length,
@@ -248,7 +251,7 @@ module.exports = class Player {
                     this.sd.social *= event.factor;
                     break;
                 case "productivity":
-                    this.productionRate += this.productionRate * (event.factor) / 100;
+                    this.productionRate += Math.floor(this.productionRate * (event.factor) / 100);
                     break;
 
                 default:
