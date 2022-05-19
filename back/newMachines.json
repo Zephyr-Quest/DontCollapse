@@ -3,7 +3,7 @@
         "name": "Poste à souder",
         "1": {
             "constructor": "Manix2",
-            "price": 1000,
+            "price": 5000,
             "productionRate": 80,
             "consumption": {
                 "electricity": 1,
@@ -58,7 +58,7 @@
         "name": "Assembleur de précision",
         "1": {
             "constructor": "Manix2",
-            "price": 1000,
+            "price": 5000,
             "productionRate": 80,
             "consumption": {
                 "electricity": 2,
@@ -113,7 +113,7 @@
         "name": "Assembleur mécanique",
         "1": {
             "constructor": "Manix2",
-            "price": 1000,
+            "price": 5412,
             "productionRate": 80,
             "consumption": {
                 "electricity": 2,
@@ -168,7 +168,7 @@
         "name": "Assembleur général",
         "1": {
             "constructor": "Manix2",
-            "price": 1000,
+            "price": 1200,
             "productionRate": 80,
             "consumption": {
                 "electricity": 2,

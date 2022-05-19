@@ -120,6 +120,7 @@ module.exports = class Player {
             let second_criteria = this.income / this.expenses;
             economic = first_criteria * second_criteria ^ 3;
         }
+        console.log("Eco : ",economic)
 
         // let economic = 0;
         // let moneyFactor = Math.min(0.005 * this.money + 50, 100);
@@ -383,12 +384,12 @@ module.exports = class Player {
         this.machineSync();
         this.income = this.generateIncome();
         this.expenses = this.generateExpenses();
-        this.sdUpdate();
         // Expenses
         this.applyEvent(event);
         this.money -= this.expenses;
         this.money += this.income;
         this.money = this.aroundNumber(this.money);
+        this.sdUpdate();
         return {
             moula: this.money,
             barres: this.sd
