@@ -1021,8 +1021,14 @@ body h1 {
   font-family: "Koulen";
   font-size: 1.5rem;
 }
-#main_board .main_content div p {
+#main_board .main_content div p,
+#main_board .main_content div table tr td {
   color: white;
+  text-align: left;
+}
+#main_board .main_content div .txt_align_center {
+  text-align: center;
+  padding: 0 10px 0 0 ;
 }
 #main_board_tuto {
   background-color: rgba(0, 0, 0, 0.466);
