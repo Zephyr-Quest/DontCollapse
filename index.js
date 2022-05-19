@@ -102,7 +102,7 @@ const updateMonth = game => {
             pSocket.emit("infoActu", infos);
             
             const dataTabBord = user.getInfo();
-            pUsername.emit("actuTabBord", dataTabBord);
+            pSocket.emit("actuTabBord", dataTabBord);
 
             // User lose
             const endPlayer = user.isLost();

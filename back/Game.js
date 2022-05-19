@@ -114,10 +114,10 @@ module.exports = class Game {
             if (player) {
                 player.isLost();
                 if (player.inGame) playersInGame.push(player);
-                if (player.isFinished()) return player;
+                if (player.isFinished()) return player.name;
             }
         });
-        if (playersInGame.length === 1) return playersInGame[0];
+        if (playersInGame.length === 1) return playersInGame[0].name;
         return false;
     }
 
