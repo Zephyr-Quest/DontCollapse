@@ -3,7 +3,7 @@ const Chrono = require("./chrono");
 const events = require("./events.json");
 const machines = require("./newMachines.json");
 const furnishers = require("./furnishers.json");
-const employees = require ("./employees.json");
+const employees = require("./employees.json");
 
 module.exports = class Game {
     constructor(id, host) {
@@ -28,7 +28,11 @@ module.exports = class Game {
 
 
     shopInfo() {
-        return {machines, furnishers, employees};
+        return {
+            machines,
+            furnishers,
+            employees
+        };
     }
 
     /**
@@ -105,14 +109,41 @@ module.exports = class Game {
      * @returns if the game is finished
      */
     isFinished() {
+        let playersInGame = [];
         this.players.forEach(player => {
-            if (player.isFinished()) return player;
+            if (player) {
+                player.isLost();
+                if (player.inGame) playersInGame.push(player);
+                if (player.isFinished()) return player.name;
+            }
         });
+        if (playersInGame.length === 1) return playersInGame[0].name;
         return false;
     }
 
     finishGame() {
-        console.log("finish game back");
+        let machineLevel = [];
+        this.players.forEach((player) => {
+            let playerLevel = 0;
+            player.machines.forEach(machine => {
+                playerLevel += machine.level;
+            });
+            machineLevel.push({name : player.name, level : playerLevel});
+        });
+        let winner = "";
+        let winnerLevel = 0;
+        machineLevel.forEach(element => {
+            if (element.level > winnerLevel) {
+                winnerLevel = element.level;
+                winner = element.name;
+            }
+            else if (element.level == winnerLevel && this.searchPlayer(winner).sd.global != this.searchPlayer(element.name).sd.global) {
+                winner = this.searchPlayer(winner).sd.global < this.searchPlayer(element.name).sd.global ? element.name : winner;
+            } else {
+                winner = this.searchPlayer(winner).money < this.searchPlayer(element.name).money ? element.name : winner;
+            }
+        });
+        return winner;
     }
 
     /* -------------------------------------------------------------------------- */
@@ -134,8 +165,7 @@ module.exports = class Game {
             slot.machine = machine;
             slot.level = level;
             slot.price = price;
-        }
-        else {
+        } else {
             this.shop.push({
                 player: player,
                 machine: machine,
@@ -174,35 +204,37 @@ module.exports = class Game {
     /*                              Events functions                              */
     /* -------------------------------------------------------------------------- */
 
-    applyFactor(eventId, factor) {
-        switch (eventId) {
-            case 0:
-                this.players.forEach(player => {
-                    player.money += factor;
-                });
-                break;
-            case 1:
-                this.players.forEach(player => {
-                    player.sd.ecologic += player.sd.ecologic * (factor / 100);
-                });
-                break;
-            case 2:
-                this.players.forEach(player => {
-                    player.sd.social += player.sd.social * (factor / 100);
-                });
-                break;
-            default:
-                break;
-        }
-    }
+    // applyFactor(eventId, factor) {
+    //     switch (eventId) {
+    //         case 0:
+    //             this.players.forEach(player => {
+    //                 player.money += factor;
+    //             });
+    //             break;
+    //         case 1:
+    //             this.players.forEach(player => {
+    //                 player.sd.ecologic += player.sd.ecologic * (factor / 100);
+    //             });
+    //             break;
+    //         case 2:
+    //             this.players.forEach(player => {
+    //                 player.sd.social += player.sd.social * (factor / 100);
+    //             });
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 
     applyEvent() {
-        if (this.runningEvent) this.runningEvent = undefined;
-        else {
+        if (this.runningEvent) {
+            this.runningEvent.duration--;
+            if (this.runningEvent.duration <= 0) this.runningEvent = undefined;
+        } else {
             let random = Math.floor(Math.random() * 100);
-            if (random/*  < 20 */) {
+            if (random < 20) {
                 this.runningEvent = events[random % events.length];
-                this.applyFactor(this.runningEvent.type, this.runningEvent.factor);
+                this.runningEvent.duration = (random % this.runningEvent.durationMax) + this.runningEvent.durationMin;
                 return this.runningEvent;
             }
         }

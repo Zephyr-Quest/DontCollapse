@@ -34,7 +34,6 @@ export default class modal {
         this.modal.addEventListener('animationend', () => {
             this.modal.removeAttribute('closing');
             this.modal.close();
-            console.log("closing", this.modal)
         }, {
             once: true
         });
@@ -63,7 +62,6 @@ export default class modal {
      * init the listeners to close the modals
      */
     initCloseListeners() {
-        console.log(this)
         // When the user click on the cross, close the modal
         if (this.close !== undefined) {
             this.close.addEventListener('click', () => {
@@ -101,7 +99,6 @@ export default class modal {
         if (this.isShop) {
             WebSocket.emit('openShop', "");
         }
-        console.log(this)
         this.modal.showModal();
     }
 

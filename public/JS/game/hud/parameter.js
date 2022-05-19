@@ -1,5 +1,6 @@
 import Modal from './modalManager.js'
 import { sc } from '../app.js';
+import Sound from '../sound.js';
 
 const oui = document.getElementById('oui-disconnect');
 const non = document.getElementById('non-disconnect');
@@ -36,7 +37,6 @@ function showParameter() {
         elem.setAttribute('open', "");
     })
     openParameter.style.color = "#f5dba6"
-console.log(signOut)
     signOut.style.display = "block";
 
     if (sound) {
@@ -145,6 +145,8 @@ function cutMusic() {
     console.log('coupe musique');
     sound = false;
     changeMusic();
+    Sound.toggleMusic();
+    Sound.stopMusicGame();
 }
 
 /**
@@ -154,6 +156,8 @@ function putMusic() {
     console.log('met musique');
     sound = true;
     changeMusic();
+    Sound.toggleMusic();
+    Sound.startMusicGame();
 }
 
 /**
@@ -177,6 +181,7 @@ function cutEffect() {
     console.log('coupe effet');
     effect = false;
     changeEffect();
+    Sound.toggleAuthrizedDuBrieAshtagJeVeuxDuBrieJaimeLeBrie();
 }
 
 /**
@@ -186,6 +191,7 @@ function putEffect() {
     console.log('met effet');
     effect = true;
     changeEffect();
+    Sound.toggleAuthrizedDuBrieAshtagJeVeuxDuBrieJaimeLeBrie();
 }
 
 /**

@@ -31,6 +31,7 @@ import {
 
 import HUD from "../game/hud/hud.js"
 import WebSocket from '../WebSocket.js';
+import sound from './sound.js';
 
 /* -------------------------------------------------------------------------- */
 /*                              GLOBAL VARIABLES                              */
@@ -266,6 +267,7 @@ export class Scene {
                         }
                         this.scene.add(this.selectionables);
                 })
+
         }
 
         /**
@@ -450,6 +452,7 @@ export class Scene {
                         } else if (tempname == "Sortie") {
                                 // If sortie
                                 this.openMenuSortie(s)
+                                // sound.startDoor()
                         } else if (tempname == "Chat") {
                                 // If chat
                                 HUD.openChatModal()
@@ -478,7 +481,6 @@ export class Scene {
                         // }
                 } else {
                         if (this.staticText) {
-                                // HUD.closeAllModals()
                                 this.closeMenu()
                                 this.animatedText = false
                                 this.staticText = false
@@ -505,13 +507,11 @@ export class Scene {
                 this.groupToDisplay = new THREE.Group()
                 this.selectionables2 = new THREE.Group();
                 this.groupToDisplay = this.selectionables.clone()
-                this.selectionables2=this.selectionables.clone()
+                this.selectionables2 = this.selectionables.clone()
                 this.scene.remove(this.selectionables)
                 this.scene.remove(this.groupToDisplay)
 
                 let machines = obj
-                console.log(obj)
-                console.log(pseudo)
                 var selectedObject
                 selectedObject = this.groupToDisplay.getObjectByName("Mac_Poste a souder");
                 this.groupToDisplay.remove(selectedObject)
@@ -522,11 +522,20 @@ export class Scene {
                 selectedObject = this.groupToDisplay.getObjectByName("Mac_Assembleur de Precision");
                 this.groupToDisplay.remove(selectedObject)
 
+
                 this.selectionables = new THREE.Group();
-                this.groupToDisplay.children.forEach(el => {
-                        if (el.name == "Mac_Chat") this.selectionables.add(el.clone())
-                })
-                this.scene.add(this.selectionables)
+                selectedObject = this.groupToDisplay.getObjectByName("Mac_Chat")
+                this.selectionables.add(selectedObject)
+                selectedObject = this.groupToDisplay.getObjectByName("Mac_Sortie")
+                this.selectionables.add(selectedObject)
+                // this.groupToDisplay.children.forEach(el => {
+                //         if (el.name == "Mac_Chat") {
+                //                 this.selectionables.add(el.clone())
+                //         } else {
+                //                 if (el.name == "Mac_Sortie") this.selectionables.add(el.clone())
+                //         }
+
+                // })
                 for (let index = 0; index < machines.length; index++) {
                         let name
                         let lvl
@@ -558,7 +567,9 @@ export class Scene {
                                 })
                         }
                 }
+                this.scene.add(this.selectionables)
                 this.scene.add(this.groupToDisplay)
+                console.log(this.groupToDisplay)
                 this.OpenCameraDisplay()
                 let menu = document.getElementsByClassName("usineDiv")[0]
                 menu.style.display = "flex"
@@ -576,19 +587,27 @@ export class Scene {
                 this.copyGroupSprite = new THREE.Group()
                 this.GroupSprite = new THREE.Group()
                 menu.addEventListener("mousedown", () => {
+                        // sound.startDoor()
                         menu.style.display = "none"
                         this.comeBackHome()
                 })
         }
 
         comeBackHome() {
-                this.scene.remove(this.groupToDisplay)
-                document.getElementById("myThreeJsCanvas").style.pointerEvents = "auto"
                 this.selectionables = this.selectionables2.clone()
+                console.log("kaerjbp")
+                console.log(this.selectionables)
+                this.selectionables2.children.forEach(el => {
+                        if (el.name == "Mac_Sortie") this.selectionables.add(el.clone())
+                })
+                // this.scene.remove(this.selectionables)
+                this.scene.remove(this.groupToDisplay)
+                // this.selectionables=new THREE.Group()
+                document.getElementById("myThreeJsCanvas").style.pointerEvents = "auto"
                 this.scene.add(this.selectionables)
                 this.groupToDisplay = new THREE.Group()
-                this.selectionables2 = new THREE.Group();
                 this.closeMenu();
+                console.log(this.selectionables)
                 WebSocket.emit("moumou_la_reine_des_mouettes_comeback", document.getElementById("username").value)
         }
 

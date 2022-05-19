@@ -1342,6 +1342,21 @@ export const ObjectArray = [
                 ray: true,
                 name: "Mac_Assembleur General"
         },
+        {
+                type: "general4",
+                x: 70,
+                y: -65,
+                z: 22,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                level: 4,
+                ray: true,
+                name: "Mac_Assembleur General"
+        },
 
         /* -------------------------------------------------------------------------- */
         /*                               POSTE À SOUDER                               */
@@ -1509,7 +1524,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                level:2,
+                level: 2,
                 ray: true,
                 name: "Mac_Assembleur Mecanique"
         },
@@ -1524,7 +1539,22 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                level:3,
+                level: 3,
+                ray: true,
+                name: "Mac_Assembleur Mecanique"
+        },
+        {
+                type: "mechanic4",
+                x: -65,
+                y: -155,
+                z: 22,
+                length: 70,
+                width: 15,
+                color: wallColor,
+                rotx: 0,
+                roty: 0,
+                rotz: 0,
+                level: 4,
                 ray: true,
                 name: "Mac_Assembleur Mecanique"
         },

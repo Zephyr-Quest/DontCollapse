@@ -2,6 +2,7 @@ import { sc } from "./game/app.js";
 import Chrono from "./game/hud/chrono.js";
 import HUD from "./game/hud/hud.js";
 import resultsModal from "./game/hud/resultsModal.js";
+import Sound from "./game/sound.js";
 
 let socket;
 const events = {
@@ -59,6 +60,9 @@ const events = {
         console.log("finish game front", msg, displayOtherPlayers);
         Chrono.stopChronoo()
         resultsModal.openResultsModal(msg, displayOtherPlayers, players);
+    },
+    "actuTabBord": (infos) => {
+        HUD.actuTabBord(infos);
     }
 };
 
@@ -80,6 +84,8 @@ function updatePlayersOnScreen() {
     while (playerList.children && playerList.children.length > 0) {
         playerList.children[0].remove();
     }
+
+    Sound.startMusicGame();
 
     // Print new players
     connectedPlayers.forEach(player => {
@@ -123,8 +129,11 @@ function beginingGame(data) {
     eltsToDelete.remove();
     const eltsToShow = document.getElementById("game");
     eltsToShow.style.display = "block";
-    HUD.refreshHud(data)
-    HUD.initShop()
+    HUD.refreshHud(data);
+    HUD.initShop();
+    Sound.stopMusicGame();
+    Sound.toggleLobry();
+    Sound.startMusicGame();
 }
 
 function getAllShop(infoPlayer, username) {
