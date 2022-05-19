@@ -348,8 +348,11 @@ module.exports = class Player {
     }
 
     isLost() {
-        this.inGame = false;
-        return this.money < -10000 || this.sd.isLost();
+        if (this.money < -10000 || this.sd.isLost()) {
+
+            this.inGame = false;
+            return this.inGame;
+        }
     }
 
     updateAll(event) {

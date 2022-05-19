@@ -112,6 +112,7 @@ module.exports = class Game {
         let playersInGame = [];
         this.players.forEach(player => {
             if (player) {
+                player.isLost();
                 if (player.inGame) playersInGame.push(player);
                 if (player.isFinished()) return player;
             }
