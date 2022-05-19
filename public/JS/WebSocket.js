@@ -62,7 +62,7 @@ const events = {
         resultsModal.openResultsModal(msg, displayOtherPlayers, players);
     },
     "actuTabBord": (infos) => {
-        
+        HUD.actuTabBord(infos);
     }
 };
 

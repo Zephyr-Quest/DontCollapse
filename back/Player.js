@@ -89,7 +89,7 @@ module.exports = class Player {
             productionRate: this.productionRate,
             // maintainersNeeded: this.maintainersNeeded,
             // engineersNeeded: this.engineersNeeded,
-            employees: this.employees.length
+            employees: this.employees.number
         }
     }
 

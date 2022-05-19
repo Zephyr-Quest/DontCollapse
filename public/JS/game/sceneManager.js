@@ -481,7 +481,6 @@ export class Scene {
                         // }
                 } else {
                         if (this.staticText) {
-                                // HUD.closeAllModals()
                                 this.closeMenu()
                                 this.animatedText = false
                                 this.staticText = false
