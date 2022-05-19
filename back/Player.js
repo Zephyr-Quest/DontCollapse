@@ -100,7 +100,6 @@ module.exports = class Player {
     sdUpdate() {
         // ecologic
         let ecologic = 0;
-
         // machine
         this.machinesBack.forEach(machine => {
             ecologic += 2.5 * machine.level;
@@ -115,7 +114,7 @@ module.exports = class Player {
 
         let economic = 0;
         if (this.money >= -10000) {
-            let first_criteria = (this.money / 200) + 5;
+            let first_criteria = (this.money / 200) + 50;
             if (first_criteria > 100) first_criteria = 100
             if (first_criteria < 0) first_criteria = 0
             let second_criteria = this.income / this.expenses;
@@ -129,11 +128,12 @@ module.exports = class Player {
 
         // social
         let social = 0;
+        this.machineSync();
         let employeesNeeded = this.maintainersNeeded + this.engineersNeeded;
         let employeesNumber = this.employees.engineers.length + this.employees.maintainers.length;
-       // console.log("employeesNeeded :", employeesNeeded, "employeesNumber :", employeesNumber);
+        // console.log("employeesNeeded :", employeesNeeded, "employeesNumber :", employeesNumber);
 
-        social = (employeesNumber / employeesNeeded) * 100 * ((this.employees.supervisors.length + this.employees.cleaners.length) / 5)
+        social = (employeesNumber / employeesNeeded) * ((this.employees.supervisors.length + this.employees.cleaners.length) / 6) * 100
 
         this.sd.updateOverall(economic, ecologic, social);
 
