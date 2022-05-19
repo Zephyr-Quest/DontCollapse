@@ -406,6 +406,7 @@ body h1 {
   font-size: 2rem;
 }
 #results-modal .modal-content p {
+  text-align: center;
   font-family: "Koulen";
   font-size: 1.2rem;
   letter-spacing: 7px;
@@ -532,6 +533,20 @@ body h1 {
   background-color: transparent;
   color: #f5dba6;
   transition: background-color 0.3s;
+}
+.item-description {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-evenly;
+  height: 100%;
+}
+.item-description button {
+  bottom: 0;
+}
+.item-title {
+  justify-content: center;
+  align-content: center;
 }
 #events-modal {
   padding: 40px;
@@ -743,7 +758,7 @@ body h1 {
   font-family: "Koulen";
   font-weight: bold;
   font-size: 1rem;
-  margin-bottom: -15px;
+  margin-top: auto;
 }
 #shop-modal .modal-content #shop .buy-button:hover {
   background-color: white;

@@ -83,13 +83,12 @@ module.exports = class Player {
             // name: this.name,
             money: this.money,
             manufacturingQuality: this.manufacturingQuality,
-            expenses: this.expenses, 
+            expenses: this.expenses,
             income: this.income,
-            consumption: this.consumption, 
+            consumption: this.consumption,
             productionRate: this.productionRate,
-            // maintainersNeeded: this.maintainersNeeded,
-            // engineersNeeded: this.engineersNeeded,
-            employees: this.employees.length
+            employeesNeeded: this.maintainersNeeded + this.engineersNeeded,
+            employees: this.employees.number
         }
     }
 
@@ -101,9 +100,9 @@ module.exports = class Player {
         let ecologic = 0;
 
         // machine
-        this.machines.forEach(machine => {
-            ecologic += this.sd.machineCalculation(machine.level);
-            ecologic += machine.secondHand ? 5 : 0;
+        this.machinesBack.forEach(machine => {
+            ecologic += 2.5 * machine.level;
+            ecologic += machine.secondHand || machine.level == 4 ? 5 : 0;
         });
         //furnisher
         this.furnishers.forEach(furnisher => {
