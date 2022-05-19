@@ -55,7 +55,7 @@ function initListener(id) {
 function toggleDescri(e) {
     for (const child of e.target.children) {
         if (child.style.display === "none") {
-            child.style.display = "block";
+            child.style.display = "flex";
         } else {
             child.style.display = "none";
         }
