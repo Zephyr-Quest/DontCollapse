@@ -649,6 +649,21 @@ body {
     }
 }
 
+.item-description{
+    display:flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    height:100%;
+    button{
+        bottom:0;
+    }
+}
+.item-title{
+    justify-content: center;
+    align-content: center;
+}
+
 #events-modal {
     .param-content {
         display: flex;
@@ -902,7 +917,8 @@ body {
                 font-family: "Koulen";
                 font-weight: bold;
                 font-size: 1rem;
-                margin-bottom: -15px;
+                margin-top:auto;
+                // margin-bottom: -15px;
 
                 &:hover {
                     background-color: white;
