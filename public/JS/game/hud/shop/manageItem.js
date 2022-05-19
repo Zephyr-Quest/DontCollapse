@@ -40,7 +40,8 @@ function buyItem(divOfItem, type) {
     itemId = Number(divOfItem.classList[1]); // set the item id
     let itemName = divOfItem.children[0].children[0].innerText; // set the item name
 
-    document.getElementById('buying').innerText = "Achat de : " + itemName + ", " + divOfItem.children[0].children[1].innerText; // replace modal text
+    document.getElementById('buying').innerText = "Achat de : " + itemName; //+ ", " + divOfItem.children[0].children[1].innerText; // replace modal text
+    if(divOfItem.children[0].children[1]) document.getElementById('buying').innerText += ", " + divOfItem.children[0].children[1].innerText;
     confirmModal.openModal(); // open confirm modal
     initListener();
 }
