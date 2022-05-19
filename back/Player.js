@@ -13,7 +13,7 @@ module.exports = class Player {
         // generals
         this.name = name;
         this.inGame = true;
-        this.money = 50000;
+        this.money = 10000;
         this.gameContinue = true;
 
         // machines
@@ -110,12 +110,19 @@ module.exports = class Player {
         });
 
         // economic
-        let economic = Math.max(((this.income - this.expenses) / this.income) * 100, 0);
+        let economic = 0;
+        let moneyFactor = Math.min(0.005 * this.money + 50, 100);
+        let croissance = (this.income / this.expenses);
+        economic = Math.max(Math.min(moneyFactor * croissance ^ 3, 100));
 
         // social
-        let social = this.sd.socialCalculation(this.employees.number, this.employees.maintainers.length,
-            this.employees.cleaners.length, this.employees.supervisors.length,
-            this.employees.engineers.length);
+        let social = 0;
+        let employeesNeeded = this.maintainersNeeded + this.engineersNeeded;
+        let employeesNumber = this.employees.engineers.length + this.employees.maintainers.length;
+        console.log("employeesNeeded :", employeesNeeded, "employeesNumber :", employeesNumber);
+
+        social = (employeesNumber / employeesNeeded) * 100 * ((this.employees.supervisors.length + this.employees.cleaners.length)/5)
+
         this.sd.updateOverall(economic, ecologic, social);
 
     }
@@ -248,7 +255,7 @@ module.exports = class Player {
                     this.sd.social *= event.factor;
                     break;
                 case "productivity":
-                    this.productionRate += this.productionRate * (event.factor) / 100;
+                    this.productionRate += Math.floor(this.productionRate * (event.factor) / 100);
                     break;
 
                 default:
@@ -268,7 +275,6 @@ module.exports = class Player {
         employees.categories.forEach(employee => {
             this.recruteEmployee(employee);
         });
-        this.recruteEmployee("maintainers");
     }
 
     furnisherUpgrade(furnisher, level) {
