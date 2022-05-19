@@ -76,13 +76,16 @@ module.exports = class Player {
 
     getInfo() {
         return {
-            name: this.name,
+            // name: this.name,
             money: this.money,
             manufacturingQuality: this.manufacturingQuality,
-            expenses: this.expenses, income: this.income,
-            consumption: this.consumption, productionRate: this.productionRate,
-            maintainersNeeded: this.maintainersNeeded, engineersNeeded: this.engineersNeeded,
-            employees: this.employees
+            expenses: this.expenses, 
+            income: this.income,
+            consumption: this.consumption, 
+            productionRate: this.productionRate,
+            // maintainersNeeded: this.maintainersNeeded,
+            // engineersNeeded: this.engineersNeeded,
+            employees: this.employees.length
         }
     }
 

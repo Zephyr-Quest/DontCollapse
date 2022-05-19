@@ -86,10 +86,10 @@ const updateMonth = game => {
     for (const p of players) {
         const pSocket = io.sockets.sockets.get(p);
         const pUsername = pSocket.handshake.session.username;
-
+        
         const user = game.searchPlayer(pUsername);
         if (!user) continue;
-
+        
         // Actualisation
         if (user.gameContinue) {
             const infoPlayer = user.updateAll(event);
@@ -100,6 +100,9 @@ const updateMonth = game => {
                 event: event
             };
             pSocket.emit("infoActu", infos);
+            
+            const dataTabBord = user.getInfo();
+            pUsername.emit("actuTabBord", dataTabBord);
 
             // User lose
             const endPlayer = user.isLost();
@@ -406,6 +409,9 @@ io.on('connection', socket => {
             barres: dataPlayer.sd
         }
         socket.emit("confirmPurchase", data);
+        
+        const infoPlayer = dataPlayer.getInfo();
+        socket.emit("actuTabBord", infoPlayer);
     });
 
     // Socket to sell second-hand engine
@@ -428,6 +434,9 @@ io.on('connection', socket => {
             barres: dataPlayer.sd
         };
         socket.emit("confirmPurchase", data);
+        
+        const infoPlayer = dataPlayer.getInfo();
+        socket.emit("actuTabBord", infoPlayer);
     })
 
     // Socket to change contract
@@ -444,6 +453,9 @@ io.on('connection', socket => {
             barres: dataPlayer.sd
         }
         socket.emit("confirmPurchase", data);
+
+        const infoPlayer = dataPlayer.getInfo();
+        socket.emit("actuTabBord", infoPlayer);
     });
 
     // Socket to change contract
@@ -459,6 +471,9 @@ io.on('connection', socket => {
             barres: dataPlayer.sd
         }
         socket.emit("confirmPurchase", data);
+
+        const infoPlayer = dataPlayer.getInfo();
+        socket.emit("actuTabBord", infoPlayer);
     });
 
     // Socket shop
