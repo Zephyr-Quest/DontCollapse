@@ -74,6 +74,18 @@ module.exports = class Player {
         return this.money >= amount;
     }
 
+    getInfo() {
+        return {
+            name: this.name,
+            money: this.money,
+            manufacturingQuality: this.manufacturingQuality,
+            expenses: this.expenses, income: this.income,
+            consumption: this.consumption, productionRate: this.productionRate,
+            maintainersNeeded: this.maintainersNeeded, engineersNeeded: this.engineersNeeded,
+            employees: this.employees
+        }
+    }
+
     /**
      * update SD factor
      */

@@ -17,5 +17,5 @@ let Damien = party.searchPlayer("Damien");
 // Damien.recruteEmployee("cleaners");
 // Damien.machineDisplay();
 Damien.updateAll();
-console.log(Damien.employees.number);
+console.log(Damien.getInfo());
 // Damien.sdDisplay();
