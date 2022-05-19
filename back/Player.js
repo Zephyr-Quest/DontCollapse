@@ -48,7 +48,11 @@ module.exports = class Player {
         this.manufacturingQuality = Infinity;
         this.expenses = 0;
         this.income = 0;
-        this.consumption = 0;
+        this.consumption = {
+            "electricity": 0,
+            "water": 0,
+            "etain": 0
+        };
         this.productionRate = Infinity;
         this.maintainersNeeded = 0;
         this.engineersNeeded = 0;
@@ -292,24 +296,26 @@ module.exports = class Player {
     /* -------------------------------------------------------------------------- */
 
     productivityUpdate() {
-        this.consumption = 0;
+        this.consumption = { "electricity": 0, "water": 0, "etain": 0 };
         this.productionRate = Infinity;
         this.manufacturingQuality = 0;
         this.machinesBack.forEach(machine => {
             this.productionRate = Math.min(machine.productionRate, this.productionRate);
             this.manufacturingQuality += machine.manufacturingQuality;
-            this.consumption += machine.consumption;
+            this.consumption.electricity += machine.consumption.electricity;
+            this.consumption.water += machine.consumption.water;
+            this.consumption.etain += machine.consumption.etain;
         });
 
         this.manufacturingQuality /= 4;
     }
 
     electricityExpenses() {
-        return this.consumption * furnishers[0].price[this.furnishers[0]];
+        return this.consumption.electricity * furnishers[0].price[this.furnishers[0]];
     }
 
     waterExpenses() {
-        return (this.productionRate * this.manufacturingQuality) * furnishers[1].price[this.furnishers[1]];
+        return this.consumption.water * furnishers[1].price[this.furnishers[1]];
     }
 
     boxExpenses() {
@@ -317,7 +323,7 @@ module.exports = class Player {
     }
 
     etainExpenses() {
-        return (this.productionRate * this.manufacturingQuality) * furnishers[3].price[this.furnishers[3]];
+        return this.consumption.etain * furnishers[3].price[this.furnishers[3]];
     }
 
     generateIncome() {
