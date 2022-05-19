@@ -102,7 +102,7 @@ const updateMonth = game => {
             pSocket.emit("infoActu", infos);
             
             const dataTabBord = user.getInfo();
-            pUsername.emit("actuTabBord", dataTabBord);
+            pSocket.emit("actuTabBord", dataTabBord);
 
             // User lose
             const endPlayer = user.isLost();
@@ -361,7 +361,7 @@ io.on('connection', socket => {
             }
         }
         // Disconnect user 
-        const msg = username + "leave the game";
+        const msg = username + " leave the game";
         io.to(idRoom).emit("new-message", "Server", msg)
         socket.leave(idRoom);
         console.log("disconnect", username, "from room", idRoom);
