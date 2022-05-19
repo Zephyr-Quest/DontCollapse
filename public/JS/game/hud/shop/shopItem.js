@@ -191,10 +191,10 @@ function refreshMachine(infos) {
 
 function refreshOccaz(infos, username) {
     let item = {
-        0: "Poste à souder",
-        1: "Assembleur de précision",
-        2: "Assembleur mécanique",
-        3: "Assembleur général"
+        0: "Poste a souder",
+        1: "Assembleur de precision",
+        2: "Assembleur mecanique",
+        3: "Assembleur general"
     }
     let occaz = document.getElementsByClassName("occaz");
     for (let i = 0; i < occaz.length - 1; i++) {
@@ -207,7 +207,7 @@ function refreshOccaz(infos, username) {
                 elem.removeAttribute('disable');
                 elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level;
                 elem.children[1].innerHTML = "a vendre";
-                elem.children[2].innerHTML = "Vendue par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
+                elem.children[2].innerHTML = "Vendu par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
             }
         } else {
             elem.setAttribute('disable', '');
