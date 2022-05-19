@@ -33,13 +33,14 @@ const level = {
  * @param {Document} divOfItem 
  */
 function buyItem(divOfItem, type) {
+    console.log(divOfItem,type)
     itemDiv = divOfItem;
     itemType = type;
     itemLevel = level[divOfItem.classList[0]]; // set the item level
     itemId = Number(divOfItem.classList[1]); // set the item id
     let itemName = divOfItem.children[0].children[0].innerText; // set the item name
 
-    document.getElementById('buying').textContent = "Achat de : " + itemName; // replace modal text
+    document.getElementById('buying').innerText = "Achat de : " + itemName + ", " + divOfItem.children[0].children[1].innerText; // replace modal text
     confirmModal.openModal(); // open confirm modal
     initListener();
 }
@@ -51,7 +52,7 @@ function buyItem(divOfItem, type) {
 function deleteItem(divOfItem) {
     itemLevel = level[divOfItem.classList[0]]; // same as buy
     itemToDelete = divOfItem.children[0].children[0].innerText;
-    document.getElementById('buying').textContent = "Voulez vous vraiment vous débarasser de votre " + itemToDelete + " ?";
+    document.getElementById('buying').innerText = "Voulez vous vraiment vous débarasser de votre " + itemToDelete + " ?";
     confirmModal.openModal()
     initListener();
 }
