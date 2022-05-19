@@ -483,6 +483,7 @@ body {
         }
 
         p {
+            text-align: center;
             font-family: "Koulen";
             font-size: 1.2rem;
             letter-spacing: 7px;
@@ -646,6 +647,21 @@ body {
 
         }
     }
+}
+
+.item-description{
+    display:flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    height:100%;
+    button{
+        bottom:0;
+    }
+}
+.item-title{
+    justify-content: center;
+    align-content: center;
 }
 
 #events-modal {
@@ -901,7 +917,8 @@ body {
                 font-family: "Koulen";
                 font-weight: bold;
                 font-size: 1rem;
-                margin-bottom: -15px;
+                margin-top:auto;
+                // margin-bottom: -15px;
 
                 &:hover {
                     background-color: white;
