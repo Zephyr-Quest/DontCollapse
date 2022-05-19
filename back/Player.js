@@ -12,6 +12,7 @@ module.exports = class Player {
     constructor(name) {
         // generals
         this.name = name;
+        this.inGame = true;
         this.money = 50000;
         this.gameContinue = true;
 
@@ -71,6 +72,18 @@ module.exports = class Player {
      */
     asEnoughMoney(amount) {
         return this.money >= amount;
+    }
+
+    getInfo() {
+        return {
+            name: this.name,
+            money: this.money,
+            manufacturingQuality: this.manufacturingQuality,
+            expenses: this.expenses, income: this.income,
+            consumption: this.consumption, productionRate: this.productionRate,
+            maintainersNeeded: this.maintainersNeeded, engineersNeeded: this.engineersNeeded,
+            employees: this.employees
+        }
     }
 
     /**
@@ -335,7 +348,11 @@ module.exports = class Player {
     }
 
     isLost() {
-        return this.money < -10000 || this.sd.isLost();
+        if (this.money < -10000 || this.sd.isLost()) {
+
+            this.inGame = false;
+            return this.inGame;
+        }
     }
 
     updateAll(event) {

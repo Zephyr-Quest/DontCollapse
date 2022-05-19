@@ -109,9 +109,15 @@ module.exports = class Game {
      * @returns if the game is finished
      */
     isFinished() {
+        let playersInGame = [];
         this.players.forEach(player => {
-            if (player.isFinished()) return player;
+            if (player) {
+                player.isLost();
+                if (player.inGame) playersInGame.push(player);
+                if (player.isFinished()) return player;
+            }
         });
+        if (playersInGame.length === 1) return playersInGame[0];
         return false;
     }
 
@@ -205,7 +211,7 @@ module.exports = class Game {
             if (this.runningEvent.duration <= 0) this.runningEvent = undefined;
         } else {
             let random = Math.floor(Math.random() * 100);
-            if (random /*< 20*/ ) {
+            if (random /*< 20*/) {
                 this.runningEvent = events[random % events.length];
                 this.runningEvent.duration = (random % this.runningEvent.durationMax) + this.runningEvent.durationMin;
                 return this.runningEvent;
