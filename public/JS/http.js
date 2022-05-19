@@ -1,5 +1,6 @@
 const http = (function () {
     const HOST = 'http://localhost:4200';
+//    const HOST = 'http://10.224.2.140:4200';
 
     function customFecth(url, config, resolve, reject) {
         fetch(url, config).then(data => {
@@ -15,7 +16,7 @@ const http = (function () {
             const options = {
                 method: 'POST',
                 body: JSON.stringify(data),
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', mode: 'no-cors' },
             };
 
             customFecth(url, options, resolve, reject);
@@ -26,7 +27,7 @@ const http = (function () {
 
             const options = {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', mode: 'no-cors' }
             };
 
             customFecth(url, options, resolve, reject);

@@ -60,8 +60,8 @@ module.exports = class Player {
         // init
         this.machineInitialisation();
         this.productivityUpdate();
-        this.generateExpenses();
-        this.generateIncome();
+        this.expenses = this.generateExpenses();
+        this.income = this.generateIncome();
         this.employeeInit();
         this.machineSync();
         this.sdUpdate();
@@ -280,8 +280,8 @@ module.exports = class Player {
         employees.categories.forEach(employee => {
             this.recruteEmployee(employee);
         });
-        this.recruteEmployee("maintainers");
-        this.recruteEmployee("maintainers");
+        // this.recruteEmployee("maintainers");
+        // this.recruteEmployee("maintainers");
     }
 
     furnisherUpgrade(furnisher, level) {
@@ -356,11 +356,12 @@ module.exports = class Player {
         expenses += this.electricityExpenses();
         expenses += this.waterExpenses();
         expenses += this.boxExpenses() + this.etainExpenses();
+        console.log(this.employees.fees);
         expenses += this.employees.fees;
         // this.furnishers.forEach((element, index) => {
         //     expenses += furnishers[index].price[element];
         // });
-        return this.aroundNumber(expenses + this.income);
+        return this.aroundNumber(expenses);
     }
 
     isFinished() {
@@ -376,7 +377,7 @@ module.exports = class Player {
         if (this.money < -10000 || this.sd.isLost()) {
 
             this.inGame = false;
-            return this.inGame;
+            return true;
         }
     }
 
@@ -384,6 +385,7 @@ module.exports = class Player {
         this.machineSync();
         this.income = this.generateIncome();
         this.expenses = this.generateExpenses();
+        console.log(this.expenses);
         // Expenses
         this.applyEvent(event);
         this.money -= this.expenses;
