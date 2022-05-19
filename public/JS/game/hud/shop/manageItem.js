@@ -46,18 +46,6 @@ function buyItem(divOfItem, type) {
 }
 
 /**
- * Open the confirm mdoal to delete the occasion item
- * @param {Document} divOfItem 
- */
-function deleteItem(divOfItem) {
-    itemLevel = level[divOfItem.classList[0]]; // same as buy
-    itemToDelete = divOfItem.children[0].children[0].innerText;
-    document.getElementById('buying').innerText = "Voulez vous vraiment vous débarasser de votre " + itemToDelete + " ?";
-    confirmModal.openModal()
-    initListener();
-}
-
-/**
  * init "oui" and "non" listeners to buy or not buy the item (or delete it)
  */
 function initListener() {
@@ -235,7 +223,6 @@ function notSell() {
 
 export default {
     buyItem,
-    deleteItem,
 
     setContractCB,
     setPersoCB,

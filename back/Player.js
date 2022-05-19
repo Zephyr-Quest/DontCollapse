@@ -119,7 +119,7 @@ module.exports = class Player {
         let social = 0;
         let employeesNeeded = this.maintainersNeeded + this.engineersNeeded;
         let employeesNumber = this.employees.engineers.length + this.employees.maintainers.length;
-        console.log("employeesNeeded :", employeesNeeded, "employeesNumber :", employeesNumber);
+       // console.log("employeesNeeded :", employeesNeeded, "employeesNumber :", employeesNumber);
 
         social = (employeesNumber / employeesNeeded) * 100 * ((this.employees.supervisors.length + this.employees.cleaners.length)/5)
 
@@ -129,14 +129,6 @@ module.exports = class Player {
 
     aroundNumber(number) {
         return Math.floor(number * 100) / 100;
-    }
-
-    /**
-     * ! Deprecated
-     * @returns nothing
-     */
-    updateHistory() {
-        return true;
     }
 
     /* -------------------------------------------------------------------------- */
