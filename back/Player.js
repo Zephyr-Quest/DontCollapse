@@ -13,7 +13,7 @@ module.exports = class Player {
         // generals
         this.name = name;
         this.inGame = true;
-        this.money = 10000;
+        this.money = 5000;
         this.gameContinue = true;
 
         // machines
@@ -59,11 +59,11 @@ module.exports = class Player {
 
         // init
         this.machineInitialisation();
+        this.employeeInit();
         this.productivityUpdate();
+        this.machineSync();
         this.expenses = this.generateExpenses();
         this.income = this.generateIncome();
-        this.employeeInit();
-        this.machineSync();
         this.sdUpdate();
     }
 
@@ -112,20 +112,19 @@ module.exports = class Player {
 
         // economic
 
-        let economic = 0;
-        if (this.money >= -10000) {
-            let first_criteria = (this.money / 200) + 50;
-            if (first_criteria > 100) first_criteria = 100
-            if (first_criteria < 0) first_criteria = 0
-            let second_criteria = this.income / this.expenses;
-            economic = first_criteria * second_criteria ^ 3;
-        }
-        console.log("Eco : ",economic)
-
         // let economic = 0;
-        // let moneyFactor = Math.min(0.005 * this.money + 50, 100);
-        // let croissance = (this.income / this.expenses);
-        // economic = Math.max(Math.min(moneyFactor * croissance ^ 3, 100));
+        // if (this.money >= -10000) {
+        //     let first_criteria = (this.money / 200) + 50;
+        //     if (first_criteria > 100) first_criteria = 100
+        //     if (first_criteria < 0) first_criteria = 0
+        //     let second_criteria = this.income / this.expenses;
+        //     economic = first_criteria * second_criteria ^ 3;
+        // }
+
+        let economic = 0;
+        let moneyFactor = Math.min(0.001 * this.money + 50, 100);
+        let croissance = (this.income / this.expenses);
+        economic = Math.max(Math.min(moneyFactor * croissance ^ 3, 100));
 
         // social
         let social = 0;
@@ -285,7 +284,6 @@ module.exports = class Player {
     }
 
     furnisherUpgrade(furnisher, level) {
-        // console.log("--- Player ", this.name, " wants to change Orange to SFR",furnisher, level);
         if (this.asEnoughMoney(furnishers[furnisher].price[level])) {
             this.furnishers[furnisher] = level;
             // this.sdUpdate();
@@ -296,7 +294,6 @@ module.exports = class Player {
     }
 
     recruteEmployee(categorie) {
-        // console.log("--- Player ", this.name, " wants to recrute", categorie);
         let name = employees["name"][Math.floor(Math.random() * employees["name"].length)];
         let salary = Math.floor(Math.random() * (employees["salaries"][categorie].max - employees["salaries"][categorie].min + 1) + employees["salaries"][categorie].min);
         Math.floor(Math.random() * (employees["salaries"][categorie].max - employees["salaries"][categorie].min + 1) + employees["salaries"][categorie].min);
@@ -356,7 +353,6 @@ module.exports = class Player {
         expenses += this.electricityExpenses();
         expenses += this.waterExpenses();
         expenses += this.boxExpenses() + this.etainExpenses();
-        console.log(this.employees.fees);
         expenses += this.employees.fees;
         // this.furnishers.forEach((element, index) => {
         //     expenses += furnishers[index].price[element];
@@ -383,9 +379,9 @@ module.exports = class Player {
 
     updateAll(event) {
         this.machineSync();
+        this.productivityUpdate();
         this.income = this.generateIncome();
         this.expenses = this.generateExpenses();
-        console.log(this.expenses);
         // Expenses
         this.applyEvent(event);
         this.money -= this.expenses;

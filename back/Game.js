@@ -26,7 +26,10 @@ module.exports = class Game {
     /*                               Utils functions                              */
     /* -------------------------------------------------------------------------- */
 
-
+    /**
+     * sent to front shop details
+     * @returns {Object} shop details
+     */
     shopInfo() {
         return {
             machines,
@@ -100,7 +103,7 @@ module.exports = class Game {
                 this.playersName.splice(this.playersName.indexOf(player), 1);
                 return true;
             }
-            return false;
+            return false;   //! Should be undefined
         });
     }
 
@@ -118,9 +121,13 @@ module.exports = class Game {
             }
         });
         if (playersInGame.length === 1) return playersInGame[0].name;
-        return false;
+        return false;   //! Should be undefined
     }
 
+    /**
+     * generate the leaderboard
+     * @returns {String} winner name
+     */
     finishGame() {
         let machineLevel = [];
         this.players.forEach((player) => {
@@ -128,7 +135,7 @@ module.exports = class Game {
             player.machines.forEach(machine => {
                 playerLevel += machine.level;
             });
-            machineLevel.push({name : player.name, level : playerLevel});
+            machineLevel.push({ name: player.name, level: playerLevel });
         });
         let winner = "";
         let winnerLevel = 0;
@@ -150,6 +157,11 @@ module.exports = class Game {
     /*                               Shop functions                               */
     /* -------------------------------------------------------------------------- */
 
+    /**
+     * check if a player sells an item
+     * @param {String} player name
+     * @returns {Object} item
+     */
     checkPlayerItem(player) {
         let result = undefined;
         this.shop.forEach(item => {
@@ -158,8 +170,15 @@ module.exports = class Game {
         return result;
     }
 
+    /**
+     * sell second hand item
+     * @param {String} player name
+     * @param {Number} machine type
+     * @param {Number} level machine
+     * @param {Number} price 
+     * @returns {Boolean} true if item is added
+     */
     addSecondhandItem(player, machine, level, price) {
-        // console.log("--- Player ", player, " wants to sell", machine, level, price);
         let slot = this.checkPlayerItem(player);
         if (slot) {
             slot.machine = machine;
@@ -204,45 +223,23 @@ module.exports = class Game {
     /*                              Events functions                              */
     /* -------------------------------------------------------------------------- */
 
-    // applyFactor(eventId, factor) {
-    //     switch (eventId) {
-    //         case 0:
-    //             this.players.forEach(player => {
-    //                 player.money += factor;
-    //             });
-    //             break;
-    //         case 1:
-    //             this.players.forEach(player => {
-    //                 player.sd.ecologic += player.sd.ecologic * (factor / 100);
-    //             });
-    //             break;
-    //         case 2:
-    //             this.players.forEach(player => {
-    //                 player.sd.social += player.sd.social * (factor / 100);
-    //             });
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
-
     applyEvent() {
-        if (this.runningEvent) {
-            this.runningEvent.duration--;
-            if (this.runningEvent.duration <= 0) this.runningEvent = undefined;
+        if (this.runningEvent) { // Si un évènement est déjà existant
+            this.runningEvent.duration--; // On réduit son temps restant
+            if (this.runningEvent.duration <= 0) this.runningEvent = undefined; // Dès qu'il reste 0 mois, on le supprime
         } else {
-            let random = Math.floor(Math.random() * 100);
+            let random = Math.floor(Math.random() * 100); // 20% de chance d'avoir un évènement aléatoire.
             if (random < 20) {
-                this.runningEvent = events[random % events.length];
+                this.runningEvent = events[random % events.length]; // On choisit un évènement et sa durée aléatoirement
                 this.runningEvent.duration = (random % this.runningEvent.durationMax) + this.runningEvent.durationMin;
-                return this.runningEvent;
+                return this.runningEvent; // et on applique cet évènement
             }
         }
         return undefined;
     }
 
     /* -------------------------------------------------------------------------- */
-    /*                              Update functions                              */
+    /*                          Update & chrono functions                         */
     /* -------------------------------------------------------------------------- */
 
     updateMonthWrapper() {
