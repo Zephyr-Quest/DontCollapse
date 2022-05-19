@@ -12,6 +12,7 @@ module.exports = class Player {
     constructor(name) {
         // generals
         this.name = name;
+        this.inGame = true;
         this.money = 50000;
         this.gameContinue = true;
 
@@ -335,6 +336,7 @@ module.exports = class Player {
     }
 
     isLost() {
+        this.inGame = false;
         return this.money < -10000 || this.sd.isLost();
     }
 
