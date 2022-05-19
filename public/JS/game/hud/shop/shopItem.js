@@ -87,10 +87,11 @@ function toggleDescri(e) {
  * @param {EventTarget} e 
  */
 function buyContract(e) {
-    Buy.buyItem(e.target.parentElement.parentElement, 0);
+    Buy.buyItem(e.target.parentElement, 0);
 }
 
 function buyPerso(e) {
+    console.log(e.target.parentElement.parentElement);
     Buy.buyItem(e.target.parentElement.parentElement, 1);
 }
 
