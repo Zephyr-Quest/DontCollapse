@@ -61,7 +61,9 @@ module.exports = class Player {
         this.machineInitialisation();
         this.productivityUpdate();
         this.generateExpenses();
+        this.generateIncome();
         this.employeeInit();
+        this.machineSync();
         this.sdUpdate();
     }
 
@@ -110,10 +112,20 @@ module.exports = class Player {
         });
 
         // economic
+
         let economic = 0;
-        let moneyFactor = Math.min(0.005 * this.money + 50, 100);
-        let croissance = (this.income / this.expenses);
-        economic = Math.max(Math.min(moneyFactor * croissance ^ 3, 100));
+        if (this.money >= -10000) {
+            let first_criteria = (this.money / 200) + 5;
+            if (first_criteria > 100) first_criteria = 100
+            if (first_criteria < 0) first_criteria = 0
+            let second_criteria = this.income / this.expenses;
+            economic = first_criteria * second_criteria ^ 3;
+        }
+
+        // let economic = 0;
+        // let moneyFactor = Math.min(0.005 * this.money + 50, 100);
+        // let croissance = (this.income / this.expenses);
+        // economic = Math.max(Math.min(moneyFactor * croissance ^ 3, 100));
 
         // social
         let social = 0;
@@ -121,7 +133,7 @@ module.exports = class Player {
         let employeesNumber = this.employees.engineers.length + this.employees.maintainers.length;
        // console.log("employeesNeeded :", employeesNeeded, "employeesNumber :", employeesNumber);
 
-        social = (employeesNumber / employeesNeeded) * 100 * ((this.employees.supervisors.length + this.employees.cleaners.length)/5)
+        social = (employeesNumber / employeesNeeded) * 100 * ((this.employees.supervisors.length + this.employees.cleaners.length) / 5)
 
         this.sd.updateOverall(economic, ecologic, social);
 
@@ -267,6 +279,8 @@ module.exports = class Player {
         employees.categories.forEach(employee => {
             this.recruteEmployee(employee);
         });
+        this.recruteEmployee("maintainers");
+        this.recruteEmployee("maintainers");
     }
 
     furnisherUpgrade(furnisher, level) {
@@ -296,7 +310,11 @@ module.exports = class Player {
     /* -------------------------------------------------------------------------- */
 
     productivityUpdate() {
-        this.consumption = { "electricity": 0, "water": 0, "etain": 0 };
+        this.consumption = {
+            "electricity": 0,
+            "water": 0,
+            "etain": 0
+        };
         this.productionRate = Infinity;
         this.manufacturingQuality = 0;
         this.machinesBack.forEach(machine => {
@@ -341,7 +359,7 @@ module.exports = class Player {
         // this.furnishers.forEach((element, index) => {
         //     expenses += furnishers[index].price[element];
         // });
-        return this.aroundNumber(expenses + this.income * 0.3);
+        return this.aroundNumber(expenses + this.income);
     }
 
     isFinished() {
