@@ -1509,7 +1509,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                level:2,
+                level: 2,
                 ray: true,
                 name: "Mac_Assembleur Mecanique"
         },
@@ -1524,7 +1524,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
-                level:3,
+                level: 3,
                 ray: true,
                 name: "Mac_Assembleur Mecanique"
         },
