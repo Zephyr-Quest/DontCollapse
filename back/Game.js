@@ -40,7 +40,6 @@ module.exports = class Game {
      * @param {String} player name
      */
     addPlayer(player) {
-        // console.log("--- Player ", player, " join the game");
         if (this.players.length < 4 && player) {
             this.players.push(new Player(player));
             this.playersName.push(player);
@@ -53,7 +52,7 @@ module.exports = class Game {
      * @returns player if it's in the game
      */
     searchPlayer(player) {
-        let result = undefined;
+        let result;
         this.players.forEach(p => {
             if (p && p.name === player) result = p;
         });
@@ -74,17 +73,6 @@ module.exports = class Game {
                 shop: this.shop
             };
         }
-        return undefined;
-    }
-
-    /**
-     * Return money amount from a given player
-     * @param {String} playerName name of the player
-     * @returns money amount (or undefined)
-     */
-    getPlayerMoney(playerName) {
-        let player = this.searchPlayer(playerName);
-        if (player) return player.money;
         return undefined;
     }
 
@@ -159,7 +147,6 @@ module.exports = class Game {
     }
 
     addSecondhandItem(player, machine, level, price) {
-        // console.log("--- Player ", player, " wants to sell", machine, level, price);
         let slot = this.checkPlayerItem(player);
         if (slot) {
             slot.machine = machine;
@@ -183,7 +170,6 @@ module.exports = class Game {
      * @returns if the transaction was made
      */
     buySecondhandItem(buyerName, sellerName) {
-        // console.log("--- Player ", buyer, " wants to buy", seller);
         let buyer = this.searchPlayer(buyerName);
         let seller = this.searchPlayer(sellerName);
         let machine = this.checkPlayerItem(seller.name);
@@ -203,29 +189,7 @@ module.exports = class Game {
     /* -------------------------------------------------------------------------- */
     /*                              Events functions                              */
     /* -------------------------------------------------------------------------- */
-
-    // applyFactor(eventId, factor) {
-    //     switch (eventId) {
-    //         case 0:
-    //             this.players.forEach(player => {
-    //                 player.money += factor;
-    //             });
-    //             break;
-    //         case 1:
-    //             this.players.forEach(player => {
-    //                 player.sd.ecologic += player.sd.ecologic * (factor / 100);
-    //             });
-    //             break;
-    //         case 2:
-    //             this.players.forEach(player => {
-    //                 player.sd.social += player.sd.social * (factor / 100);
-    //             });
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
-
+    //! Event à refaire
     applyEvent() {
         if (this.runningEvent) {
             this.runningEvent.duration--;

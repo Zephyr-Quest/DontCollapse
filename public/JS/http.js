@@ -1,6 +1,6 @@
 const http = (function () {
     // const HOST = 'http://localhost:4200';
-   const HOST = 'http://10.224.1.2:4200';
+   const HOST = 'http://10.222.8.203:4200';
 
     function customFecth(url, config, resolve, reject) {
         fetch(url, config).then(data => {

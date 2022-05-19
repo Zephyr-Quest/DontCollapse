@@ -20,11 +20,5 @@ module.exports = class Machine {
         this.engineersRequested = machine.engineersRequested;
     }
 
-    display() {
-        console.log("🏭", this.constructor, this.name);
-        console.log("Details : type", this.type, "level", this.level);
-        console.log("⏰ Production rate : ", this.productionRate);
-        console.log("⚡ Consumption :", this.consumption);
-        console.log("Maintainers needed :", this.maintainersRequested, ", Engineers needed :", this.engineersRequested);
-    }
+    
 };
