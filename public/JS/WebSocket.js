@@ -60,6 +60,9 @@ const events = {
         console.log("finish game front", msg, displayOtherPlayers);
         Chrono.stopChronoo()
         resultsModal.openResultsModal(msg, displayOtherPlayers, players);
+    },
+    "actuTabBord": (infos) => {
+        
     }
 };
 
