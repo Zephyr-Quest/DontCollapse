@@ -37,14 +37,6 @@ function initChatButton() {
     chat.initListener();
 }
 
-function initShopButton() {
-    shop.initListener();
-}
-
-function deleteChatbutton() {
-    chat.destroyListener();
-}
-
 function openChatModal() {
     chat.openModal();
     sc.closeMenu();
@@ -103,10 +95,6 @@ function setSellOccazCallback(callback) {
     Item.setSellOccazCB(callback);
 }
 
-function closeAllModals() {
-    shop.closeFunction();
-    chat.closeFunction();
-}
 
 function refreshShop(infos, username) {
     ShopItem.refreshContract(infos.furnishers);
@@ -237,17 +225,24 @@ function initShop() {
     );
 }
 
+function actuTabBord(infos){
+    console.log(infos)
+    document.getElementById('prev-expe').innerText=infos.expenses;
+    document.getElementById('prev-income').innerText=infos.income;
+    document.getElementById('nb-employee').innerText= infos.employees;
+    document.getElementById('actual-elec').innerText=infos.consumption.electricity;
+    document.getElementById('actual-water').innerText = infos.consumption.water;
+    document.getElementById('actual-etain').innerText = infos.consumption.etain;
+    document.getElementById('actual-card').innerText = infos.productionRate;
+}
+
 export default {
-    initShopButton,
     initChatButton,
-    deleteChatbutton,
 
     openChatModal,
     openShopModal,
     closeShopModal,
-    closeAllModals,
     initShop,
-
     openResultsModal,
     closeResultModal,
     isResultOpen,
@@ -256,6 +251,7 @@ export default {
     refreshHud,
     updateOnPurchase,
     openSpecificMachine,
+    actuTabBord,
 
     updateEcologicBar,
     updateEconomicBar,
