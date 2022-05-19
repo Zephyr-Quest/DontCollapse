@@ -116,9 +116,13 @@ module.exports = class Player {
         economic = Math.max(Math.min(moneyFactor * croissance ^ 3, 100));
 
         // social
-        let social = this.sd.socialCalculation(this.employees.number, this.employees.maintainers.length,
-            this.employees.cleaners.length, this.employees.supervisors.length,
-            this.employees.engineers.length);
+        let social = 0;
+        let employeesNeeded = this.maintainersNeeded + this.engineersNeeded;
+        let employeesNumber = this.employees.engineers.length + this.employees.maintainers.length;
+        console.log("employeesNeeded :", employeesNeeded, "employeesNumber :", employeesNumber);
+
+        social = (employeesNumber / employeesNeeded) * 100 * ((this.employees.supervisors.length + this.employees.cleaners.length)/5)
+
         this.sd.updateOverall(economic, ecologic, social);
 
     }
@@ -271,7 +275,6 @@ module.exports = class Player {
         employees.categories.forEach(employee => {
             this.recruteEmployee(employee);
         });
-        this.recruteEmployee("maintainers");
     }
 
     furnisherUpgrade(furnisher, level) {
