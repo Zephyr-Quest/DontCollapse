@@ -113,6 +113,7 @@ module.exports = class Player {
         // economic
 
         let economic = 0;
+        console.log(this.money)
         if (this.money >= -10000) {
             let first_criteria = (this.money / 200) + 50;
             if (first_criteria > 100) first_criteria = 100
@@ -279,8 +280,8 @@ module.exports = class Player {
         employees.categories.forEach(employee => {
             this.recruteEmployee(employee);
         });
-        this.recruteEmployee("maintainers");
-        this.recruteEmployee("maintainers");
+        // this.recruteEmployee("maintainers");
+        // this.recruteEmployee("maintainers");
     }
 
     furnisherUpgrade(furnisher, level) {
@@ -375,7 +376,7 @@ module.exports = class Player {
         if (this.money < -10000 || this.sd.isLost()) {
 
             this.inGame = false;
-            return this.inGame;
+            return true;
         }
     }
 
@@ -383,12 +384,12 @@ module.exports = class Player {
         this.machineSync();
         this.income = this.generateIncome();
         this.expenses = this.generateExpenses();
-        this.sdUpdate();
         // Expenses
         this.applyEvent(event);
         this.money -= this.expenses;
         this.money += this.income;
         this.money = this.aroundNumber(this.money);
+        this.sdUpdate();
         return {
             moula: this.money,
             barres: this.sd
