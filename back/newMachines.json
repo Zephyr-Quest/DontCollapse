@@ -3,220 +3,188 @@
         "name": "Poste à souder",
         "1": {
             "constructor": "Manix2",
-            "price": 5000,
-            "productionRate": 80,
+            "price": 1000,
+            "productionRate": 102,
             "consumption": {
-                "electricity": 10,
+                "electricity": 300,
                 "water": 0,
-                "etain": 20
+                "etain": 50
             },
-            "manufacturingQuality": 1,
-            "maintainersRequested": 1,
-            "engineersRequested": 1
+            "employeesNeeded" : 1
         },
         "2": {
             "constructor": "Droit Ô But",
-            "price": 8000,
-            "productionRate": 95,
+            "price": 8200,
+            "productionRate": 144,
             "consumption": {
-                "electricity": 20,
+                "electricity": 650,
                 "water": 0,
-                "etain": 20
+                "etain": 50
             },
-            "manufacturingQuality": 1.25,
-            "maintainersRequested": 4,
-            "engineersRequested": 2
+            "employeesNeeded" : 3
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 9700,
-            "productionRate": 110,
+            "price": 19900,
+            "productionRate": 178,
             "consumption": {
-                "electricity": 20,
+                "electricity": 600,
                 "water": 0,
-                "etain": 30
+                "etain": 100
             },
-            "manufacturingQuality": 1.5,
-            "maintainersRequested": 8,
-            "engineersRequested": 3
+            "employeesNeeded" : 4
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 12035,
-            "productionRate": 120,
+            "price": 28200,
+            "productionRate": 217,
             "consumption": {
-                "electricity": 30,
+                "electricity": 900,
                 "water": 0,
-                "etain": 30
+                "etain": 100
             },
-            "manufacturingQuality": 2,
-            "maintainersRequested": 8,
-            "engineersRequested": 4
+            "employeesNeeded" : 5
         }
     },
     "1": {
         "name": "Assembleur de précision",
         "1": {
             "constructor": "Manix2",
-            "price": 5000,
-            "productionRate": 80,
+            "price": 1000,
+            "productionRate": 103,
             "consumption": {
-                "electricity": 20,
-                "water": 20,
-                "etain": 30
+                "electricity": 600,
+                "water": 150,
+                "etain": 100
             },
-            "manufacturingQuality": 1,
-            "maintainersRequested": 2,
-            "engineersRequested": 1
+            "employeesNeeded" : 2
         },
         "2": {
             "constructor": "Droit Ô But",
-            "price": 7800,
-            "productionRate": 95,
+            "price": 9622,
+            "productionRate": 139,
             "consumption": {
-                "electricity": 20,
-                "water": 30,
-                "etain": 30
+                "electricity": 650,
+                "water": 170,
+                "etain": 100
             },
-            "manufacturingQuality": 1.25,
-            "maintainersRequested": 4,
-            "engineersRequested": 2
+            "employeesNeeded" : 2
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 8700,
-            "productionRate": 110,
+            "price": 25490,
+            "productionRate": 175,
             "consumption": {
-                "electricity": 30,
-                "water": 20,
-                "etain": 40
+                "electricity": 900,
+                "water": 100,
+                "etain": 150
             },
-            "manufacturingQuality": 1.5,
-            "maintainersRequested": 8,
-            "engineersRequested": 3
+            "employeesNeeded" : 4
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 10290,
-            "productionRate": 120,
+            "price": 34900,
+            "productionRate": 216,
             "consumption": {
-                "electricity": 30,
-                "water": 20,
-                "etain": 40
+                "electricity": 900,
+                "water": 150,
+                "etain": 150
             },
-            "manufacturingQuality": 2,
-            "maintainersRequested": 8,
-            "engineersRequested": 4
+            "employeesNeeded" : 5
         }
     },
     "2": {
         "name": "Assembleur mécanique",
         "1": {
             "constructor": "Manix2",
-            "price": 5412,
-            "productionRate": 80,
+            "price": 1000,
+            "productionRate": 98,
             "consumption": {
-                "electricity": 30,
-                "water": 30,
-                "etain": 20
+                "electricity": 600,
+                "water": 150,
+                "etain": 50
             },
-            "manufacturingQuality": 1,
-            "maintainersRequested": 2,
-            "engineersRequested": 1
+            "employeesNeeded" : 1
         },
         "2": {
             "constructor": "Droit Ô But",
-            "price": 6007,
-            "productionRate": 95,
+            "price": 9999,
+            "productionRate": 143,
             "consumption": {
-                "electricity": 30,
-                "water": 30,
-                "etain": 20
+                "electricity": 900,
+                "water":170,
+                "etain": 50
             },
-            "manufacturingQuality": 1.25,
-            "maintainersRequested": 4,
-            "engineersRequested": 2
+            "employeesNeeded" : 3
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 6900,
-            "productionRate": 110,
+            "price": 22900,
+            "productionRate": 183,
             "consumption": {
-                "electricity": 40,
-                "water": 30,
-                "etain": 30
+                "electricity": 900,
+                "water": 150,
+                "etain": 100
             },
-            "manufacturingQuality": 1.5,
-            "maintainersRequested": 8,
-            "engineersRequested": 3
+            "employeesNeeded" : 4
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 8980,
-            "productionRate": 120,
+            "price": 27644,
+            "productionRate": 208,
             "consumption": {
-                "electricity": 30,
-                "water": 30,
-                "etain": 40
+                "electricity": 900,
+                "water": 150,
+                "etain": 150
             },
-            "manufacturingQuality": 2,
-            "maintainersRequested": 8,
-            "engineersRequested": 4
+            "employeesNeeded" : 6
         }
     },
     "3": {
         "name": "Assembleur général",
         "1": {
             "constructor": "Manix2",
-            "price": 1200,
-            "productionRate": 80,
+            "price": 1000,
+            "productionRate": 99,
             "consumption": {
-                "electricity": 30,
+                "electricity": 600,
                 "water": 0,
                 "etain": 10
             },
-            "manufacturingQuality": 1,
-            "maintainersRequested": 2,
-            "engineersRequested": 1
+            "employeesNeeded" : 1
         },
         "2": {
             "constructor": "Droit Ô But",
-            "price": 4567,
-            "productionRate": 95,
+            "price": 9800,
+            "productionRate": 141,
             "consumption": {
-                "electricity": 40,
+                "electricity": 900,
                 "water": 0,
                 "etain": 0
             },
-            "manufacturingQuality": 1.25,
-            "maintainersRequested": 4,
-            "engineersRequested": 2
+            "employeesNeeded" : 2
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 9788,
-            "productionRate": 110,
+            "price": 20999,
+            "productionRate": 182,
             "consumption": {
-                "electricity": 30,
-                "water": 20,
+                "electricity": 900,
+                "water": 100,
                 "etain": 0
             },
-            "manufacturingQuality": 1.5,
-            "maintainersRequested": 8,
-            "engineersRequested": 3
+            "employeesNeeded" : 4
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 12970,
-            "productionRate": 120,
+            "price": 30800,
+            "productionRate": 213,
             "consumption": {
-                "electricity": 30,
-                "water": 10,
-                "etain": 20
+                "electricity": 900,
+                "water": 50,
+                "etain": 50
             },
-            "manufacturingQuality": 2,
-            "maintainersRequested": 8,
-            "engineersRequested": 4
+            "employeesNeeded" : 6
         }
     }
 }

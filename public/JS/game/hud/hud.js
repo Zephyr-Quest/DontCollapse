@@ -10,7 +10,9 @@ import Shop from './shop/topRubric.js'
 import Sound from '../sound.js';
 
 import * as THREE from 'three';
-import { sc } from '../app.js';
+import {
+    sc
+} from '../app.js';
 
 /* --------------------------------- Modals --------------------------------- */
 
@@ -21,15 +23,15 @@ const chat = new Modal('chat-modal', 'chat-button', 'close-chat');
 const events = new Modal('events-modal', undefined, undefined);
 const results = new Modal('results-modal', undefined, 'disconnectionResults', false, true);
 
-function openResultsModal(){
+function openResultsModal() {
     results.openModal();
 }
 
-function closeResultModal(){
+function closeResultModal() {
     results.closeFunction();
 }
 
-function isResultOpen(){
+function isResultOpen() {
     return results.isOpen()
 }
 
@@ -108,10 +110,10 @@ function refreshHud(infos) {
     ProgressBar.updateEconomic(Math.round(infos.barres.economic));
     ProgressBar.updateSocial(Math.round(infos.barres.social));
 
-    Money.setMoney(Math.round(infos.moula));
+    if (infos.moula) Money.setMoney(Math.round(infos.moula));
 
     if (infos.chrono) Chrono.startChronoFrom(infos.chrono.min, infos.chrono.sec);
-   
+
     if (infos.event) {
         if (!events.isOpen()) events.openModal();
         let div = document.querySelector('#events-content');
@@ -188,7 +190,6 @@ function initShop() {
                 descri.children[0].innerText = "Salaire minimum : " + employees.salaries[employees.categories[i]].min
                 descri.children[1].innerText = "Salaire maximum : " + employees.salaries[employees.categories[i]].max
             }
-            console.log(machine)
             // machines
             for (let i = 0; i < 4; i++) {
                 let descri = document.querySelectorAll("." + itemId[machine[i][i + 1].constructor] + " .item-description");
@@ -205,11 +206,12 @@ function initShop() {
                                 descri[j].prepend(elem)
                                 break;
                             case 2:
-                                elem.innerText = "Mainteneurs recommandes : " + machine[j][i + 1].maintainersRequested
+                                elem.innerHTML = "Vitesse de production : " + machine[j][i + 1].productionRate
                                 descri[j].prepend(elem)
+
                                 break;
                             case 3:
-                                elem.innerText = "Ingenieurs recommandes : " + machine[j][i + 1].engineersRequested
+                                elem.innerText = "Personnels reccomandes : " + machine[j][i + 1].employeesNeeded
                                 descri[j].prepend(elem)
                                 break;
                             default:
@@ -224,15 +226,24 @@ function initShop() {
     );
 }
 
-function actuTabBord(infos){
-    document.getElementById('prev-expe').innerText=infos.expenses;
-    document.getElementById('prev-income').innerText=infos.income;
-    document.getElementById('nb-employee').innerText= infos.employees;
-    document.getElementById('actual-elec').innerText=infos.consumption.electricity;
+function actuTabBord(infos) {
+    refreshHud(infos)
+    document.getElementById('prev-expe').innerText = infos.expenses;
+    document.getElementById('prev-income').innerText = infos.income;
+    document.getElementById('actual-elec').innerText = infos.consumption.electricity;
     document.getElementById('actual-water').innerText = infos.consumption.water;
     document.getElementById('actual-etain').innerText = infos.consumption.etain;
     document.getElementById('actual-card').innerText = infos.productionRate;
+
+    document.getElementById('nb-employee').innerText = infos.employees.number + " / " + infos.employeesNeeded;
+    document.getElementById('actual-maint').innerText = infos.employees.maintainers.length;
+    document.getElementById('actual-clean').innerText = infos.employees.cleaners.length;
+    document.getElementById('actual-inge').innerText = infos.employees.engineers.length;
+    document.getElementById('actual-super').innerText = infos.employees.supervisors.length;
+
+    console.log(infos)
 }
+
 
 export default {
     initChatButton,

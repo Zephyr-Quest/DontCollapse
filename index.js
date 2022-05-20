@@ -119,14 +119,14 @@ const updateMonth = game => {
     const end = game.isFinished();
     if (end !== false) {
         game.finishGame();
-        const msg = end + "has finished the game";
+        const msg = end + " a gagne la partie";
         io.to(game.idRoom).emit("finishGame", msg, false);
     }
 };
 
 const endGame = game => {
     const winner = game.finishGame();
-    const msg = "Temps ecoule, " + winner + " a gagné la partie";
+    const msg = "Temps ecoule, " + winner + " a gagne la partie";
     io.to(game.idRoom).emit("finishGame", msg, false);
 }
 
