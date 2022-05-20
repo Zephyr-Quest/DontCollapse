@@ -15,7 +15,6 @@ module.exports = class Machine {
         this.price = machine.price;
         this.productionRate = machine.productionRate;
         this.consumption = machine.consumption;
-        this.manufacturingQuality = machine.manufacturingQuality;
         this.employeesNeeded = machine.employeesNeeded;
     }
 

@@ -48,7 +48,6 @@ module.exports = class Player {
         //! Fichier à revoir !
         //! Infinity ???
         this.sd = new SustainableDevelopment();
-        this.manufacturingQuality = Infinity;
         this.expenses = 0;
         this.income = 0;
         this.consumption = {
@@ -96,7 +95,6 @@ module.exports = class Player {
         return {
             barres: this.sd,
             money: this.money,
-            manufacturingQuality: this.manufacturingQuality,
             expenses: this.expenses,
             income: this.income,
             consumption: this.consumption,
@@ -245,24 +243,19 @@ module.exports = class Player {
 
 
         this.productionRate = Infinity;
-        // this.manufacturingQuality = 0;
         this.machinesBack.forEach(machine => {
             this.productionRate = Math.min(machine.productionRate, this.productionRate);
 
-
-            // this.manufacturingQuality += machine.manufacturingQuality;
             this.consumption.electricity += machine.consumption.electricity;
             this.consumption.water += machine.consumption.water;
             this.consumption.etain += machine.consumption.etain;
         });
 
-        let ratioEmployee = (this.employees.number) / (this.employeesNeeded)
-        if (ratioEmployee > 1) ratioEmployee = 1
-        if (ratioEmployee < 0) ratioEmployee = 0
+        let ratioEmployee = (this.employees.number) / (this.employeesNeeded);
+        if (ratioEmployee > 1) ratioEmployee = 1;
+        if (ratioEmployee < 0) ratioEmployee = 0;
         this.productionRate *= ratioEmployee;
-        this.productionRate = Math.floor(this.productionRate)
-
-        // this.manufacturingQuality /= 4;
+        this.productionRate = Math.floor(this.productionRate);
     }
 
     electricityExpenses() {
@@ -309,13 +302,6 @@ module.exports = class Player {
     }
 
     updateAll(event) {
-        // Vérifier contrats
-        // Employees
-        // Productivité
-        // Income expenses
-        // Money
-        // ODD
-
         // EVENT ?
 
         this.employeeOptimal();

@@ -10,7 +10,6 @@
                 "water": 0,
                 "etain": 50
             },
-            "manufacturingQuality": 1,
             "employeesNeeded" : 1
         },
         "2": {
@@ -22,7 +21,6 @@
                 "water": 0,
                 "etain": 50
             },
-            "manufacturingQuality": 1.25,
             "employeesNeeded" : 3
         },
         "3": {
@@ -34,7 +32,6 @@
                 "water": 0,
                 "etain": 100
             },
-            "manufacturingQuality": 1.5,
             "employeesNeeded" : 4
         },
         "4": {
@@ -46,7 +43,6 @@
                 "water": 0,
                 "etain": 100
             },
-            "manufacturingQuality": 2,
             "employeesNeeded" : 5
         }
     },
@@ -61,7 +57,6 @@
                 "water": 150,
                 "etain": 100
             },
-            "manufacturingQuality": 1,
             "employeesNeeded" : 2
         },
         "2": {
@@ -73,7 +68,6 @@
                 "water": 170,
                 "etain": 100
             },
-            "manufacturingQuality": 1.25,
             "employeesNeeded" : 2
         },
         "3": {
@@ -85,7 +79,6 @@
                 "water": 100,
                 "etain": 150
             },
-            "manufacturingQuality": 1.5,
             "employeesNeeded" : 4
         },
         "4": {
@@ -97,7 +90,6 @@
                 "water": 150,
                 "etain": 150
             },
-            "manufacturingQuality": 2,
             "employeesNeeded" : 5
         }
     },
@@ -112,7 +104,6 @@
                 "water": 150,
                 "etain": 50
             },
-            "manufacturingQuality": 1,
             "employeesNeeded" : 1
         },
         "2": {
@@ -124,7 +115,6 @@
                 "water":170,
                 "etain": 50
             },
-            "manufacturingQuality": 1.25,
             "employeesNeeded" : 3
         },
         "3": {
@@ -136,7 +126,6 @@
                 "water": 150,
                 "etain": 100
             },
-            "manufacturingQuality": 1.5,
             "employeesNeeded" : 4
         },
         "4": {
@@ -148,7 +137,6 @@
                 "water": 150,
                 "etain": 150
             },
-            "manufacturingQuality": 2,
             "employeesNeeded" : 6
         }
     },
@@ -163,7 +151,6 @@
                 "water": 0,
                 "etain": 0
             },
-            "manufacturingQuality": 1,
             "employeesNeeded" : 1
         },
         "2": {
@@ -175,7 +162,6 @@
                 "water": 0,
                 "etain": 0
             },
-            "manufacturingQuality": 1.25,
             "employeesNeeded" : 2
         },
         "3": {
@@ -187,7 +173,6 @@
                 "water": 100,
                 "etain": 0
             },
-            "manufacturingQuality": 1.5,
             "employeesNeeded" : 4
         },
         "4": {
@@ -199,7 +184,6 @@
                 "water": 50,
                 "etain": 50
             },
-            "manufacturingQuality": 2,
             "employeesNeeded" : 6
         }
     }
