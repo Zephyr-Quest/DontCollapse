@@ -124,7 +124,7 @@ const updateMonth = game => {
 
 const endGame = game => {
     const winner = game.finishGame();
-    const msg = "Temps ecoule, " + winner + " a gagné la partie";
+    const msg = "Temps ecoule, " + winner + " a gagne la partie";
     io.to(game.idRoom).emit("finishGame", msg, false);
 }
 

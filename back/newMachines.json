@@ -15,7 +15,7 @@
         },
         "2": {
             "constructor": "Droit Ô But",
-            "price": 8000,
+            "price": 8200,
             "productionRate": 144,
             "consumption": {
                 "electricity": 650,
@@ -27,7 +27,7 @@
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 9700,
+            "price": 17900,
             "productionRate": 168,
             "consumption": {
                 "electricity": 600,
@@ -35,11 +35,11 @@
                 "etain": 100
             },
             "manufacturingQuality": 1.5,
-            "employeesNeeded" : 3
+            "employeesNeeded" : 4
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 12035,
+            "price": 34200,
             "productionRate": 217,
             "consumption": {
                 "electricity": 900,
@@ -47,7 +47,7 @@
                 "etain": 100
             },
             "manufacturingQuality": 2,
-            "employeesNeeded" : 4
+            "employeesNeeded" : 5
         }
     },
     "1": {
@@ -66,7 +66,7 @@
         },
         "2": {
             "constructor": "Droit Ô But",
-            "price": 7800,
+            "price": 9622,
             "productionRate": 139,
             "consumption": {
                 "electricity": 650,
@@ -78,7 +78,7 @@
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 8700,
+            "price": 22490,
             "productionRate": 165,
             "consumption": {
                 "electricity": 900,
@@ -86,11 +86,11 @@
                 "etain": 150
             },
             "manufacturingQuality": 1.5,
-            "employeesNeeded" : 3
+            "employeesNeeded" : 4
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 10290,
+            "price": 37900,
             "productionRate": 216,
             "consumption": {
                 "electricity": 900,
@@ -98,7 +98,7 @@
                 "etain": 150
             },
             "manufacturingQuality": 2,
-            "employeesNeeded" : 4
+            "employeesNeeded" : 5
         }
     },
     "2": {
@@ -117,7 +117,7 @@
         },
         "2": {
             "constructor": "Droit Ô But",
-            "price": 6007,
+            "price": 9999,
             "productionRate": 143,
             "consumption": {
                 "electricity": 900,
@@ -129,7 +129,7 @@
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 6900,
+            "price": 20900,
             "productionRate": 173,
             "consumption": {
                 "electricity": 900,
@@ -137,11 +137,11 @@
                 "etain": 100
             },
             "manufacturingQuality": 1.5,
-            "employeesNeeded" : 3
+            "employeesNeeded" : 4
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 8980,
+            "price": 31644,
             "productionRate": 208,
             "consumption": {
                 "electricity": 900,
@@ -149,7 +149,7 @@
                 "etain": 150
             },
             "manufacturingQuality": 2,
-            "employeesNeeded" : 4
+            "employeesNeeded" : 6
         }
     },
     "3": {
@@ -168,7 +168,7 @@
         },
         "2": {
             "constructor": "Droit Ô But",
-            "price": 4567,
+            "price": 9800,
             "productionRate": 141,
             "consumption": {
                 "electricity": 900,
@@ -180,7 +180,7 @@
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 9788,
+            "price": 19999,
             "productionRate": 172,
             "consumption": {
                 "electricity": 900,
@@ -188,11 +188,11 @@
                 "etain": 0
             },
             "manufacturingQuality": 1.5,
-            "employeesNeeded" : 3
+            "employeesNeeded" : 4
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 12970,
+            "price": 34800,
             "productionRate": 213,
             "consumption": {
                 "electricity": 900,
@@ -200,7 +200,7 @@
                 "etain": 50
             },
             "manufacturingQuality": 2,
-            "employeesNeeded" : 4
+            "employeesNeeded" : 6
         }
     }
 }
