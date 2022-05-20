@@ -8,7 +8,7 @@ const SustainableDevelopment = require("./SustainableDevelopment");
 const moneyMax = 20000
 const moneyMin = -10000
 const moneyDepart = 10000
-const pcPrice = 800
+const pcPrice = 899.99
 
 module.exports = class Player {
     constructor(name) {
@@ -88,6 +88,10 @@ module.exports = class Player {
     }
 
     getInfo() {
+        this.employeeOptimal();
+        this.productivityUpdate()
+        this.generateIncome();
+        this.generateExpenses();
         return {
             // name: this.name,
             money: this.money,
@@ -147,7 +151,7 @@ module.exports = class Player {
     employeeOptimal() {
         this.employeesNeeded = 0;
         this.machinesBack.forEach(machine => {
-            this.employeesNeeded = machine.employeesNeeded;
+            this.employeesNeeded += machine.employeesNeeded;
         });
     }
 
