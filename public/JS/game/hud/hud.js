@@ -37,14 +37,6 @@ function initChatButton() {
     chat.initListener();
 }
 
-function initShopButton() {
-    shop.initListener();
-}
-
-function deleteChatbutton() {
-    chat.destroyListener();
-}
-
 function openChatModal() {
     chat.openModal();
     sc.closeMenu();
@@ -103,10 +95,6 @@ function setSellOccazCallback(callback) {
     Item.setSellOccazCB(callback);
 }
 
-function closeAllModals() {
-    shop.closeFunction();
-    chat.closeFunction();
-}
 
 function refreshShop(infos, username) {
     ShopItem.refreshContract(infos.furnishers);
@@ -167,7 +155,6 @@ function initShop() {
     HTTP.get(
         "/shopinfo",
         data => {
-            console.log(data);
             let furnishers = data.furnishers;
             let employees = data.employees;
             let machine = data.machines
@@ -181,7 +168,7 @@ function initShop() {
                             descri[j].children[0].innerText = "Prix au kWh : " + furnishers[i].price[j + 1] + "€"
                             break;
                         case 1:
-                            descri[j].children[0].innerText = "Prix au dm/3 : " + furnishers[i].price[j + 1] + "€"
+                            descri[j].children[0].innerText = "Prix au m3 : " + furnishers[i].price[j + 1] + "€"
                             break;
                         case 2:
                             descri[j].children[0].innerText = furnishers[i].price[j + 1] + "€ par carton"
@@ -201,33 +188,33 @@ function initShop() {
                 descri.children[0].innerText = "Salaire minimum : " + employees.salaries[employees.categories[i]].min
                 descri.children[1].innerText = "Salaire maximum : " + employees.salaries[employees.categories[i]].max
             }
-
+            console.log(machine)
             // machines
-            let lesPhrases = ["Prix : ", "Consommation : ", "Nombre de mainteneurs recommande : ", "Nombre d'ingenieur recommande : "]
             for (let i = 0; i < 4; i++) {
                 let descri = document.querySelectorAll("." + itemId[machine[i][i + 1].constructor] + " .item-description");
                 for (let j = 0; j < 4; j++) {
-                    for (let k = 0; k < lesPhrases.length; k++) {
-                        let mach;
+                    for (let k = 0; k < 4; k++) {
+                        let elem = document.createElement("p")
                         switch (k) {
                             case 0:
-                                mach = machine[j][i + 1].price;
+                                elem.innerText = "Prix : " + machine[j][i + 1].price + " €"
+                                descri[j].prepend(elem)
                                 break;
                             case 1:
-                                mach = machine[j][i + 1].consumption;
+                                elem.innerHTML = "Consommation : " + machine[j][i + 1].consumption.electricity + " kWh | " + machine[j][i + 1].consumption.water + " m3 | " + machine[j][i + 1].consumption.etain + " bobines"
+                                descri[j].prepend(elem)
                                 break;
                             case 2:
-                                mach = machine[j][i + 1].maintainersRequested;
+                                elem.innerText = "Mainteneurs recommandes : " + machine[j][i + 1].maintainersRequested
+                                descri[j].prepend(elem)
                                 break;
                             case 3:
-                                mach = machine[j][i + 1].engineersRequested;
+                                elem.innerText = "Ingenieurs recommandes : " + machine[j][i + 1].engineersRequested
+                                descri[j].prepend(elem)
                                 break;
                             default:
                                 break;
                         }
-                        let elem = document.createElement("p")
-                        elem.innerText = lesPhrases[k] + mach
-                        descri[j].prepend(elem)
                     }
                 }
             }
@@ -237,17 +224,23 @@ function initShop() {
     );
 }
 
+function actuTabBord(infos){
+    document.getElementById('prev-expe').innerText=infos.expenses;
+    document.getElementById('prev-income').innerText=infos.income;
+    document.getElementById('nb-employee').innerText= infos.employees;
+    document.getElementById('actual-elec').innerText=infos.consumption.electricity;
+    document.getElementById('actual-water').innerText = infos.consumption.water;
+    document.getElementById('actual-etain').innerText = infos.consumption.etain;
+    document.getElementById('actual-card').innerText = infos.productionRate;
+}
+
 export default {
-    initShopButton,
     initChatButton,
-    deleteChatbutton,
 
     openChatModal,
     openShopModal,
     closeShopModal,
-    closeAllModals,
     initShop,
-
     openResultsModal,
     closeResultModal,
     isResultOpen,
@@ -256,6 +249,7 @@ export default {
     refreshHud,
     updateOnPurchase,
     openSpecificMachine,
+    actuTabBord,
 
     updateEcologicBar,
     updateEconomicBar,

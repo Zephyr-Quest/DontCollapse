@@ -13,36 +13,54 @@ let rightBtn = document.querySelectorAll('#right-page button')
 function initListener(id) {
     closeAllListener();
 
-    // if the occasion is not selected
-    for (let i = id[0]; i <= id[1]; i++) {
-        if (!leftPage[i].hasAttribute("disable")) {
+    if (id[0] < 18) {
+        for (let i = id[0]; i <= id[1]; i++) {
             leftPage[i].addEventListener('mouseenter', toggleDescri);
             leftPage[i].addEventListener('mouseleave', toggleDescri);
-        }
-        if (!rightPage[i].hasAttribute("disable")) {
             rightPage[i].addEventListener('mouseenter', toggleDescri);
             rightPage[i].addEventListener('mouseleave', toggleDescri);
         }
+    } else {
+        for (let i = id[0]; i <= id[1]; i++) {
+
+            if (!leftPage[i].hasAttribute("disable")) {
+                leftPage[i].addEventListener('mouseenter', toggleDescri);
+                leftPage[i].addEventListener('mouseleave', toggleDescri);
+            }
+            if (!rightPage[i].hasAttribute("disable")) {
+                rightPage[i].addEventListener('mouseenter', toggleDescri);
+                rightPage[i].addEventListener('mouseleave', toggleDescri);
+            }
+        }
     }
+
     if (id[0] < 8) {
         for (let i = id[0]; i <= id[1]; i++) {
-            leftBtn[i].addEventListener('click', buyContract);
-            rightBtn[i].addEventListener('click', buyContract);
+            if (!leftPage[i].hasAttribute("disable"))
+                leftBtn[i].addEventListener('click', buyContract);
+            if (!rightPage[i].hasAttribute("disable"))
+                rightBtn[i].addEventListener('click', buyContract);
         }
     } else if (id[0] < 10) {
         for (let i = id[0]; i <= id[1]; i++) {
-            leftBtn[i].addEventListener('click', buyPerso);
-            rightBtn[i].addEventListener('click', buyPerso);
+            if (!leftPage[i].hasAttribute("disable"))
+                leftBtn[i].addEventListener('click', buyPerso);
+            if (!rightPage[i].hasAttribute("disable"))
+                rightBtn[i].addEventListener('click', buyPerso);
         }
     } else if (id[0] < 18) {
         for (let i = id[0]; i <= id[1]; i++) {
-            leftBtn[i].addEventListener('click', buyMachine);
-            rightBtn[i].addEventListener('click', buyMachine);
+            if (!leftPage[i].hasAttribute("disable"))
+                leftBtn[i].addEventListener('click', buyMachine);
+            if (!rightPage[i].hasAttribute("disable"))
+                rightBtn[i].addEventListener('click', buyMachine);
         }
     } else if (id[0] < 20) {
         for (let i = id[0]; i <= id[1]; i++) {
-            leftBtn[i].addEventListener('click', buyOccaz);
-            rightBtn[i].addEventListener('click', buyOccaz);
+            if (!leftPage[i].hasAttribute("disable"))
+                leftBtn[i].addEventListener('click', buyOccaz);
+            if (!rightPage[i].hasAttribute("disable"))
+                rightBtn[i].addEventListener('click', buyOccaz);
         }
     } else console.warn('ERROR');
 }
@@ -55,11 +73,12 @@ function initListener(id) {
 function toggleDescri(e) {
     for (const child of e.target.children) {
         if (child.style.display === "none") {
-            child.style.display = "flex";
+            if (!child.hasAttribute('disable')) child.style.display = "block";
         } else {
-            child.style.display = "none";
+            if (!child.hasAttribute('disable')) child.style.display = "none";
         }
     }
+
 }
 
 
@@ -76,11 +95,11 @@ function buyPerso(e) {
 }
 
 function buyMachine(e) {
-    Buy.buyItem(e.target.parentElement.parentElement, 2);
+    Buy.buyItem(e.target.parentElement, 2);
 }
 
 function buyOccaz(e) {
-    Buy.buyItem(e.target.parentElement.parentElement, 3);
+    Buy.buyItem(e.target.parentElement, 3);
 }
 
 
@@ -166,22 +185,33 @@ function refreshContract(infos) {
         for (let i = 0; i < supplier.length - 1; i++) {
             if (supplier[i + 1].hasAttribute('disable')) supplier[i + 1].removeAttribute('disable');
         }
-        document.getElementsByClassName(infos[i])[i].setAttribute('disable', '');
+        let elem = document.getElementsByClassName(infos[i])[i]
+        elem.setAttribute('disable', '');
+        elem.querySelector('.buy-button').setAttribute('disable', '')
     }
 
 }
 
 function refreshMachine(infos) {
+    let elem;
     for (let i = 0; i < infos.length; i++) {
         switch (infos[i].level) {
             case 4:
-                document.getElementsByClassName('tesla')[i + 1].setAttribute('disable', '');
+                elem = document.getElementsByClassName('tesla')[i + 1]
+                elem.setAttribute('disable', '');
+                elem.querySelector('.buy-button').setAttribute('disable', '')
             case 3:
-                document.getElementsByClassName('braz')[i + 1].setAttribute('disable', '');
+                elem = document.getElementsByClassName('braz')[i + 1]
+                elem.setAttribute('disable', '');
+                elem.querySelector('.buy-button').setAttribute('disable', '')
             case 2:
-                document.getElementsByClassName('droit')[i + 1].setAttribute('disable', '');
+                elem = document.getElementsByClassName('droit')[i + 1]
+                elem.setAttribute('disable', '');
+                elem.querySelector('.buy-button').setAttribute('disable', '')
             case 1:
-                document.getElementsByClassName('manix')[i + 1].setAttribute('disable', '');
+                elem = document.getElementsByClassName('manix')[i + 1]
+                elem.setAttribute('disable', '');
+                elem.querySelector('.buy-button').setAttribute('disable', '')
             default:
                 break;
 
@@ -201,18 +231,19 @@ function refreshOccaz(infos, username) {
         let elem = occaz[i + 1];
         if (infos[i]) {
             if (infos[i].player === username) {
-                elem.children[0].innerHTML = "Vous vendez un " + item[infos[i].machine];
-                elem.children[1].innerHTML = "de niveau " + infos[i].level + ",<br>" + infos[i].price + "€";
+                elem.children[0].children[0].innerHTML = "Vous vendez un " + item[infos[i].machine];
+                elem.children[0].children[1].innerHTML = "de niveau " + infos[i].level + ",<br>" + infos[i].price + "€";
             } else {
                 elem.removeAttribute('disable');
-                elem.children[0].innerHTML = item[infos[i].machine] + " de niveau " + infos[i].level;
-                elem.children[1].innerHTML = "a vendre";
-                elem.children[2].innerHTML = "Vendu par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
+                elem.children[0].children[0].innerHTML = item[infos[i].machine];
+                elem.children[0].children[1].innerHTML = "de niveau " + infos[i].level;
+                elem.children[0].children[2].innerHTML = "a vendre";
+                elem.children[1].innerHTML = "Vendu par <span class='sellUsername'>" + infos[i].player + "</span>, " + infos[i].price + "€";
             }
         } else {
             elem.setAttribute('disable', '');
-            elem.children[0].innerHTML = "Rien n'est a vendre";
-            elem.children[1].innerText = "pour le moment";
+            elem.children[0].children[0].innerHTML = "Rien n'est a vendre";
+            elem.children[0].children[1].innerText = "pour le moment";
         }
     }
 

@@ -216,21 +216,25 @@ body h1 {
   position: relative;
   z-index: 15;
 }
+.margin_righttt {
+  margin-left: 50px;
+}
 #top {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   position: relative;
   z-index: 15;
-  width: 80%;
+  width: fit-content;
   margin-left: 10%;
+  margin: 0 auto 0 auto;
 }
 #top .containers {
   width: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  margin-left: 50%;
+  margin-left: calc(50% - 0px);
   transform: translateX(-50%);
   text-align: center;
 }
@@ -262,7 +266,6 @@ body h1 {
   border: solid #ff0000 2px;
   height: 30px;
   width: 400px;
-  margin-right: 20px;
   border-radius: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -1018,6 +1021,49 @@ body h1 {
   font-family: "Koulen";
   font-size: 1.5rem;
 }
-#main_board .main_content div p {
+#main_board .main_content div p,
+#main_board .main_content div table tr td {
+  color: white;
+  text-align: left;
+}
+#main_board .main_content div .txt_align_center {
+  text-align: center;
+  padding: 0 10px 0 0 ;
+}
+#main_board_tuto {
+  background-color: rgba(0, 0, 0, 0.466);
+  border: white 2px solid;
+  border-radius: 10px;
+  width: 356px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  padding: 0 20px;
+  margin-top: 90px;
+  margin-left: auto;
+  right: 0;
+}
+#main_board_tuto:hover {
+  cursor: pointer;
+}
+#main_board_tuto:hover .main_content {
+  display: flex;
+}
+#main_board_tuto h1 {
+  font-family: "Koulen";
+  font-size: 1.5rem;
+  color: #f5dba6;
+}
+#main_board_tuto .main_content {
+  width: 100%;
+  display: none;
+  flex-direction: column;
+}
+#main_board_tuto .main_content div h2 {
+  color: white;
+  font-family: "Koulen";
+  font-size: 1.5rem;
+}
+#main_board_tuto .main_content div p {
   color: white;
 }
