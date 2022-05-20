@@ -359,7 +359,7 @@ module.exports = class Player {
         if (this.money < -10000 || this.sd.isLost()) {
 
             this.inGame = false;
-            return this.inGame;
+            return true;
         }
     }
 
