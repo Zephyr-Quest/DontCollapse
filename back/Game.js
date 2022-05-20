@@ -116,17 +116,19 @@ module.exports = class Game {
             player.machines.forEach(machine => {
                 playerLevel += machine.level;
             });
-            machineLevel.push({name : player.name, level : playerLevel});
+            machineLevel.push({
+                name: player.name,
+                level: playerLevel
+            });
         });
         let winner;
         let winnerLevel = 0;
         machineLevel.forEach(element => {
-            if (element.level > winnerLevel) {
+            if (element.level == winnerLevel && this.searchPlayer(winner).sd.moyenne() != this.searchPlayer(element.name).sd.moyenne()) {
+                winner = this.searchPlayer(winner).sd.moyenne() < this.searchPlayer(element.name).sd.moyenne() ? element.name : winner;
+            } else if (element.level > winnerLevel) {
                 winnerLevel = element.level;
                 winner = element.name;
-            }
-            else if (element.level == winnerLevel && this.searchPlayer(winner).sd.moyenne() != this.searchPlayer(element.name).sd.moyenne()) {
-                winner = this.searchPlayer(winner).sd.moyenne() < this.searchPlayer(element.name).sd.moyenne() ? element.name : winner;
             } else {
                 winner = this.searchPlayer(winner).money < this.searchPlayer(element.name).money ? element.name : winner;
             }

@@ -84,7 +84,7 @@ module.exports = class Player {
      * @returns if the player has enough money
      */
     asEnoughMoney(amount) {
-        return this.money >= amount;
+        return this.money + 10000 >= amount;
     }
 
     getInfo() {
@@ -94,7 +94,7 @@ module.exports = class Player {
         this.generateExpenses();
         this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.employees)
         return {
-            barres:this.sd,
+            barres: this.sd,
             money: this.money,
             manufacturingQuality: this.manufacturingQuality,
             expenses: this.expenses,
@@ -291,8 +291,6 @@ module.exports = class Player {
         expenses += this.electricityExpenses() + this.waterExpenses() + this.boxExpenses() + this.etainExpenses();
         expenses += this.employees.fees;
         this.expenses = this.aroundNumber(expenses);
-        console.log("pmazoduchbcaepid" + this.expenses)
-
     }
 
     isFinished() {

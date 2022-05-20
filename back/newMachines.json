@@ -27,8 +27,8 @@
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 17900,
-            "productionRate": 168,
+            "price": 19900,
+            "productionRate": 178,
             "consumption": {
                 "electricity": 600,
                 "water": 0,
@@ -39,7 +39,7 @@
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 34200,
+            "price": 28200,
             "productionRate": 217,
             "consumption": {
                 "electricity": 900,
@@ -78,8 +78,8 @@
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 22490,
-            "productionRate": 165,
+            "price": 25490,
+            "productionRate": 175,
             "consumption": {
                 "electricity": 900,
                 "water": 100,
@@ -90,7 +90,7 @@
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 37900,
+            "price": 34900,
             "productionRate": 216,
             "consumption": {
                 "electricity": 900,
@@ -129,8 +129,8 @@
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 20900,
-            "productionRate": 173,
+            "price": 22900,
+            "productionRate": 183,
             "consumption": {
                 "electricity": 900,
                 "water": 150,
@@ -141,7 +141,7 @@
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 31644,
+            "price": 27644,
             "productionRate": 208,
             "consumption": {
                 "electricity": 900,
@@ -180,8 +180,8 @@
         },
         "3": {
             "constructor": "Braz'Air'Eau",
-            "price": 19999,
-            "productionRate": 172,
+            "price": 20999,
+            "productionRate": 182,
             "consumption": {
                 "electricity": 900,
                 "water": 100,
@@ -192,7 +192,7 @@
         },
         "4": {
             "constructor": "Teslassemblage",
-            "price": 34800,
+            "price": 30800,
             "productionRate": 213,
             "consumption": {
                 "electricity": 900,

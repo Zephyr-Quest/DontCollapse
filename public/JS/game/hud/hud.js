@@ -194,7 +194,7 @@ function initShop() {
             for (let i = 0; i < 4; i++) {
                 let descri = document.querySelectorAll("." + itemId[machine[i][i + 1].constructor] + " .item-description");
                 for (let j = 0; j < 4; j++) {
-                    for (let k = 0; k < 3; k++) {
+                    for (let k = 0; k < 4; k++) {
                         let elem = document.createElement("p")
                         switch (k) {
                             case 0:
@@ -206,6 +206,11 @@ function initShop() {
                                 descri[j].prepend(elem)
                                 break;
                             case 2:
+                                elem.innerHTML = "Vitesse de production : " + machine[j][i + 1].productionRate
+                                descri[j].prepend(elem)
+
+                                break;
+                            case 3:
                                 elem.innerText = "Personnels reccomandes : " + machine[j][i + 1].employeesNeeded
                                 descri[j].prepend(elem)
                                 break;
