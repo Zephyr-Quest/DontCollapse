@@ -65,12 +65,14 @@ module.exports = class Player {
         // init
         //! Vérifier l'ordre de tout ça
         this.machineInitialisation();
+        this.employeeInit();
+        this.employeeOptimal();
         this.productivityUpdate();
         this.generateExpenses();
         this.generateIncome();
-        this.employeeInit();
-        this.employeeOptimal();
-        this.sdUpdate();
+        console.log("Expenses :" + this.expenses)
+        console.log("Income :" + this.income)
+        this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.maintainersNeeded, this.engineersNeeded, this.employees)
     }
 
     /* -------------------------------------------------------------------------- */
@@ -100,45 +102,6 @@ module.exports = class Player {
         }
     }
 
-    /**
-     * update SD factor
-     */
-    //! ça c'est dégueu
-    sdUpdate() {
-        //! À CHANGER DE FICHIER !!!
-        // ÉCOLOGIC
-        let ecologic = 0;
-        this.machinesBack.forEach(machine => {
-            ecologic += 2.5 * machine.level;
-            ecologic += machine.secondHand || machine.level == 4 ? 5 : 0;
-        });
-        //furnisher
-        this.furnishers.forEach(furnisher => {
-            ecologic += 2.5 * furnisher;
-        });
-
-        // ECONOMIC
-        let economic = 0;
-        if (this.money >= -10000) {
-            let first_criteria = (this.money / 200) + 50;
-            if (first_criteria > 100) first_criteria = 100
-            if (first_criteria < 0) first_criteria = 0
-            let second_criteria = this.income / this.expenses;
-            economic = first_criteria * second_criteria ^ 3;
-        }
-
-        // SOCIAL
-        let social = 0;
-        this.employeeOptimal();
-        let employeesNeeded = this.maintainersNeeded + this.engineersNeeded;
-        let employeesNumber = this.employees.engineers.length + this.employees.maintainers.length;
-        social = (employeesNumber / employeesNeeded) * ((this.employees.supervisors.length + this.employees.cleaners.length) / 6) * 100
-
-        //! à quoi il sert ? TOTALEMENT DÉBILE 
-        this.sd.updateOverall(economic, ecologic, social);
-
-    }
-
     aroundNumber(number) {
         return Math.floor(number * 100) / 100;
     }
@@ -154,8 +117,6 @@ module.exports = class Player {
     machineInitialisation() {
         for (let type = 0; type < 4; type++) this.machinesBack[type] = new Machine(type, 1);
         this.productivityUpdate();
-        //! Return utile ? 
-        return true;
     }
 
     /**
@@ -171,7 +132,7 @@ module.exports = class Player {
             delete this.machinesBack[machineType]; // We delete the old instance of the machine
             this.machinesBack[machineType] = new Machine(machineType, machineLevel); // Creating the new machine
             this.money -= this.machinesBack[machineType].price;
-            this.sdUpdate();
+            this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.maintainersNeeded, this.engineersNeeded, this.employees);
             this.productivityUpdate();
             this.employeeOptimal();
 
@@ -185,7 +146,6 @@ module.exports = class Player {
         return false;
     }
 
-    //! Rename function
     employeeOptimal() {
         this.engineersNeeded = 0;
         this.maintainersNeeded = 0;
@@ -202,7 +162,7 @@ module.exports = class Player {
             delete this.machinesBack[machineType]; // We delete the old instance of the machine
             this.machinesBack[machineType] = new Machine(machineType, machineLevel); // Creating the new machine
             this.money -= price;
-            this.sdUpdate();
+            this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.maintainersNeeded, this.engineersNeeded, this.employees);
 
             // ! À supprimer une fois les contrôles effectués
             this.machines[machineType].level = machineLevel;
@@ -250,7 +210,6 @@ module.exports = class Player {
     /* -------------------------------------------------------------------------- */
 
     employeeInit() {
-        //! Name ?
         employees.categories.forEach(employee => {
             this.recruteEmployee(employee);
         });
@@ -265,14 +224,11 @@ module.exports = class Player {
     }
 
     recruteEmployee(categorie) {
-        //! Name à dégager
-        let name = employees["name"][Math.floor(Math.random() * employees["name"].length)];
         let salary = Math.floor(Math.random() * (employees["salaries"][categorie].max - employees["salaries"][categorie].min + 1) + employees["salaries"][categorie].min);
         Math.floor(Math.random() * (employees["salaries"][categorie].max - employees["salaries"][categorie].min + 1) + employees["salaries"][categorie].min);
-        this.employees[categorie].push(new Employee(name, salary));
+        this.employees[categorie].push(new Employee(salary));
         ++this.employees.number;
         this.employees.fees += salary;
-        //! Return useless
         return true;
     }
 
@@ -280,26 +236,33 @@ module.exports = class Player {
     /*                              Update functions                              */
     /* -------------------------------------------------------------------------- */
 
-    //! à revoir les calculs
     productivityUpdate() {
         this.consumption = {
             "electricity": 0,
             "water": 0,
             "etain": 0
         };
-        //! ???
+
+
         this.productionRate = Infinity;
-        this.manufacturingQuality = 0;
+        // this.manufacturingQuality = 0;
         this.machinesBack.forEach(machine => {
             this.productionRate = Math.min(machine.productionRate, this.productionRate);
-            this.manufacturingQuality += machine.manufacturingQuality;
+
+
+            // this.manufacturingQuality += machine.manufacturingQuality;
             this.consumption.electricity += machine.consumption.electricity;
             this.consumption.water += machine.consumption.water;
             this.consumption.etain += machine.consumption.etain;
         });
 
-        //! Utile ???? Moyenne bizarre
-        this.manufacturingQuality /= 4;
+        let ratioEmployee = (this.employees.engineers.length + this.employees.maintainers.length) / (this.engineersNeeded + this.maintainersNeeded)
+        if (ratioEmployee > 1) ratioEmployee = 1
+        if (ratioEmployee < 0) ratioEmployee = 0
+        this.productionRate *= ratioEmployee;
+        this.productionRate = Math.floor(this.productionRate)
+
+        // this.manufacturingQuality /= 4;
     }
 
     electricityExpenses() {
@@ -311,7 +274,6 @@ module.exports = class Player {
     }
 
     boxExpenses() {
-        //! On a changé le 2 à droite
         return (this.productionRate) * furnishers[2].price[this.furnishers[2]];
     }
 
@@ -319,51 +281,53 @@ module.exports = class Player {
         return this.consumption.etain * furnishers[3].price[this.furnishers[3]];
     }
 
-    //! À revoir parce que Max dit que ça va pas
     generateIncome() {
         let income = this.productionRate * pcPrice;
         this.income = this.aroundNumber(income);
     }
 
-    //! Pareil (maxime est chonchon)
     generateExpenses() {
         let expenses = 0;
         expenses += this.electricityExpenses() + this.waterExpenses() + this.boxExpenses() + this.etainExpenses();
         expenses += this.employees.fees;
         this.expenses = this.aroundNumber(expenses);
+        console.log("pmazoduchbcaepid" + this.expenses)
+
     }
 
     isFinished() {
-        let machineFinished = Infinity;
         this.machinesBack.forEach(machine => {
-            machineFinished = Math.min(machine.level, machineFinished);
+            if (machine.level != 4) return false
         });
 
-        return machineFinished === 4 && this.sd.isFinished();
+        return this.money >= 0 && this.sd.isFinished();
     }
 
-    //! REVOIR LES CONDITIONS DE FIN
     isLost() {
         if (this.money < moneyMin || this.sd.isLost()) {
-
             this.inGame = false;
             return true;
         }
     }
 
-    //! À check (Maxime dit qu'il fonctionne à moitié => à revoir)
-    // On part du contructeur et de cette fonction, on se dit ce qu'on veut et on developpe
-    //! PRODUCTION RATE PAS BON
     updateAll(event) {
+        // Vérifier contrats
+        // Employees
+        // Productivité
+        // Income expenses
+        // Money
+        // ODD
+
+        // EVENT ?
+
         this.employeeOptimal();
+        this.productivityUpdate()
         this.generateIncome();
         this.generateExpenses();
-        // Expenses
         this.applyEvent(event);
-        this.money -= this.expenses;
-        this.money += this.income;
+        this.money += this.income - this.expenses;
         this.money = this.aroundNumber(this.money);
-        this.sdUpdate();
+        this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.maintainersNeeded, this.engineersNeeded, this.employees)
         return {
             moula: this.money,
             barres: this.sd

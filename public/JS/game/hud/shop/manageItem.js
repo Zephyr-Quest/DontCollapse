@@ -42,7 +42,7 @@ function buyItem(divOfItem, type) {
     let itemName = divOfItem.children[0].children[0].innerText; // set the item name
     console.log(itemName);
 
-    document.getElementById('buying').innerText = "Achat de : " + itemName // + ", " + divOfItem.children[0].children[1].innerText; // replace modal text
+    document.getElementById('buying').innerText = "Achat de : " + itemName;
     if (divOfItem.children[0].children[1]) document.getElementById('buying').innerText += ", " + divOfItem.children[0].children[1].innerText;
     confirmModal.openModal(); // open confirm modal
     initListener();
