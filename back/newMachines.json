@@ -11,8 +11,7 @@
                 "etain": 1
             },
             "manufacturingQuality": 1,
-            "maintainersRequested": 0,
-            "engineersRequested": 1
+            "employeesNeeded" : 1
         },
         "2": {
             "constructor": "Droit Ô But",
@@ -24,8 +23,7 @@
                 "etain": 1
             },
             "manufacturingQuality": 1.25,
-            "maintainersRequested": 4,
-            "engineersRequested": 2
+            "employeesNeeded" : 2
         },
         "3": {
             "constructor": "Braz'Air'Eau",
@@ -37,8 +35,7 @@
                 "etain": 2
             },
             "manufacturingQuality": 1.5,
-            "maintainersRequested": 8,
-            "engineersRequested": 3
+            "employeesNeeded" : 3
         },
         "4": {
             "constructor": "Teslassemblage",
@@ -50,8 +47,7 @@
                 "etain": 2
             },
             "manufacturingQuality": 2,
-            "maintainersRequested": 8,
-            "engineersRequested": 4
+            "employeesNeeded" : 4
         }
     },
     "1": {
@@ -66,8 +62,7 @@
                 "etain": 2
             },
             "manufacturingQuality": 1,
-            "maintainersRequested": 2,
-            "engineersRequested": 1
+            "employeesNeeded" : 1
         },
         "2": {
             "constructor": "Droit Ô But",
@@ -79,8 +74,7 @@
                 "etain": 2
             },
             "manufacturingQuality": 1.25,
-            "maintainersRequested": 4,
-            "engineersRequested": 2
+            "employeesNeeded" : 2
         },
         "3": {
             "constructor": "Braz'Air'Eau",
@@ -92,8 +86,7 @@
                 "etain": 3
             },
             "manufacturingQuality": 1.5,
-            "maintainersRequested": 8,
-            "engineersRequested": 3
+            "employeesNeeded" : 3
         },
         "4": {
             "constructor": "Teslassemblage",
@@ -105,8 +98,7 @@
                 "etain": 3
             },
             "manufacturingQuality": 2,
-            "maintainersRequested": 8,
-            "engineersRequested": 4
+            "employeesNeeded" : 4
         }
     },
     "2": {
@@ -121,8 +113,7 @@
                 "etain": 1
             },
             "manufacturingQuality": 1,
-            "maintainersRequested": 2,
-            "engineersRequested": 1
+            "employeesNeeded" : 1
         },
         "2": {
             "constructor": "Droit Ô But",
@@ -134,8 +125,7 @@
                 "etain": 1
             },
             "manufacturingQuality": 1.25,
-            "maintainersRequested": 4,
-            "engineersRequested": 2
+            "employeesNeeded" : 2
         },
         "3": {
             "constructor": "Braz'Air'Eau",
@@ -147,8 +137,7 @@
                 "etain": 2
             },
             "manufacturingQuality": 1.5,
-            "maintainersRequested": 8,
-            "engineersRequested": 3
+            "employeesNeeded" : 24
         },
         "4": {
             "constructor": "Teslassemblage",
@@ -160,8 +149,7 @@
                 "etain": 3
             },
             "manufacturingQuality": 2,
-            "maintainersRequested": 8,
-            "engineersRequested": 4
+            "employeesNeeded" : 4
         }
     },
     "3": {
@@ -176,8 +164,7 @@
                 "etain": 0
             },
             "manufacturingQuality": 1,
-            "maintainersRequested": 2,
-            "engineersRequested": 1
+            "employeesNeeded" : 1
         },
         "2": {
             "constructor": "Droit Ô But",
@@ -189,8 +176,7 @@
                 "etain": 0
             },
             "manufacturingQuality": 1.25,
-            "maintainersRequested": 4,
-            "engineersRequested": 2
+            "employeesNeeded" : 2
         },
         "3": {
             "constructor": "Braz'Air'Eau",
@@ -202,8 +188,7 @@
                 "etain": 0
             },
             "manufacturingQuality": 1.5,
-            "maintainersRequested": 8,
-            "engineersRequested": 3
+            "employeesNeeded" : 3
         },
         "4": {
             "constructor": "Teslassemblage",
@@ -215,8 +200,7 @@
                 "etain": 1
             },
             "manufacturingQuality": 2,
-            "maintainersRequested": 8,
-            "engineersRequested": 4
+            "employeesNeeded" : 4
         }
     }
 }

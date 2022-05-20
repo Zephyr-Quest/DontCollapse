@@ -59,8 +59,7 @@ module.exports = class Player {
         this.productionRate = Infinity;
 
         //! Optimal
-        this.maintainersNeeded = 0;
-        this.engineersNeeded = 0;
+        this.employeesNeeded = 0;
 
         // init
         //! Vérifier l'ordre de tout ça
@@ -72,7 +71,7 @@ module.exports = class Player {
         this.generateIncome();
         console.log("Expenses :" + this.expenses)
         console.log("Income :" + this.income)
-        this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.maintainersNeeded, this.engineersNeeded, this.employees)
+        this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.employees)
     }
 
     /* -------------------------------------------------------------------------- */
@@ -97,7 +96,7 @@ module.exports = class Player {
             income: this.income,
             consumption: this.consumption,
             productionRate: this.productionRate,
-            employeesNeeded: this.maintainersNeeded + this.engineersNeeded,
+            employeesNeeded: this.employeesNeeded,
             employees: this.employees.number
         }
     }
@@ -132,7 +131,7 @@ module.exports = class Player {
             delete this.machinesBack[machineType]; // We delete the old instance of the machine
             this.machinesBack[machineType] = new Machine(machineType, machineLevel); // Creating the new machine
             this.money -= this.machinesBack[machineType].price;
-            this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.maintainersNeeded, this.engineersNeeded, this.employees);
+            this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.employees);
             this.productivityUpdate();
             this.employeeOptimal();
 
@@ -141,17 +140,14 @@ module.exports = class Player {
             this.machines[machineType].secondHand = false;
 
             return true;
-
         }
         return false;
     }
 
     employeeOptimal() {
-        this.engineersNeeded = 0;
-        this.maintainersNeeded = 0;
+        this.employeesNeeded = 0;
         this.machinesBack.forEach(machine => {
-            this.maintainersNeeded += machine.maintainersRequested;
-            this.engineersNeeded += machine.engineersRequested;
+            this.employeesNeeded = machine.employeesNeeded;
         });
     }
 
@@ -162,14 +158,13 @@ module.exports = class Player {
             delete this.machinesBack[machineType]; // We delete the old instance of the machine
             this.machinesBack[machineType] = new Machine(machineType, machineLevel); // Creating the new machine
             this.money -= price;
-            this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.maintainersNeeded, this.engineersNeeded, this.employees);
+            this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.employees);
 
             // ! À supprimer une fois les contrôles effectués
             this.machines[machineType].level = machineLevel;
             this.machines[machineType].secondHand = true;
 
             return true;
-
         }
         return false;
     }
@@ -256,7 +251,7 @@ module.exports = class Player {
             this.consumption.etain += machine.consumption.etain;
         });
 
-        let ratioEmployee = (this.employees.engineers.length + this.employees.maintainers.length) / (this.engineersNeeded + this.maintainersNeeded)
+        let ratioEmployee = (this.employees.number) / (this.employeesNeeded)
         if (ratioEmployee > 1) ratioEmployee = 1
         if (ratioEmployee < 0) ratioEmployee = 0
         this.productionRate *= ratioEmployee;
@@ -327,7 +322,7 @@ module.exports = class Player {
         this.applyEvent(event);
         this.money += this.income - this.expenses;
         this.money = this.aroundNumber(this.money);
-        this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.maintainersNeeded, this.engineersNeeded, this.employees)
+        this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.employees)
         return {
             moula: this.money,
             barres: this.sd

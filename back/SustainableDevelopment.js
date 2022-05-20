@@ -25,7 +25,7 @@ module.exports = class SustainableDevelopment {
     /**
      * update SD factor
      */
-    updateODD(machinesBack, furnishers, money, income, expenses, maintainersNeeded, engineersNeeded, employees) {
+    updateODD(machinesBack, furnishers, money, income, expenses, employees) {
         // ÉCOLOGIC
         let ecologic = 0;
         machinesBack.forEach(machine => {
@@ -40,7 +40,7 @@ module.exports = class SustainableDevelopment {
         // ECONOMIC
         let economic = 0;
         if (money >= -10000) {
-            let first_criteria = (money / 300) + 10/3;
+            let first_criteria = (money / 300) + 10 / 3;
             if (first_criteria > 100) first_criteria = 100
             if (first_criteria < 0) first_criteria = 0
             let second_criteria = income / expenses;
@@ -49,9 +49,16 @@ module.exports = class SustainableDevelopment {
 
         // SOCIAL
         let social = 0;
-        let employeesNeeded = maintainersNeeded + engineersNeeded;
-        let employeesNumber = employees.engineers.length + employees.maintainers.length;
-        social = (employeesNumber / employeesNeeded) * ((employees.supervisors.length + employees.cleaners.length) / 6) * 100
+        let maintainers = employees.maintainers.length / employees.number;
+        let inge = employees.engineers.length / employees.number;
+        let cleaners = employees.cleaners.length / employees.number;
+        let supervisors = employees.supervisors.length / employees.number;
+
+        let diff = Math.abs(supervisors - cleaners);
+        diff = Math.abs(diff - inge);
+        diff = Math.abs(diff - maintainers);
+
+        social = 100 - (diff * 100 * 1.9);
 
         this.roundODD(economic, ecologic, social);
 
