@@ -11,6 +11,7 @@ let stopChrono = true;
  * decrement chrono
  */
 function descendLeChronoMonAmi() {
+    if(stopChrono)return
     // decrement seconds
     chronoSeconds--;
 
@@ -33,7 +34,7 @@ function descendLeChronoMonAmi() {
  * @param {Number} seconds The timestamp seconds
  */
 function startChronoFrom(minutes, seconds) {
-    if (typeof minutes !== 'number' || minutes < 0 || minutes > 99)
+    if (typeof minutes !== 'number' || minutes < 0 || minutes > 59)
         return;
     if (typeof seconds !== 'number' || seconds < 0 || seconds > 59)
         return;
@@ -61,7 +62,6 @@ function updateChronoHUD() {
  * Stop the chrono
  */
 function stopChronoo() {
-    startChronoFrom(0,0);
     stopChrono = true;
 }
 

@@ -40,7 +40,7 @@ module.exports = class SustainableDevelopment {
         // ECONOMIC
         let economic = 0;
         if (money >= -10000) {
-            let first_criteria = (money / 300) + 10 / 3;
+            let first_criteria = (money / 700) + 100 / 7;
             if (first_criteria > 100) first_criteria = 100
             if (first_criteria < 0) first_criteria = 0
             let second_criteria = income / expenses;
@@ -49,10 +49,10 @@ module.exports = class SustainableDevelopment {
 
         // SOCIAL
         let social = 0;
-        let maintainers = employees.maintainers.length / employees.number;
-        let inge = employees.engineers.length / employees.number;
-        let cleaners = employees.cleaners.length / employees.number;
-        let supervisors = employees.supervisors.length / employees.number;
+        let maintainers = Math.min(1, employees.maintainers.length / employees.number);
+        let inge = Math.min(1, employees.engineers.length / employees.number);
+        let cleaners = Math.min(1, employees.cleaners.length / employees.number);
+        let supervisors = Math.min(1, employees.supervisors.length / employees.number);
 
         let diff = Math.abs(supervisors - cleaners);
         diff = Math.abs(diff - inge);

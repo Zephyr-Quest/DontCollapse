@@ -5,7 +5,7 @@ const Employee = require("./Employee");
 const Machine = require("./Machine");
 const SustainableDevelopment = require("./SustainableDevelopment");
 
-const moneyMax = 20000
+const moneyMax = 60000
 const moneyMin = -10000
 const moneyDepart = 10000
 const pcPrice = 899.99
