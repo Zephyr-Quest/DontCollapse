@@ -102,8 +102,21 @@
                         <p><span id="prev-income"></span>€</p><br>
                     </div>
                     <div>
-                        <h2>> Nombre d'employes :</h2>
-                        <p id="nb-employee"></p><br>
+                        <h2>> Nombre d'employes : <span id="nb-employee"></span></h2>
+                        <table>
+                            <tr>
+                                <td>Mainteneur(s) embauché(s) : <strong><span id="actual-maint"></span></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Technicien(s) de surface embauché(s) : <strong><span id="actual-clean"></span></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Ingénieur(s) embauché(s) : <strong><span id="actual-inge"></span></strong></td>
+                            </tr>
+                            <tr>
+                                <td>Personnel(s) administratif embauché(s) : <strong><span id="actual-super"></span></strong></td>
+                            </tr>
+                        </table><br>
                     </div>
                     <div>
                         <h2>> Consommation d'energie actuelle :</h2>
@@ -124,7 +137,7 @@
                                 <td class="txt_align_center"><i class="fa-solid fa-box-open"></i></td>
                                 <td><span id="actual-card"></span> Cartons</td>
                             </tr>
-                        </table>
+                        </table><br>
                     </div>
                 </div>
             </div>
@@ -633,7 +646,8 @@
                     <div id="input-div" style="display: none;">
                         <p>Pour quel prix ?</p>
                         <form id="price-form" action="">
-                            <input type="number" id="input-price" autocomplete="off" placeholder="Prix de vente" min="0" />
+                            <input type="number" id="input-price" autocomplete="off" placeholder="Prix de vente"
+                                min="0" />
                             <button class="button">Vendre</button>
                         </form>
                     </div>

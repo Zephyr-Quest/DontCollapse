@@ -192,7 +192,10 @@ function refreshContract(infos) {
     for (let i = 0; i < infos.length; i++) {
         let supplier = document.getElementsByClassName(supp[i])
         for (let i = 0; i < supplier.length - 1; i++) {
-            if (supplier[i + 1].hasAttribute('disable')) supplier[i + 1].removeAttribute('disable');
+            if (supplier[i + 1].hasAttribute('disable')) {
+                supplier[i + 1].removeAttribute('disable');
+               supplier[i+1].children[2].removeAttribute('disable')
+            }
         }
         let elem = document.getElementsByClassName(infos[i])[i]
         elem.setAttribute('disable', '');

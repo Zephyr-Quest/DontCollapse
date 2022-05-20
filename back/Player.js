@@ -101,7 +101,7 @@ module.exports = class Player {
             consumption: this.consumption,
             productionRate: this.productionRate,
             employeesNeeded: this.employeesNeeded,
-            employees: this.employees.number
+            employees: this.employees
         }
     }
 
