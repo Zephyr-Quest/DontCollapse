@@ -92,8 +92,9 @@ module.exports = class Player {
         this.productivityUpdate()
         this.generateIncome();
         this.generateExpenses();
+        this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.employees)
         return {
-            // name: this.name,
+            barres:this.sd,
             money: this.money,
             manufacturingQuality: this.manufacturingQuality,
             expenses: this.expenses,

@@ -61,6 +61,7 @@ function updateChronoHUD() {
  * Stop the chrono
  */
 function stopChronoo() {
+    startChronoFrom(0,0);
     stopChrono = true;
 }
 

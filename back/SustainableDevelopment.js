@@ -66,14 +66,18 @@ module.exports = class SustainableDevelopment {
 
 
     isFinished() {
-        if (this.economic == 100 && this.social == 100 && this.ecologic == 100) return true
+        if (this.economic == 100 && this.social == 100 && this.ecologic == 100) return true;
         return false;
 
     }
 
     isLost() {
-        if (this.economic == 0 || this.social == 0 || this.ecologic == 0) return true
+        if (this.economic == 0 || this.social == 0 || this.ecologic == 0) return true;
         return false;
 
+    }
+
+    moyenne() {
+        return (this.ecologic + this.economic + this.social) / 3;
     }
 };
