@@ -6,9 +6,9 @@
             "price": 5000,
             "productionRate": 80,
             "consumption": {
-                "electricity": 1,
+                "electricity": 10,
                 "water": 0,
-                "etain": 1
+                "etain": 20
             },
             "manufacturingQuality": 1,
             "maintainersRequested": 1,
@@ -19,9 +19,9 @@
             "price": 8000,
             "productionRate": 95,
             "consumption": {
-                "electricity": 2,
+                "electricity": 20,
                 "water": 0,
-                "etain": 1
+                "etain": 20
             },
             "manufacturingQuality": 1.25,
             "maintainersRequested": 4,
@@ -32,9 +32,9 @@
             "price": 9700,
             "productionRate": 110,
             "consumption": {
-                "electricity": 2,
+                "electricity": 20,
                 "water": 0,
-                "etain": 2
+                "etain": 30
             },
             "manufacturingQuality": 1.5,
             "maintainersRequested": 8,
@@ -45,9 +45,9 @@
             "price": 12035,
             "productionRate": 120,
             "consumption": {
-                "electricity": 3,
+                "electricity": 30,
                 "water": 0,
-                "etain": 2
+                "etain": 30
             },
             "manufacturingQuality": 2,
             "maintainersRequested": 8,
@@ -61,9 +61,9 @@
             "price": 5000,
             "productionRate": 80,
             "consumption": {
-                "electricity": 2,
-                "water": 2,
-                "etain": 2
+                "electricity": 20,
+                "water": 20,
+                "etain": 30
             },
             "manufacturingQuality": 1,
             "maintainersRequested": 2,
@@ -74,9 +74,9 @@
             "price": 7800,
             "productionRate": 95,
             "consumption": {
-                "electricity": 2,
-                "water": 3,
-                "etain": 2
+                "electricity": 20,
+                "water": 30,
+                "etain": 30
             },
             "manufacturingQuality": 1.25,
             "maintainersRequested": 4,
@@ -87,9 +87,9 @@
             "price": 8700,
             "productionRate": 110,
             "consumption": {
-                "electricity": 3,
-                "water": 2,
-                "etain": 3
+                "electricity": 30,
+                "water": 20,
+                "etain": 40
             },
             "manufacturingQuality": 1.5,
             "maintainersRequested": 8,
@@ -100,9 +100,9 @@
             "price": 10290,
             "productionRate": 120,
             "consumption": {
-                "electricity": 3,
-                "water": 2,
-                "etain": 3
+                "electricity": 30,
+                "water": 20,
+                "etain": 40
             },
             "manufacturingQuality": 2,
             "maintainersRequested": 8,
@@ -116,9 +116,9 @@
             "price": 5412,
             "productionRate": 80,
             "consumption": {
-                "electricity": 2,
-                "water": 3,
-                "etain": 1
+                "electricity": 30,
+                "water": 30,
+                "etain": 20
             },
             "manufacturingQuality": 1,
             "maintainersRequested": 2,
@@ -129,9 +129,9 @@
             "price": 6007,
             "productionRate": 95,
             "consumption": {
-                "electricity": 3,
-                "water": 3,
-                "etain": 1
+                "electricity": 30,
+                "water": 30,
+                "etain": 20
             },
             "manufacturingQuality": 1.25,
             "maintainersRequested": 4,
@@ -142,9 +142,9 @@
             "price": 6900,
             "productionRate": 110,
             "consumption": {
-                "electricity": 3,
-                "water": 3,
-                "etain": 2
+                "electricity": 40,
+                "water": 30,
+                "etain": 30
             },
             "manufacturingQuality": 1.5,
             "maintainersRequested": 8,
@@ -155,9 +155,9 @@
             "price": 8980,
             "productionRate": 120,
             "consumption": {
-                "electricity": 3,
-                "water": 3,
-                "etain": 3
+                "electricity": 30,
+                "water": 30,
+                "etain": 40
             },
             "manufacturingQuality": 2,
             "maintainersRequested": 8,
@@ -171,9 +171,9 @@
             "price": 1200,
             "productionRate": 80,
             "consumption": {
-                "electricity": 2,
+                "electricity": 30,
                 "water": 0,
-                "etain": 0
+                "etain": 10
             },
             "manufacturingQuality": 1,
             "maintainersRequested": 2,
@@ -184,7 +184,7 @@
             "price": 4567,
             "productionRate": 95,
             "consumption": {
-                "electricity": 3,
+                "electricity": 40,
                 "water": 0,
                 "etain": 0
             },
@@ -197,8 +197,8 @@
             "price": 9788,
             "productionRate": 110,
             "consumption": {
-                "electricity": 3,
-                "water": 2,
+                "electricity": 30,
+                "water": 20,
                 "etain": 0
             },
             "manufacturingQuality": 1.5,
@@ -210,9 +210,9 @@
             "price": 12970,
             "productionRate": 120,
             "consumption": {
-                "electricity": 3,
-                "water": 1,
-                "etain": 1
+                "electricity": 30,
+                "water": 10,
+                "etain": 20
             },
             "manufacturingQuality": 2,
             "maintainersRequested": 8,

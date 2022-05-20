@@ -1,45 +1,5 @@
 [
     {
-        "event": "Démonstration écologique",
-        "type": [
-            "ecologic"
-        ],
-        "factor": 1,
-        "durationMin": 1,
-        "durationMax": 1,
-        "duration": 0
-    },
-    {
-        "event": "Démonstration économique",
-        "type": [
-            "economic"
-        ],
-        "factor": 1,
-        "durationMin": 1,
-        "durationMax": 1,
-        "duration": 0
-    },
-    {
-        "event": "Démonstration sociale",
-        "type": [
-            "social"
-        ],
-        "factor": 1,
-        "durationMin": 1,
-        "durationMax": 1,
-        "duration": 0
-    },
-    {
-        "event": "Démonstration production",
-        "type": [
-            "productivity"
-        ],
-        "factor": 1,
-        "durationMin": 1,
-        "durationMax": 1,
-        "duration": 0
-    },
-    {
         "event": "Guerre",
         "type": [
             "economic",
@@ -69,7 +29,7 @@
             "social",
             "productivity"
         ],
-        "factor": -0.30,
+        "factor": -0.40,
         "durationMin": 1,
         "durationMax": 3,
         "duration": 0
