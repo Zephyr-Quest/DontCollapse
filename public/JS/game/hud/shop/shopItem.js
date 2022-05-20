@@ -3,16 +3,17 @@ import Buy from './manageItem.js'
 const leftPage = document.querySelectorAll('#left-page > div');
 const rightPage = document.querySelectorAll('#right-page > div');
 
-let leftBtn = document.querySelectorAll('#left-page button')
-let rightBtn = document.querySelectorAll('#right-page button')
+let leftBtn = document.querySelectorAll('#left-page button');
+let rightBtn = document.querySelectorAll('#right-page button');
 
+let opening = true;
 /**
  * init listeners from id[0] to id[1]
  * @param {Document} id 
  */
 function initListener(id) {
     closeAllListener();
-
+    opening = true;
     if (id[0] < 18) {
         for (let i = id[0]; i <= id[1]; i++) {
             leftPage[i].addEventListener('mouseenter', toggleDescri);
@@ -71,6 +72,14 @@ function initListener(id) {
  * @param {EventTarget} e 
  */
 function toggleDescri(e) {
+    if (opening) {
+        opening = false;
+        let elem = e.target.children
+        elem[0].style.display = "block";
+        elem[1].style.display = "none";
+        if (elem[2]) elem[2].style.display = "none";
+    }
+
     for (const child of e.target.children) {
         if (child.style.display === "none") {
             if (!child.hasAttribute('disable')) child.style.display = "block";
@@ -78,7 +87,6 @@ function toggleDescri(e) {
             if (!child.hasAttribute('disable')) child.style.display = "none";
         }
     }
-
 }
 
 
