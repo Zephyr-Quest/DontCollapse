@@ -35,6 +35,10 @@ function isResultOpen() {
     return results.isOpen()
 }
 
+function isChatOpen(){
+    return chat.isOpen()
+}
+
 function initChatButton() {
     chat.initListener();
 }
@@ -241,14 +245,16 @@ function actuTabBord(infos) {
     document.getElementById('actual-inge').innerText = infos.employees.engineers.length;
     document.getElementById('actual-super').innerText = infos.employees.supervisors.length;
 
-    console.log(infos)
+   // console.log(infos)
 }
+
 
 
 export default {
     initChatButton,
 
     openChatModal,
+    isChatOpen,
     openShopModal,
     closeShopModal,
     initShop,

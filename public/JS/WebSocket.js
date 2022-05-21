@@ -1,10 +1,14 @@
-import { sc } from "./game/app.js";
+import {
+    sc
+} from "./game/app.js";
 import Chrono from "./game/hud/chrono.js";
 import HUD from "./game/hud/hud.js";
 import resultsModal from "./game/hud/resultsModal.js";
 import Sound from "./game/sound.js";
 
 let socket;
+let unread = 0;
+
 const events = {
     "updatePlayerList": players => {
         console.log(players)
@@ -20,6 +24,12 @@ const events = {
         beginingGame(data);
     },
     'new-message': (user, msg) => {
+        if (HUD.isChatOpen()) unread = 0;
+        else {
+            unread++;
+            //! Sound
+        }
+
         let index;
         if (user != "Server") index = connectedPlayers.indexOf(user);
         const names = {
@@ -175,12 +185,16 @@ const initListenersOtherFactoryEndGameModal = () => {
     document.getElementById("playerListDiv").childNodes.forEach(liPlayer => {
         liPlayer.addEventListener("click", (event) => {
             seeOtherEvent(event, (data, player) => {
-                document.getElementById("myThreeJsCanvas").style.pointerEvents="none"
+                document.getElementById("myThreeJsCanvas").style.pointerEvents = "none"
                 sc.goSeeOtherPlayer(data, player);
                 resultsModal.closeModal();
             })
         })
     })
+}
+
+function getUnreadMessage() {
+    return unread;
 }
 
 export default {
@@ -189,6 +203,7 @@ export default {
     emit,
     getConnectedPlayers,
     initListenersOtherFactoryEndGameModal,
+    getUnreadMessage,
 
     getAllShop,
 }
