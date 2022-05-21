@@ -240,8 +240,6 @@ function actuTabBord(infos) {
     document.getElementById('actual-clean').innerText = infos.employees.cleaners.length;
     document.getElementById('actual-inge').innerText = infos.employees.engineers.length;
     document.getElementById('actual-super').innerText = infos.employees.supervisors.length;
-
-    console.log(infos)
 }
 
 
