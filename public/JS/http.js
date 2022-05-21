@@ -1,6 +1,5 @@
 const http = (function () {
-    const HOST = 'http://localhost:4200';
-//    const HOST = 'http://10.224.1.2:4200';
+    const HOST = window.location.origin;
 
     function customFecth(url, config, resolve, reject) {
         fetch(url, config).then(data => {
