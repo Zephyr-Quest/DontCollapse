@@ -303,9 +303,9 @@ app.post("/join",
         });
     })
 
-
-http.listen(4200, () => {
-    console.log('Serveur lancé sur le port 4200');
+const PORT = process.env.DC_PORT;
+http.listen(PORT, () => {
+    console.log('Serveur lancé sur le port', PORT);
 });
 
 

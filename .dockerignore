@@ -1,0 +1,7 @@
+node_modules
+private
+.env.example
+.gitignore
+README.md
+shop.jpg
+tableau.jpg
