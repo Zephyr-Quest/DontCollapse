@@ -79,7 +79,7 @@ export class Scene {
                         welding: 1,
                         mechanic: 1
                 }
-                this.firstLevels = new THREE.Group()
+                this.sortieOpen = false
 
         }
 
@@ -241,6 +241,8 @@ export class Scene {
                 let obj, mesh
                 this.selectionables = new THREE.Group();
                 this.otherLevels = new THREE.Group();
+                this.firstLevels = new THREE.Group()
+
                 ObjectArray.forEach(el => {
                         obj = new Object3D(el)
                         mesh = obj.getMesh()
@@ -252,14 +254,17 @@ export class Scene {
                                 }
                         });
                         // Don't add to scene if it's other level than 1
-                        if (el.level) {
+                        if (el.level && el.level > 1) {
                                 mesh.level = el.level
                                 this.otherLevels.add(mesh)
 
                         } else {
                                 if (el.ray) {
                                         mesh.level = 1
-                                        this.firstLevels.add(mesh.clone())
+                                        // if (el.name.includes("Mac_")) this.firstLevels.add(mesh)
+                                        // let objAnim = mesh.animation
+                                        // let obj=mesh.clone()
+                                        // obj.animation=objAnim
                                         this.selectionables.add(mesh);
                                 } else {
                                         this.scene.add(mesh)
@@ -267,6 +272,9 @@ export class Scene {
                         }
                         this.scene.add(this.selectionables);
                 })
+                console.log(this.firstLevels)
+                console.log(this.otherLevels)
+                console.log(this.selectionables)
 
         }
 
@@ -298,7 +306,7 @@ export class Scene {
                                 break;
                 }
                 this.selectionables.children.forEach(el => {
-                        if (el.name == name) this.selectionables.remove(el)
+                        if (el.name == name) this.otherLevels.add(el)
                 })
                 this.otherLevels.children.forEach(el => {
                         if (el.name == name && el.level == itemToChange.level) {
@@ -504,72 +512,62 @@ export class Scene {
         }
 
         goSeeOtherPlayer(obj, pseudo) {
-                this.groupToDisplay = new THREE.Group()
-                this.selectionables2 = new THREE.Group();
-                this.groupToDisplay = this.selectionables.clone()
-                this.selectionables2 = this.selectionables.clone()
-                this.scene.remove(this.selectionables)
-                this.scene.remove(this.groupToDisplay)
-
-                let machines = obj
-                var selectedObject
-                selectedObject = this.groupToDisplay.getObjectByName("Mac_Poste a souder");
-                this.groupToDisplay.remove(selectedObject)
-                selectedObject = this.groupToDisplay.getObjectByName("Mac_Assembleur General");
-                this.groupToDisplay.remove(selectedObject)
-                selectedObject = this.groupToDisplay.getObjectByName("Mac_Assembleur Mecanique");
-                this.groupToDisplay.remove(selectedObject)
-                selectedObject = this.groupToDisplay.getObjectByName("Mac_Assembleur de Precision");
-                this.groupToDisplay.remove(selectedObject)
-
-
-                this.selectionables = new THREE.Group();
-                selectedObject = this.groupToDisplay.getObjectByName("Mac_Chat")
-                this.selectionables.add(selectedObject)
-                selectedObject = this.groupToDisplay.getObjectByName("Mac_Sortie")
-                this.selectionables.add(selectedObject)
-                // this.groupToDisplay.children.forEach(el => {
-                //         if (el.name == "Mac_Chat") {
-                //                 this.selectionables.add(el.clone())
-                //         } else {
-                //                 if (el.name == "Mac_Sortie") this.selectionables.add(el.clone())
-                //         }
-
-                // })
-                for (let index = 0; index < machines.length; index++) {
-                        let name
-                        let lvl
-                        switch (index) {
-                                case 0:
+                let index = 0
+                let name
+                let lvl
+                let bla = 0
+                this.groupToDisplayAfter = new THREE.Group()
+                let i = this.selectionables.children.length
+                while (bla < this.selectionables.children.length) {
+                        let el = this.selectionables.children[bla]
+                        // console.log("Index actuel : ", bla)
+                        // console.log("Index final : ", i)
+                        // console.log("Longueur totale : ", this.selectionables.children.length)
+                        if (el.name.includes("Mac_")) {
+                                // console.log("En train d'être traité :", el.name)
+                                if (el.name == "Mac_Poste a souder") {
                                         name = "Mac_Poste a souder"
-                                        lvl = machines[index].level
-                                        break;
-                                case 1:
+                                        lvl = obj[0].level
+                                } else if (el.name == "Mac_Assembleur de Precision") {
                                         name = "Mac_Assembleur de Precision"
-                                        lvl = machines[index].level
-                                        break;
-                                case 2:
+                                        lvl = obj[1].level
+                                } else if (el.name == "Mac_Assembleur Mecanique") {
                                         name = "Mac_Assembleur Mecanique"
-                                        lvl = machines[index].level
-                                        break;
-                                case 3:
+                                        lvl = obj[2].level
+                                } else if (el.name == "Mac_Assembleur General") {
                                         name = "Mac_Assembleur General"
-                                        lvl = machines[index].level
-                                        break;
+                                        lvl = obj[3].level
+                                }
+                                if (el.name.includes("Mac_Boutique")) {
+                                        this.scene.add(el)
+                                        el.same = true
+                                }
+                                if (el.name.includes("Mac_Sortie")) {
+                                        this.scene.add(el)
+                                        el.same = true
+                                }
+                                if (el.name.includes("Mac_Chat")) {
+                                        this.scene.add(el.clone())
+                                }
+                                if (el.name == name && el.hasOwnProperty("level") && lvl == el.level) {
+                                        el.same = true
+                                        this.scene.add(el)
+                                        i--
+                                        bla--
+                                } else if (el.name == name && el.hasOwnProperty("level") && lvl != el.level) {
+                                        this.groupToDisplayAfter.add(el)
+                                        i--
+                                        bla--
+                                        this.otherLevels.children.forEach(els => {
+                                                if (els.name == name && els.level == lvl) this.scene.add(els)
+                                        })
+
+                                }
+
+
                         }
-                        if (lvl == 1) {
-                                this.firstLevels.children.forEach(el => {
-                                        if (el.name == name) this.groupToDisplay.add(el.clone())
-                                })
-                        } else {
-                                this.otherLevels.children.forEach(el => {
-                                        if (el.name == name && el.level == lvl) this.groupToDisplay.add(el.clone())
-                                })
-                        }
+                        bla += 1
                 }
-                this.scene.add(this.selectionables)
-                this.scene.add(this.groupToDisplay)
-                console.log(this.groupToDisplay)
                 this.OpenCameraDisplay()
                 let menu = document.getElementsByClassName("usineDiv")[0]
                 menu.style.display = "flex"
@@ -581,6 +579,7 @@ export class Scene {
 
                 let menu2 = document.getElementById("myMenuSortie")
                 if (menu2.style.display == "block") menu2.style.display = "none"
+                this.sortieOpen = false;
                 // document.getElementById("myThreeJsCanvas").style.pointerEvents = "none"
                 this.scene.remove(this.copyGroupSprite)
                 this.scene.remove(this.GroupSprite)
@@ -589,25 +588,44 @@ export class Scene {
                 menu.addEventListener("mousedown", () => {
                         // sound.startDoor()
                         menu.style.display = "none"
+                        this.sortieOpen = true;
                         this.comeBackHome()
                 })
         }
 
         comeBackHome() {
-                this.selectionables = this.selectionables2.clone()
-                console.log("kaerjbp")
-                console.log(this.selectionables)
-                this.selectionables2.children.forEach(el => {
-                        if (el.name == "Mac_Sortie") this.selectionables.add(el.clone())
-                })
-                // this.scene.remove(this.selectionables)
-                this.scene.remove(this.groupToDisplay)
-                // this.selectionables=new THREE.Group()
+                let j = this.scene.children.length
+                let jj = 0
+                let i = this.groupToDisplayAfter.children.length
+                let ii = 0
+                console.log(this.groupToDisplayAfter.children)
+                if (i > 0) {
+                        while (ii < this.groupToDisplayAfter.children.length) {
+                                let el = this.groupToDisplayAfter.children[ii]
+                                this.selectionables.add(el)
+                                i--
+                                this.scene.children.forEach(ets => {
+                                        if (el.name == ets.name) this.otherLevels.add(ets)
+                                })
+                        }
+                }
+                if (j > 0) {
+                        while (jj < this.scene.children.length) {
+                                let el = this.scene.children[jj]
+                                if (el.hasOwnProperty("same")) {
+                                        console.log(el)
+                                        delete el.same
+                                        this.selectionables.add(this.scene.children[jj])
+                                        j--
+                                        jj--
+                                }
+
+                                jj++
+                        }
+                }
                 document.getElementById("myThreeJsCanvas").style.pointerEvents = "auto"
-                this.scene.add(this.selectionables)
-                this.groupToDisplay = new THREE.Group()
+                this.groupToDisplayAfter = new THREE.Group()
                 this.closeMenu();
-                console.log(this.selectionables)
                 WebSocket.emit("moumou_la_reine_des_mouettes_comeback", document.getElementById("username").value)
         }
 
@@ -644,8 +662,14 @@ export class Scene {
                 })
                 document.getElementById("title_menuShop").innerText = "Menu : " + s + " Niveau " + lvl;
                 menu.style.display = "block"
+                let canClose = true
+                this.scene.children.forEach(el => {
+                        if (el.hasOwnProperty("same")) canClose = false
+                })
                 menu = document.getElementById("myMenuSortie")
-                if (menu.style.display == "block") menu.style.display = "none"
+                // if (canClose && menu.style.display == "block") {
+                menu.style.display = "none"
+                // }
         }
 
         /**
@@ -654,12 +678,14 @@ export class Scene {
          * @param   {Three.mesh}  s  Door
          *
          */
+
         openMenuSortie(s) {
-                this.closeCameraDisplay()
                 let players = WebSocket.getConnectedPlayers()
                 let sortie = document.getElementById("SortiWrap");
                 let user = document.getElementById("username").value
                 sortie.innerHTML = ""
+                this.sortieOpen = true
+                this.closeCameraDisplay()
                 players.forEach(el => {
                         if (el != user) {
                                 let divWrap = document.createElement("div")
@@ -699,11 +725,14 @@ export class Scene {
                 if (menu.style.display == "block") menu.style.display = "none"
                 this.scene.children.forEach(el => {
                         if (el.name == "Mac_Sortie") {
-                                this.scene.remove(el)
-                                this.selectionables.add(el)
-                                el.rotation.y = Math.PI / 2
-                                el.position.x = -15
-                                el.position.y = 250.5
+                                if (this.sortieOpen) {
+                                        this.sortieOpen = false
+                                        this.scene.remove(el)
+                                        this.selectionables.add(el)
+                                        el.rotation.y = Math.PI / 2
+                                        el.position.x = -15
+                                        el.position.y = 250.5
+                                }
                         }
                 })
         }

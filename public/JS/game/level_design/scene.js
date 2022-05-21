@@ -1309,6 +1309,7 @@ export const ObjectArray = [
                 rotx: 0,
                 roty: 0,
                 rotz: 0,
+                level: 1,
                 ray: true,
                 name: "Mac_Assembleur General"
         },
@@ -1373,6 +1374,7 @@ export const ObjectArray = [
                 color: "red",
                 rotx: 0,
                 roty: 0,
+                level: 1,
                 rotz: 0,
                 ray: true,
                 name: "Mac_Poste a souder"
@@ -1443,6 +1445,7 @@ export const ObjectArray = [
                 color: "#AD3C25",
                 rotx: 0,
                 roty: -90,
+                level: 1,
                 rotz: 0,
                 ray: true,
                 name: "Mac_Assembleur de Precision"
@@ -1509,6 +1512,7 @@ export const ObjectArray = [
                 color: wallColor,
                 rotx: 0,
                 roty: 0,
+                level: 1,
                 rotz: 0,
                 ray: true,
                 name: "Mac_Assembleur Mecanique"
