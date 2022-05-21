@@ -117,30 +117,24 @@ module.exports = class Game {
      * @returns {String} winner name
      */
     finishGame() {
-        let machineLevel = [];
-        this.players.forEach((player) => {
-            let playerLevel = 0;
-            player.machines.forEach(machine => {
-                playerLevel += machine.level;
+        let winner = { name: "", score: 0 }
+        this.players.forEach(player => {
+            let score = player.sd.ecologic + player.sd.economic + player.sd.social + player.money; // Moyenne ODD + Argent
+            player.machinesBack.forEach(machine => {
+                score += machine.level * 6.25 // Pour avoir 25 points par machine 4*25 = 100;
             });
-            machineLevel.push({
-                name: player.name,
-                level: playerLevel
-            });
-        });
-        let winner;
-        let winnerLevel = 0;
-        machineLevel.forEach(element => {
-            if (element.level == winnerLevel && this.searchPlayer(winner).sd.moyenne() != this.searchPlayer(element.name).sd.moyenne()) {
-                winner = this.searchPlayer(winner).sd.moyenne() < this.searchPlayer(element.name).sd.moyenne() ? element.name : winner;
-            } else if (element.level > winnerLevel) {
-                winnerLevel = element.level;
-                winner = element.name;
-            } else {
-                winner = this.searchPlayer(winner).money < this.searchPlayer(element.name).money ? element.name : winner;
+            if (score > winner.score) {
+                winner.name = player.name;
+                winner.score = player.score;
+            }
+            if (score == winner.score) {
+                if (this.searchPlayer(winner.name).money < player.money) {
+                    winner.name = player.name;
+                    winner.score = player.score;
+                }
             }
         });
-        return winner;
+        return winner.name;
     }
 
     /* -------------------------------------------------------------------------- */
