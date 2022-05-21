@@ -27,6 +27,7 @@ const events = {
         if (HUD.isChatOpen()) unread = 0;
         else {
             unread++;
+            Sound.startNewMessage();
             //! Sound
         }
 

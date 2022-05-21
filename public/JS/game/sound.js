@@ -2,6 +2,7 @@ const lobbyGameMusic = new Audio('../../sound/Mii_Lobby.mp3');
 const soundFactory = new Audio('../../sound/soundFactory.mp3');
 const moulaTune = new Audio('../../sound/moula.mp3');
 const soundDoor = new Audio('../../sound/door.ogg');
+//const soundMessage = new Audio('../../sound/...mp3')
 
 let authorizedEffect = true;
 let authorizedMusic = true;
@@ -48,11 +49,18 @@ function toggleMusic() {
     authorizedMusic = !authorizedMusic;
 }
 
+function startNewMessage(){
+    if (authorizedEffect){}
+        //soundMessage.play();
+}
+
 export default {
     startMusicGame,
     stopMusicGame,
     startMoula,
     startDoor,
+    startNewMessage,
+
     toggleAuthrizedDuBrieAshtagJeVeuxDuBrieJaimeLeBrie,
     toggleLobry,
     toggleMusic
