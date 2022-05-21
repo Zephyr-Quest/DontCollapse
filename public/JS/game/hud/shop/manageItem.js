@@ -42,6 +42,10 @@ function buyItem(divOfItem, type) {
     let itemName = divOfItem.children[0].children[0].innerText; // set the item name
     console.log(itemName);
 
+    document.getElementById('confirm-div').style.display = 'block';
+    document.getElementById('input-div').style.display = 'none';
+
+
     document.getElementById('buying').innerText = "Achat de : " + itemName;
     if (divOfItem.children[0].children[1]) document.getElementById('buying').innerText += ", " + divOfItem.children[0].children[1].innerText;
     confirmModal.openModal(); // open confirm modal
