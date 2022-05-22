@@ -12,12 +12,13 @@ export default class modal {
      * @param {String} close 
      * @param {Boolean} isShop 
      */
-    constructor(modal, open, close, isShop = false, isByeBye = false) {
+    constructor(modal, open, close, isShop = false, isByeBye = false, isChat = false) {
         this.modal = document.getElementById(modal);
         if (open !== undefined) this.open = document.getElementById(open);
         if (close !== undefined) this.close = document.getElementById(close);
         this.isShop = isShop;
         this.isByeBye = isByeBye;
+        this.isChat = isChat;
     }
 
 
@@ -79,16 +80,16 @@ export default class modal {
             }
         });
 
-//if (!this.isByeBye) {
-            // When the user clicks on Escape, close the modal
-            window.addEventListener('keydown', (e) => {
-                if ((e.key === "Escape" || e.key === "Esc") && this.modal.hasAttribute('open')) {
-                    this.closeFunction();
-                    if (this.isByeBye) window.location.href = "/lobby";
+        //if (!this.isByeBye) {
+        // When the user clicks on Escape, close the modal
+        window.addEventListener('keydown', (e) => {
+            if ((e.key === "Escape" || e.key === "Esc") && this.modal.hasAttribute('open')) {
+                this.closeFunction();
+                if (this.isByeBye) window.location.href = "/lobby";
 
-                }
-            });
-    //    }
+            }
+        });
+        //    }
     }
 
     /**
@@ -96,9 +97,8 @@ export default class modal {
      */
     openModal() {
         this.initCloseListeners();
-        if (this.isShop) {
-            WebSocket.emit('openShop', "");
-        }
+        if (this.isShop) WebSocket.emit('openShop', "");
+        if (this.isChat) WebSocket.resetUnreadMessage()
         this.modal.showModal();
     }
 

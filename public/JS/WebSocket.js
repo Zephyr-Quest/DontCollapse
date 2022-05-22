@@ -200,6 +200,10 @@ function getUnreadMessage() {
     return unread;
 }
 
+function resetUnreadMessage(){
+    unread = 0;
+}
+
 export default {
     init,
     connect,
@@ -207,6 +211,7 @@ export default {
     getConnectedPlayers,
     initListenersOtherFactoryEndGameModal,
     getUnreadMessage,
+    resetUnreadMessage,
 
     getAllShop,
 }
