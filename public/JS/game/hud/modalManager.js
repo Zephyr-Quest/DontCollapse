@@ -98,7 +98,12 @@ export default class modal {
     openModal() {
         this.initCloseListeners();
         if (this.isShop) WebSocket.emit('openShop', "");
-        if (this.isChat) WebSocket.resetUnreadMessage()
+        if (this.isChat) {
+            WebSocket.resetUnreadMessage()
+            setTimeout(() => {
+                document.getElementById("input-chat").focus()
+            }, 50)
+        }
         this.modal.showModal();
     }
 
