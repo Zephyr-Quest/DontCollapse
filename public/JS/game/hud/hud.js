@@ -35,7 +35,7 @@ function isResultOpen() {
     return results.isOpen()
 }
 
-function isChatOpen(){
+function isChatOpen() {
     return chat.isOpen()
 }
 
@@ -171,16 +171,16 @@ function initShop() {
                 for (let j = 0; j < 4; j++) {
                     switch (i) {
                         case 0:
-                            descri[j].children[0].innerText = "Prix au kWh : " + furnishers[i].price[j + 1] + "€"
+                            descri[j].children[0].innerHTML = "Prix au kWh : " + furnishers[i].price[j + 1] + "€<br>Indice ecologique : " + furnishers[i].index[j + 1]
                             break;
                         case 1:
-                            descri[j].children[0].innerText = "Prix au m3 : " + furnishers[i].price[j + 1] + "€"
+                            descri[j].children[0].innerHTML = "Prix au m3 : " + furnishers[i].price[j + 1] + "€<br>Indice ecologique : " + furnishers[i].index[j + 1]
                             break;
                         case 2:
-                            descri[j].children[0].innerText = furnishers[i].price[j + 1] + "€ par carton"
+                            descri[j].children[0].innerHTML = furnishers[i].price[j + 1] + "€ par carton<br>Indice ecologique : " + furnishers[i].index[j + 1]
                             break;
                         case 3:
-                            descri[j].children[0].innerText = furnishers[i].price[j + 1] + "€ par bobine"
+                            descri[j].children[0].innerHTML = furnishers[i].price[j + 1] + "€ par bobine<br>Indice ecologique : " + furnishers[i].index[j + 1]
                             break;
                         default:
                             break;
@@ -245,7 +245,7 @@ function actuTabBord(infos) {
     document.getElementById('actual-inge').innerText = infos.employees.engineers.length;
     document.getElementById('actual-super').innerText = infos.employees.supervisors.length;
 
-   // console.log(infos)
+    // console.log(infos)
 }
 
 
