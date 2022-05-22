@@ -83,32 +83,34 @@ const updateMonth = game => {
     const players = io.sockets.adapter.rooms.get(game.idRoom);
     const event = game.applyEvent();
 
-    for (const p of players) {
-        const pSocket = io.sockets.sockets.get(p);
-        const pUsername = pSocket.handshake.session.username;
+    if (players) {
+        for (const p of players) {
+            const pSocket = io.sockets.sockets.get(p);
+            const pUsername = pSocket.handshake.session.username;
 
-        const user = game.searchPlayer(pUsername);
-        if (!user) continue;
+            const user = game.searchPlayer(pUsername);
+            if (!user) continue;
 
-        // Actualisation
-        if (user.gameContinue) {
-            const infoPlayer = user.updateAll(event);
-            const infos = {
-                chrono: game.chrono.getTime(),
-                moula: infoPlayer.moula,
-                barres: infoPlayer.barres,
-                event: event
-            };
-            pSocket.emit("infoActu", infos);
+            // Actualisation
+            if (user.gameContinue) {
+                const infoPlayer = user.updateAll(event);
+                const infos = {
+                    chrono: game.chrono.getTime(),
+                    moula: infoPlayer.moula,
+                    barres: infoPlayer.barres,
+                    event: event
+                };
+                pSocket.emit("infoActu", infos);
 
-            const dataTabBord = user.getInfo();
-            pSocket.emit("actuTabBord", dataTabBord);
+                const dataTabBord = user.getInfo();
+                pSocket.emit("actuTabBord", dataTabBord);
 
-            // User lose
-            const endPlayer = user.isLost();
-            if (endPlayer) {
-                user.gameContinue = false;
-                pSocket.emit("finishGame", "you lose", true, game.playersName);
+                // User lose
+                const endPlayer = user.isLost();
+                if (endPlayer) {
+                    user.gameContinue = false;
+                    pSocket.emit("finishGame", "you lose", true, game.playersName);
+                }
             }
         }
     }

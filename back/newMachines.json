@@ -149,7 +149,7 @@
             "consumption": {
                 "electricity": 600,
                 "water": 0,
-                "etain": 0
+                "etain": 10
             },
             "employeesNeeded" : 1
         },

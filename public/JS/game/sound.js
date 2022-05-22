@@ -2,7 +2,7 @@ const lobbyGameMusic = new Audio('../../sound/Mii_Lobby.mp3');
 const soundFactory = new Audio('../../sound/soundFactory.mp3');
 const moulaTune = new Audio('../../sound/moula.mp3');
 const soundDoor = new Audio('../../sound/door.ogg');
-//const soundMessage = new Audio('../../sound/...mp3')
+const soundMessage = new Audio('../../sound/message.oga');
 
 let authorizedEffect = true;
 let authorizedMusic = true;
@@ -37,6 +37,11 @@ function startDoor() {
         soundDoor.play();
 }
 
+function startMessage() {
+    if (authorizedEffect)
+        soundMessage.play();
+}
+
 function toggleAuthrizedDuBrieAshtagJeVeuxDuBrieJaimeLeBrie() {
     authorizedEffect = !authorizedEffect;
 }
@@ -61,6 +66,7 @@ export default {
     startDoor,
     startNewMessage,
 
+    startMessage,
     toggleAuthrizedDuBrieAshtagJeVeuxDuBrieJaimeLeBrie,
     toggleLobry,
     toggleMusic

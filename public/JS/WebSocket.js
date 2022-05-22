@@ -11,7 +11,6 @@ let unread = 0;
 
 const events = {
     "updatePlayerList": players => {
-        console.log(players)
         connectedPlayers = players;
         updatePlayersOnScreen();
     },
@@ -57,6 +56,7 @@ const events = {
         item3.classList.add("message");
         item3.innerHTML = "<p></p>";
         messages.appendChild(item3);
+        displayMessageChat(user, msg);
     },
     "sendPlayerInfoShop": (infoPlayer, username) => {
         getAllShop(infoPlayer, username);
@@ -68,7 +68,7 @@ const events = {
         HUD.refreshHud(infoPlayer);
     },
     "finishGame": (msg, displayOtherPlayers, players = undefined) => {
-        console.log("finish game front", msg, displayOtherPlayers);
+        console.log("finish game front", msg, displayOtherPlayers, players);
         Chrono.stopChronoo()
         resultsModal.openResultsModal(msg, displayOtherPlayers, players);
     },
@@ -149,6 +149,42 @@ function beginingGame(data) {
 
 function getAllShop(infoPlayer, username) {
     HUD.refreshShop(infoPlayer, username);
+}
+
+function displayMessageChat(user, msg) {
+    if (HUD.isChatOpen()) unread = 0;
+    else {
+        unread++;
+        Sound.startNewMessage();
+        //! Sound
+    }
+
+    let index;
+    if (user != "Server") index = connectedPlayers.indexOf(user);
+    const names = {
+        0: "host",
+        1: "J1",
+        2: "J2",
+        3: "J3",
+    }
+
+    let item2 = document.createElement('div');
+    item2.classList.add(user === username ? "sender" : "receiver");
+    item2.classList.add("message");
+    item2.innerText = msg;
+    messages.appendChild(item2);
+
+    let item = document.createElement('div');
+    item.classList.add(user === username ? "sender" : "receiver");
+    item.classList.add("username");
+    item.classList.add(user === "Server" ? "server" : names[index]);
+    item.innerText = user;
+    messages.appendChild(item);
+
+    let item3 = document.createElement('div');
+    item3.classList.add("message");
+    item3.innerHTML = "<p></p>";
+    messages.appendChild(item3);
 }
 
 /* --------------------------------- Return --------------------------------- */

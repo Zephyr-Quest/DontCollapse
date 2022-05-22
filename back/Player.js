@@ -61,7 +61,6 @@ module.exports = class Player {
         this.employeesNeeded = 0;
 
         // init
-        //! Vérifier l'ordre de tout ça
         this.machineInitialisation();
         this.employeeInit();
         this.employeeOptimal();
