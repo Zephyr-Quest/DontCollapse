@@ -108,23 +108,36 @@ function refreshShop(infos, username) {
     ShopItem.refreshOccaz(infos.shop, username);
     Shop.initShopListeners();
 }
+let evv = undefined
 
 function refreshHud(infos) {
-    ProgressBar.updateEcologic(Math.round(infos.barres.ecologic));
-    ProgressBar.updateEconomic(Math.round(infos.barres.economic));
-    ProgressBar.updateSocial(Math.round(infos.barres.social));
+    ProgressBar.updateEcologic(infos.barres.ecologic);
+    ProgressBar.updateEconomic(infos.barres.economic);
+    ProgressBar.updateSocial(infos.barres.social);
 
-    if (infos.moula) Money.setMoney(Math.round(infos.moula));
+    if (infos.moula) Money.setMoney(infos.moula);
 
     if (infos.chrono) Chrono.startChronoFrom(infos.chrono.min, infos.chrono.sec);
 
     if (infos.event) {
+        if (evv == infos.event.event) return
+        if (evv === undefined) evv = infos.event.event
         if (!events.isOpen()) events.openModal();
         let div = document.querySelector('#events-content');
         div.removeChild(div.firstChild);
+        div.style.textAlign="center"
         let elem = document.createElement('p');
-        elem.innerHTML = infos.event.event;
+        elem.style.textAlign="center"
+        elem.innerHTML = "";
+        elem.innerHTML += infos.event.event;
+        elem.innerHTML += "<br><br>"
+        elem.innerHTML += infos.event.desc
+        elem.innerHTML += "<br><br>Durée : "
+        elem.innerHTML += infos.event.duration
+        elem.innerHTML += " mois"
         div.append(elem);
+    } else {
+        evv = undefined
     }
 }
 
@@ -132,7 +145,7 @@ function updateOnPurchase(data) {
     Item.confirmation(data.confirmation, data.idEngine, data.levelEngine, data.type);
     if (data.confirmation === true) {
         Sound.startMoula();
-        refreshHud(data);
+        // refreshHud(data);
     }
 }
 
@@ -245,7 +258,15 @@ function actuTabBord(infos) {
     document.getElementById('actual-inge').innerText = infos.employees.engineers.length;
     document.getElementById('actual-super').innerText = infos.employees.supervisors.length;
 
-    // console.log(infos)
+    if (infos.event != undefined) {
+        document.getElementById("prev-event").innerText = infos.event.event
+        document.getElementById("prev-event-dur").innerText = "> Temps restant : "
+        document.getElementById("prev-event-dur").innerText += infos.event.duration
+        document.getElementById("prev-event-dur").innerText += " mois"
+    } else {
+        document.getElementById("prev-event").innerText = "Pas d'évènement"
+        document.getElementById("prev-event-dur").innerText = ""
+    }
 }
 
 

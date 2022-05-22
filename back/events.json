@@ -1,68 +1,106 @@
-[
-    {
+[{
         "event": "Guerre",
+        "desc": "Une guerre a éclaté entre la Russie et l'Ukraine, ce qui fait beaucoup d'impact en France, dans tous les domaines",
         "type": [
             "economic",
             "social",
             "productivity"
         ],
-        "factor": -0.20,
+        "factor": 0.8,
         "durationMin": 2,
         "durationMax": 5,
         "duration": 0
     },
     {
         "event": "13ème mois",
+        "desc": "Le jour de la prime est arrivé ! C'est le moment d'encaisser le chèque et de partir en vacances !",
         "type": [
             "economic",
             "social",
             "productivity"
         ],
-        "factor": 0.20,
+        "factor": 1.3,
         "durationMin": 1,
         "durationMax": 1,
         "duration": 0
     },
     {
         "event": "Grève",
+        "desc": "Vos employés sont mécontents, ils veulent plus de frites à la cantine ! Ils ont donc réduit la cadence",
         "type": [
             "social",
             "productivity"
         ],
-        "factor": -0.40,
+        "factor": 0.6,
         "durationMin": 1,
         "durationMax": 3,
         "duration": 0
     },
     {
-        "event": "Pic épidémiologique (maladie)",
+        "event": "Maladie hivernale",
+        "desc": "Oh mince, un virus est entré dans l'entreprise, et a contaminé tout le monde, les arrêts maladie s'enchaînent",
         "type": [
             "social",
             "productivity"
         ],
-        "factor": -0.20,
+        "factor": 0.8,
         "durationMin": 1,
         "durationMax": 2,
         "duration": 0
     },
     {
         "event": "Pollution",
+        "desc": "Il fait chaud, et comme d'hab, encore un pic de pollution. Faudrait vraiment penser à venir en vélo",
         "type": [
             "ecologic"
         ],
-        "factor": -0.20,
+        "factor": 0.9,
         "durationMin": 1,
         "durationMax": 1,
         "duration": 0
     },
     {
         "event": "Panne",
+        "desc": "Encore cette satanée machine qui est cassée, je suis sûr que ce n'est qu'un joint à changer, la maintenance va s'en charger",
         "type": [
-            "production"
+            "productivity"
         ],
-        "factor": -0.1,
+        "factor": 0.9,
         "durationMin": 1,
         "durationMax": 1,
+        "duration": 0
+    },
+    {
+        "event": "Grosse soirée la veille",
+        "desc": "Vos employés sont tous sortis en boîte la veille, ils sont tous fatigués, et auraient grand besoin d'un Doliprane",
+        "type": [
+            "productivity"
+        ],
+        "factor": 0.9,
+        "durationMin": 1,
+        "durationMax": 1,
+        "duration": 0
+    },
+    {
+        "event": "La nouvelle machine à café est arrivée !",
+        "desc": "Elle vous a couté bien bien cher, mais pourtant c'était le meilleur achat depuis la reprise de l'entreprise",
+        "type": [
+            "social"
+        ],
+        "factor": 1.2,
+        "durationMin": 1,
+        "durationMax": 2,
+        "duration": 0
+    },
+    {
+        "event": "Mince, encore une nouvelle taxe",
+        "desc": "Une nouvelle taxe a été instaurée par le gouvernement, 25% d'impôts sur le papier toilette",
+        "type": [
+            "economic"
+        ],
+        "factor": 0.8,
+        "durationMin": 1,
+        "durationMax": 2,
         "duration": 0
     }
 ]

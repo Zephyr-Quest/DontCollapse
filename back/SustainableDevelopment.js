@@ -60,8 +60,9 @@ module.exports = class SustainableDevelopment {
 
         social = 100 - (diff * 100 * 1.9);
 
-        this.roundODD(economic, ecologic, social);
 
+
+        this.roundODD(economic, ecologic, social);
     }
 
 

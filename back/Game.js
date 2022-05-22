@@ -122,7 +122,7 @@ module.exports = class Game {
             score: 0
         }
         this.players.forEach(player => {
-            let score = player.sd.ecologic + player.sd.economic + player.sd.social + player.money / 200; // Moyenne ODD + Argent
+            let score = player.sd.ecologic + player.sd.economic + player.sd.social; // Moyenne ODD + Argent
             player.machinesBack.forEach(machine => {
                 score += machine.level * 6.25 * 3 // Pour avoir 25 points par machine 4*25 = 100;
             });
@@ -213,11 +213,14 @@ module.exports = class Game {
         if (this.runningEvent) { // Si un évènement est déjà existant
             this.runningEvent.duration--; // On réduit son temps restant
             if (this.runningEvent.duration <= 0) this.runningEvent = undefined; // Dès qu'il reste 0 mois, on le supprime
+            return this.runningEvent; // et on applique cet évènement
         } else {
             let random = Math.floor(Math.random() * 100); // 20% de chance d'avoir un évènement aléatoire.
-            if (random < 20) {
-                this.runningEvent = events[random % events.length]; // On choisit un évènement et sa durée aléatoirement
-                this.runningEvent.duration = (random % this.runningEvent.durationMax) + this.runningEvent.durationMin;
+            if (random < 100) {
+                let secondRandom = Math.floor(Math.random() * events.length)
+                this.runningEvent = events[secondRandom]; // On choisit un évènement et sa durée aléatoirement
+                secondRandom = Math.floor(Math.random() * (this.runningEvent.durationMax + 1 - this.runningEvent.durationMin) + this.runningEvent.durationMin)
+                this.runningEvent.duration = secondRandom
                 return this.runningEvent; // et on applique cet évènement
             }
         }

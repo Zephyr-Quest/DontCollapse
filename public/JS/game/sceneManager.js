@@ -272,10 +272,6 @@ export class Scene {
                         }
                         this.scene.add(this.selectionables);
                 })
-                console.log(this.firstLevels)
-                console.log(this.otherLevels)
-                console.log(this.selectionables)
-
         }
 
         /**
@@ -286,7 +282,6 @@ export class Scene {
          */
         updateModel(itemToChange) {
                 let name;
-                console.log(itemToChange)
                 switch (itemToChange.obj) {
                         case 0:
                                 name = "Mac_Poste a souder"
@@ -520,11 +515,7 @@ export class Scene {
                 let i = this.selectionables.children.length
                 while (bla < this.selectionables.children.length) {
                         let el = this.selectionables.children[bla]
-                        // console.log("Index actuel : ", bla)
-                        // console.log("Index final : ", i)
-                        // console.log("Longueur totale : ", this.selectionables.children.length)
                         if (el.name.includes("Mac_")) {
-                                // console.log("En train d'être traité :", el.name)
                                 if (el.name == "Mac_Poste a souder") {
                                         name = "Mac_Poste a souder"
                                         lvl = obj[0].level
@@ -598,7 +589,7 @@ export class Scene {
                 let jj = 0
                 let i = this.groupToDisplayAfter.children.length
                 let ii = 0
-                console.log(this.groupToDisplayAfter.children)
+                log(this.groupToDisplayAfter.children)
                 if (i > 0) {
                         while (ii < this.groupToDisplayAfter.children.length) {
                                 let el = this.groupToDisplayAfter.children[ii]
@@ -613,7 +604,6 @@ export class Scene {
                         while (jj < this.scene.children.length) {
                                 let el = this.scene.children[jj]
                                 if (el.hasOwnProperty("same")) {
-                                        console.log(el)
                                         delete el.same
                                         this.selectionables.add(this.scene.children[jj])
                                         j--

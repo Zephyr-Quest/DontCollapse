@@ -20,7 +20,7 @@ const {
     connected
 } = require('process');
 const {
-    info
+    info, log
 } = require('console');
 
 if (process.env.NODE_ENV !== "production") {
@@ -102,7 +102,7 @@ const updateMonth = game => {
                 };
                 pSocket.emit("infoActu", infos);
 
-                const dataTabBord = user.getInfo();
+                const dataTabBord = user.getInfo(event);
                 pSocket.emit("actuTabBord", dataTabBord);
 
                 // User lose
@@ -184,7 +184,6 @@ app.get('/otherplayer/:player', (req, res) => {
     }
 
     console.log(username, "go to see", player, "in room", idRoom)
-    console.log(allRooms[idRoom].searchPlayer(player).machines)
     return res.json(allRooms[idRoom].searchPlayer(player).machines)
 });
 
@@ -194,7 +193,6 @@ app.delete("/removeuser/:player", (req, res) => {
     const player = req.params.player;
 
     console.log("delete", username, player);
-    console.log("host", idRoom, allRooms[idRoom].host);
     if (allRooms[idRoom].host !== username) {
         res.status(401).json({
             message: "You don't have permission."
@@ -399,7 +397,7 @@ io.on('connection', socket => {
                 const pUsername = pSocket.handshake.session.username;
                 const user = allRooms[idRoom].searchPlayer(pUsername);
 
-                const dataTabBord = user.getInfo();
+                const dataTabBord = user.getInfo(allRooms[idRoom].runningEvent);
                 pSocket.emit("actuTabBord", dataTabBord);
             }
 
@@ -449,7 +447,7 @@ io.on('connection', socket => {
         };
         socket.emit("confirmPurchase", data);
 
-        const infoPlayer = dataPlayer.getInfo();
+        const infoPlayer = dataPlayer.getInfo(allRooms[idRoom].runningEvent);
         socket.emit("actuTabBord", infoPlayer);
     })
 
@@ -468,7 +466,7 @@ io.on('connection', socket => {
         }
         socket.emit("confirmPurchase", data);
 
-        const infoPlayer = dataPlayer.getInfo();
+        const infoPlayer = dataPlayer.getInfo(allRooms[idRoom].runningEvent);
         socket.emit("actuTabBord", infoPlayer);
     });
 
@@ -486,7 +484,7 @@ io.on('connection', socket => {
         }
         socket.emit("confirmPurchase", data);
 
-        const infoPlayer = dataPlayer.getInfo();
+        const infoPlayer = dataPlayer.getInfo(allRooms[idRoom].runningEvent);
         socket.emit("actuTabBord", infoPlayer);
     });
 

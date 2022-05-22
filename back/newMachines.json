@@ -37,7 +37,7 @@
         "4": {
             "constructor": "Teslassemblage",
             "price": 28200,
-            "productionRate": 217,
+            "productionRate": 237,
             "consumption": {
                 "electricity": 900,
                 "water": 0,
@@ -84,13 +84,13 @@
         "4": {
             "constructor": "Teslassemblage",
             "price": 34900,
-            "productionRate": 216,
+            "productionRate": 236,
             "consumption": {
                 "electricity": 900,
                 "water": 150,
                 "etain": 150
             },
-            "employeesNeeded" : 5
+            "employeesNeeded" : 6
         }
     },
     "2": {
@@ -131,7 +131,7 @@
         "4": {
             "constructor": "Teslassemblage",
             "price": 27644,
-            "productionRate": 208,
+            "productionRate": 228,
             "consumption": {
                 "electricity": 900,
                 "water": 150,
@@ -178,13 +178,13 @@
         "4": {
             "constructor": "Teslassemblage",
             "price": 30800,
-            "productionRate": 213,
+            "productionRate": 233,
             "consumption": {
                 "electricity": 900,
                 "water": 50,
                 "etain": 50
             },
-            "employeesNeeded" : 6
+            "employeesNeeded" : 7
         }
     }
 }

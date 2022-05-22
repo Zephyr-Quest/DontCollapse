@@ -40,7 +40,6 @@ function buyItem(divOfItem, type) {
     itemLevel = level[divOfItem.classList[0]]; // set the item level
     itemId = Number(divOfItem.classList[1]); // set the item id
     let itemName = divOfItem.children[0].children[0].innerText; // set the item name
-    console.log(itemName);
 
     document.getElementById('confirm-div').style.display = 'block';
     document.getElementById('input-div').style.display = 'none';
@@ -140,9 +139,7 @@ function confirmation(bought, id, level, type) {
             obj: id,
             level: level
         }
-        // console.log(sc)
         sc.updateModel(tempBought)
-        // Scene.updateModel(tempBought)
 
         // Objets : Niveau 1, 2, 3 ou 4 selon l'évolution
         // Type : 0 pour Poste à souder

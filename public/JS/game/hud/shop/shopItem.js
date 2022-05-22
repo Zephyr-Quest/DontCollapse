@@ -99,7 +99,6 @@ function buyContract(e) {
 }
 
 function buyPerso(e) {
-    console.log(e.target.parentElement.parentElement);
     Buy.buyItem(e.target.parentElement.parentElement, 1);
 }
 

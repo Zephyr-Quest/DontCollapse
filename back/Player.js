@@ -67,8 +67,6 @@ module.exports = class Player {
         this.productivityUpdate();
         this.generateExpenses();
         this.generateIncome();
-        console.log("Expenses :" + this.expenses)
-        console.log("Income :" + this.income)
         this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.employees)
     }
 
@@ -85,12 +83,15 @@ module.exports = class Player {
         return this.money + 10000 >= amount;
     }
 
-    getInfo() {
+    getInfo(event) {
         this.employeeOptimal();
         this.productivityUpdate()
         this.generateIncome();
         this.generateExpenses();
         this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.employees)
+        if (event != undefined) {
+            this.applyEvent(event)
+        }
         return {
             barres: this.sd,
             money: this.money,
@@ -99,7 +100,8 @@ module.exports = class Player {
             consumption: this.consumption,
             productionRate: this.productionRate,
             employeesNeeded: this.employeesNeeded,
-            employees: this.employees
+            employees: this.employees,
+            event: event
         }
     }
 
@@ -177,7 +179,7 @@ module.exports = class Player {
 
     //! EVENT À REVOIR
     applyEvent(event) {
-        if (!event) return undefined;
+        if (event === undefined) return undefined;
         event.type.forEach(eventType => {
             switch (eventType) {
                 case "ecologic":
@@ -197,6 +199,7 @@ module.exports = class Player {
                     break;
             }
         });
+        this.sd.roundODD(this.sd.economic, this.sd.ecologic, this.sd.social)
         return event;
     }
 
@@ -302,15 +305,14 @@ module.exports = class Player {
 
     updateAll(event) {
         // EVENT ?
-
         this.employeeOptimal();
         this.productivityUpdate()
         this.generateIncome();
         this.generateExpenses();
-        this.applyEvent(event);
         this.money += this.income - this.expenses;
         this.money = this.aroundNumber(this.money);
         this.sd.updateODD(this.machinesBack, this.furnishers, this.money, this.income, this.expenses, this.employees)
+        this.applyEvent(event);
         return {
             moula: this.money,
             barres: this.sd

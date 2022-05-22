@@ -17,7 +17,6 @@ chatForm.addEventListener('submit', event => {
 });
 
 function deleteEvent(e) {
-    console.log(e.target)
     const player = e.target.parentElement.getElementsByTagName("h2")[0].innerText;
     console.log("removing", player);
 
