@@ -550,6 +550,7 @@ body h1 {
 .item-title {
   justify-content: center;
   align-content: center;
+  flex-direction: column;
 }
 #events-modal {
   padding: 40px;
