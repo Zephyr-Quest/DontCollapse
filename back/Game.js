@@ -91,7 +91,7 @@ module.exports = class Game {
                 this.playersName.splice(this.playersName.indexOf(player), 1);
                 return true;
             }
-            return false;   //! Should be undefined
+            return false; //! Should be undefined
         });
     }
 
@@ -109,7 +109,7 @@ module.exports = class Game {
             }
         });
         if (playersInGame.length === 1) return playersInGame[0].name;
-        return false;   //! Should be undefined
+        return false; //! Should be undefined
     }
 
     /**
@@ -117,11 +117,14 @@ module.exports = class Game {
      * @returns {String} winner name
      */
     finishGame() {
-        let winner = { name: "", score: 0 }
+        let winner = {
+            name: "",
+            score: 0
+        }
         this.players.forEach(player => {
-            let score = player.sd.ecologic + player.sd.economic + player.sd.social + player.money; // Moyenne ODD + Argent
+            let score = player.sd.ecologic + player.sd.economic + player.sd.social + player.money / 200; // Moyenne ODD + Argent
             player.machinesBack.forEach(machine => {
-                score += machine.level * 6.25 // Pour avoir 25 points par machine 4*25 = 100;
+                score += machine.level * 6.25 * 3 // Pour avoir 25 points par machine 4*25 = 100;
             });
             if (score > winner.score) {
                 winner.name = player.name;
