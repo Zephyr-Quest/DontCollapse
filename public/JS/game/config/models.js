@@ -2,6 +2,15 @@
 // Stockage des models (nom + valeur une fois chargée + propriétés...)
 
 export const Models = {
+        shop: {
+                name: "shop",
+                model: "shop.glb",
+                scale: 20,
+                isModel: true,
+                isClonable: false,
+                instance: null,
+                rotation: [90, 0, 0]
+        },
         wall: {
                 name: "",
                 model: null,
