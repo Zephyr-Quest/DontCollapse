@@ -75,14 +75,14 @@ function toggleDescri(e) {
     if (opening) {
         opening = false;
         let elem = e.target.children
-        elem[0].style.display = "block";
+        elem[0].style.display = "flex";
         elem[1].style.display = "none";
         if (elem[2]) elem[2].style.display = "none";
     }
 
     for (const child of e.target.children) {
         if (child.style.display === "none") {
-            if (!child.hasAttribute('disable')) child.style.display = "block";
+            if (!child.hasAttribute('disable')) child.style.display = "flex";
         } else {
             if (!child.hasAttribute('disable')) child.style.display = "none";
         }

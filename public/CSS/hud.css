@@ -762,6 +762,7 @@ body h1 {
   font-weight: bold;
   font-size: 1rem;
   margin-top: auto;
+  justify-content: center;
 }
 #shop-modal .modal-content #shop .buy-button:hover {
   background-color: white;
@@ -1048,6 +1049,8 @@ body h1 {
 }
 #main_board_tuto:hover .main_content {
   display: flex;
+  height: 80vh;
+  overflow: auto;
 }
 #main_board_tuto h1 {
   font-family: "Koulen";
