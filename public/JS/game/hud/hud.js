@@ -19,7 +19,7 @@ import {
 Parameter.initListener();
 
 const shop = new Modal('shop-modal', 'shop-button', 'close-shop', true);
-const chat = new Modal('chat-modal', 'chat-button', 'close-chat');
+const chat = new Modal('chat-modal', 'chat-button', 'close-chat', false, false, true);
 const events = new Modal('events-modal', undefined, undefined);
 const results = new Modal('results-modal', undefined, 'disconnectionResults', false, true);
 
