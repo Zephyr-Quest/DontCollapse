@@ -284,7 +284,7 @@ export const ObjectArray = [
         },
         /* ------------------------------- CUBE BUREAU ------------------------------ */
         {
-                type: "cube",
+                type: "shop",
                 length: 200,
                 width: 100,
                 heigth: 150,

@@ -5,7 +5,7 @@ export const Models = {
         shop: {
                 name: "shop",
                 model: "shop.glb",
-                scale: 20,
+                scale: 5,
                 isModel: true,
                 isClonable: false,
                 instance: null,
