@@ -7,7 +7,6 @@ import resultsModal from "./game/hud/resultsModal.js";
 import Sound from "./game/sound.js";
 
 let socket;
-let unread = 0;
 
 const events = {
     "updatePlayerList": players => {
@@ -23,39 +22,6 @@ const events = {
         beginingGame(data);
     },
     'new-message': (user, msg) => {
-        if (HUD.isChatOpen()) unread = 0;
-        else {
-            unread++;
-            Sound.startNewMessage();
-            //! Sound
-        }
-
-        let index;
-        if (user != "Server") index = connectedPlayers.indexOf(user);
-        const names = {
-            0: "host",
-            1: "J1",
-            2: "J2",
-            3: "J3",
-        }
-
-        let item2 = document.createElement('div');
-        item2.classList.add(user === username ? "sender" : "receiver");
-        item2.classList.add("message");
-        item2.innerText = msg;
-        messages.appendChild(item2);
-
-        let item = document.createElement('div');
-        item.classList.add(user === username ? "sender" : "receiver");
-        item.classList.add("username");
-        item.classList.add(user === "Server" ? "server" : names[index]);
-        item.innerText = user;
-        messages.appendChild(item);
-
-        let item3 = document.createElement('div');
-        item3.classList.add("message");
-        item3.innerHTML = "<p></p>";
-        messages.appendChild(item3);
         displayMessageChat(user, msg);
     },
     "sendPlayerInfoShop": (infoPlayer, username) => {
@@ -151,12 +117,12 @@ function getAllShop(infoPlayer, username) {
     HUD.refreshShop(infoPlayer, username);
 }
 
+let unread = 0;
 function displayMessageChat(user, msg) {
     if (HUD.isChatOpen()) unread = 0;
     else {
         unread++;
-        Sound.startNewMessage();
-        //! Sound
+        Sound.startMessage();
     }
 
     let index;

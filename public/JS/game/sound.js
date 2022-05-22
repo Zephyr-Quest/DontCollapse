@@ -54,17 +54,11 @@ function toggleMusic() {
     authorizedMusic = !authorizedMusic;
 }
 
-function startNewMessage(){
-    if (authorizedEffect){}
-        //soundMessage.play();
-}
-
 export default {
     startMusicGame,
     stopMusicGame,
     startMoula,
     startDoor,
-    startNewMessage,
 
     startMessage,
     toggleAuthrizedDuBrieAshtagJeVeuxDuBrieJaimeLeBrie,
