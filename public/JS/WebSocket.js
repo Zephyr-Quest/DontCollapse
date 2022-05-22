@@ -7,7 +7,6 @@ import Sound from "./game/sound.js";
 let socket;
 const events = {
     "updatePlayerList": players => {
-        console.log(players)
         connectedPlayers = players;
         updatePlayersOnScreen();
     },
@@ -20,32 +19,7 @@ const events = {
         beginingGame(data);
     },
     'new-message': (user, msg) => {
-        let index;
-        if (user != "Server") index = connectedPlayers.indexOf(user);
-        const names = {
-            0: "host",
-            1: "J1",
-            2: "J2",
-            3: "J3",
-        }
-
-        let item2 = document.createElement('div');
-        item2.classList.add(user === username ? "sender" : "receiver");
-        item2.classList.add("message");
-        item2.innerText = msg;
-        messages.appendChild(item2);
-
-        let item = document.createElement('div');
-        item.classList.add(user === username ? "sender" : "receiver");
-        item.classList.add("username");
-        item.classList.add(user === "Server" ? "server" : names[index]);
-        item.innerText = user;
-        messages.appendChild(item);
-
-        let item3 = document.createElement('div');
-        item3.classList.add("message");
-        item3.innerHTML = "<p></p>";
-        messages.appendChild(item3);
+        displayMessageChat(user, msg);
     },
     "sendPlayerInfoShop": (infoPlayer, username) => {
         getAllShop(infoPlayer, username);
@@ -57,7 +31,7 @@ const events = {
         HUD.refreshHud(infoPlayer);
     },
     "finishGame": (msg, displayOtherPlayers, players = undefined) => {
-        console.log("finish game front", msg, displayOtherPlayers);
+        console.log("finish game front", msg, displayOtherPlayers, players);
         Chrono.stopChronoo()
         resultsModal.openResultsModal(msg, displayOtherPlayers, players);
     },
@@ -140,6 +114,38 @@ function getAllShop(infoPlayer, username) {
     HUD.refreshShop(infoPlayer, username);
 }
 
+function displayMessageChat(user, msg) {
+    let index;
+    if (user != "Server") index = connectedPlayers.indexOf(user);
+    const names = {
+        0: "host",
+        1: "J1",
+        2: "J2",
+        3: "J3",
+    }
+
+    let item2 = document.createElement('div');
+    item2.classList.add(user === username ? "sender" : "receiver");
+    item2.classList.add("message");
+    item2.innerText = msg;
+    messages.appendChild(item2);
+
+    let item = document.createElement('div');
+    item.classList.add(user === username ? "sender" : "receiver");
+    item.classList.add("username");
+    item.classList.add(user === "Server" ? "server" : names[index]);
+    item.innerText = user;
+    messages.appendChild(item);
+
+    let item3 = document.createElement('div');
+    item3.classList.add("message");
+    item3.innerHTML = "<p></p>";
+    messages.appendChild(item3);
+
+    if (user !== username)
+        Sound.startMessage();
+}
+
 /* --------------------------------- Return --------------------------------- */
 
 // return {
@@ -175,7 +181,7 @@ const initListenersOtherFactoryEndGameModal = () => {
     document.getElementById("playerListDiv").childNodes.forEach(liPlayer => {
         liPlayer.addEventListener("click", (event) => {
             seeOtherEvent(event, (data, player) => {
-                document.getElementById("myThreeJsCanvas").style.pointerEvents="none"
+                document.getElementById("myThreeJsCanvas").style.pointerEvents = "none"
                 sc.goSeeOtherPlayer(data, player);
                 resultsModal.closeModal();
             })

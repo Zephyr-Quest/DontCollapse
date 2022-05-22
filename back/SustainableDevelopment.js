@@ -1,19 +1,11 @@
-const employees = require("./employees.json");
-
 module.exports = class SustainableDevelopment {
     // Initializes data to zero
     constructor() {
-        this.global = 0;
         this.economic = 0;
         this.ecologic = 0;
         this.social = 0;
     }
 
-    display() {
-        console.log("🌿 Ecologic :", this.ecologic);
-        console.log("💸 Economic :", this.economic);
-        console.log("🫂 Social", this.social);
-    }
 
     /**
      * update the sustainable development
@@ -21,41 +13,71 @@ module.exports = class SustainableDevelopment {
      * @param {Number} ecologic factor
      * @param {Number} social factor
      */
-    updateOverall(economic, ecologic, social) {
+    roundODD(economic, ecologic, social) {
         this.economic = Math.floor(Math.min(Math.abs(economic), 100));
+        if (this.economic < 0) this.economic = 0
         this.ecologic = Math.floor(Math.min(Math.abs(ecologic), 100));
+        if (this.ecologic < 0) this.ecologic = 0
         this.social = Math.floor(Math.min(Math.abs(social), 100));
-
-        this.global = (this.ecologic + this.economic + this.social) / 3;
-        return this.global;
-    }
-
-    machineCalculation(level) {
-        return (Math.min(Math.max(Math.abs((5 * level ^ 4) / 24 - 1.25 * level ^ 3 + (55 * level ^ 2) / 24 + 1.25 * level), 0), 15));
+        if (this.social < 0) this.social = 0
     }
 
     /**
-     * score calculation
-     * @param {Number} employeesNumber number
-     * @param {Number} maintainers nuber
-     * @param {Number} cleaners number
-     * @param {Number} supervisors number
-     * @param {Number} engineers Number
-     * @returns ratio
+     * update SD factor
      */
-    socialCalculation(employeesNumber, maintainers, cleaners, supervisors, engineers) {
-        let humanRessources = [[maintainers, employees.salaries.maintainers.pourcentage], [cleaners, employees.salaries.cleaners.pourcentage], [supervisors, employees.salaries.supervisors.pourcentage], [engineers, employees.salaries.engineers.pourcentage]];
-        let result = 0;
-        humanRessources.forEach(categories => {
-            result += categories[0] / employeesNumber < categories[1] + 0.10 && categories[0] / employeesNumber > categories[1] - 0.10 ? 25 : 0;
+    updateODD(machinesBack, furnishers, money, income, expenses, employees) {
+        // ÉCOLOGIC
+        let ecologic = 0;
+        machinesBack.forEach(machine => {
+            ecologic += 2.5 * machine.level;
+            ecologic += machine.secondHand || machine.level == 4 ? 5 : 0;
         });
-        return result;
+        //furnisher
+        furnishers.forEach(el => {
+            ecologic += 2.5 * el;
+        });
+
+        // ECONOMIC
+        let economic = 0;
+        if (money >= -10000) {
+            let first_criteria = (money / 700) + 100 / 7;
+            if (first_criteria > 100) first_criteria = 100
+            if (first_criteria < 0) first_criteria = 0
+            let second_criteria = income / expenses;
+            economic = first_criteria * second_criteria ^ 3;
+        }
+
+        // SOCIAL
+        let social = 0;
+        let maintainers = Math.min(1, employees.maintainers.length / employees.number);
+        let inge = Math.min(1, employees.engineers.length / employees.number);
+        let cleaners = Math.min(1, employees.cleaners.length / employees.number);
+        let supervisors = Math.min(1, employees.supervisors.length / employees.number);
+
+        let diff = Math.abs(supervisors - cleaners);
+        diff = Math.abs(diff - inge);
+        diff = Math.abs(diff - maintainers);
+
+        social = 100 - (diff * 100 * 1.9);
+
+        this.roundODD(economic, ecologic, social);
+
     }
 
+
     isFinished() {
-        return this.global === 100;
+        if (this.economic == 100 && this.social == 100 && this.ecologic == 100) return true;
+        return false;
+
     }
+
     isLost() {
-        return this.global <= 10;
+        if (this.economic == 0 || this.social == 0 || this.ecologic == 0) return true;
+        return false;
+
+    }
+
+    moyenne() {
+        return (this.ecologic + this.economic + this.social) / 3;
     }
 };

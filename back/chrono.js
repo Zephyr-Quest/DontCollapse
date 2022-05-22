@@ -28,6 +28,7 @@ module.exports = class Chrono {
         
         if (this.minutes === 0 && this.seconds === 0){
             this.stopChrono = true;
+            this.monthCallback();
             this.endGameCallBack();
         }
         

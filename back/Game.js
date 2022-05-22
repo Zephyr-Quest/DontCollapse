@@ -43,7 +43,6 @@ module.exports = class Game {
      * @param {String} player name
      */
     addPlayer(player) {
-        // console.log("--- Player ", player, " join the game");
         if (this.players.length < 4 && player) {
             this.players.push(new Player(player));
             this.playersName.push(player);
@@ -56,7 +55,7 @@ module.exports = class Game {
      * @returns player if it's in the game
      */
     searchPlayer(player) {
-        let result = undefined;
+        let result;
         this.players.forEach(p => {
             if (p && p.name === player) result = p;
         });
@@ -77,17 +76,6 @@ module.exports = class Game {
                 shop: this.shop
             };
         }
-        return undefined;
-    }
-
-    /**
-     * Return money amount from a given player
-     * @param {String} playerName name of the player
-     * @returns money amount (or undefined)
-     */
-    getPlayerMoney(playerName) {
-        let player = this.searchPlayer(playerName);
-        if (player) return player.money;
         return undefined;
     }
 
@@ -129,28 +117,24 @@ module.exports = class Game {
      * @returns {String} winner name
      */
     finishGame() {
-        let machineLevel = [];
-        this.players.forEach((player) => {
-            let playerLevel = 0;
-            player.machines.forEach(machine => {
-                playerLevel += machine.level;
+        let winner = { name: "", score: 0 }
+        this.players.forEach(player => {
+            let score = player.sd.ecologic + player.sd.economic + player.sd.social + player.money; // Moyenne ODD + Argent
+            player.machinesBack.forEach(machine => {
+                score += machine.level * 6.25 // Pour avoir 25 points par machine 4*25 = 100;
             });
-            machineLevel.push({ name: player.name, level: playerLevel });
-        });
-        let winner = "";
-        let winnerLevel = 0;
-        machineLevel.forEach(element => {
-            if (element.level > winnerLevel) {
-                winnerLevel = element.level;
-                winner = element.name;
+            if (score > winner.score) {
+                winner.name = player.name;
+                winner.score = player.score;
             }
-            else if (element.level == winnerLevel && this.searchPlayer(winner).sd.global != this.searchPlayer(element.name).sd.global) {
-                winner = this.searchPlayer(winner).sd.global < this.searchPlayer(element.name).sd.global ? element.name : winner;
-            } else {
-                winner = this.searchPlayer(winner).money < this.searchPlayer(element.name).money ? element.name : winner;
+            if (score == winner.score) {
+                if (this.searchPlayer(winner.name).money < player.money) {
+                    winner.name = player.name;
+                    winner.score = player.score;
+                }
             }
         });
-        return winner;
+        return winner.name;
     }
 
     /* -------------------------------------------------------------------------- */
@@ -202,7 +186,6 @@ module.exports = class Game {
      * @returns if the transaction was made
      */
     buySecondhandItem(buyerName, sellerName) {
-        // console.log("--- Player ", buyer, " wants to buy", seller);
         let buyer = this.searchPlayer(buyerName);
         let seller = this.searchPlayer(sellerName);
         let machine = this.checkPlayerItem(seller.name);
@@ -222,7 +205,7 @@ module.exports = class Game {
     /* -------------------------------------------------------------------------- */
     /*                              Events functions                              */
     /* -------------------------------------------------------------------------- */
-
+    //! Event à refaire
     applyEvent() {
         if (this.runningEvent) { // Si un évènement est déjà existant
             this.runningEvent.duration--; // On réduit son temps restant

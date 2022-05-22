@@ -1,58 +1,9 @@
 {
-    "name": [
-        "Josiane",
-        "Nicolas",
-        "Mikael Morelle",
-        "Maxime",
-        "Tom",
-        "Enguerrand",
-        "Martin",
-        "Thierry Occre",
-        "Célia",
-        "Jacob",
-        "David",
-        "Enzo",
-        "Simon",
-        "Marc-Antoine",
-        "Edouard",
-        "Paul",
-        "Damien",
-        "Xavier",
-        "Marie",
-        "Ysoline",
-        "Céline",
-        "Eddie",
-        "Cindy",
-        "Florence",
-        "Marie",
-        "Baptise",
-        "Charles",
-        "Alexandre",
-        "Jeanne",
-        "Françoise",
-        "Monique",
-        "Catherine",
-        "Nathalie",
-        "Isabelle",
-        "Jacqueline",
-        "Sylvie",
-        "Anne",
-        "Jean",
-        "Pierre",
-        "Michel",
-        "Pierre",
-        "Louis",
-        "René",
-        "Enzo",
-        "Léo",
-        "Lucas",
-        "Quentin"
-    ],
     "salaries": {
         "engineers": {
             "pourcentage": 0.20,
             "min": 3500,
-            "max": 5000
+            "max": 4500
         },
         "maintainers": {
             "pourcentage": 0.40,
@@ -66,8 +17,8 @@
         },
         "supervisors": {
             "pourcentage": 0.30,
-            "min": 4000,
-            "max": 4500
+            "min": 3000,
+            "max": 4000
         }
     },
     "categories": [

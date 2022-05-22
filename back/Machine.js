@@ -15,16 +15,8 @@ module.exports = class Machine {
         this.price = machine.price;
         this.productionRate = machine.productionRate;
         this.consumption = machine.consumption;
-        this.manufacturingQuality = machine.manufacturingQuality;
-        this.maintainersRequested = machine.maintainersRequested;
-        this.engineersRequested = machine.engineersRequested;
+        this.employeesNeeded = machine.employeesNeeded;
     }
 
-    display() {
-        console.log("🏭", this.constructor, this.name);
-        console.log("Details : type", this.type, "level", this.level);
-        console.log("⏰ Production rate : ", this.productionRate);
-        console.log("⚡ Consumption :", this.consumption);
-        console.log("Maintainers needed :", this.maintainersRequested, ", Engineers needed :", this.engineersRequested);
-    }
+    
 };
