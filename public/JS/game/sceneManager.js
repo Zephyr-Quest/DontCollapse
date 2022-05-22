@@ -781,6 +781,14 @@ export class Scene {
                                                 z: s.position.z * 2,
                                         }
                                 }
+                                if(tempname=="Chat"){
+                                        let unread = WebSocket.getUnreadMessage();
+                                        if(unread!=0){
+                                                tempname+=" ("
+                                                tempname+=unread
+                                                tempname+=" non lu)"
+                                        }
+                                }
                                 if (this.copyGroupSprite != this.GroupSprite) {
                                         this.createTitles(this, this.scene, tempos, "Sprite" + tempname, tempname)
                                         this.scene.add(this.GroupSprite)
