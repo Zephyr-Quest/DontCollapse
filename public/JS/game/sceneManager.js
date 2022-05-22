@@ -709,6 +709,7 @@ export class Scene {
                 s.rotation.y = Math.PI
                 s.position.x = 10
                 s.position.y = 225
+                sound.startDoor()
                 this.selectionables.remove(s)
                 this.scene.add(s)
         }
@@ -726,6 +727,7 @@ export class Scene {
                 this.scene.children.forEach(el => {
                         if (el.name == "Mac_Sortie") {
                                 if (this.sortieOpen) {
+                                        sound.startDoor()
                                         this.sortieOpen = false
                                         this.scene.remove(el)
                                         this.selectionables.add(el)
@@ -781,12 +783,12 @@ export class Scene {
                                                 z: s.position.z * 2,
                                         }
                                 }
-                                if(tempname=="Chat"){
+                                if (tempname == "Chat") {
                                         let unread = WebSocket.getUnreadMessage();
-                                        if(unread!=0){
-                                                tempname+=" ("
-                                                tempname+=unread
-                                                tempname+=" non lu)"
+                                        if (unread != 0) {
+                                                tempname += " ("
+                                                tempname += unread
+                                                tempname += " non lu)"
                                         }
                                 }
                                 if (this.copyGroupSprite != this.GroupSprite) {
