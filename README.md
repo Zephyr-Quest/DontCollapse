@@ -9,8 +9,6 @@ Don't Collapse est un jeu multijoueur de gestion d'usine. Améliorez vos machine
 
 ## Badges
 
-Add badges from somewhere like: [shields.io](https://shields.io/)
-
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 ![Release](https://img.shields.io/github/v/release/Zephyr-Quest/DontCollapse)
 ![Code Size](https://img.shields.io/github/languages/code-size/Zephyr-Quest/DontCollapse)
