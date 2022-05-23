@@ -1,4 +1,64 @@
+
 # Don't Collapse
+
+Don't Collapse est un jeu multijoueur de gestion d'usine. Améliorez vos machines, gérez votre personnel, le tout grâce à la boutique pour faire le plus de recettes possibles en repectant vos différents objectifs de développement durable. N'hésitez pas à consulter le tableau de bord pour connaître votre stade d'avancement, le nombre de salariés que vous avez ou encore vos dépenses et recette prévisionnelles.
+
+
+
+
+
+## Badges
+
+Add badges from somewhere like: [shields.io](https://shields.io/)
+
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+![Release](https://img.shields.io/github/v/release/Zephyr-Quest/DontCollapse)
+![Code Size](https://img.shields.io/github/languages/code-size/Zephyr-Quest/DontCollapse)
+
+## Tech Stack
+
+**Client:** ThreeJS
+
+**Server:** Node, Express, SocketIO
+
+
+## Installation
+
+Pour installer le jeu chez vous, vous devez cloner le dépôt Git et installer les dépendances du projet en faisant :
+
+```bash
+  npm install
+```
+    
+Ensuite vous devez créer un fichier `.env` à la racine du projet qui servira à mettre votre clé privée, nécessaire pour le déploiement.
+Il devra contenir :
+```env
+SESSION_SECRET = "CLE DE SESSION"
+```
+Remplacez `CLE DE SESSION` par votre clé.
+## Déploiement
+Pour déployer le projet, faire :
+
+```bash
+  node .
+```
+
+
+## Authors
+
+- [@EnguerrandMQT](https://www.github.com/EnguerrandMQT)
+- [@MartDel](https://www.github.com/MartDel)
+- [@MaximeDeclemy](https://www.github.com/MaximeDeclemy)
+- [@RemiVan-Boxem](https://www.github.com/RemiVan-Boxem)
+- [@TomMullier](https://www.github.com/TomMullier)
+
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
 ## Message du propriétaire :
 *Merci d'avoir repris mon usine. Je sais que c'est un challenge pour toi, de refaire partir l'industrie de l'ordinateur portable quand le marché est partagé entre les grandes multinationales. Je compte sur toi pour pouvoir continuer à faire vivre mon usine avec nos partenaires locaux. Je crois en toi.
 *
