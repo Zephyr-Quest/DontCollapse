@@ -120,6 +120,8 @@ Nous regardons si le joueur est en croissance économique ou s'il perd de l'arge
 - **Social** :
 La barre correspondant au pilier social est calculé selon le nombre de personnes employées dans chaque catégorie (techniciens de surface, personnel d'entretien, ingénieurs, personnel administratif). Si l'écart entre les différents types d'employés augmente, vous perdrez des points.
 
+## Gestion de projet
+L'avancement du projet est à retrouver sur le notion placé dans l'équipe teams de l'usine du futur.
 ----------
 ###### Un projet de Zéphyr Studio
 ###### Par Declemy Maxime, Delebecque Martin, Marquant Enguerrand, Mullier Tom et Van Boxem Rémi
