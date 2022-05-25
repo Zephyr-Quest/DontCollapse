@@ -122,6 +122,7 @@ La barre correspondant au pilier social est calculé selon le nombre de personne
 
 ## Gestion de projet
 L'avancement du projet est à retrouver sur le notion placé dans l'équipe teams de l'usine du futur.
+
 ----------
 ###### Un projet de Zéphyr Studio
 ###### Par Declemy Maxime, Delebecque Martin, Marquant Enguerrand, Mullier Tom et Van Boxem Rémi
