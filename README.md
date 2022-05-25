@@ -62,9 +62,9 @@ Pour déployer le projet, faire :
 *
 ## Synopsis :
 
-Bienvenue à l'usine d'Isigny de Strawberry, la marque d'ordinateur 100% locale. Strawberry était, à l'époque, la seule entreprise à produire la majorité de ses composants sur son territoire. Malheureusement, avec la mondialisation, le libre échange et le capitalisme, il revenait souvent moins cher d'acheter à l'autre bout du monde que de produire local. Des grandes marques tels que Macrosoft, Peer, DY, BELL ont pris ce tournant et ont commencé à délocaliser leur production ailleurs. 
+Bienvenue à l'usine de Strawberry, la marque d'ordinateur 100% locale. Strawberry était, à l'époque, la seule entreprise à produire la majorité de ses composants sur son territoire. Malheureusement, avec la mondialisation, le libre échange et le capitalisme, il revenait souvent moins cher d'acheter à l'autre bout du monde que de produire local. Des grandes marques tels que Macrosoft, Peer, DY, BELL ont pris ce tournant et ont commencé à délocaliser leur production ailleurs. 
 
-C'est ainsi que vous intervenez. Vous récupérez l'usine de Strawberry, au bord du dépôt de bilan, et votre but est de la rendre compétitive face aux géants mondiaux.
+C'est ici que vous intervenez. Vous récupérez l'usine de Strawberry, au bord du dépôt de bilan, et votre but est de la rendre compétitive face aux géants mondiaux.
 
 Vous allez pour cela devoir optimiser les trois enjeux du développement durable :
 
