@@ -37,10 +37,10 @@ import sound from './sound.js';
 /*                              GLOBAL VARIABLES                              */
 /* -------------------------------------------------------------------------- */
 
-const stats = new Stats();
-stats.showPanel(0);
+// const stats = new Stats();
+// stats.showPanel(0);
 
-document.body.appendChild(stats.dom);
+// document.body.appendChild(stats.dom);
 
 THREE.Object3D.DefaultUp.set(0, 0, 1);
 /**
@@ -200,7 +200,7 @@ export class Scene {
          *
          */
         animate() {
-                stats.begin();
+                // stats.begin();
 
                 // Play animations
                 const delta = this.clock.getDelta();
@@ -210,7 +210,7 @@ export class Scene {
                 requestAnimationFrame(this.animate.bind(this));
                 this.controls.update();
 
-                stats.end();
+                // stats.end();
         }
 
         /**
@@ -589,7 +589,6 @@ export class Scene {
                 let jj = 0
                 let i = this.groupToDisplayAfter.children.length
                 let ii = 0
-                log(this.groupToDisplayAfter.children)
                 if (i > 0) {
                         while (ii < this.groupToDisplayAfter.children.length) {
                                 let el = this.groupToDisplayAfter.children[ii]

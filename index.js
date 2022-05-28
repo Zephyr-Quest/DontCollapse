@@ -20,7 +20,8 @@ const {
     connected
 } = require('process');
 const {
-    info, log
+    info,
+    log
 } = require('console');
 
 if (process.env.NODE_ENV !== "production") {
@@ -397,6 +398,7 @@ io.on('connection', socket => {
                 const pUsername = pSocket.handshake.session.username;
                 const user = allRooms[idRoom].searchPlayer(pUsername);
 
+                if (!user) return
                 const dataTabBord = user.getInfo(allRooms[idRoom].runningEvent);
                 pSocket.emit("actuTabBord", dataTabBord);
             }

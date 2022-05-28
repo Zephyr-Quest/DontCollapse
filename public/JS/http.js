@@ -1,5 +1,5 @@
 const http = (function () {
-    const HOST = 'http://192.168.1.14:4200';
+    const HOST = 'http://localhost:4200';
 //    const HOST = 'http://10.224.1.2:4200';
 
     function customFecth(url, config, resolve, reject) {

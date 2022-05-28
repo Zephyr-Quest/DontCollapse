@@ -11,8 +11,8 @@ let lobby = true;
 function startMusicGame() {
     if (authorizedMusic)
         if (lobby) {
-            lobbyGameMusic.play();
-            lobbyGameMusic.loop = true;
+            // lobbyGameMusic.play();
+            // lobbyGameMusic.loop = true;
         }
         else {
             soundFactory.play();

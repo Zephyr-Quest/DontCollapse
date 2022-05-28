@@ -216,7 +216,7 @@ module.exports = class Game {
             return this.runningEvent; // et on applique cet évènement
         } else {
             let random = Math.floor(Math.random() * 100); // 20% de chance d'avoir un évènement aléatoire.
-            if (random < 100) {
+            if (random < 25) {
                 let secondRandom = Math.floor(Math.random() * events.length)
                 this.runningEvent = events[secondRandom]; // On choisit un évènement et sa durée aléatoirement
                 secondRandom = Math.floor(Math.random() * (this.runningEvent.durationMax + 1 - this.runningEvent.durationMin) + this.runningEvent.durationMin)
